@@ -3,12 +3,13 @@
 \title{Score Statistics for Association of Traits with Haplotypes}
 \description{
 Compute score statistics to evaluate the association of a trait with haplotypes, when linkage phase is unknown and diploid marker 
-phenotypes  are  observed  among  unrelated subjects. For now, only autosomal loci are considered.
+phenotypes are observed among unrelated subjects. For now, only autosomal loci are considered. This package haplo.score
+which this function is based is greatly acknowledged.
 }
 \usage{
 hap.score(y, geno, trait.type="gaussian", offset=NA, x.adj=NA, skip.haplo=0.005, 
           locus.label=NA, miss.val=0, n.sim=0, 
-          method="gc", id=NA, handle.miss=0, n.miss.loci=NA, sexid=NA)
+          method="gc", id=NA, handle.miss=0, mloci=NA, sexid=NA)
 }
 
 \arguments{
@@ -24,7 +25,7 @@ hap.score(y, geno, trait.type="gaussian", offset=NA, x.adj=NA, skip.haplo=0.005,
  \item{method}{method of haplotype frequency estimation, "gc" or "hap"}
  \item{id}{an added option which contains the individual IDs}
  \item{handle.miss}{flag to handle missing genotype data, 0=no, 1=yes}
- \item{n.miss.loci}{maximum number of loci/sites with missing data to be allowed in the analysis}
+ \item{mloci}{maximum number of loci/sites with missing data to be allowed in the analysis}
  \item{sexid}{flag to indicator sex for data from X chromosome, i=male, 2=female}
 }
 
@@ -49,9 +50,9 @@ List with the following components:
 \details{This is a version which substitutes haplo.em}
 
 \section{References}{
-Schaid DJ, Rowland CM, Tines DE, Jacobson RM,  Poland  GA.
+Schaid DJ, Rowland CM, Tines DE, Jacobson RM,  Poland  GA (2002)
 Score tests for association of traits with haplotypes when
-linkage phase is ambiguous. Submitted to Amer J Hum Genet.
+linkage phase is ambiguous. Amer J Hum Genet 70:425-34
 }
 
 \examples{
@@ -59,7 +60,10 @@ linkage phase is ambiguous. Submitted to Amer J Hum Genet.
 data(hla)
 y<-hla[,2]
 geno<-hla[,3:8]
+# complete data
 hap.score(y,geno,locus.label=c("DRB","DQA","DQB"))
+# incomplete genotype data
+hap.score(y,geno,locus.label=c("DRB","DQA","DQB"),handle.miss=1,mloci=1)
 unlink("assign.dat")
 
 ### note the differences in p values in the following runs
@@ -71,12 +75,12 @@ aldh2<-aldh2[-deleted,]
 y<-aldh2[,2]
 geno<-aldh2[,3:18]
 # only one missing locus
-hap.score(y,geno,handle.miss=1,n.miss.loci=1,method="hap")
+hap.score(y,geno,handle.miss=1,mloci=1,method="hap")
 # up to seven missing loci and with 10,000 permutations
-hap.score(y,geno,handle.miss=1,n.miss.loci=7,method="hap",n.sim=10000)
+hap.score(y,geno,handle.miss=1,mloci=7,method="hap",n.sim=10000)
 
-# haplo.score takes considerably longer time and does not handle missing data
-haplo.score(y,geno,n.sim=10000)
+# hap.score takes considerably longer time and does not handle missing data
+hap.score(y,geno,n.sim=10000)
 }
 }
  

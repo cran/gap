@@ -3,10 +3,10 @@
 
 void tbyt(double *h, double *haplotypes, double *D, double *VarD,
           double *Dmax, double *VarDmax, double *Dprime, double *VarDprime,
-          double *x2)
+          double *x2, double *lor, double *vlor)
 {
 double p,q,u,v,t;
-double a,b,xi;
+double a,b,c,d,or,xi;
 double ED;
 double EDmax;
 
@@ -51,6 +51,13 @@ else {
  *VarDprime=((1-fabs(*Dprime))*t+fabs(*Dprime)*xi*(1-xi))/(*haplotypes)/(*Dmax)/(*Dmax);
 }
 *x2=*haplotypes*(*D)*(*D)/p/q/u/v;
+a=*haplotypes*h[0]+0.5;
+b=*haplotypes*h[1]+0.5;
+c=*haplotypes*h[2]+0.5;
+d=*haplotypes*h[3]+0.5;
+or=a*d/b/c;
+*lor=log(or);
+*vlor=1/a+1/b+1/c+1/d;
 return;
 
 }

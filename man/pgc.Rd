@@ -5,7 +5,8 @@
 \description{
 This function is a R port of the GENECOUNTING/PREPARE program which takes
 an array of genotyep data and collapses individuals with the same multilocus
-genotype
+genotype. This function can also be used to prepare for the genotype table in testing
+Hardy-Weinberg equilibrium.
 }
 
 \arguments{
@@ -29,8 +30,9 @@ Zhao JH, Sham PC (2003). Generic number system and haplotype analysis. Comp Prog
 }
 
 \seealso{
-\code{\link[gap]{genecounting}}
+\code{\link[gap]{genecounting}},\code{\link[gap]{hwe.hardy}}
 }
+
 \examples{
 \dontrun{
 
@@ -48,7 +50,7 @@ pgc(x,handle.miss=1,with.id=1)
 pgc(x,handle.miss=1,with.id=0)
 }
 }
-}
+
 \author{Jing hua Zhao}
 \note{Built on pgc.c}
 \keyword{models}

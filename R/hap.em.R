@@ -1,13 +1,14 @@
-# 15-10-03 WAH
-# 16-10-03 UCL office to add sort=F in merge
-hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500)
+hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.val=0)
 {
-  data<-as.matrix(data)
+  tmp0 <- geno.recode(data,miss.val=miss.val)
+  geno <- as.matrix(tmp0$grec)
+  geno[is.na(geno)] <- 0
+  data<-as.matrix(geno)
   nloci<-dim(data)[2]/2
   loci<-rep(0,nloci)
   for (i in 1:nloci)
   {
-     loci[i]<-max(data[,c(2*i-1,2*i)])
+     loci[i]<-length(tmp0$alist[[i]]$allele) #  max(data[,c(2*i-1,2*i)],na.rm=TRUE)
   }
   if(all(is.na(locus.label))) {
      locus.label<- paste("loc-",1:nloci,sep="")
@@ -37,6 +38,10 @@ hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500)
   nreps<-tapply(indx.subj,indx.subj,length)
 
   list (lnlike=z$l1,hap.prob=hap.prob,indx.subj=indx.subj,post=post,
-        hap1code=hap1,hap2code=hap2,haplotype=haplotype,nreps=nreps,
+        hap1code=hap1,hap2code=hap2,haplotype=grec2g(haplotype,nloci,tmp0),nreps=nreps,
         converge=z$converge,niter=z$niter,uhap=uhap)
 }
+
+# 15-10-03 WAH
+# 16-10-03 UCL office to add sort=F in merge
+# 25-09-04 first attempt to robust label-handling

@@ -19,7 +19,7 @@ static int idm[mxloc];
 void *xmalloc(long),hilo(int*,int*),getp(int*,int *),geth(int*,int *),
      ch(int*,int*,double*,double*),counting(int*,int *, long int),
      genp(int*,long int,double*);
-int digit2(int,int*,int),digitm(int*,int*,int);
+void digit2(int,int*,int),digitm(int*,int*,int);
 int linenum(int*,int*),linenums(int*,int*);
 double phasep(int*,int*),ll(int*,int*,double*);
 
@@ -901,42 +901,38 @@ hrtree(t->right);
 free(t);
 }
 
-int digit2(int radix, int d[], int i)
+void digit2(int radix, int d[], int i)
 {
 if(d[i]<radix)
 {
   ++d[i];
-  goto ok;
+  return;
 }
 else
 {
   d[i]=0;
   ++d[i+1];
-  if(d[i+1]<=radix) goto ok;
+  if(d[i+1]<=radix) return;
 }
 digit2(radix,d,i+1);
 
-ok:
-return 0;
 }
 
-int digitm(int radix[], int d[], int i)
+void digitm(int radix[], int d[], int i)
 {
 if(d[i]<radix[i])
 {
   ++d[i];
-  goto ok;
+  return;
 }
 else
 {
   d[i]=0;
   ++d[i+1];
-  if(d[i+1]<=radix[i+1]) goto ok;
+  if(d[i+1]<=radix[i+1]) return;
 }
 digitm(radix,d,i+1);
 
-ok:
-return 0;
 }
 
 int linenum(int *loci, int *ai)

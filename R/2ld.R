@@ -1,15 +1,15 @@
 # worked 28/6/03
 tbyt<-function(h,n) {
-   D<-VarD<-Dmax<-VarDmax<-Dprime<-VarDprime<-x2<-0
+   D<-VarD<-Dmax<-VarDmax<-Dprime<-VarDprime<-x2<-lor<-vlor<-00
    z<-.C("tbyt",h=as.vector(h), haplotypes=as.double(n),
           D=as.double(D), VarD=as.double(VarD),
           Dmax=as.double(Dmax), VarDmax=as.double(VarDmax),
           Dprime=as.double(Dprime), VarDprime=as.double(VarDprime),
-          x2=as.double(x2),PACKAGE="gap")
+          x2=as.double(x2),lor=as.double(lor),vlor=as.double(vlor),PACKAGE="gap")
 
     list(h=h,n=n,D=z$D,VarD=z$VarD,
          Dmax=z$Dmax,VarDmax=z$VarDmax,Dprime=z$Dprime,
-         VarDprime=z$VarDprime,x2=z$x2)
+         VarDprime=z$VarDprime,x2=z$x2,lor=z$lor,vlor=z$vlor)
 }
 
 kbyl<-function(n1,n2,h,n,optrho=2)

@@ -10,10 +10,6 @@ kinship matrix according to Morgan v2.1
 \item{ped}{pedigree id and family trio (id, father id, morther id}
 }
 
-\source{
-CRAN \url{http://cran.r-project.org}
-}
-
 \value{
 The returned value is a list containing:
 
@@ -22,7 +18,7 @@ The returned value is a list containing:
 }
 
 \section{References}{
-Morgan V2.1 http://www.stat.washington.edu/thompson/Genepi/MORGAN/morgan.shtml
+Morgan V2.1 \url{http://www.stat.washington.edu/thompson/Genepi/MORGAN/Morgan.shtml}
 }
 
 \seealso{

@@ -1,115 +1,62 @@
-# 08-2-2004 Working but miss.value needs to be added later
-# 09-2-2004 Add using genotype counts
-# 11-2-2004 Works ok in all three modes
-# 17-2-2004 Add is.miss function
-
-hwe <- function(data, is.count=FALSE, is.genotype=FALSE, yates.correct=FALSE, miss.val=0)
+hwe <- function(data, data.type="allele", yates.correct=FALSE, miss.val=0)
 {
-  g2a.c <- function (s)
+  data.int <- charmatch(data.type,c("allele","genotype","count"))
+  if (is.na(data.int)) stop("Invalid data type")
+  if (data.int==0) stop("Ambiguous data type")
+  x2 <- lrt <- 0
+  if (data.int<3)
   {
-      d <- 1 + 8 * (s - 1)
-      u <- 1 + ((1 + (sqrt(d) - 1) - 1) / 2)
-      u <- ceiling(u)
-      l = s - u * (u - 1) / 2
-      list (l=l,u=u)
-  }
-  g2a <- function (x)
-  {
-      i <- 1 + floor((sqrt(8 * x + 1) - 1)/2)
-      j <- x - i * (i - 1)/2
-      i <- ifelse(j == 0, i - 1, i)
-      j <- ifelse(j == 0, i, j)
-      list(l=j,u=i)
-  }
-  is.miss <- function(data,is.genotype,miss.val=0)
-  {
-     if (is.genotype)
+     # remove individuals with missing data
+     # obtain maximum number of alleles and table of genotype counts
+     if (data.int==1)
      {
-        id <- array(FALSE, length(data))
-        for (i in 1:length(miss.val))
-            id <- id | data==miss.val[i]
+         a1 <- data[,1]
+         a2 <- data[,2]
      }
      else
      {
-        id <- array(FALSE, length(data[,1]))  
-        for (i in 1:length(miss.val))
-            id <- id | apply(data==miss.val[i],1,any)
+         tmp <- g2a(data)
+         a1 <- tmp[,1]
+         a2 <- tmp[,2]
+         # need recoding since some may be overcoded.
      }
-     return (id)  
-  }
-  if (!is.count)
-  {
-     if (!is.genotype)
+     tmp <- allele.recode(a1,a2,miss.val)
+     a1 <- tmp$a1
+     a2 <- tmp$a2
+     n.allele <- length(tmp$allele.label)
+     geno.table <- table(a2g(a1,a2))
+     n <- sum(geno.table, na.rm=T)
+     n2 <- 2.0 * n
+     allele.freq <- table(c(a1,a2)) / n2
+     dimnames(allele.freq)[[1]] <- tmp$allele.label
+     geno.obs <- as.numeric(names(geno.table))
+     geno.len <- length(geno.table)
+     n.genotype <- geno.obs[geno.len]
+     # nonobserved contributes data
+     geno.all <- array(0,n.genotype)
+     for(i in 1:geno.len)
      {
-        data <- data[!is.miss(data,is.genotype),]
-        n.obs <- length(data[,1])
-        genotype <- array(0,n.obs)
-        n.allele <- max(data)
-        a1 <- data[,1]
-        a2 <- data[,2]
-        for (i in 1:n.obs)
-        {
-            l <- min(a1[i],a2[i])
-            u <- max(a1[i],a2[i])
-            genotype[i] <- l + u * (u - 1) / 2
-            geno.table <- table(genotype)
-        }
+        j <- geno.obs[i]
+        geno.all[j] <- geno.table[i]
      }
-     else
-     {
-        data <- data[!is.miss(data,is.genotype)]
-        geno.table <- table(data)
-        n.obs <- length(data)
-        a1 <- a2 <- array(0,n.obs)
-        genotype <- data
-        s <- max(data)
-        z <- g2a(s)
-        n.allele <- z$u
-        for (i in 1:n.obs)
-        {
-            z <- g2a(data[i])
-            a1[i] <- z$l
-            a2[i] <- z$u
-        }
-     }
-     n.obs2 <- 2 * n.obs
-     allele.freq <- table(c(a1,a2)) / n.obs2
-     n.geno <- length(geno.table)
-     geno.name <- as.numeric(names(geno.table))
-
-     x2 <- lrt <- 0
-     n.genotype <- n.allele * (n.allele + 1) / 2
-     all.genotype <- array(0,n.genotype)
-
-     for (i in 1:n.geno)
-     {
-         j <- geno.name[i]
-         all.genotype[j] <- geno.table[i]
-     }
-     to.warn <- FALSE
      for (i in 1:n.genotype)
      {
-         o <- all.genotype[i]
+         o <- geno.all[i]
          z <- g2a(i)
-         a1 <- z$l
-         a2 <- z$u
-         e <- ifelse(a1==a2,1,2) * allele.freq[a1] * allele.freq[a2] * n.obs
-         if (e < 0.5) to.warn <- TRUE
-         if (yates.correct)
-            x2 <- x2 + (abs (o - e) - 0.5)^2 / e
-         else
-            x2 <- x2 + (o - e)^2 / e
+         l <- z[1]
+         u <- z[2]
+         e <- ifelse(l==u,1,2) * allele.freq[l] * allele.freq[u] * n
+         x2 <- x2 + ifelse(yates.correct, (abs (o - e) - 0.5)^2 / e, (o - e)^2 / e)
          if (o>0) lrt <- lrt + o * log(o / e)
      }
   }
   else
   {
       n.genotype <- length(data)
-      n.obs <- sum(data)
+      n <- sum(data)
       e <- array(0,n.genotype)
       n.allele <- (sqrt(1 + 8 * n.genotype) - 1) / 2
       allele.freq <- array(0,n.allele)
-      to.warn <- FALSE
       k <- 0
       for (i in 1:n.allele)
       {
@@ -118,31 +65,41 @@ hwe <- function(data, is.count=FALSE, is.genotype=FALSE, yates.correct=FALSE, mi
               k <- k + 1
               allele.freq[i] <- allele.freq[i] + data[k]
               allele.freq[j] <- allele.freq[j] + data[k]
-              if(e[k] < 0.5) to.warn <- TRUE
           }
       }
-      for (i in 1:n.allele) allele.freq[i] <- allele.freq[i] / n.obs / 2
+      allele.freq <- allele.freq / 2.0 / n
       k <- 0
       for (i in 1:n.allele)
           for (j in 1:i)
           {
               k <- k + 1
-              e[k] <- ifelse(i==j,1,2) * allele.freq[i] * allele.freq[j] * n.obs
+              e[k] <- ifelse(i==j,1,2) * allele.freq[i] * allele.freq[j] * n
           }
-      x2 <- lrt <- 0
       for (i in 1:n.genotype)
       {
           o <- data[i]
-          x2 <- x2 + (o - e[i])^2 / e[i]
-          if (yates.correct) x2 <- x2 + (abs(o - e[i]) - 0.5)^2 / e[i]
-          if (o > 0) lrt <- lrt + o * log(o / e[i])
+          if (e[i]>0)
+          {
+            x2 <- x2 + ifelse(yates.correct, (abs(o - e[i]) - 0.5)^2 / e[i], (o - e[i])^2 / e[i])
+            if (o > 0) lrt <- lrt + o * log(o / e[i])
+          }
       }
   }
-  if (to.warn) cat("there is at least one cell with expected value < 0.5\n")
   df <- n.genotype - n.allele
-  rho <- x2 / n.obs
+  lrt <- 2.0 * lrt
+  rho <- sqrt(x2 / n)
   cat("Pearson x2=",x2,"df=",df,"p=",1-pchisq(x2,df),sep="\t")
   cat("\n")
   list (allele.freq=allele.freq,x2=x2, p.x2=1-pchisq(x2,df),
-        lrt=lrt, p.lrt=1-pchisq(x2,df), df=df, rho=rho)
+        lrt=lrt, p.lrt=1-pchisq(lrt,df), df=df, rho=rho)
 }
+
+# 08-02-2004 Working but miss.value needs to be added later
+# 09-02-2004 Add using genotype counts
+# 11-02-2004 Works ok in all three modes
+# 17-02-2004 Add is.miss function
+# 04-10-2004 tidy is.count/is.genotype with data.type and document allele.freq
+# 06-11-2004 simply code
+# 08-11-2004 debug, refer to code of August 2004 and done
+# 09-11-2004 correct allele lables for allele frequencies
+# 10-11-2004 fix lrt statistic and p.lrt

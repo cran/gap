@@ -2,22 +2,23 @@
 \alias{hap.em}
 \title{Gene counting for haplotype analysis}
 \usage{
-hap.em(id, data, locus.label=NA, converge.eps=1e-06, maxiter=500)
+hap.em(id, data, locus.label=NA, converge.eps=1e-06, maxiter=500, miss.val=0)
 }
 
 \description{
 Gene counting for haplotype analysis with missing data, adapted for hap.score
 }
 \arguments{
-  \item{id}{a vector of individual IDs}
-  \item{data}{Matrix of alleles, such that each locus has a  pair  of
+ \item{id}{a vector of individual IDs}
+ \item{data}{Matrix of alleles, such that each locus has a  pair  of
    adjacent  columns  of  alleles,  and  the order of columns
    corresponds to the order of  loci  on  a  chromosome.   If
    there  are  K  loci, then ncol(data) = 2*K. Rows represent
    alleles for each subject.}
-  \item{locus.label }{Vector of  labels  for  loci,  of  length  K  (see definition of data matrix).}
-  \item{converge.eps }{Convergence criterion, based on absolute  change in log likelihood (lnlike).}
-  \item{maxiter}{Maximum number of iterations of EM.}
+ \item{locus.label }{Vector of  labels  for  loci,  of  length  K  (see definition of data matrix).}
+ \item{converge.eps }{Convergence criterion, based on absolute  change in log likelihood (lnlike).}
+ \item{maxiter}{Maximum number of iterations of EM}
+ \item{miss.val}{missing value}
 }
 
 \value{
@@ -53,14 +54,11 @@ List with components:
 
 \section{References}{
 
-Clayton DG (2001) SNPHAP. http://www-gene.cimr.cam.ac.uk/clayton/software
-
-Zhao JH and W Qian (2003) Association analysis of unrelated individuals
-using polymorphic genetic markers. RSS 2003, Hassalt, Belgium
+See hap
 
 }
 \seealso{
-\code{\link[gap]{hap}}, \code{\link[hap]{kbyl}}
+\code{\link[gap]{hap}}, \code{\link[gap]{kbyl}}
 }
 
 \examples{

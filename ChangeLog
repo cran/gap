@@ -1,5 +1,28 @@
 Version history of R genetic analysis package (R/gap)
 
+Todo list:
+
+. add examples from Abbas (memory problem!)
+. standard error of haplotypes
+. genecounting on X chromosome
+. hap/hap.em to handle missing only one allele
+. joint genetic and environmental effects and mixed models
+. pca regression and htSNP
+. path/segregation/linkage analysis programs
+. C/Fortran calls to .Call, etc.
+. NEXUS format, C++ from GDA site
+
+Version 0.8-3
+
+8-11-2004
+
+to adapt haplo.score fully for hap.score
+to create examples for hwe.hardy using pgc, etc.
+to add gcp
+to modify gc.em, hap.em to allow for any allele labels
+to change hwe to accept allele, genotype and genotype count more naturally
+to change digit2 and digitm from int to void because of a complaint by Brian Ripley
+
 Version 0.8-2
 
 16-8-2004
@@ -128,18 +151,6 @@ Version 0.1
 
 First submission to CRAN with Vignette and revised Rd
 
+07/06/03
 
-07/06/03 draft plan (home edition) shortly before RSS 2003
-
-
-Things to do,
-
-1. hap.score to deal with more distributions and robust label handling
-2. hap/hap.em to handle missing only one allele and add X chromosome code
-3. joint genetic and environmental effects and mixed models
-4. pca regression and htSNP
-5. permutation tests/LD statistics as in EHPLUS
-
-Further to add: path/segregation/linkage analysis programs
-
-Change .C/.Fortran calls to .Call, etc.
+draft plan (home edition) shortly before RSS 2003

@@ -45,6 +45,9 @@ Zapata C, Carollo C, Rodriquez S (2001) Sampleing variance and distribution
 of the D' measure of overall gametic disequilibrium between multiallelic loci.
 Ann. Hum. Genet. 65: 395-406
 
+Zhao, J. H. (2004) 2LD, GENECOUNTING and HAP: Computer programs for
+linkage disequilibrium analysis. Bioinformatics, 20, 1325-1326
+
 }
 \seealso{
 \code{\link[gap]{tbyt}}

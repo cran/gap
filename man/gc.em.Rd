@@ -2,22 +2,23 @@
 \alias{gc.em}
 \title{Gene counting for haplotype analysis}
 \usage{
-gc.em(data, locus.label=NA, converge.eps=1e-06, maxiter=500, handle.miss=0)
+gc.em(data, locus.label=NA, converge.eps=1e-06, maxiter=500, handle.miss=0, miss.val=0)
 }
 
 \description{
 Gene counting for haplotype analysis with missing data, adapted for hap.score
 }
 \arguments{
-  \item{data}{Matrix of alleles, such that each locus has a  pair  of
+ \item{data}{Matrix of alleles, such that each locus has a  pair  of
    adjacent  columns  of  alleles,  and  the order of columns
    corresponds to the order of  loci  on  a  chromosome.   If
    there  are  K  loci, then ncol(data) = 2*K. Rows represent
    alleles for each subject.}
-  \item{locus.label }{Vector of  labels  for  loci,  of  length  K  (see definition of data matrix).}
-  \item{converge.eps }{Convergence criterion, based on absolute  change in log likelihood (lnlike).}
-  \item{maxiter}{Maximum number of iterations of EM.}
-  \item{handle.miss}{a flag for handling missing genotype data, 0=no, 1=yes}
+ \item{locus.label }{Vector of  labels  for  loci,  of  length  K  (see definition of data matrix).}
+ \item{converge.eps }{Convergence criterion, based on absolute  change in log likelihood (lnlike).}
+ \item{maxiter}{Maximum number of iterations of EM.}
+ \item{handle.miss}{a flag for handling missing genotype data, 0=no, 1=yes}
+ \item{miss.val}{missing value}
 }
 
 \value{
@@ -58,7 +59,7 @@ List with components:
 \section{References}{
 
 Zhao, J. H., Lissarrague, S., Essioux, L. and P. C. Sham (2002).
-Gene-counting for haplotype analysis with missing genotypes.
+GENECOUNTING: haplotype analysis with missing genotypes.
 Bioinformatics 18(12):1694-1695
 
 Zhao, J. H. and P. C. Sham (2003). Generic number systems and haplotype
@@ -66,7 +67,7 @@ analysis. Comp Meth Prog Biomed 70: 1-9
 
 }
 \seealso{
-\code{\link[gap]{genecounting}}, \code{\link[hap]{kbyl}}
+\code{\link[gap]{genecounting}}, \code{\link[gap]{kbyl}}
 }
 
 \examples{

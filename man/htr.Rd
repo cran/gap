@@ -31,6 +31,7 @@ discrete and continuous traits in samples of unrelated individuals. Hum. Hered. 
 \examples{
 \dontrun{
 # 26-10-03
+# this is now part of demo
 test2<-read.table("test2.dat")
 y<-test2[,1]
 x<-test2[,-1]

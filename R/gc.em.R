@@ -1,17 +1,21 @@
-gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle.miss=0)
+gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle.miss=0, miss.val=0)
 {
-# to run genecounting
+  tmp0<-geno.recode(data,miss.val=miss.val)
+  geno<-tmp0$grec
+  geno[is.na(geno)]<-0
+  data<-as.matrix(geno)
   weight<-rep(1,dim(data)[1])
   nloci<-dim(data)[2]/2
   loci<-rep(0,nloci)
   for (i in 1:nloci)
   {
-      loci[i]<-max(data[,c(2*i-1,2*i)])
+      loci[i]<-length(tmp0$alist[[i]]$allele) # max(data[,c(2*i-1,2*i)],na.rm=TRUE)
   }
   if(all(is.na(locus.label))) {
      locus.label<- paste("loc-",1:nloci,sep="")
   }
-  data.gc<-genecounting(data,weight,eps=converge.eps,pl=0.001,maxit=maxiter,handle.miss)
+# to run genecounting
+  data.gc<-genecounting(data,weight=weight,loci=loci,eps=converge.eps,pl=0.001,maxit=maxiter,handle.miss=handle.miss)
   hap.prob<-data.gc$h
   hap.prob.noLD<-data.gc$h0
   lnlike<-data.gc$l1
@@ -66,6 +70,6 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle
 
   list(lnlike=lnlike,lr=lr,
        hap.prob=hap.prob,hap.prob.noLD=hap.prob.noLD,indx.subj=indx.subj,
-       post=post,hap1code=hap1,hap2code=hap2,haplotype=haplotype,
+       post=post,hap1code=hap1,hap2code=hap2,haplotype=grec2g(haplotype,nloci,tmp0),
        nreps=nreps,converge=converge,niter=niter,uhap=uhap,htrtable=htrtable)
 }

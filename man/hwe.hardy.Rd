@@ -48,6 +48,39 @@ a<-c(
 0, 0, 1, 0, 0, 0, 0,
 0, 0, 0, 2, 1, 0, 0, 0)
 ex2<-hwe.hardy(a,alleles=8)
+
+# example using HLA
+data(hla)
+x<-hla[,3:4]
+y<-pgc(x,handle.miss=0,with.id=1)
+n.alleles<-max(x,na.rm=TRUE)
+z<-vector("numeric",n.alleles*(n.alleles+1)/2)
+z[y$idsave]<-y$wt
+hwe.hardy(z,alleles=n.alleles)
+## comparison with hwe
+hwe(z,data.type="count")
+## to create input file for HARDY
+
+print.tri<-function (xx,n)
+{
+  cat(n,"\n")
+  for(i in 1:n) 
+  {
+     for(j in 1:i)
+     {
+        cat(xx[i,j]," ")
+     }
+     cat("\n")
+  }
+  cat("100 170 1000\n")
+}
+xx<-matrix(0,n.alleles,n.alleles)
+xxx<-lower.tri(xx,diag=TRUE)
+xx[xxx]<-z
+sink("z.dat")
+print.tri(xx,n.alleles)
+sink()
+## now call as: hwe z.dat z.out
 }
 }
 \author{Sun-Wei Guo, Jing hua Zhao}

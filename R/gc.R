@@ -1,4 +1,4 @@
-genecounting <- function(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,maxit=50,pl=0.001)
+genecounting <- function(data,weight=NULL,loci=NULL,convll=1,handle.miss=0,eps=0.00001,maxit=50,pl=0.001)
 {
   if(is.null(weight)) weight<-rep(1,dim(data)[1])
 # precis<-1
@@ -12,10 +12,13 @@ genecounting <- function(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,max
   precis<-.Machine$double.eps
   gid<-1:(dim(data)[1])
   nloci=dim(data)[2]/2
-  loci<-rep(0,nloci)
-  for (i in 1:nloci)
+  if(is.null(loci))
   {
-      loci[i]=max(data[,c(2*i-1,2*i)])
+    loci<-rep(0,nloci)
+    for (i in 1:nloci)
+    {
+        loci[i]=max(data[,c(2*i-1,2*i)],na.rm=TRUE)
+    }
   }
   data<-as.matrix(data)
   data<-t(data)

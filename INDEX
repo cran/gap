@@ -9,16 +9,18 @@ fsnps                   A case-control data involving four SNPs with
                         missing genotype
 gc.em                   Gene counting for haplotype analysis
 gcontrol                genomic control
+gcp                     Permutation tests using GENECOUNTING
 genecounting            Gene counting for haplotype analysis
 gif                     Kinship coefficient and genetic index of
                         familiality
-hap.em                  Gene counting for haplotype analysis
 hap                     Haplotype reconstruction
+hap.em                  Gene counting for haplotype analysis
 hap.score               Score Statistics for Association of Traits
                         with Haplotypes
 hla                     HLA markers and Schizophrenia
 htr                     Haplotype trend regression
-hwe                     Hardy-Weinberg equlibrium test
+hwe                     Hardy-Weinberg equlibrium test for
+                        multiallelic marker
 hwe.hardy               Hardy-Weinberg equlibrium test using MCMC
 kbyl                    LD statistics for two multiallelic loci
 kin.morgan              kinship matrix for simple pedigree
@@ -32,8 +34,10 @@ muvar                   Means and variances under 1- and 2- locus
 pbsize                  Power for population-based association design
 pfc                     Probability of familial clustering of disease
 pfc.sim                 Probability of familial clustering of disease
-                        using Monte Carlo
-pgc                     Preparing frequency weight for GENECOUNTING
+pgc                     Preparing weight for GENECOUNTING
+plot.hap.score          Plot Haplotype Frequencies versus Haplotype
+                        Score Statistics
+print.hap.score         Print a hap.score object
 s2k                     Statistics for 2 by K table
 tbyt                    LD statistics for two SNPs
 whscore                 Whittemore-Halpern scores for allele-sharing

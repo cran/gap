@@ -1,14 +1,13 @@
 hap.score<-function(y, geno, trait.type="gaussian",
                     offset = NA, x.adj = NA, skip.haplo=.005,
-                    locus.label=NA, miss.val=0, n.sim=0, method="gc", id=NA, handle.miss=0, n.miss.loci=NA, sexid=NA)
+                    locus.label=NA, miss.val=0, n.sim=0, method="gc", id=NA, handle.miss=0, mloci=NA, sexid=NA)
 {
-  require(haplo.score)
   trait.int <- charmatch(trait.type, c("gaussian", "binomial", "poisson", "ordinal"))
   if(is.na(trait.int)) stop("Invalid trait type")
   if(trait.int == 0)   stop("Ambiguous trait type")
   if(length(y)!=nrow(geno)) stop("Dims of y and geno are not compatible")
   n.loci <- ncol(geno)/2
-  if(n.loci != (floor(ncol(geno)/2)) )stop("Odd number of cols of geno")
+  if(n.loci != (floor(ncol(geno)/2))) stop("Odd number of cols of geno")
   if(handle.miss==0)
   {
     miss <- apply(is.na(geno),1,any)
@@ -20,19 +19,19 @@ hap.score<-function(y, geno, trait.type="gaussian",
   }
   else
   {
-    if(is.na(n.miss.loci)) stop("Maximum number of missing loci (n.miss.loci) not specified")
+    if(is.na(mloci)) stop("Maximum number of missing loci (mloci) not specified")
     nmiss <- apply(is.na(geno),1,sum)
     if(!all(is.na(miss.val))) {
        for(mval in miss.val) {
           nmiss <- nmiss + apply(geno==mval, 1, sum)
        }
     }
-    if(n.miss.loci<0 | n.miss.loci >= n.loci) stop("Invalid control for number of missing loci")
+    if(mloci<0 | mloci >= n.loci) stop("Invalid control for number of missing loci")
     miss <- rep(F, length(y))
-    for(i in 1:length(y)) if(nmiss[i] > n.miss.loci*2) miss[i] <- T
+    for(i in 1:length(y)) if(nmiss[i] > mloci*2) miss[i] <- T
   }
   adjusted <- T
-  if( all(is.na(x.adj)) ) adjusted <- F
+  if( all(is.na(x.adj))) adjusted <- F
   if(adjusted){
     x.adj <- as.matrix(x.adj)
     if(nrow(x.adj)!=length(y)) stop("Dims of y and x.adj are not compatible")
@@ -62,8 +61,8 @@ hap.score<-function(y, geno, trait.type="gaussian",
   method.id<-charmatch(method, c("gc", "hap"))
   if(is.na(method.id)) stop("Invalid selection of method")
   if(method.id == 0)   stop("Ambiguous method")
-  else if(method.id==1) haplo <- gc.em(data=geno, locus.label, converge.eps=0.00001, maxiter=5000, handle.miss=handle.miss)
-  else haplo <- hap.em(id, data=geno, locus.label, converge.eps=0.00001, maxiter=5000) 
+  else if(method.id==1) haplo <- gc.em(data=geno, locus.label, converge.eps=0.00001, maxiter=5000, handle.miss=handle.miss, miss.val=miss.val)
+  else haplo <- hap.em(id, data=geno, locus.label, converge.eps=0.00001, maxiter=5000, miss.val=miss.val)
   if(!haplo$converge) stop("EM for haplo failed to converge")
   hap1 <- haplo$hap1code
   hap2 <- haplo$hap2code
@@ -92,7 +91,7 @@ hap.score<-function(y, geno, trait.type="gaussian",
         a  <- switch(trait.int,sum(reg.out$residuals^2)/reg.out$df.residual,1, 1)
       }
      v <- switch(trait.int, 1/a, mu*(1-mu), mu )
-     tmp <- haplo.score.glm(y, mu, a, v, x.adj, nreps, x.post, post, x)
+     tmp <- hap.score.glm(y, mu, a, v, x.adj, nreps, x.post, post, x)
      u.score <- tmp$u.score
      v.score <- tmp$v.score
    }
@@ -106,14 +105,13 @@ hap.score<-function(y, geno, trait.type="gaussian",
          alpha <- reg.out$coef[1:(K-1)]
          beta <- reg.out$coeff[K:(K-1 + n.xadj)]
 
-         tmp <- haplo.score.podds(y, alpha, beta, x.adj, nreps, x.post,
-                              post, x)
+         tmp <- hap.score.podds(y, alpha, beta, x.adj, nreps, x.post, post, x)
        }
       if(!adjusted){
          tbl <- table(y)
          s <- 1- (cumsum(tbl)-tbl)/n.subj
          alpha <-  - log((1-s[-1])/s[-1])
-         tmp <- haplo.score.podds(y, alpha, beta=NA, x.adj=NA, nreps, x.post, post, x)
+         tmp <- hap.score.podds(y, alpha, beta=NA, x.adj=NA, nreps, x.post, post, x)
        }
       u.score <- tmp$u.score
       v.score <- tmp$v.score
@@ -148,16 +146,16 @@ hap.score<-function(y, geno, trait.type="gaussian",
               mu.rand <- mu[rand.ord]
               v.rand <- switch(trait.int, v, v[rand.ord], v[rand.ord])
             }
-           tmp <- haplo.score.glm(y[rand.ord], mu.rand, a, v.rand, 
+           tmp <- hap.score.glm(y[rand.ord], mu.rand, a, v.rand, 
                                 x.adj[rand.ord,], nreps, x.post, post, x)
          }
          if(trait.int ==4){
             if(adjusted){             
-               tmp <- haplo.score.podds(y[rand.ord], alpha, beta, 
+               tmp <- hap.score.podds(y[rand.ord], alpha, beta, 
                                x.adj[rand.ord,,drop=F],nreps, x.post, post, x)
             }
             if(!adjusted) {
-               tmp <- haplo.score.podds(y[rand.ord], alpha, beta=NA, 
+               tmp <- hap.score.podds(y[rand.ord], alpha, beta=NA, 
                                x.adj=NA,nreps, x.post, post, x)
              }
 
@@ -198,15 +196,154 @@ hap.score<-function(y, geno, trait.type="gaussian",
        hap.prob=haplo$hap.prob[which.haplo],
        locus.label=locus.label,
        n.sim=n.sim, n.val.global=n.val.global, n.val.haplo=n.val.haplo))
-   class(obj) <- "haplo.score"
+   class(obj) <- "hap.score"
    return(obj)
 }
  
+hap.score.glm <- function(y,mu,a,v,x.adj,nreps,x.post, post, x)
+{
+   u.mtx  <- (y-mu)*x.post / a
+   u.score <- apply(u.mtx,2,sum)
+
+   # Var matrix for x.adj covariates
+   v.11 <- t(x.adj * v) %*% x.adj
+
+   # Var matrix for covar(x.adj, x.post)
+   v.21 <- t(x.post) %*% (x.adj * v)
+
+   # Var matrix for haplo scores
+   res <- ( (y - mu)/a ) ^2
+   t1 <- rep( (v-res) ,nreps) * post
+   v.22 <- t(x*t1) %*% x + t(u.mtx) %*% u.mtx
+
+   # Var matrix for haplo scores, adjusted for x.adj
+   v.score <- v.22 - v.21 %*% solve(v.11) %*% t(v.21) 
+   return(list(u.score=u.score, v.score=v.score))
+}
+
+hap.score.podds <- function(y, alpha, beta=NA, x.adj=NA, nreps, x.post,  post, x)
+{
+###################################################################
+#
+# If U=c(u.a, u.e, u.g), where 
+#   u.a = score for alpha's
+#   u.e = score for unambiguous (x.adj) covariates
+#   u.g = score for ambiguous haplotypes
+#
+# Then the upper triangle of Var(U) can be partitioned as
+#
+#          | v.aa   v.ae   v.ag |   |           |
+#   V(U) = |        v.ee   v.eg | = | v.11 v.12 |
+#          |               v.gg |   |      v.gg |
+#
+# where v.12 is composed of v.aa, v.ae, v.ee
+#       v.12 is composed of v.ag, v.eg
+#
+# and Var(u.g) = v.gg - v.12 * v.12(inv) * t(v.12)
+#
+# The following computes each of the submatrices as needed
+# to determine u.g and Var(u.g)
+#
+##################################################################
+adjusted <- T
+if(any(is.na(x.adj))) adjusted <- F
+if(adjusted) n.xadj <- ncol(x.adj)
+n.x <- ncol(x)
+K <- max(y)
+
+# to make suscripting easier, append Inf to front of alpha,
+# as place-holder for alpha[1] = Inf
+alpha <- c(Inf, alpha)
+if(adjusted){
+   s   <- ifelse(y==1, 1, 1/(1 + exp(-(alpha[y  ] + x.adj %*% beta ))) )
+   s.p <- ifelse(y==K, 0, 1/(1 + exp(-(alpha[y+1] + x.adj %*% beta ))) )
+ }
+if(!adjusted){
+   s   <- ifelse(y==1, 1, 1/(1 + exp(-(alpha[y  ]  ))) )
+   s.p <- ifelse(y==K, 0, 1/(1 + exp(-(alpha[y+1]  ))) )
+ }
+w1 <- (s*(1-s) - s.p*(1-s.p))/(s - s.p)
+u.mtx <- w1 * x.post
+u.score <- apply(u.mtx,2,sum)
+
+#  compute information matrix for alpha-beta (v.ab) and alpha-alpha (v.aa)
+tmp1 <- (s   + s.p^2 - 2*s*s.p)*s.p*(1-s.p)/(s-s.p)^2
+tmp2 <- (s.p +   s^2 - 2*s*s.p)*s*(1-s)/(s-s.p)^2
+tmp3 <- s.p*(1-s.p)*s*(1-s)/(s-s.p)^2
+
+v.ag <- matrix(rep(0, (K-1)*n.x), ncol=n.x)
+if(adjusted) v.ae <- matrix(rep(0, (K-1)*n.xadj), ncol=n.xadj)
+v.aa <- matrix(rep(0,(K-1)^2),ncol=(K-1))
+
+n.subj <- length(y)
+for(j in 2:K){
+   wt <- rep(0,n.subj)
+   wt <- ifelse(y==(j-1), (tmp1 - tmp3), wt)
+   wt <- ifelse(y==j, (tmp2 - tmp3), wt)
+   v.ag[(j-1),] <- apply(wt * x.post, 2,sum)
+   if(adjusted) v.ae[(j-1),] <-  apply(wt * x.adj, 2,sum)
+   v.aa[(j-1),(j-1)] <- sum(tmp1[y==(j-1)]) + sum(tmp2[y==j])   
+   if(j < K) v.aa[(j-1), j] <- -sum(tmp3[y==j])
+ }
+
+# fill in lower tri of v.aa to make it symmetric
+v.aa <- v.aa + t( (col(v.aa) > row(v.aa))*v.aa )
+
+# Louis' method for v.gg
+w2 <- s*(1-s) + s.p*(1-s.p)
+t1 <- rep( (w2 - w1^2), nreps) * post
+v.gg <- t(x*t1) %*% x + t(u.mtx) %*% u.mtx
+
+if(adjusted){
+   v.ee <- t(w2*x.adj) %*% x.adj
+   v.eg <- t(w2*x.adj) %*% x.post
+   v.11 <- rbind( cbind(v.aa, v.ae), cbind(t(v.ae),v.ee) )
+   v.12 <- rbind(v.ag,v.eg)
+   v.score <- v.gg - t(v.12) %*% solve(v.11) %*% v.12
+ }
+if(!adjusted){
+   v.score <- v.gg - t(v.ag) %*% solve(v.aa) %*% v.ag
+ }
+
+return(list(u.score=u.score, v.score=v.score))
+}
+
+plot.hap.score <- function(x, ...){
+   plot(x$hap.prob, x$score.haplo, xlab="Haplotype Frequency", 
+        ylab="Haploltype Score Statistic", ...)
+   invisible()
+}
+
+print.hap.score <- function(x, ...){
+
+# print of global score stats:
+   cat("\nGlobal Score Statistics\n\n")
+   cat(paste("global-stat = ",round(x$score.global,5),", df = ",x$df,
+         ", p-val = ",round(x$score.global.p,5),sep=""))
+   if(x$n.sim>0) cat(", sim. p-val = ",x$score.global.p.sim,"\n\n")
+   if(x$n.sim>0) cat("max-stat sim. p-val = ",x$score.max.p.sim)
+   cat("\n\n")
+
+# create table for haplotype specific stats:
+   tbl <- cbind(x$haplotype,round(x$hap.prob,5),round(x$score.haplo,5),
+          round(x$score.haplo.p,5))
+   if(x$n.sim>0) tbl <- cbind(tbl,x$score.haplo.p.sim)
+   ord <- order(x$score.haplo)
+   tbl <- tbl[ord,]
+   if(x$n.sim == 0) dimnames(tbl) <- list(NULL,c(x$locus.label,"Hap-Freq",
+                  "Hap-Score","p-val"))
+   if(x$n.sim > 0) dimnames(tbl) <- list(NULL,c(x$locus.label,"Hap-Freq",
+                  "Hap-Score","p-val","sim p-val"))
+   cat("Haplotype-specific Scores\n\n")
+   print(tbl,quote=F)
+   cat("\n\n")
+   invisible()
+}
+
 # 13-9-2003 start to implement
 # 14-9-2003 in shape
 # 21-9-2003 start extensive checking
 # 23-9-2003 rewrite interface to genecounting
-# 26-9-2003 done with successful use of byand order
+# 26-9-2003 done with successful use of by and order
 # 17-10-2003 start to implement missing genotype code
-  
-
+# 18-9-2004 to fix S3 class hap.score

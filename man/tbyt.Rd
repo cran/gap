@@ -7,8 +7,8 @@ LD statistics for two SNPs
 }
 
 \arguments{
-  \item{h}{a vector of haplotype frequencies}
-  \item{n}{number of haplotypes}
+ \item{h}{a vector of haplotype frequencies}
+ \item{n}{number of haplotypes}
 }
 
 \value{
@@ -23,9 +23,16 @@ The returned value is a list containing:
 \item{Dprime}{the scaled disequilibrium parameter}
 \item{VarDprime}{the variance of Dprime}
 \item{x2}{the Chi-squared statistic}
+\item{lor}{the log(OR) statistic}
+\item{vlor}{the var[log(OR)] statistic}
 }
 
 \section{References}{
+Zabetian CP, Buxbaum SG, Elston RC, Kohnke MD, Anderson GM, Gelernter J, Cubells JF.
+The structure of linkage disequilibrium at the DBH locus strongly influences the 
+magnitude of association between diallelic markers and plasma dopamine beta-hydroxylase activity
+Am J Hum Genet 72: 1389-1400 
+
 Zapata C, Alvarez G, Carollo C (1997) Approximate variance of the standardized
 measure of gametic disequilibrium D'. Am. J. Hum. Genet. 61:771-774
 }
