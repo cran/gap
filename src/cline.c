@@ -103,7 +103,7 @@ int get_flag(int argc, char **argv, char *flag, int vtype, void *val) {
                   return -1;
 	       }
             case 3:
-               if (sscanf(fss, "%f", &dv)) {
+               if (sscanf(fss, "%lf", &dv)) {
                   *(dval++) = dv;
                   return i;
 	       } else {

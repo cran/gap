@@ -1,6 +1,6 @@
 /*****************************************************************************/
 /*                                                                           */
-/*  Program: MAKEPED.C                                                      */
+/*  Program: MAKEPED.C                                                       */
 /*                                                                           */
 /*                                                                           */
 /*  Used to convert pedigree files missing sib pointers to pedigree files    */
@@ -11,7 +11,7 @@
 /*  6-23-88  The ind_lookup routine stopped looking for an id too soon.      */
 /*           This showed up when strings where used as id's and the pedigree */
 /*           was entered in the reverse order from the way you would draw    */
-/*           a pedigree, that is, an individual drawn at bottom of a pedigree */
+/*           a pedigree, that is, an individual drawn at bottom of a pedigree*/
 /*           was listed as the first individual in the data file.            */
 /*                                                                           */
 /* 10-05-88  Character spacing of output when loops created an new individual*/
@@ -36,6 +36,7 @@
 /*           E. Weeks).  Change pifile and pofile to s_byte from u_byte.     */
 /*  1-16-92  Added a feature to check duplicated individual IDs which are    */
 /*           supposed to be unique.  Added by Xiaoli Xie.                    */
+/*  1-19-04  No further warnings for R port. Jing hua Zhao                   */
 /*****************************************************************************/
 #define version 2.21
 
@@ -52,9 +53,9 @@
 #ifdef TURBO_C
   #include <alloc.h>
 #endif
-#ifndef u_long
+/*
 typedef unsigned long   u_long;
-#endif
+*/
 
 #define	FALSE			0
 #define	TRUE			1
@@ -202,7 +203,7 @@ i = 1;
 while (i <= nuperson) {
   if (person[sequence+i] == NULL)  return(0);
   else
-   if (!strcmp_i(person[sequence + i]->oldid_s,name) ) /* if they match */
+   if (!strcmp(person[sequence + i]->oldid_s,name) ) /* if they match */
         return(person[sequence + i]->id);
   else
     i++;
@@ -231,7 +232,7 @@ i = 1;
 while (i <= lineperson) {
   if (lineind[i][0] == '\0')  return(0);
   else
-   if (!strcmp_i(lineind[i],name) ) /* if they match */
+   if (!strcmp(lineind[i],name) ) /* if they match */
     { 
       fprintf(stdout,"\nWARNING! Individual id. %s in family %s is duplicated%c\n",name,curped_s,BELL);
       return(1);
@@ -500,7 +501,7 @@ void readped()
 
     if (!feof(pedfile)) {
         fscanf(pedfile,"%s",newped_s);
-        if (strcmp_i(thisped_s,newped_s) != 0) {
+        if (strcmp(thisped_s,newped_s) != 0) {
         sequence += nuperson;
         nuperson = 0;
         lineperson = 1; /* added by xie*/
@@ -795,13 +796,13 @@ void file_loops(char **loopfile)
   s_intg i;
 /*s_intg from_file;*/
   s_intg found_start_of_ped;
-  s_intg start_of_ped;
+  s_intg start_of_ped=0;
   s_intg found_person;
 /*s_intg good_format;*/
-  s_byte loop_file[max_filespec];
 /*s_byte c;*/
   FILE   *loopf;
 #ifdef executable 
+  s_byte loop_file[max_filespec];
   loop_file[0] = '\0';
   fprintf(stdout,"\nEnter filename -> ");
   while ( loop_file[0] == '\0' ) {
@@ -813,7 +814,7 @@ void file_loops(char **loopfile)
   }
 #else
    if ((loopf = fopen(*loopfile,"r")) == NULL) {
-       fprintf(stderr,"\nERROR: Cannot open file %s\n",loopfile);
+       fprintf(stderr,"\nERROR: Cannot open file %s\n",*loopfile);
        exit(1);
    }
 #endif
@@ -832,12 +833,12 @@ void file_loops(char **loopfile)
   i = 1;
   while(( i <= totperson) && (!found_person)) {
 
-    if ((!found_start_of_ped) && (strcmp_i(pedigree_s,person[i]->oldped_s)==0)) {
+    if ((!found_start_of_ped) && (strcmp(pedigree_s,person[i]->oldped_s)==0)) {
       start_of_ped = i;
       found_start_of_ped = TRUE;
     }
-    if ( (strcmp_i(pedigree_s,person[i]->oldped_s) == 0) &&
-         (strcmp_i(person_s,person[i]->oldid_s ) == 0)) {
+    if ( (strcmp(pedigree_s,person[i]->oldped_s) == 0) &&
+         (strcmp(person_s,person[i]->oldid_s ) == 0)) {
            found_person = TRUE;
            add_loop(start_of_ped,i);
     }
@@ -867,11 +868,11 @@ void some_loops()
   s_byte person_s[maxname];
 /*s_intg pedigree_i;*/
   s_byte pedigree_s[maxname];
-  s_intg pedigree;
+  s_intg pedigree=0;
   s_intg i,/*j,k,*/ii;
-  s_intg start_of_ped;
+  s_intg start_of_ped=0;
   s_intg found_per;
-  s_intg found_ped;
+  s_intg found_ped=0;
 /*s_intg good_format;*/
   s_intg count;             /* Number of people assigned loops.  */
   s_byte done;
@@ -894,7 +895,7 @@ void some_loops()
        i = 1;
 	 while ((!found_ped) && (i<=totperson)) {
 
-             if (( strcmp_i(pedigree_s,person[i]->oldped_s) == 0)) {
+             if (( strcmp(pedigree_s,person[i]->oldped_s) == 0)) {
 	       found_ped = TRUE;
 	       start_of_ped = i;
 	       pedigree = person[i]->ped;
@@ -917,7 +918,7 @@ void some_loops()
 	 while( (i<=totperson) &&
 	       (pedigree == person[i]->ped) &&
 	       (!found_per)){
-		   if (!strcmp_i(person[i]->oldid_s,person_s)) {
+		   if (!strcmp(person[i]->oldid_s,person_s)) {
              loops[count++] = i;
              /* Any loops with indices above i should be incremented by one,
                 since add_loop shifts all the indices above i */
@@ -1088,7 +1089,7 @@ void auto_probands()
 {
   s_intg i,istart;
   s_intg ped_num;		        /* current pedigree */
-  s_intg found;                 /* index of best choice so far */
+  s_intg found=0;               /* index of best choice so far */
   s_intg max_level;             /* max num generations found so far */
   s_intg trys;
 
@@ -1166,10 +1167,10 @@ void file_probands(char **probandfile)
 /*s_intg start_of_ped;*/
   s_intg found;
 /*s_intg good_format;*/
-  s_byte proband_file[max_filespec];
 /*s_byte c;*/
   FILE   *prof;
 #ifdef executable 
+  s_byte proband_file[max_filespec];
   proband_file[0] = '\0';
   fprintf(stdout,"\nEnter filename -> ");
   while ( proband_file[0] == '\0' ) {
@@ -1181,7 +1182,7 @@ void file_probands(char **probandfile)
   }
 #else
    if ((prof = fopen(*probandfile,"r")) == NULL) {
-       fprintf(stderr,"\nERROR: Cannot open file %s\n",probandfile);
+       fprintf(stderr,"\nERROR: Cannot open file %s\n",*probandfile);
        exit(1);
    }
 #endif
@@ -1197,8 +1198,8 @@ void file_probands(char **probandfile)
        j = 1;
        while(( j<=totperson) && (!found)) {
 
-        if ( (strcmp_i(pedigree_s,person[j]->oldped_s) == 0) &&
-             (strcmp_i(person_s,person[j]->oldid_s ) == 0)) {
+        if ( (strcmp(pedigree_s,person[j]->oldped_s) == 0) &&
+             (strcmp(person_s,person[j]->oldid_s ) == 0)) {
             clear_proband(j);
             if (person[j]->proband > 2) {
    fprintf(stderr,"\nERROR: If a loopperson is also the proband, that person \n");
@@ -1263,7 +1264,7 @@ void all_probands()
                  (pedigree == person[i]->ped) &&
                  (!found)){
 
-             if (!strcmp_i(person[i]->oldid_s,person_s)) {
+             if (!strcmp(person[i]->oldid_s,person_s)) {
               if (person[i]->proband > 2) {
    fprintf(stderr,"\nERROR: If a loopperson is also the proband, that person \n");
    fprintf(stderr,"       must be in the first loop (#2). \n");
@@ -1307,11 +1308,11 @@ void some_probands()
   s_byte person_s[maxname];
 /*s_intg pedigree_i;*/
   s_byte pedigree_s[maxname];
-  s_intg pedigree;
+  s_intg pedigree=0;
   s_intg i/*,j,k*/;
-  s_intg start_of_ped;
+  s_intg start_of_ped=0;
   s_intg found_per;
-  s_intg found_ped;
+  s_intg found_ped=0;
 /*s_intg good_format;*/
   s_intg count;             /* number of people assigned probands.  */
   s_byte done;
@@ -1334,7 +1335,7 @@ void some_probands()
        found_ped = FALSE;
        i = 1;
 	 while ((!found_ped) && (i<=totperson)) {
-		if (( strcmp_i(pedigree_s,person[i]->oldped_s) == 0)) {
+		if (( strcmp(pedigree_s,person[i]->oldped_s) == 0)) {
 	       found_ped = TRUE;
 	       start_of_ped = i;
 	       pedigree = person[i]->ped;
@@ -1357,7 +1358,7 @@ void some_probands()
 	 while( (i<=totperson) &&
 	       (pedigree == person[i]->ped) &&
 	       (!found_per)){
-		   if (!strcmp_i(person[i]->oldid_s,person_s)) {
+		   if (!strcmp(person[i]->oldid_s,person_s)) {
 		     clear_proband(i);
               if (person[i]->proband > 2) {
    fprintf(stderr,"\nERROR: If a loopperson is also the proband, that person \n");
@@ -1804,12 +1805,12 @@ void makeped(char **pifile, char **pofile, int *autoselect,
   found_error = FALSE;
 
   if ((pedfile = fopen(*pifile, "r")) == NULL){
-   fprintf(stderr,"\nERROR: Cannot open %s\n",pifile);
+   fprintf(stderr,"\nERROR: Cannot open %s\n",*pifile);
    exit(1);
  }
 
   if ((pedout = fopen(*pofile, "w")) == NULL){
-   fprintf(stderr,"\nERROR: Cannot open %s\n",pofile);
+   fprintf(stderr,"\nERROR: Cannot open %s\n",*pofile);
    exit(1);
  }
   readped();
@@ -1834,3 +1835,4 @@ void makeped(char **pifile, char **pofile, int *autoselect,
 #endif
 
 /*Adapted from makeped.c on 18-10-2003*/
+

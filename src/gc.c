@@ -53,8 +53,8 @@ int *converge
 long int i,j,k,io,it;
 int loci1[mxloc];
 double s,lnls;
-time_t t;
 /*
+time_t t;
 printf("\nGENECOUNTING, %s %.2f %s",(!handlemissing)?"ordinary":"missing-value handling",version, " JH Zhao 03/01--05/03\n");
 time(&t);
 printf("%s\n\n",ctime(&t));

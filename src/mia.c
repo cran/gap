@@ -116,7 +116,7 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
             strcpy(line,rol);
           }
           if(i==1) fprintf(outfile,"\n");
-          sscanf(rol,"%f",&freq);
+          sscanf(rol,"%lf",&freq);
           haptable[k][i-1]=freq;
           k++;
         }
@@ -262,7 +262,7 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
             strcpy(so_list[l].namei[j],a);
             strcpy(line,rol);
           }
-          sscanf(rol,"%f",&so_list[l].prob);
+          sscanf(rol,"%lf",&so_list[l].prob);
           ++l;
         }
         fclose(infile);

@@ -106,7 +106,7 @@ int getnum(FILE *f, double *x)
 {
   static char buffer[MAX_INPUT+1];
   if (fgets(buffer,MAX_INPUT,f)==NULL) return(0);
-  return(sscanf(buffer,"%*s %f %f %f %f %f %f",x,x+1,x+2,x+3,x+4,x+5));
+  return(sscanf(buffer,"%*s %lf %lf %lf %lf %lf %lf",x,x+1,x+2,x+3,x+4,x+5));
 }
 
 double median(double *x,int *n)
