@@ -1,0 +1,21 @@
+useDynLib(gap)
+import(MASS,genetics)
+export(Ginv,
+       a2g, allele.recode,
+       bt,
+       chow.test, compositeLD,
+       fbsize,
+       g2a, g2a.c, gc.em, gcode, gcontrol, gcp, genecounting, geno.recode, gif, grec2g,
+       hap, hap.em, hap.score, htr, hwe, hwe.hardy,
+       kbyl, kin.morgan,
+       m2plem, makeped, mia, mtdt, muvar,
+       pbsize, pedtodot, pfc, pfc.sim, pgc, plem2m, plot.hap.score, printBanner, print.compositeLD, print.hap.score,
+       revhap, revhap.i,
+       s2k,
+       tbyt, toETDT,
+       ungcode,
+       whscore
+       )
+S3method(plot, hap.score)
+S3method(print, hap.score)
+S3method(print, compositeLD)
