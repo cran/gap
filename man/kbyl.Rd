@@ -1,7 +1,7 @@
 \name{kbyl}
 \alias{kbyl}
 \title{LD statistics for two multiallelic loci}
-\usage{kbyl(n1,n2,h,n,optrho)}
+\usage{kbyl(n1,n2,h,n,optrho=2)}
 \description{
 LD statistics for two multiallelic loci}
 }

@@ -47,15 +47,12 @@
 /* #include <unix.h> */  /* Microsoft C doesn't like this */
 #include <string.h>
 #ifdef MICROSOFT_C
-  #include <malloc.h>
+/*  #include <malloc.h> malloc/malloc.h for Mac OS X 10.3 (Panther)*/
 #endif
 
 #ifdef TURBO_C
   #include <alloc.h>
 #endif
-/*
-typedef unsigned long   u_long;
-*/
 
 #define	FALSE			0
 #define	TRUE			1

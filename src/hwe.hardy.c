@@ -20,7 +20,7 @@ double cal_probn (int *, Index, double, int *);
 void select_index (Index *, int);
 void random_choose (int *, int *, int);
 void test_switch (int *, Index, int *, int *, double *, double *);
-void do_switch (int *, Index, int);
+void ndo_switch (int *, Index, int);
 void stamp_time (time_t, FILE *);
 
 int *work;
@@ -263,7 +263,7 @@ void test_switch (int *a, Index index, int *switch_ind, int *switch_type, double
   }
 }
 
-void do_switch (int *a, Index index, int type)
+void ndo_switch (int *a, Index index, int type)
 {
   int k11, k22, k12, k21;
 
@@ -464,7 +464,7 @@ double cal_prob (int *a, Index index, double ln_p_old, int *actual_switch)
       if ( type == 1 ) p1_ratio = p2_ratio;
       rand_num = drand48();
       if ( rand_num < TRANS( p1_ratio ) ) {
-           do_switch ( a, index, type );
+           ndo_switch ( a, index, type );
            ln_p_new = ln_p_old + log (p1_ratio);
            *actual_switch = 1;
       } else ln_p_new = ln_p_old;
@@ -472,11 +472,11 @@ double cal_prob (int *a, Index index, double ln_p_old, int *actual_switch)
     default:
       rand_num = drand48();
       if ( rand_num <= TRANS(p1_ratio)) {
-         do_switch ( a, index, 0 );
+         ndo_switch ( a, index, 0 );
          ln_p_new = ln_p_old + log (p1_ratio);
          *actual_switch = 2;
        } else if ( rand_num <= TRANS(p1_ratio) + TRANS(p2_ratio) ) {
-         do_switch ( a, index, 1 );
+         ndo_switch ( a, index, 1 );
          ln_p_new = ln_p_old + log (p2_ratio);
          *actual_switch = 2;
        } else ln_p_new = ln_p_old;

@@ -1,4 +1,3 @@
-% \VignetteDepends{tools}
 % \VignetteIndexEntry{An overview of gap}
 % \Vignettekeywords{human genetics, linkage analysis, association analysis}
 % \VignettePackage{gap}
@@ -82,6 +81,7 @@ mtdt                    Transmission/disequilibrium test of a multiallelic marke
 muvar                   Means and variances under 1- and 2- locus QTL model
 pbsize                  Sample size for population-based association desgin
 pfc                     Probability of familial clustering of disease
+pgc                     Preparing frequency weight for GENECOUNTING
 s2k                     Statistics for 2 by K table
 tbyt                    LD statistics for two SNPs
 whscore                 Whittemore-Halpern scores for allele-sharing

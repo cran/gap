@@ -1,0 +1,94 @@
+Version history of R genetic analysis package (R/gap)
+
+07/06/03 draft plan (home edition) shortly before RSS 2003
+
+Version 0.1
+
+11-01-2004
+
+First submission to CRAN with Vignette and revised Rd
+
+
+Version 0.2
+
+12-01-2004
+
+Change %lf and %lg to %f according to check by Prof Kurt Hornik
+
+
+Version 0.3
+
+13-01-2004 
+
+Refine Vignette and change gap.demo.R
+
+
+Version 0.4
+
+14-01-2004
+
+Create this file
+Change DESCRIPTION
+Correct author of mtdt
+Delete hap.out in R directory
+Add docoumentation of htrtable in gc.em
+See also pfc rather than gif in gif.Rd
+Add right bracket in dat1 of chow.test
+Change ad to y in htr.Rd and the annotation in apoeapoc.Rd
+
+
+Version 0.5
+
+19-01-2004
+
+To remove warnings earlier found in PC and pointed by Prof Brian Ripley
+Resubmission to CRAN
+
+
+22-1-2004
+
+Add haplotype diversity to genecounting
+Add default value to optrho in kbyl
+Change "for" to "with" when describing fsnps
+
+
+Version 0.6
+
+28-1-2004
+
+Changes for Mac OS X 10.3 (Panther) according to Michael Barmada (michael.barmada@hgen.pitt.edu):
+. do_switch --> ndo_switch in hwe.hardy.c
+. malloc.h --> malloc/malloc.h in gcontrol.c and makeped.c; but it seems ok to stick to stdlib.h
+. add static to n_loci, etc. in hap.c, mia.c to avoid conflict
+
+31-1-2004
+
+Rename genecounting.R to gc.R and change lnl0 and lnl1 to l0 and l1
+Add pgc function but with same problem as hwe.hardy
+
+1-2-2004
+
+Fix error and handle.miss functions in pgc when with.id=0
+Change cat() to c() in gap.demo.R to avoid generating data files
+Merge muvar1 and muvar2 into muvar and add their synopsis
+
+
+Version 0.7
+
+2-2-2004
+
+Warnings pointed by Kurt Hornik
+Change %lf to %f in several places of pgc.c
+Remove semicolon after } of rsort1
+
+
+things to do,
+
+1. hwe.hardy debug
+2. hap.score to deal with more distributions and robust label handling
+3. hap/hap.em to handle missing only one allele and add X chromosome code
+4. joint genetic and environmental effects and mixed models
+5. pca regression and htSNP
+6. permutation tests/LD statistics as in EHPLUS
+
+Further to add: path/segregation/linkage analysis programs

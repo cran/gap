@@ -18,11 +18,11 @@ Gene counting for haplotype analysis with missing data
 \value{
 The returned value is a list containing:
 
-\item{h}{haplotype frequency estimates under linkage disequilibrium}
-\item{h0}{haplotype frequency estimates under linkage equilibrium}
+\item{h}{haplotype frequency estimates under linkage disequilibrium (LD)}
+\item{h0}{haplotype frequency estimates under linkage equilibrium (no LD)}
 \item{prob}{genotype probability estimates}
-\item{lnl0}{log-likelihood under linkage equilibrium}
-\item{lnl1}{log-likelihood under linkage disequilibrium}
+\item{l0}{log-likelihood under linkage equilibrium}
+\item{l1}{log-likelihood under linkage disequilibrium}
 \item{hapid}{unique haplotype identifier (defunct, see gc.em)}
 \item{npusr}{number of parameters according user-given alleles}
 \item{npdat}{number of parameters according to observed}
@@ -30,6 +30,8 @@ The returned value is a list containing:
 \item{iter}{number of iterations used in gene counting}
 \item{converge}{a flag indicating convergence status of gene counting}
 \item{Dprime}{a multilocus version of Hedrick's D'}
+\item{di0}{haplotype diversity under no LD, defined as \eqn{1-\sum (h_0^2)}{1-sum (h0^2)}}
+\item{di1}{haplotype diversity under LD, defined as \eqn{1-\sum (h^2))}{1-sum (h^2)}}
 }
 
 \section{References}{
@@ -52,15 +54,15 @@ analysis. Comp Meth Prog Biomed 70: 1-9
 data(hla)
 hla.gc<-genecounting(hla[,3:8])
 summary(hla.gc)
-hla.gc$lnl0
-hla.gc$lnl1
+hla.gc$l0
+hla.gc$l1
 
 # Now we use ALDH2 data
 data(aldh2)
 aldh2.gc<-genecounting(aldh2[,3:6],handle.miss=1)
 summary(aldh2.gc)
-aldh2.gc$lnl0
-aldh2.gc$lnl1
+aldh2.gc$l0
+aldh2.gc$l1
 }
 }
 \author{Jing hua Zhao}

@@ -8,13 +8,13 @@
 #define mxloc 50
 #define mxalleles 100
 
-double pl;
-int handlemissing;
-int nloci,nloci2,nalleles,loci[mxloc],obscom,nlocim,locim[mxloc+1];
-double sample,msample,pp[mxloc][mxalleles];
-long int hapall,hapallm;
-double *c,*h,*hs,*h0,*hm;
-int idm[mxloc];
+static double pl;
+static int handlemissing;
+static int nloci,nloci2,nalleles,loci[mxloc],obscom,nlocim,locim[mxloc+1];
+static double sample,msample,pp[mxloc][mxalleles];
+static long int hapall;
+static double *c,*h,*hs,*h0,*hm;
+static int idm[mxloc];
 
 void *xmalloc(long),hilo(int*,int*),getp(int*,int *),geth(int*,int *),
      ch(int*,int*,double*,double*),counting(int*,int *, long int),

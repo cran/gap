@@ -68,9 +68,11 @@ genecounting <- function(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,max
 # hapid<-apply(x,2,sum)>0
 # x<-x[,hapid]
 # hapid<-(1:hapall)[hapid]
-  list(h=z$Rh1, h0=z$Rh0, prob=z$prob, lnl0=z$lnl0, lnl1=z$lnl1,
+  di0<-1-sum((z$Rh0)^2)
+  di1<-1-sum((z$Rh1)^2)
+  list(h=z$Rh1, h0=z$Rh0, prob=z$prob, l0=z$lnl0, l1=z$lnl1,
        hapid=hapid, npusr=z$npusr, npdat=z$npdat, htrtable=x,
-       iter=z$iter,converge=z$converge,Dprime=Dprime)
+       iter=z$iter,converge=z$converge,Dprime=Dprime,di0=di0,di1=di1)
 }
 
 # 17-11-2003 Add Dprime, a version which generalises Hedrick's

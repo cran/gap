@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <float.h>
-#include <malloc.h>
+/*#include <malloc/malloc.h> necessary for Mac OS X 10.3 (Panther)*/
 #include <string.h>
 
 #define FALSE 0

@@ -61,11 +61,11 @@ return;
 
 enum {PEARSON,TSCHUPROW,CRAMER};
 
-int alleles1,alleles2,dfobs;
-double obs[maxgenotypes][maxgenotypes];
-double p[maxalleles],q[maxalleles];
-double sample_size,z1,z2,x2obs,x2lrt;
-int Dmaxij[maxalleles*maxalleles];
+static int alleles1,alleles2;
+static double obs[maxgenotypes][maxgenotypes];
+static double p[maxalleles],q[maxalleles];
+static double sample_size,z1,z2;
+static int Dmaxij[maxalleles*maxalleles];
 
 int kbylem(double *,double *,double *);
 void abp(int,int,double*,double*,double*,double*);
@@ -411,6 +411,8 @@ return 0;
 
 /*
 enum {EHOUTPUT,RAWDATA,CONTINGTABLE};
+static int dfobs;
+static double x2obs,x2lrt;
 
 int getobs(char *obsfile)
 {
@@ -595,5 +597,6 @@ if(po!=0&&pe!=0) ci=po*log(po/pe);
 
 return ci;
 }
+
 
 */

@@ -15,7 +15,7 @@ typedef struct {
   double prob;
 } so_def;
 so_def *so_list,*so_list_t;
-int n_loci;
+static int n_loci;
 
 void qsorts(long int,long int);
 

@@ -1,6 +1,6 @@
 \name{fsnps}
 \alias{fsnps}
-\title{A case-control data involving four SNPs for missing genotype}
+\title{A case-control data involving four SNPs with missing genotype}
 \description{
 This is a simulated data
 }
