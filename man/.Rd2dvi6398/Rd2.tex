@@ -1,0 +1,348 @@
+\documentclass[a4paper]{book}
+\usepackage[ae,hyper]{Rd}
+\usepackage{makeidx}
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge \R{ documentation}} \par\bigskip{{\Large of \file{Rd2.dvi} etc.}}}
+\par\bigskip{\large \today}
+\end{center}
+\Rdcontents{\R{} topics documented:}
+\Header{}{}
+
+\Header{aldh2}{ALDH2 markers and Alcoholism}
+\keyword{datasets}{aldh2}
+\begin{Description}\relax
+This data set contains eight ALDH2 markers 
+and Japanese patients and controls.\end{Description}
+\begin{Usage}
+\begin{verbatim}data(aldh2)\end{verbatim}
+\end{Usage}
+\begin{Format}\relax
+A data frame:
+\describe{
+\item[id] subject id
+\item[y] a variable taking value 0 for controls and 1 for Schizophrenia
+\item[D12S2070.a1] D12S2070 allele a1
+\item[D12S2070.a2] D12S2070 allele a2
+\item[D12S839.a1] D12S839 allele a1
+\item[D12S839.a2] D12S839 allele a2
+\item[D12S821.a1] D12S821 allele a1
+\item[D12S821.a2] D12S821 allele a2
+\item[D12S1344.a1] D12S1344 allele a1
+\item[D12S1344.a2] D12S1344 allele a2
+\item[EXON12.a1] EXON12 allele a1
+\item[EXON12.a2] EXON12 allele a2
+\item[EXON1.a1] EXON1 allele a1
+\item[EXON1.a2] EXON1 allele a2
+\item[D12S2263.a1] D12S2263 allele a1
+\item[D12S2263.a2] D12S2263 allele a2
+\item[D12S1341.a1] D12S1341 allele a1
+\item[D12S1341.a2] D12S1341 allele a2
+}
+
+The remaining variables are genotypes for 8 loci, with a prefix name
+(e.g., "EXON12") and a suffix for each of two alleles (".a1" and ".a2").
+
+The eight markers loci follows the following map (base pairs)
+
+\Tabular{lr}{
+D12S2070   & (> 450 000),\\
+D12S839    & (> 450 000),\\
+D12S821    & (\eqn{\sim}{~} 400 000),\\
+D12S1344   & (   83 853),\\
+EXON12     & (    0),\\
+EXON1      & (   37 335),\\
+D12S2263   & (   38 927),\\
+D12S1341   & (> 450 000)
+}\end{Format}
+\begin{Source}\relax
+Prof Ian Craig of Oxford and SGDP Centre, KCL\end{Source}
+
+\Header{apoeapoc}{APOE/APOC1 markers and Schizophrenia}
+\keyword{datasets}{apoeapoc}
+\begin{Description}\relax
+This data set contains APOE/APOC1 markers 
+and Chinese Schizophrenic patients and controls.\end{Description}
+\begin{Usage}
+\begin{verbatim}data(apoeapoc)\end{verbatim}
+\end{Usage}
+\begin{Format}\relax
+A data frame:
+\describe{
+\item[id] subject id
+\item[y] a variable taking value 0 for controls and 1 for Schizophrenia
+\item[sex] sex
+\item[age] age
+\item[apoe.a1] APOE allele a1
+\item[apoe.a2] APOE allele a2
+\item[apoc.a1] APOC allele a1
+\item[apoc.a2] APOC allele a2
+}
+
+The remaining variables are age, sex and genotypes for APOE and APOC 
+with suffixes for each of two alleles (".a1" and ".a2").\end{Format}
+\begin{Source}\relax
+Dr JJ Shi of Western China Medical University\end{Source}
+
+\Header{bt}{Bradley-Terry model for contingency table}
+\begin{Description}\relax
+This function calculates statistics under Bradley-Terry model. 
+
+Inside the function is a function toETDT which generates data required by ETDT.\end{Description}
+\begin{Usage}
+\begin{verbatim}bt(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] the data table
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+The returned value is a list containing:
+\begin{ldescription}
+\item[\code{y}] A column of 1
+\item[\code{count}] the frequency count/weight
+\item[\code{allele}] the design matrix
+\item[\code{bt.glm}] a glm.fit object
+\item[\code{etdt.dat}] a data table that can be used by ETDT
+\end{ldescription}
+\end{Value}
+\begin{Section}{References}
+Bradley RA, Terry M E (1952) Rank analysis of incomplete block designs I. 
+the method of paired comparisons. Biometrika 39:324--345
+
+Sham PC, Curtis D (1995) An extended transmission/disequilibrium 
+test ({TDT}) for multi-allelic marker loci. Ann. Hum. Genet. 59:323-336\end{Section}
+\begin{Author}\relax
+Jing hua Zhao\end{Author}
+\begin{SeeAlso}\relax
+\code{\Link{mtdt}}\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+# Copeman JB, Cucca F, Hearne CM, Cornall RJ, Reed PW, Ronningen KS, Undlien DE, Nistico L, Buzzetti R, Tosi R, et al.
+# (1995) Linkage disequilibrium mapping of a type 1 diabetes susceptibility gene (IDDM7) to chromosome 2q31-q33. 
+# Nat Genet 9: 80-5
+
+x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
+              0,0, 1, 3, 0,0, 0, 2, 3, 0, 0, 0,
+              2,3,26,35, 7,0, 2,10,11, 3, 4, 1,
+              2,3,22,26, 6,2, 4, 4,10, 2, 2, 0,
+              0,1, 7,10, 2,0, 0, 2, 2, 1, 1, 0,
+              0,0, 1, 4, 0,1, 0, 1, 0, 0, 0, 0,
+              0,2, 5, 4, 1,1, 0, 0, 0, 2, 0, 0,
+              0,0, 2, 6, 1,0, 2, 0, 2, 0, 0, 0,
+              0,3, 6,19, 6,0, 0, 2, 5, 3, 0, 0,
+              0,0, 3, 1, 1,0, 0, 0, 1, 0, 0, 0,
+              0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
+              0,0, 1, 0, 0,0, 0, 0, 0, 0, 0, 0),nrow=12)
+
+# Bradley-Terry model, only deviance is available in R
+bt.ex<-bt(x)
+anova(bt.ex$bt.glm)
+summary(bt.ex$bt.glm)
+bt.ex$etdt.dat
+
+\end{ExampleCode}
+\end{Examples}
+
+\Header{chow.test}{Chow's test for heterogeneity in two regressions}
+\begin{Description}\relax
+Chow's test is for differences between two or more regressions.  Assuming that
+errors in regressions 1 and 2 are normally distributed with zero mean and
+homoscedastic variance, and they are independent of each other, the test of
+regressions from sample sizes \eqn{n_1}{} and \eqn{n_2}{} is then carried out using
+the following steps.  1.  Run a regression on the combined sample with size
+\eqn{n=n_1+n_2}{} and obtain within group sum of squares called \eqn{S_1}{}.  The
+number of degrees of freedom is \eqn{n_1+n_2-k}{}, with \eqn{k}{} being the number
+of parameters estimated, including the intercept.  2.  Run two regressions on
+the two individual samples with sizes \eqn{n_1}{} and \eqn{n_2}{}, and obtain their
+within group sums of square \eqn{S_2+S_3}{}, with \eqn{n_1+n_2-2k}{} degrees of
+freedom.  3.  Conduct an \eqn{F_{(k,n_1+n_2-2k)}}{} test defined by \deqn{F =
+\frac{[S_1-(S_2+S_3)]/k}{[(S_2+S_3)/(n_1+n_2-2k)]}}{} If the \eqn{F}{} statistic
+exceeds the critical \eqn{F}{}, we reject the null hypothesis that the two
+regressions are equal.
+
+In the case of haplotype trend regression, haplotype frequencies from combined
+data are known, so can be directly used.\end{Description}
+\begin{Usage}
+\begin{verbatim}chow.test(y1,x1,y2,x2,x=NULL)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{y1}] a vector of dependent variable
+\item[\code{x1}] a matrix of independent variables
+\item[\code{y2}] a vector of dependent variable
+\item[\code{x2}] a matrix of independent variables
+\item[\code{x}] a known matrix of independent variables
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+The returned value is a vector containing (please use subscript to access them):
+
+\begin{ldescription}
+\item[\code{F}] the F statistic
+\item[\code{df1}] the numerator degree(s) of freedom
+\item[\code{df2}] the denominator degree(s) of freedom
+\item[\code{p}] the p value for the F test
+\end{ldescription}
+\end{Value}
+\begin{Section}{References}
+Chow GC (1960). Tests of equality between sets of coefficients in two linear regression. Econometrica 28:591-605\end{Section}
+\begin{Note}\relax
+adapted from chow.R\end{Note}
+\begin{Author}\relax
+Shigenobu Aoki, Jing hua Zhao\end{Author}
+\begin{Source}\relax
+\url{http://aoki2.si.gunma-u.ac.jp/R/}\end{Source}
+\begin{SeeAlso}\relax
+\code{\Link{htr}}\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+dat1 <- matrix(c(
+        1.2, 1.9, 0.9,
+        1.6, 2.7, 1.3,
+        3.5, 3.7, 2.0,
+        4.0, 3.1, 1.8,
+        5.6, 3.5, 2.2,
+        5.7, 7.5, 3.5,
+        6.7, 1.2, 1.9,
+        7.5, 3.7, 2.7,
+        8.5, 0.6, 2.1,
+        9.7, 5.1, 3.6, byrow=TRUE, ncol=3)
+
+dat2 <- matrix(c(
+        1.4, 1.3, 0.5,
+        1.5, 2.3, 1.3,
+        3.1, 3.2, 2.5,
+        4.4, 3.6, 1.1,
+        5.1, 3.1, 2.8,
+        5.2, 7.3, 3.3,
+        6.5, 1.5, 1.3,
+        7.8, 3.2, 2.2,
+        8.1, 0.1, 2.8,
+        9.5, 5.6, 3.9), byrow=TRUE, ncol=3)
+
+y1<-dat1[,3]
+y2<-dat2[,3]
+x1<-dat1[,1:2]
+x2<-dat2[,1:2]
+chow.test.r<-chow.test(y1,x1,y2,x2)
+
+\end{ExampleCode}
+\end{Examples}
+
+\Header{fbsize}{Sample size for family-based linkage and association design}
+\begin{Description}\relax
+This function implements Risch and Merikangas (1996) statistics 
+evaluating power for family-based linkage and association design.
+They are potentially useful in the prospect of genome-wide 
+association studies.
+
+The function calls auxiliary functions sn() and strlen; sn() 
+contains the necessary thresholds for power calculation while
+strlen() evaluates length of a string (generic).\end{Description}
+\begin{Usage}
+\begin{verbatim}fbsize(gamma,p,debug=0,error=0)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{gamma}] genotype relative risk assuming multiplicative model
+\item[\code{p}] frequency of disease allele
+\item[\code{debug}] verbose output
+\item[\code{error}] 0=use the correct formula,1=the original paper
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+The returned value is a list containing:
+
+\begin{ldescription}
+\item[\code{gamma}] input gamma
+\item[\code{p}] input p
+\item[\code{n1}] sample size for ASP
+\item[\code{n2}] sample size for TDT
+\item[\code{n3}] sample size for ASP-TDT
+\item[\code{lambdao}] lambda o
+\item[\code{lambdas}] lambda s
+\end{ldescription}
+\end{Value}
+\begin{Section}{References}
+Risch, N. and K. Merikangas (1996). The future of genetic studies of
+complex human diseases. Science 273(September): 1516-1517.
+
+Risch, N. and K. Merikangas (1997). Reply to Scott el al. Science
+275(February): 1329-1330.
+
+Scott, W. K., M. A. Pericak-Vance, et al. (1997). Genetic analysis of 
+complex diseases. Science 275: 1327.\end{Section}
+\begin{Note}\relax
+extracted from rm.c\end{Note}
+\begin{Author}\relax
+Jing hua Zhao\end{Author}
+\begin{SeeAlso}\relax
+\code{\Link{pbsize}}\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+models <- matrix(c(
+    4.0, 0.01,
+    4.0, 0.10,
+    4.0, 0.50, 
+    4.0, 0.80,
+    2.0, 0.01,
+    2.0, 0.10,
+    2.0, 0.50,
+    2.0, 0.80,
+    1.5, 0.01,    
+    1.5, 0.10,
+    1.5, 0.50,
+    1.5, 0.80), ncol=2, byrow=TRUE)
+    
+cat("\nThe family-based result: \n")
+cat("\ngamma   p     Y     N_asp   P_A    Het    N_tdt  Het N_asp/tdt  L_o  L_s\n\n")
+for(i in 1:12) {
+  g <- models[i,1]
+  p <- models[i,2]
+  fbsize(g,p)
+  if(i%%4==0) cat("\n")
+}
+
+# APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
+# Genetic analysis of complex diseases 1327
+g <- 4.5
+p <- 0.15
+cat("\nAlzheimer's:\n\n")
+fbsize(g,p)
+
+\end{ExampleCode}
+\end{Examples}
+
+\Header{fsnps}{A case-control data involving four SNPs for missing genotype}
+\keyword{datasets}{fsnps}
+\begin{Description}\relax
+This is a simulated data\end{Description}
+\begin{Usage}
+\begin{verbatim}data(hla)\end{verbatim}
+\end{Usage}
+\begin{Format}\relax
+A data frame
+\describe{
+\item[id] subject id
+\item[y] a column of 0/1 indicating case/control
+\item[site1.a1] SNP 1 allele a1
+\item[site1.a2] SNP 1 allele a2
+\item[site2.a1] SNP 2 allele a1
+\item[site2.a2] SNP 2 allele a2
+\item[site3.a1] SNP 3 allele a1
+\item[site3.a2] SNP 3 allele a2
+\item[site4.a1] SNP 4 allele a1
+\item[site4.a2] SNP 4 allele a2
+}
+
+The remaining variables are genotypes for 4 SNPs, coded in characters\end{Format}
+\begin{Source}\relax
+Dr Sebastien Lissarrague of Genset\end{Source}
+
