@@ -1,0 +1,203 @@
+Version history of R genetic analysis package (R/gap)
+
+Todo list:
+
+. to be compatible with definitions in genetics
+. standard error of haplotypes
+. phase routine to include hap, genecounting or PHASE
+. hap/hap.em to handle missing only one allele and X Chromsome data
+. joint genetic and environmental effects and mixed models
+. pca regression and htSNP
+. linkage analysis programs
+. C/Fortran calls to .Call, etc.
+. NEXUS format, C++ from GDA site
+
+Version 1.0-4
+
+13-12-2005
+
+Add ccize
+
+Version 1.0-3
+
+24-7-2005
+
+genecounting (gc.c):
+Change nhet2 from short to long (int)
+Change ll() in gc.c according to report by Iris Grossman on a "Crazy" data
+
+hwe.hardy:
+Fix bug report by Lize van der Merwe <lize.van.der.merwe@mrc.ac.za> on data
+three=c("A/A",rep("A/B",4),rep("B/B",4),rep("A/C",14),rep("B/C",28),rep("C/C",49))
+g3=genotype(three)
+hwe.hardy(g3)
+
+It benefits from the original author of HWE ("Guo, Sun-Wei" <swguo@mail.mcw.edu>)
+
+17-4-2005
+
+Refine 2ld.R and 2ld.c according to the C program 2LD 
+Revisit pfm.sim.f (f95 -PIC -xlibmil -xO5 -dalign -c by Brian Ripley).
+
+Version 1.0-2
+
+14-4-2005
+
+Done with genecounting involving Chromosome X data.
+Comment on code for hrt which is useless and causes crashes.
+Move fine controls of genecounting and hap to gc.control/hap.control.
+
+18-3-2005
+
+Version 0.8-4
+
+add NAMESPACE
+change bt, gcontrol, mtdt
+add pedtodot
+add datasets mao, nep499, snca, cf, fa, crohn
+modify hwe.hardy by Gregor Gorjanc <Gregor.Gorjanc@bfro.uni-lj.si>,
+which requires package genetics
+change onLoad to .onLoad
+
+Version 0.8-3
+
+8-11-2004
+
+adapt haplo.score fully for hap.score
+create examples for hwe.hardy using pgc, etc.
+add gcp
+modify gc.em, hap.em to allow for any allele labels
+change hwe to accept allele, genotype and genotype count more naturally
+change digit2 and digitm from int to void because of a complaint by Brian Ripley
+
+Version 0.8-2
+
+16-8-2004
+
+Add keyword as required by R 2.x
+Change hwe.hardy.c, pgc.h and makeped.c according to gcc -Wall -pedantic
+
+Version 0.8-1
+
+5-6-2004
+
+add kin.matrix to kin.morgan using algorithm similar to g2a
+replace tril/triu in mtdt with standard function lower.tri/upper.tri
+add resid and scale prob in genecounting
+relabel gret in pgc.Rd as cdata
+delete comma in pfc.R and fix problem with loop index in pfc.f
+add pfc.sim
+
+
+Version 0.8
+
+4-2-2004
+
+Crashes by hwe.hardy go away, chi-squared tests to be implemented
+
+8-2-2004
+
+Add hwe, decided any details should go to the R code itself
+
+17-2-2004
+
+Add static to outfile in pgc.h and hap.c, pointed by Jan de Leeuw (deleeuw@stat.ucla.edu)
+
+21-2-2004
+
+Completion of the first comprehensive analysis of data on Parkinson's disease and SNCA markers from
+Abbas Parsian (parsian@louisville.edu) (HWE, haplotype frequency estimation, score tests, Fisher's
+exact test, hwde, genetics) and gap obtained comparable results with SAS combined with hwe of 
+Jurg Ott (ott@rockefeller.edu) but dealing with missing data; this could be released as an example
+later on. It was decided that auxiliary functions are better added after the actual linkage analysis
+codes are working.
+
+Fix lr statistic in gc.em.R due to rename of lnlx to lx
+
+26-2-2004
+
+Reverse the order of version history in this file (starting from the most recent)
+
+
+Version 0.7
+
+2-2-2004
+
+Warnings pointed by Kurt Hornik
+Change %lf to %f in several places of pgc.c
+Remove semicolon after } of rsort1
+
+
+Version 0.6
+
+28-1-2004
+
+Changes for Mac OS X 10.3 (Panther) according to Michael Barmada (michael.barmada@hgen.pitt.edu):
+. do_switch --> ndo_switch in hwe.hardy.c
+. malloc.h --> malloc/malloc.h in gcontrol.c and makeped.c; but it seems ok to stick to stdlib.h
+. add static to n_loci, etc. in hap.c, mia.c to avoid conflict
+
+31-1-2004
+
+Rename genecounting.R to gc.R and change lnl0 and lnl1 to l0 and l1
+Add pgc function but with same problem as hwe.hardy
+
+1-2-2004
+
+Fix error and handle.miss functions in pgc when with.id=0
+Change cat() to c() in gap.demo.R to avoid generating data files
+Merge muvar1 and muvar2 into muvar and add their synopsis
+
+
+Version 0.5
+
+19-01-2004
+
+To remove warnings earlier found in PC and pointed by Prof Brian Ripley
+Resubmission to CRAN
+
+
+22-1-2004
+
+Add haplotype diversity to genecounting
+Add default value to optrho in kbyl
+Change "for" to "with" when describing fsnps
+
+
+Version 0.4
+
+14-01-2004
+
+Create this file
+Change DESCRIPTION
+Correct author of mtdt
+Delete hap.out in R directory
+Add docoumentation of htrtable in gc.em
+See also pfc rather than gif in gif.Rd
+Add right bracket in dat1 of chow.test
+Change ad to y in htr.Rd and the annotation in apoeapoc.Rd
+
+
+Version 0.3
+
+13-01-2004 
+
+Refine Vignette and change gap.demo.R
+
+
+Version 0.2
+
+12-01-2004
+
+Change %lf and %lg to %f according to check by Prof Kurt Hornik
+
+
+Version 0.1
+
+11-01-2004
+
+First submission to CRAN with Vignette and revised Rd
+
+07/06/03
+
+draft plan (home edition) shortly before RSS 2003

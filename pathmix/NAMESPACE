@@ -1,4 +1,0 @@
-useDynLib(pathmix)
-export (
-        pathmix
-)

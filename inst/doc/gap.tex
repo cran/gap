@@ -1,0 +1,169 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{Sweave}
+\usepackage{url}
+\usepackage{a4wide}
+\usepackage{amsmath,epsfig,psfig}
+\usepackage{graphicx}
+\usepackage[authoryear,round]{natbib}
+\bibliographystyle{plainnat}
+
+%% \VignetteIndexEntry{An overview of gap}
+%% \Vignettekeywords{human genetics, linkage analysis, association analysis}
+%% \VignettePackage{gap}
+
+% \newcommand{\keywords}[1]{\addvspace{\baselineskip}\noindent{{\bf Keywords.} #1}}
+
+\parindent 0in
+
+\begin{document}
+
+\title{An Integrated Genetic Analysis Package Using R}
+\author{Jing hua Zhao}
+\date{}
+\maketitle
+
+\begin{center}
+MRC Epidemiology Unit, Strangeways Research Laboratory, Worts Causeway, Cambridge CB1 8RN\\
+\url{http://www.mrc-epid.cam.ac.uk}
+\end{center}
+
+\tableofcontents
+
+% library(tools)
+% Rnwfile<- file.path("/gap/inst/doc","gap.Rnw")
+% Sweave(Rnwfile,pdf=TRUE,eps=TRUE,stylepath=TRUE,driver=RweaveLatex())
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+This package was designed to integrate some C/Fortran/SAS programs I have written 
+or used over the years. As such, it would rather be a long-term project, but an
+immediate benefit would be something complementary to other packages currently
+available in R, e.g. {\bf genetics}, {\bf hwde}, {\bf haplo.score}, etc. I hope
+eventually this will be part of a bigger effort to fulfill most of the requirements
+foreseen by many, e.g. ~\cite{guo00}, within the portable environment of R
+for data management, analysis, graphics and object-oriented programming. \\
+
+So far the number of functions is quite limited and experimental, but I already
+feel enormous advantage by shifting to R and would like sooner rather than later
+to share my work with others. I will not claim this workas exclusively done by
+me, but would like to invite others to join me and enlarge the collections and
+improve them.
+
+
+\section{Implementation}
+
+The following, extracted from the package INDEX, shows the data and functions
+currently available.
+
+\begin{verbatim}
+aldh2                   ALDH2 markers and Alcoholism
+apoeapoc                APOE/APOC1 markers and Schizophrenia
+bt                      Bradley-Terry model for contingency table
+ccsize                  Power and sample size for case-cohort design
+chow.test               Chow's test for heterogeneity in two
+                        regressions
+cf                      Cystic Fibrosis data
+crohn                   Crohn disease data
+fa                      Friedreich Ataxia data
+fbsize                  Sample size for family-based linkage and
+                        association design
+fsnps                   A case-control data involving four SNPs with
+                        missing genotype
+gc.em                   Gene counting for haplotype analysis
+gcontrol                genomic control
+gcp                     Permutation tests using GENECOUNTING
+genecounting            Gene counting for haplotype analysis
+gif                     Kinship coefficient and genetic index of
+                        familiality
+hap                     Haplotype reconstruction
+hap.em                  Gene counting for haplotype analysis
+hap.score               Score Statistics for Association of Traits
+                        with Haplotypes
+hla                     HLA markers and Schizophrenia
+htr                     Haplotype trend regression
+hwe                     Hardy-Weinberg equlibrium test for
+                        multiallelic marker
+hwe.hardy               Hardy-Weinberg equlibrium test using MCMC
+kbyl                    LD statistics for two multiallelic loci
+kin.morgan              kinship matrix for simple pedigree
+makeped                 A function to prepare pedigrees in
+                        post-MAKEPED format
+mao                     A study of Parkinson's disease and MAO gene
+mia                     multiple imputation analysis for hap
+mtdt                    Transmission/disequilibrium test of a
+                        multiallelic marker
+muvar                   Means and variances under 1- and 2- locus
+                        (biallelic) QTL model
+nep499                  A study of Alzheimer's disease with eight SNPs and APOE
+pbsize                  Power for population-based association design
+pedtodot                Converting pedigree(s) to dot file(s)
+pfc                     Probability of familial clustering of disease
+pfc.sim                 Probability of familial clustering of disease
+pgc                     Preparing weight for GENECOUNTING
+plot.hap.score          Plot Haplotype Frequencies versus Haplotype
+                        Score Statistics
+print.hap.score         Print a hap.score object
+s2k                     Statistics for 2 by K table
+snca                    A study of Parkinson's disease and SNCA makers
+tbyt                    LD statistics for two SNPs
+whscore                 Whittemore-Halpern scores for allele-sharing
+\end{verbatim}
+
+Assuming proper installation, you will be able to obtain the list by typing
+\textit{library(help=gap)} or view the list within a web browser via 
+\textit{help.start()}.\\
+
+You can cut and paste examples at end of each function's documentation.\\
+
+Both \textit{genecounting} and \textit{hap} are able to handle SNPs and multiallelic
+markers, with the former be flexible enough to include features such as X-linked data
+and the later being able to handle large number of SNPs, an
+advantage over algorithms in {\bf haplo.score}. But the latter is able to recode
+allele labels automatically, so functions \textit{gc.em} and \textit{hap.em}
+are in {\bf haplo.score}'s \textit{haplo.em} format and used by a modified function
+\textit{hap.score} in association testing.\\
+
+It is notable that multilocus data are handled differently from that in {\bf hwde} and
+elegant definitions of basic genetic data can be found in {\bf genetics} package.\\
+
+Incidentally, I found my C mixed-radixed sorting routine as in \cite{zhao03} is much
+faster than R's internal function.\\
+
+With exceptions such as function \textit{pfc} which is very computer-intensive, most
+functions in the package can easily be adapted for analysis of large datasets involving
+either SNPs or multiallelic markers. Some are utility functions, e.g. \textit{muvar}
+and \textit{whscore}, which will be part of the other analysis routines in the future.\\
+
+For users, all functions have unified format. For developers, it is able to incorporate
+their C/C++ programs more easily and avoid repetitive work such as preparing own routines
+for matrix algebra and linear models. Further advantage can be taken from packages in
+{\bf Bioconductor}, which are designed and written to deal with large number of genes.
+
+
+\section{Examples}
+
+Examples can be found from most function documentations. You can also try several simple
+examples via \textit{demo}:
+
+\begin{Schunk}
+\begin{Sinput}
+> library(gap)
+> demo(gap)
+\end{Sinput}
+\end{Schunk}
+
+\section{Known bugs}
+
+Unaware of any bug. However, better memory management is expected.
+
+\section{Bibliographic note}
+
+The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{gholamic94},
+~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97}, ~\cite{sham97}, 
+~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, 
+~\cite{hirotsu01}, ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}.
+
+\bibliography{gap}
+\end{document}
