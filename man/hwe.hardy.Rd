@@ -52,4 +52,4 @@ ex2<-hwe.hardy(a,alleles=8)
 }
 \author{Sun-Wei Guo, Jing hua Zhao}
 \note{Adapted from HARDY, testable with -Dexecutable as standalone program}
-\keyword{}
+\keyword{htest}

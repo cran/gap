@@ -1,5 +1,24 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 0.8-2
+
+16-8-2004
+
+Add keyword as required by R 2.x
+Change hwe.hardy.c, pgc.h and makeped.c according to gcc -Wall -pedantic
+
+Version 0.8-1
+
+5-6-2004
+
+add kin.matrix to kin.morgan using algorithm similar to g2a
+replace tril/triu in mtdt with standard function lower.tri/upper.tri
+add resid and scale prob in genecounting
+relabel gret in pgc.Rd as cdata
+delete comma in pfc.R and fix problem with loop index in pfc.f
+add pfc.sim
+
+
 Version 0.8
 
 4-2-2004
@@ -122,3 +141,5 @@ Things to do,
 5. permutation tests/LD statistics as in EHPLUS
 
 Further to add: path/segregation/linkage analysis programs
+
+Change .C/.Fortran calls to .Call, etc.

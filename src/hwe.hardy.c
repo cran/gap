@@ -38,10 +38,13 @@ void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
   double constant, p_simulated, total_step;
   int total, counter, actual_switch;
   Index index;
-  randomization sample={gss[0],gss[1],gss[2]};
+  randomization sample;
   outcome result={0,0,{0,0,0}};
   int i, j, k;
 
+  sample.group = gss[0];
+  sample.size = gss[1];
+  sample.step = gss[2];
   srand(*seed);
   no_allele=*alleles;
   total = 0;

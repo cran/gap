@@ -7,7 +7,7 @@ Gene counting for haplotype analysis with missing data
 }
 \arguments{
   \item{data}{genotype table}
-  \item{weight}{a column of frequencies}
+  \item{weight}{a column of frequency weights}
   \item{convll}{set convergence criteria according to log-likelihood, if its value set to 1}
   \item{handle.miss}{to handle missing data, if its value set to 1}
   \item{eps}{the actual convergence criteria, with default value 1e-5}
@@ -31,6 +31,7 @@ The returned value is a list containing:
 \item{converge}{a flag indicating convergence status of gene counting}
 \item{di0}{haplotype diversity under no LD, defined as \eqn{1-\sum (h_0^2)}{1-sum (h0^2)}}
 \item{di1}{haplotype diversity under LD, defined as \eqn{1-\sum (h^2))}{1-sum (h^2)}}
+\item{resid}{residuals in terms of frequency weights = o - e}
 }
 
 \section{References}{
@@ -66,4 +67,4 @@ aldh2.gc$l1
 }
 \author{Jing hua Zhao}
 \note{adapted from GENECOUNTING}
-\keyword{}
+\keyword{models}

@@ -63,4 +63,4 @@ famp<-pfc(test)
 }
 \author{Dani Zelterman, Jing hua Zhao}
 \note{Adapted from family.for by Dani Zelterman, 25/7/03}
-\keyword{}
+\keyword{models}

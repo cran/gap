@@ -1,6 +1,6 @@
 Package: gap
-Version: 0.8
-Date: 2004-2-28
+Version: 0.8-2
+Date: 2004-8-16
 Title: Genetic analysis package
 Author: Jing hua Zhao in collaboration with other colleagues, and with
         help from Kurt Hornik and Brian Ripley of the R core development team

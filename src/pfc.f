@@ -31,16 +31,17 @@ c     open(10,file='family.dat')
       oldsib=-1
       maxsize=1
 c     do 20 j=1,10000000
-      do 20 j=1,famsize
+      do 20 i=1,famsize
 c       read(10,*,end=25,err=25)sib,aff,freq
-        sib=famdata(j,1)
-        aff=famdata(j,2)
-        freq=famdata(j,3)
+        sib=famdata(i,1)
+        aff=famdata(i,2)
+        freq=famdata(i,3)
         fm(aff+1,sib)=freq
         if(sib .GT. maxsize)maxsize=sib
         if(sib .NE. oldsib)write(6,*)
         oldsib=sib
         write(6,1000)sib,aff,freq
+        if(i.eq.famsize)goto 25
    20 continue
    25 write(6,1000)
 

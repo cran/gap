@@ -51,5 +51,4 @@ gcontrol(test)
 use -Dexecutable for standalone program, function getnum in the original 
 code needs \%*s to skip id string}
 
-\keyword{}
-
+\keyword{models}

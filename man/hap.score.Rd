@@ -80,4 +80,4 @@ haplo.score(y,geno,n.sim=10000)
 }
 }
  
-\keyword{}
+\keyword{models}

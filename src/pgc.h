@@ -24,7 +24,6 @@ int cc=false,sel[MAX_LOC],selp[MAX_LOC],isgenotype,iogenotype;
 int selected,selectn,selectp,selidx[MAX_LOC],selndx[MAX_LOC],selpdx[MAX_LOC];
 float freq,pen0,pen1,pen2;
 int sample_size,cases;
-static char *outfile;
 
 typedef struct
 {

@@ -69,4 +69,4 @@ gif(test,gifset=1:23)
 \author{Alun Thomas, Jing hua Zhao}
 \note{Adapted from gif.c, testable with -Dexecutable as standalone program, 
 which can be use for any pair of indidivuals}
-\keyword{}
+\keyword{datagen}

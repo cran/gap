@@ -17,7 +17,8 @@ CRAN \url{http://cran.r-project.org}
 \value{
 The returned value is a list containing:
 
-\item{kin}{the kinship matrix}
+\item{kin}{the kinship matrix in vector form}
+\item{kin.matrix}{the kinship matrix}
 }
 
 \section{References}{
@@ -52,4 +53,4 @@ kin.morgan(werner[,1:3])
 }
 \author{Morgan development team, Jing hua Zhao}
 \note{The input data is required to be sorted so that parents preceed their children}
-\keyword{}
+\keyword{datagen}

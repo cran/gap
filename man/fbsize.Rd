@@ -83,4 +83,4 @@ fbsize(g,p)
 }
 \author{Jing hua Zhao}
 \note{extracted from rm.c}
-\keyword{}
+\keyword{models}

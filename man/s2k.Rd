@@ -39,4 +39,4 @@ result <- s2k(y1,y2)
 }
 \author{Chihiro Hirotsu, Jing hua Zhao}
 \note{The lengths of y1 and y2 should be the same}
-\keyword{}
+\keyword{models}

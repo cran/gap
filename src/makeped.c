@@ -152,9 +152,9 @@ u_byte ped_integers;
 
 /****************************************************************************/
 /*                                                                          */
-/*			   read_pedigree   				                                */
+/*			   read_pedigree   				    */
 /*                                                                          */
-/* Prompts for the identifier of a pedigree                                  */
+/* Prompts for the identifier of a pedigree                                 */
 /*                                                                          */
 /****************************************************************************/
 
@@ -166,9 +166,9 @@ void read_pedigree(pedigree_s)
 }
 /****************************************************************************/
 /*                                                                          */
-/*			   read_person   				                                */
+/*			   read_person   				    */
 /*                                                                          */
-/* Prompts for the identifier of a person                                    */
+/* Prompts for the identifier of a person                                   */
 /*                                                                          */
 /****************************************************************************/
 
@@ -210,7 +210,7 @@ return(0);
 
 /****************************************************************************/
 /*                                                                          */
-/*                            chk_dupli                                    */
+/*                            chk_dupli                                     */
 /*                                                                          */
 /****************************************************************************/
 
@@ -324,7 +324,7 @@ void getind(id,sequence,newped_s,nuped)
 
 /*****************************************************************************/
 /*                                                                           */
-/*                             getindpa                                        */
+/*                             getindpa                                      */
 /*                                                                           */
 /*****************************************************************************/
 
@@ -636,7 +636,7 @@ void save_loops(count)
 /*                                                                          */
 /*                            largest_id                                    */
 /*                                                                          */
-/* Given the index of a person, this routine returns the largest integer id  */
+/* Given the index of a person, this routine returns the largest integer id */
 /* found in that persons pedigree.                                          */
 /*                                                                          */
 /****************************************************************************/
@@ -787,7 +787,7 @@ void file_loops(char **loopfile)
 /*s_byte response;*/
 /*s_intg pedigree;*/
 /*s_intg pedigree_i;*/
-  u_byte pedigree_s[maxname];
+  s_byte pedigree_s[maxname];
 /*s_intg person_i;*/
   s_byte person_s[maxname];
   s_intg i;
@@ -999,7 +999,7 @@ s_intg count_generations(person_x)
 /*                                                                          */
 /*			   clear_proband   				    */
 /*                                                                          */
-/* Given the index of some person, this function clears all proband fields   */
+/* Given the index of some person, this function clears all proband fields  */
 /* in the same pedigree.                                                    */
 /*                                                                          */
 /****************************************************************************/
@@ -1294,7 +1294,7 @@ void all_probands()
 
 /*****************************************************************************/
 /*                                                                           */
-/*                              some_probands                                 */
+/*                              some_probands                                */
 /*                                                                           */
 /*****************************************************************************/
 
@@ -1631,7 +1631,7 @@ void check_sex()
 /*                           check_no_phen                                   */
 /*                                                                           */
 /* If a person has no phenotypic data then they were referenced as a parent  */
-/* in the data file but did not have a record of their own.                   */
+/* in the data file but did not have a record of their own.                  */
 /*                                                                           */
 /*****************************************************************************/
 
@@ -1832,4 +1832,4 @@ void makeped(char **pifile, char **pofile, int *autoselect,
 #endif
 
 /*Adapted from makeped.c on 18-10-2003*/
-
+/*file_loops Change u_byte to s_byte pedigree_s on 16-8-2004*/

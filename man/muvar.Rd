@@ -40,4 +40,4 @@ muvar(n.loci=2,y12=c(1,1,1,1,1,0,0,0,0),p1=0.99,p2=0.9)
 }
 \author{Jing hua Zhao}
 \note{Adapted from an earlier C program written for the above book}
-\keyword{}
+\keyword{models}

@@ -92,4 +92,4 @@ cat("can be obtained by Fisher's exact test\n")
 }
 \author{Jing hua Zhao}
 \note{extracted from rm.c}
-\keyword{}
+\keyword{models}

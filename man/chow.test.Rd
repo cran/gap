@@ -84,4 +84,4 @@ chow.test.r<-chow.test(y1,x1,y2,x2)
 }
 \author{Shigenobu Aoki, Jing hua Zhao}
 \note{adapted from chow.R}
-\keyword{}
+\keyword{htest}

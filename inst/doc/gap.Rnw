@@ -60,28 +60,38 @@ currently available.
 aldh2                   ALDH2 markers and Alcoholism
 apoeapoc                APOE/APOC1 markers and Schizophrenia
 bt                      Bradley-Terry model for contingency table
-chow.test               Chow's test for heterogeneity
-fbsize                  Sample size for family-based linkage and association design
-fsnps                   A case-control data involving four SNPs for missing genotype
+chow.test               Chow's test for heterogeneity in two
+                        regressions
+fbsize                  Sample size for family-based linkage and
+                        association design
+fsnps                   A case-control data involving four SNPs with
+                        missing genotype
 gc.em                   Gene counting for haplotype analysis
-gcontrol                Genomic control
+gcontrol                genomic control
 genecounting            Gene counting for haplotype analysis
-gif                     Kinship coefficient and genetic index of familiality
-hap                     Haplotype reconstruction
+gif                     Kinship coefficient and genetic index of
+                        familiality
 hap.em                  Gene counting for haplotype analysis
-hap.score               Score Statistics for Association of Traits with haplotypes
+hap                     Haplotype reconstruction
+hap.score               Score Statistics for Association of Traits
+                        with Haplotypes
 hla                     HLA markers and Schizophrenia
-hwe                     Hardy-Weinberg equilibrium test
-hwe.hardy               Hardy-Weinberg equilibrium test using MCMC
-htr                     Haplotype trend regression (with permutation)
+htr                     Haplotype trend regression
+hwe                     Hardy-Weinberg equlibrium test
+hwe.hardy               Hardy-Weinberg equlibrium test using MCMC
 kbyl                    LD statistics for two multiallelic loci
 kin.morgan              kinship matrix for simple pedigree
-makeped                 A function to prepare post-MAKEPED format file
-mia                     Multiple imputation analysis for hap
-mtdt                    Transmission/disequilibrium test of a multiallelic marker
-muvar                   Means and variances under 1- and 2- locus QTL model
-pbsize                  Sample size for population-based association desgin
+makeped                 A function to prepare pedigrees in
+                        post-MAKEPED format
+mia                     multiple imputation analysis for hap
+mtdt                    Transmission/disequilibrium test of a
+                        multiallelic marker
+muvar                   Means and variances under 1- and 2- locus
+                        (biallelic) QTL model
+pbsize                  Power for population-based association design
 pfc                     Probability of familial clustering of disease
+pfc.sim                 Probability of familial clustering of disease
+                        using Monte Carlo
 pgc                     Preparing frequency weight for GENECOUNTING
 s2k                     Statistics for 2 by K table
 tbyt                    LD statistics for two SNPs

@@ -31,6 +31,8 @@ muvar                   Means and variances under 1- and 2- locus
                         (biallelic) QTL model
 pbsize                  Power for population-based association design
 pfc                     Probability of familial clustering of disease
+pfc.sim                 Probability of familial clustering of disease
+                        using Monte Carlo
 pgc                     Preparing frequency weight for GENECOUNTING
 s2k                     Statistics for 2 by K table
 tbyt                    LD statistics for two SNPs

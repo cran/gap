@@ -33,8 +33,8 @@ The returned value is a list containing:
 
 \item{x2}{Pearson \eqn{\chi^2}{chi-square}}
 \item{p.x2}{p value for \eqn{\chi^2}{chi-square}}
-\item{lrt}{Log-likelihood ratio test statistic}}
-\item{p.lrt}{p value for lrt}}
+\item{lrt}{Log-likelihood ratio test statistic}
+\item{p.lrt}{p value for lrt}
 \item{df}{Degree(s) of freedom}
 \item{rho}{\eqn{\chi^2/N}{chi-square/N} the effect size}
 }
@@ -53,5 +53,4 @@ a.out
 }
 }
 \author{Jing hua Zhao}
-\keyword{}
-
+\keyword{htest}

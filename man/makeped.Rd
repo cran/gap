@@ -56,4 +56,4 @@ makeped("ped7.pre","ped7.ped",0,1,"ped7.lop")
 }
 }
 \note{adapted from makeped.c by W Li and others}
-\keyword{}
+\keyword{datagen}

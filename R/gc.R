@@ -70,8 +70,9 @@ genecounting <- function(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,max
 # hapid<-(1:hapall)[hapid]
   di0<-1-sum((z$Rh0)^2)
   di1<-1-sum((z$Rh1)^2)
-  list(h=z$Rh1, h0=z$Rh0, prob=z$prob, l0=z$lnl0, l1=z$lnl1,
+  prob<-z$prob/sum(z$prob)
+  resid<-weight*(1-prob)
+  list(h=z$Rh1, h0=z$Rh0, prob=prob, l0=z$lnl0, l1=z$lnl1,
        hapid=hapid, npusr=z$npusr, npdat=z$npdat, htrtable=x,
-       iter=z$iter,converge=z$converge,di0=di0,di1=di1)
+       iter=z$iter,converge=z$converge,di0=di0,di1=di1,resid=resid)
 }
-

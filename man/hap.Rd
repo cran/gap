@@ -71,4 +71,4 @@ hap(id=fsnps[,1],data=fsnps[,3:10],nloci=4,ss=1,mi=5)
 }
 }
 \note{adapted from hap}
-\keyword{}
+\keyword{models}

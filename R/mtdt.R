@@ -1,9 +1,16 @@
 mtdt <- function(x,n.sim=0)
 {
 #
-# lower triangular matrix
+# lower triangular matrix 5/6/2004
 #
   tril <- function(t)
+  {
+    a <- t
+    a[upper.tri(t)] <- 0
+    a
+  }
+
+  tril.old <- function(t)
   {
     m <- dim(t)[1]
     n <- dim(t)[2]
@@ -19,9 +26,16 @@ mtdt <- function(x,n.sim=0)
     a
   }
 #
-# upper triangular matrix
+# upper triangular matrix 5/6/2004
 #
   triu <- function(t)
+  {
+    a <- t
+    a[lower.tri(t)] <- 0
+    a
+  }
+
+  triu.old <- function(t)
   {
     m <- dim(t)[1]
     n <- dim(t)[2]

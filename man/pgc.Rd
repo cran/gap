@@ -18,7 +18,7 @@ genotype
 \value{
 The returned value is a list containing:
 
-\item{gret}{the collapsed genotype data}
+\item{cdata}{the collapsed genotype data}
 \item{wt}{the frequency weight}
 \item{obscom}{the observed number of combinations or genotypes}
 \item{idsave}{optional, available only if with.id = 1}
@@ -51,4 +51,4 @@ pgc(x,handle.miss=1,with.id=0)
 }
 \author{Jing hua Zhao}
 \note{Built on pgc.c}
-\keyword{}
+\keyword{models}
