@@ -1,7 +1,7 @@
 \name{genecounting}
 \alias{genecounting}
 \title{Gene counting for haplotype analysis}
-\usage{genecounting(data,weight=NULL,convll,handle.miss,eps,maxit,pl)}
+\usage{genecounting(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,maxit=50,pl=0.001)}
 \description{
 Gene counting for haplotype analysis with missing data
 }
@@ -29,7 +29,6 @@ The returned value is a list containing:
 \item{htrtable}{design matrix for haplotype trend regression (defunct, see gc.em)}
 \item{iter}{number of iterations used in gene counting}
 \item{converge}{a flag indicating convergence status of gene counting}
-\item{Dprime}{a multilocus version of Hedrick's D'}
 \item{di0}{haplotype diversity under no LD, defined as \eqn{1-\sum (h_0^2)}{1-sum (h0^2)}}
 \item{di1}{haplotype diversity under LD, defined as \eqn{1-\sum (h^2))}{1-sum (h^2)}}
 }

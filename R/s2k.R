@@ -8,7 +8,7 @@ s2k <- function(y1,y2)
   p<-0
   z<-.C("x22k",data=as.integer(array(data)), tablen=as.integer(tablen),
         x2a=as.double(x2a), x2b=as.double(x2b), col1=as.integer(col1),
-        col2=as.integer(col2), p=as.double(p))
+        col2=as.integer(col2), p=as.double(p),PACKAGE="gap")
   c1<-z$col1
   c2<-z$col2
   cat("\nthe maximum accumulated table below and above",c1,"\n")

@@ -8,7 +8,7 @@
 static int n_subjects, n_loci=0, n_phase, *alleles, all_snps=0;
 long n_warn = 0;
 double **af,**pq;
-FILE *outfile;
+static FILE *outfile;
 char of1name[MAX_FILENAME_LEN],of2name[MAX_FILENAME_LEN],
      tempname[MAX_FILENAME_LEN];
 

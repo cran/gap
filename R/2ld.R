@@ -5,7 +5,7 @@ tbyt<-function(h,n) {
           D=as.double(D), VarD=as.double(VarD),
           Dmax=as.double(Dmax), VarDmax=as.double(VarDmax),
           Dprime=as.double(Dprime), VarDprime=as.double(VarDprime),
-          x2=as.double(x2))
+          x2=as.double(x2),PACKAGE="gap")
 
     list(h=h,n=n,D=z$D,VarD=z$VarD,
          Dmax=z$Dmax,VarDmax=z$VarDmax,Dprime=z$Dprime,
@@ -26,7 +26,7 @@ kbyl<-function(n1,n2,h,n,optrho=2)
           VarDijptable=matrix(VarDijptable,nrow=n1),
           x2=as.double(x2), seX2=as.double(seX2),
           rho=as.double(rho), seR=as.double(seR), optrho=as.integer(optrho),
-          klinfo=as.double(klinfo))
+          klinfo=as.double(klinfo),PACKAGE="gap")
 
    list(n1=z$nalleles1, n2=z$nalleles2, h=z$h, n=z$haplotypes,
    VarDp=z$VarDp,Dijtable=z$Dijtable, Dmaxtable=z$Dmaxtable,

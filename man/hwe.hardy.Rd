@@ -1,16 +1,17 @@
 \name{hwe.hardy}
 \alias{hwe.hardy}
-\title{Hardy-Weinberg equlibrium test}
-\usage{hwe.hardy(a,alleles,seed,sample)}
+\title{Hardy-Weinberg equlibrium test using MCMC}
+\usage{hwe.hardy(a,alleles=3,seed=3000,sample=c(1000,1000,5000))}
+
 \description{
 Hardy-Weinberg equilibrium test by MCMC
 }
 \arguments{
   \item{a}{a trangular array containing the genotype}
-  \item{alleles}{number of allele at the locus}
-  \item{seed}{pseudo-random number seed, with default value 3000}
+  \item{alleles}{number of allele at the locus, greater than or equal to 3}
+  \item{seed}{pseudo-random number seed}
   \item{sample}{optional, parameters for MCMC containing \# of chunks, 
-                size of chunk, burn-in steps, with default values to be 1000, 1000, 5000}
+                size of chunk and burn-in steps}
 }
 
 \source{
@@ -22,16 +23,16 @@ The returned value is a list containing:
 
 \item{p}{Monte Carlo p value}
 \item{se}{standard error of Monte Carlo p value}
-\item{swp}{percentage of switches}
+\item{swp}{percentage of switches (partial, full and altogether)}
 }
 
 \section{References}{
 
-Guo, S.-W. and E. A. Thompson (1992) Performing the Exact Test of
-Hardy-Weinberg Proportion for Multiple Alleles. Biometrics. 48:361--372.
+Guo, S.-W. and E. A. Thompson (1992) Performing the exact test of
+Hardy-Weinberg proportion for multiple alleles. Biometrics. 48:361--372.
 }
 \seealso{
-\code{\link[gap]{genecounting}} 
+\code{\link[gap]{hwe}} 
 }
 
 \examples{
@@ -46,9 +47,9 @@ a<-c(
 0, 0, 0, 0, 0, 1,
 0, 0, 1, 0, 0, 0, 0,
 0, 0, 0, 2, 1, 0, 0, 0)
-ex2<-hwe.hardy(a,alleles=8,seed=3000,sample=c(1000,1000,5000))
+ex2<-hwe.hardy(a,alleles=8)
 }
 }
 \author{Sun-Wei Guo, Jing hua Zhao}
-\note{adapted from HARDY, testable with -Dexecutable as standalone program, bug to be fixed under Unix}
+\note{Adapted from HARDY, testable with -Dexecutable as standalone program}
 \keyword{}

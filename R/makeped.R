@@ -7,5 +7,5 @@ makeped<-function(pifile="pedfile.pre",pofile="pedfile.ped",auto.select=1,
 {
   z<-.C("makeped",pifile=as.character(pifile),pofile=as.character(pofile),autoselect=as.integer(auto.select),
         withloop=as.integer(with.loop),loopfile=as.character(loop.file),
-        autoproband=as.integer(auto.proband),probandfile=as.character(proband.file))
+        autoproband=as.integer(auto.proband),probandfile=as.character(proband.file),PACKAGE="gap")
 }

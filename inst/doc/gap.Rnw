@@ -71,7 +71,8 @@ hap                     Haplotype reconstruction
 hap.em                  Gene counting for haplotype analysis
 hap.score               Score Statistics for Association of Traits with haplotypes
 hla                     HLA markers and Schizophrenia
-hwe.hardy               Hardy-Weinberg equilibrium test
+hwe                     Hardy-Weinberg equilibrium test
+hwe.hardy               Hardy-Weinberg equilibrium test using MCMC
 htr                     Haplotype trend regression (with permutation)
 kbyl                    LD statistics for two multiallelic loci
 kin.morgan              kinship matrix for simple pedigree
@@ -130,8 +131,7 @@ demo(gap.demo)
 
 \section{Known bugs}
 
-There appears to be some problem with the memory management in \textit{hwe.hardy} 
-which needs to be fixed.
+Unaware of any bug after hwe.hardy was fixed.
 
 
 \section{References}

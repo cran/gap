@@ -18,7 +18,8 @@ hap.score               Score Statistics for Association of Traits
                         with Haplotypes
 hla                     HLA markers and Schizophrenia
 htr                     Haplotype trend regression
-hwe.hardy               Hardy-Weinberg equlibrium test
+hwe                     Hardy-Weinberg equlibrium test
+hwe.hardy               Hardy-Weinberg equlibrium test using MCMC
 kbyl                    LD statistics for two multiallelic loci
 kin.morgan              kinship matrix for simple pedigree
 makeped                 A function to prepare pedigrees in

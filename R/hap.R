@@ -17,7 +17,7 @@ hap<-function(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep="")
         rp=as.integer(rp),ro=as.integer(ro),rv=as.integer(rv),sd=as.double(sd),
         mm=as.integer(mm),mi=as.integer(mi),mc=as.integer(mc),ds=as.double(ds),
         de=as.double(de),q=as.integer(q),l1=as.double(l1),niter=as.integer(niter),
-        converged=as.integer(converge))
+        converged=as.integer(converge),PACKAGE="gap")
 
   list(l1=z$l1,converge=z$converged,niter=z$niter)
 }

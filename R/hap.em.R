@@ -18,6 +18,7 @@ hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500)
   tmp1<-read.table("hap.out",header=T)
 # unlink("hap.out")
   haplotype<-as.matrix(tmp1[,1:nloci])
+  dimnames(haplotype)<-list(1:length(haplotype[,1]),locus.label)
   uhap<-hapid<-1:(dim(tmp1)[1])
   tmp1<-data.frame(tmp1,hapid)
   hap.prob<-tmp1[,nloci+1]

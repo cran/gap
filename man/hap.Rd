@@ -1,8 +1,9 @@
 \name{hap}
 \alias{hap}
 \title{Haplotype reconstruction}
-\usage{hap(id,data,nloci,loci,names,mb,pr,po,to,th,maxit,n,ss,rs,rp,ro,rv,sd,mm,
-           mi,mc,ds,de,q)}
+\usage{hap(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep=""),
+              mb=0,pr=0,po=0.001,to=0.001,th=1,maxit=100,n=0,
+              ss=0,rs=0,rp=0,ro=0,rv=0,sd=0,mm=0,mi=0,mc=50,ds=0.1,de=0,q=0)}
 \description{
 Haplotype reconstruction using sorting and trimming algorithms
 }

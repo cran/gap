@@ -66,7 +66,7 @@ using polymorphic genetic markers. RSS 2003, Hassalt, Belgium
 \examples{
 \dontrun{
 data(hla)
-hap.em(id=1:length(hla[,1]),data=hla[,3:8])
+hap.em(id=1:length(hla[,1]),data=hla[,3:8],locus.label=c("DQR","DQA","DQB"))
 }
 }
 \author{Jing hua Zhao}

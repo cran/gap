@@ -59,11 +59,11 @@ genecounting <- function(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,max
            npdat=as.integer(npdat),
            htrtable=as.double(htrtable),
            iter=as.integer(iter),
-           converge=as.integer(converge)
+           converge=as.integer(converge),PACKAGE="gap"
            )
   x<-0
   hapid<-0
-  Dprime<-sum(z$Rh0*abs(z$Rh1-z$Rh0))
+# Dprime<-sum(z$Rh0*abs(z$Rh1-z$Rh0))
 # x<-t(matrix(z$htrtable/2,nrow=hapall))
 # hapid<-apply(x,2,sum)>0
 # x<-x[,hapid]
@@ -72,7 +72,6 @@ genecounting <- function(data,weight=NULL,convll=1,handle.miss=0,eps=0.00001,max
   di1<-1-sum((z$Rh1)^2)
   list(h=z$Rh1, h0=z$Rh0, prob=z$prob, l0=z$lnl0, l1=z$lnl1,
        hapid=hapid, npusr=z$npusr, npdat=z$npdat, htrtable=x,
-       iter=z$iter,converge=z$converge,Dprime=Dprime,di0=di0,di1=di1)
+       iter=z$iter,converge=z$converge,di0=di0,di1=di1)
 }
 
-# 17-11-2003 Add Dprime, a version which generalises Hedrick's

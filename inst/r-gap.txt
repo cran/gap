@@ -1,55 +1,42 @@
 Version history of R genetic analysis package (R/gap)
 
-07/06/03 draft plan (home edition) shortly before RSS 2003
+Version 0.8
 
-Version 0.1
+4-2-2004
 
-11-01-2004
+Crashes by hwe.hardy goes away, chi-squared tests to be implemented
 
-First submission to CRAN with Vignette and revised Rd
+8-2-2004
 
+Add hwe, decided any details should go to the R code itself
 
-Version 0.2
+17-2-2004
 
-12-01-2004
+Add static to outfile in pgc.h and hap.c, pointed by Jan de Leeuw (deleeuw@stat.ucla.edu)
 
-Change %lf and %lg to %f according to check by Prof Kurt Hornik
+21-2-2004
 
+Completion of the first comprehensive analysis of data on Parkinson's disease and SNCA markers from
+Abbas Parsian (parsian@louisville.edu) (HWE, haplotype frequency estimation, score tests, Fisher's
+exact test, hwde, genetics) and gap obtained comparable results with SAS combined with hwe of 
+Jurg Ott (ott@rockefeller.edu) but dealing with missing data; this could be released as an example
+later on. It was decided that auxiliary functions are better added after the actual linkage analysis
+codes are working.
 
-Version 0.3
+Fix lr statistic in gc.em.R due to rename of lnlx to lx
 
-13-01-2004 
+26-2-2004
 
-Refine Vignette and change gap.demo.R
-
-
-Version 0.4
-
-14-01-2004
-
-Create this file
-Change DESCRIPTION
-Correct author of mtdt
-Delete hap.out in R directory
-Add docoumentation of htrtable in gc.em
-See also pfc rather than gif in gif.Rd
-Add right bracket in dat1 of chow.test
-Change ad to y in htr.Rd and the annotation in apoeapoc.Rd
+Reverse the order of version history in this file (starting from the most recent)
 
 
-Version 0.5
+Version 0.7
 
-19-01-2004
+2-2-2004
 
-To remove warnings earlier found in PC and pointed by Prof Brian Ripley
-Resubmission to CRAN
-
-
-22-1-2004
-
-Add haplotype diversity to genecounting
-Add default value to optrho in kbyl
-Change "for" to "with" when describing fsnps
+Warnings pointed by Kurt Hornik
+Change %lf to %f in several places of pgc.c
+Remove semicolon after } of rsort1
 
 
 Version 0.6
@@ -73,22 +60,65 @@ Change cat() to c() in gap.demo.R to avoid generating data files
 Merge muvar1 and muvar2 into muvar and add their synopsis
 
 
-Version 0.7
+Version 0.5
 
-2-2-2004
+19-01-2004
 
-Warnings pointed by Kurt Hornik
-Change %lf to %f in several places of pgc.c
-Remove semicolon after } of rsort1
+To remove warnings earlier found in PC and pointed by Prof Brian Ripley
+Resubmission to CRAN
 
 
-things to do,
+22-1-2004
 
-1. hwe.hardy debug
-2. hap.score to deal with more distributions and robust label handling
-3. hap/hap.em to handle missing only one allele and add X chromosome code
-4. joint genetic and environmental effects and mixed models
-5. pca regression and htSNP
-6. permutation tests/LD statistics as in EHPLUS
+Add haplotype diversity to genecounting
+Add default value to optrho in kbyl
+Change "for" to "with" when describing fsnps
+
+
+Version 0.4
+
+14-01-2004
+
+Create this file
+Change DESCRIPTION
+Correct author of mtdt
+Delete hap.out in R directory
+Add docoumentation of htrtable in gc.em
+See also pfc rather than gif in gif.Rd
+Add right bracket in dat1 of chow.test
+Change ad to y in htr.Rd and the annotation in apoeapoc.Rd
+
+
+Version 0.3
+
+13-01-2004 
+
+Refine Vignette and change gap.demo.R
+
+
+Version 0.2
+
+12-01-2004
+
+Change %lf and %lg to %f according to check by Prof Kurt Hornik
+
+
+Version 0.1
+
+11-01-2004
+
+First submission to CRAN with Vignette and revised Rd
+
+
+07/06/03 draft plan (home edition) shortly before RSS 2003
+
+
+Things to do,
+
+1. hap.score to deal with more distributions and robust label handling
+2. hap/hap.em to handle missing only one allele and add X chromosome code
+3. joint genetic and environmental effects and mixed models
+4. pca regression and htSNP
+5. permutation tests/LD statistics as in EHPLUS
 
 Further to add: path/segregation/linkage analysis programs

@@ -14,8 +14,8 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle
   data.gc<-genecounting(data,weight,eps=converge.eps,pl=0.001,maxit=maxiter,handle.miss)
   hap.prob<-data.gc$h
   hap.prob.noLD<-data.gc$h0
-  lnlike<-data.gc$lnl1
-  lr<-2*(data.gc$lnl1-data.gc$lnl0)
+  lnlike<-data.gc$l1
+  lr<-2*(data.gc$l1-data.gc$l0)
   df<-data.gc$npdat-sum(loci)-length(loci)
   niter<-data.gc$iter
   converge<-data.gc$converge
@@ -38,6 +38,7 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle
   haplotype<-as.matrix(tmp[[1]])
   tmp<-order(haplotype[,nloci+1])
   haplotype<-haplotype[tmp,1:(dim(haplotype)[2]-2)]
+  dimnames(haplotype)<-list(1:length(haplotype[,1]),locus.label)
   hap1<-hapid[indx1]
   hap2<-hapid[indx2]
   uhap <- sort(unique(hapid))

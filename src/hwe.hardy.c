@@ -4,6 +4,7 @@
 #include <time.h>
 
 #define  MAX_ALLELE    100
+#define  LENGTH        MAX_ALLELE * ( MAX_ALLELE + 1 ) / 2
 #define  STR_END       '\0'
 #define  MIN(x, y)     ((x) < (y)) ? (x) : (y)
 #define  RATIO(u, v)   ((double) (u) ) / ( 1.0 + (double) (v) )
@@ -13,55 +14,47 @@
 #define  drand48()     rand()/(double)RAND_MAX
 
 typedef struct {int i1, i2, j1, j2, type; double cst;} Index;
-struct outcome {double p_value, se; int swch_count[3];};
-struct randomization {int group, size, step;};
+typedef struct {double p_value, se; int swch_count[3];} outcome;
+typedef struct {int group, size, step;} randomization;
 
 double cal_probn (int *, Index, double, int *);
+double ln_p_value (int *, double);
+double log_factorial (int);
+double cal_const (int *n, int);
+void cal_n (int *, int *);
 void select_index (Index *, int);
 void random_choose (int *, int *, int);
 void test_switch (int *, Index, int *, int *, double *, double *);
 void ndo_switch (int *, Index, int);
 void stamp_time (time_t, FILE *);
 
-int *work;
+int *work, no_allele;
 
 void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
          double *p, double *se, double *swp)
 {
+  int b[LENGTH], n[MAX_ALLELE];
   double ln_p_observed, ln_p_simulated, p_mean, p_square;
-  double p_simulated, total_step;
-  int no_allele=*alleles, counter, actual_switch;
+  double constant, p_simulated, total_step;
+  int total, counter, actual_switch;
   Index index;
-  struct randomization sample={gss[0],gss[1],gss[2]};
-  struct outcome result={0,0,{0,0,0}};
-  time_t t1;
-  int i, j, k, l;
-  char line[250];
+  randomization sample={gss[0],gss[1],gss[2]};
+  outcome result={0,0,{0,0,0}};
+  int i, j, k;
 
-  time(&t1);
   srand(*seed);
-  line[0] = '-';
-  k = 1;
-  printf ("Observed genotype frequencies: \n\n");
-  for ( i = 0; i < no_allele; ++i ) {
-    for ( j = k; j < k + 5; ++j ) line[j] = '-';
-    line[j] = STR_END;
-    k = j;
-    printf ("%s\n", line);
-    printf ("|");
+  no_allele=*alleles;
+  total = 0;
+  for ( i = 0; i < no_allele; ++i ) 
     for ( j = 0; j <= i; ++j ) {
-         l = LL(i, j);
-         printf("%4d|", a[l]);
+         k = LL(i, j);
+         b[k] = a[k];
+         total += b[k];
     }
-    printf ("\n");
-  }
-  printf("%s\n\n", line);
-  printf("Total number of alleles: %2d\n\n", no_allele);
-  printf("Number of initial steps: %d\n", sample.step);
-  printf("Number of chunks: %d\n", sample.group);
-  printf("Size of each chunk: %d\n\n", sample.size);
+  cal_n (b, n );
+  constant = cal_const (n, total );
+  ln_p_observed = ln_p_value ( b, constant );
   ln_p_simulated = ln_p_observed = 0.0;
-  p_mean = p_square = 0.0;
   work=(int*)malloc(MAX_ALLELE*sizeof(int));
   if(!work) {
     fprintf(stderr,"not enough memory\n");
@@ -69,14 +62,15 @@ void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
   }
   for ( i = 0; i < sample.step; ++i ) {
     select_index ( &index, no_allele );
-    ln_p_simulated = cal_probn(a, index, ln_p_simulated, &actual_switch);
+    ln_p_simulated = cal_probn(b, index, ln_p_simulated, &actual_switch);
     ++result.swch_count[actual_switch];
   }
+  p_mean = p_square = 0.0;
   for ( i = 0; i < sample.group; ++i ) {
     counter = 0;
     for ( j = 0; j < sample.size; ++j ) {
       select_index ( &index, no_allele );
-      ln_p_simulated = cal_probn(a, index, ln_p_simulated, &actual_switch);
+      ln_p_simulated = cal_probn(b, index, ln_p_simulated, &actual_switch);
       if ( ln_p_simulated <= ln_p_observed ) ++counter;
       ++result.swch_count[actual_switch];
     }
@@ -93,16 +87,9 @@ void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
   total_step = sample.step + sample.group * sample.size;
   *p=result.p_value;
   *se=result.se;
-  for(i=1;i<3;i++) swp[i]=result.swch_count[i]/total_step*100;
-  printf("Randomization test P-value: %7.4g  (%7.4g) \n",
-                result.p_value, result.se);
-  printf("Percentage of partial switches: %6.2f \n",
-                result.swch_count[1] / total_step * 100);
-  printf("Percentage of full switches: %6.2f \n",
-                result.swch_count[2] / total_step * 100);
-  printf("Percentage of all switches: %6.2f \n",
-                (result.swch_count[1] + result.swch_count[2]) / total_step * 100 );
-  stamp_time(t1,stderr);
+  swp[0]=result.swch_count[1]/total_step * 100;
+  swp[1]=result.swch_count[2]/total_step * 100;
+  swp[2]=(result.swch_count[1]+result.swch_count[2])/total_step * 100;
 }
 
 double cal_probn (int *a, Index index, double ln_p_old, int *actual_switch)
@@ -229,40 +216,6 @@ void random_choose (int *k1, int *k2, int k)
   }
 }
 
-void test_switch (int *a, Index index, int *switch_ind, int *switch_type, double *p1_rt, double *p2_rt)
-{
-  int k11, k22, k12, k21;
-
-  *switch_ind = 0;
-  k11 = L(index.i1, index.j1);
-  k22 = L(index.i2, index.j2);
-  k12 = L(index.i1, index.j2);
-  k21 = L(index.i2, index.j1);
-  if ( index.type <= 1 ) {
-    if ( a[k11] > 0 && a[k22] > 0 ) {
-         *switch_ind = 1;
-         *switch_type = 0;
-         *p1_rt = RATIO(a[k11], a[k12]) *  RATIO(a[k22], a[k21]) * index.cst;
-    }
-    if ( a[k12] > 0 && a[k21] > 0 ) {
-         *switch_ind += 1;
-         *switch_type = 1;
-      *p2_rt = RATIO(a[k12], a[k11]) *  RATIO(a[k21], a[k22]) / index.cst;
-    }
-  } else {
-    if ( a[k11] > 0 && a[k22] > 0 ) {
-      *switch_ind = 1;
-      *switch_type = 0;
-         *p1_rt = RATIO(a[k11],a[k12] + 1.0)*RATIO(a[k22],a[k12]) * index.cst;
-    }
-    if ( a[k12] > 1 ) {
-      *switch_ind += 1;
-      *switch_type = 1;
-      *p2_rt = RATIO(a[k12],a[k11]) * RATIO(a[k12] - 1,a[k22]) / index.cst;
-    }
-  }
-}
-
 void ndo_switch (int *a, Index index, int type)
 {
   int k11, k22, k12, k21;
@@ -285,6 +238,60 @@ void ndo_switch (int *a, Index index, int type)
   }
 }
 
+double ln_p_value (int *a, double constant)
+{
+  register int i, j, l, temp;
+  register double ln_prob;
+
+  ln_prob = constant;
+  temp = 0;
+  for ( i = 0; i < no_allele; ++i ) {
+    for ( j = 0; j < i; ++j ) {
+         l = LL(i, j);
+         temp += a[l];
+      ln_prob -= log_factorial ( a[l] );
+    }
+         l = LL(i, i);
+         ln_prob -= log_factorial ( a[l] );
+  }
+  ln_prob += temp * log ( 2.0 );
+  return ( ln_prob );
+}
+
+void cal_n (int *a, int *n)
+{
+  register int i, j, l;
+
+  for ( i = 0; i < no_allele; ++i ) {
+    l = LL(i, i);
+    n[i] = a[l];
+    for ( j = 0; j < no_allele; ++j ) {
+         l = L(i, j);
+         n[i] += a[l];
+    }
+  }
+}
+
+double cal_const (int *n, int total)
+{
+  double constant;
+  register int i;
+
+  constant = log_factorial ( total ) - log_factorial ( 2*total );
+  for ( i = 0; i < no_allele; ++i )
+    constant += log_factorial ( n[i] );
+  return ( constant );
+}
+
+double log_factorial (int k)
+{
+  register double result;
+
+  if ( k == 0 ) result = 0.0;
+  else result = log( (double)k ) + log_factorial ( k - 1 );
+  return (result);
+}
+
 void stamp_time (time_t t1, FILE *outfile)
 {
   time_t t2, now;
@@ -296,13 +303,11 @@ void stamp_time (time_t t1, FILE *outfile)
 }
 
 #ifdef executable
-#define  LENGTH        MAX_ALLELE * ( MAX_ALLELE + 1 ) / 2
 
-double ln_p_value (int *, int, double);
-double log_factorial (int);
 int check_file (int, char *[], FILE **, FILE **);
-int read_data (int *, int *, int *, struct randomization *, FILE **);
-void print_data (int *, int, struct randomization, FILE **);
+int read_data (int *, int *, int *, randomization *, FILE **);
+void print_data (int *, int, randomization, FILE **);
+double cal_prob (int *, Index, double, int *);
 
 int main(int argc, char *argv[])
 {
@@ -311,8 +316,8 @@ int main(int argc, char *argv[])
   double constant, p_simulated, total_step;
   int no_allele, total, counter, actual_switch;
   Index index;
-  struct randomization sample;
-  struct outcome result;
+  randomization sample;
+  outcome result;
   FILE *infile, *outfile;
   time_t t1;
   register int i, j;
@@ -387,7 +392,7 @@ int check_file (int argc, char *argv[], FILE **infile, FILE **outfile)
   return (exit_value);
 }
 
-int read_data (int *a, int *no_allele, int *total, struct randomization *sample, FILE **infile )
+int read_data (int *a, int *no_allele, int *total, randomization *sample, FILE **infile )
 {
   register int i, j, l, err = 1;
 
@@ -419,10 +424,10 @@ int read_data (int *a, int *no_allele, int *total, struct randomization *sample,
   return (0);
 }
 
-void print_data (int *a, int no_allele, struct randomization sample, FILE **outfile)
+void print_data (int *a, int no_allele, randomization sample, FILE **outfile)
 {
   register int i, j, k, l;
-  char line[120];
+  char line[250];
 
   line[0] = '-';
   k = 1;
@@ -485,58 +490,38 @@ double cal_prob (int *a, Index index, double ln_p_old, int *actual_switch)
   return (ln_p_new);
 }
 
-double ln_p_value (int *a, int no_allele, double constant)
+void test_switch (int *a, Index index, int *switch_ind, int *switch_type, double *p1_rt, double *p2_rt)
 {
-  register int i, j, l, temp;
-  register double ln_prob;
+  int k11, k22, k12, k21;
 
-  ln_prob = constant;
-  temp = 0;
-  for ( i = 0; i < no_allele; ++i ) {
-    for ( j = 0; j < i; ++j ) {
-         l = LL(i, j);
-         temp += a[l];
-      ln_prob -= log_factorial ( a[l] );
+  *switch_ind = 0;
+  k11 = L(index.i1, index.j1);
+  k22 = L(index.i2, index.j2);
+  k12 = L(index.i1, index.j2);
+  k21 = L(index.i2, index.j1);
+  if ( index.type <= 1 ) {
+    if ( a[k11] > 0 && a[k22] > 0 ) {
+         *switch_ind = 1;
+         *switch_type = 0;
+         *p1_rt = RATIO(a[k11], a[k12]) *  RATIO(a[k22], a[k21]) * index.cst;
     }
-         l = LL(i, i);
-         ln_prob -= log_factorial ( a[l] );
-  }
-  ln_prob += temp * log ( 2.0 );
-  return ( ln_prob );
-}
-
-void cal_n (int no_allele, int *a, int *n)
-{
-  register int i, j, l;
-
-  for ( i = 0; i < no_allele; ++i ) {
-    l = LL(i, i);
-    n[i] = a[l];
-    for ( j = 0; j < no_allele; ++j ) {
-         l = L(i, j);
-         n[i] += a[l];
+    if ( a[k12] > 0 && a[k21] > 0 ) {
+         *switch_ind += 1;
+         *switch_type = 1;
+      *p2_rt = RATIO(a[k12], a[k11]) *  RATIO(a[k21], a[k22]) / index.cst;
+    }
+  } else {
+    if ( a[k11] > 0 && a[k22] > 0 ) {
+      *switch_ind = 1;
+      *switch_type = 0;
+         *p1_rt = RATIO(a[k11],a[k12] + 1.0)*RATIO(a[k22],a[k12]) * index.cst;
+    }
+    if ( a[k12] > 1 ) {
+      *switch_ind += 1;
+      *switch_type = 1;
+      *p2_rt = RATIO(a[k12],a[k11]) * RATIO(a[k12] - 1,a[k22]) / index.cst;
     }
   }
-}
-
-double cal_const (double no_allele, int *n, int total)
-{
-  double constant;
-  register int i;
-
-  constant = log_factorial ( total ) - log_factorial ( 2*total );
-  for ( i = 0; i < no_allele; ++i )
-    constant += log_factorial ( n[i] );
-  return ( constant );
-}
-
-double log_factorial (int k)
-{
-  register double result;
-
-  if ( k == 0 ) result = 0.0;
-  else result = log( (double)k ) + log_factorial ( k - 1 );
-  return (result);
 }
 
 #endif
