@@ -21,7 +21,7 @@ The returned value is a list containing:
 }
 
 \section{References}{
-Bradley RA, Terry M E (1952) Rank analysis of incomplete block designs I. 
+Bradley RA, Terry ME (1952) Rank analysis of incomplete block designs I. 
 the method of paired comparisons. Biometrika 39:324--345
 
 Sham PC, Curtis D (1995) An extended transmission/disequilibrium 

@@ -30,7 +30,7 @@ Comp Biomed Res 27:342-350
 
 }
 \seealso{
-\code{\link[gap]{gif}}
+\code{\link[gap]{pfc}}
 }
 
 \examples{

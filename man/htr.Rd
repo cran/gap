@@ -44,7 +44,7 @@ htr.test2
 # 13-11-2003
 data(apoeapoc)
 apoeapoc.gc<-gc.em(apoeapoc[,5:8])
-y<-apoeapoc$ad
+y<-apoeapoc$y
 for(i in 1:length(y)) if(y[i]==2) y[i]<-1
 htr(y,apoeapoc.gc$htrtable)
 }

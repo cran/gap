@@ -70,5 +70,5 @@ x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
 mtdt(x)
 }
 }
-\author{Alun Thomas, Jing hua Zhao}
+\author{Mike Miller, Jing hua Zhao}
 \keyword{}

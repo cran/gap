@@ -52,6 +52,7 @@ List with components:
   \item{hap2code}{Similar to hap1code, but for  each  subject's  second haplotype.}
   \item{post}{Vector of posterior probabilities of pairs of
    haplotypes for a person, given thier marker phenotypes.}
+  \item{htrtable}{A table which can be used in haplotype trend regression}
 }
 
 \section{References}{

@@ -8,7 +8,7 @@
 \format{A data frame:
 \describe{
 \item{id}{subject id}
-\item{y}{a variable taking value 0 for controls and 1 for Schizophrenia}
+\item{y}{a variable taking value 0 for controls and 2 for Schizophrenia}
 \item{sex}{sex}
 \item{age}{age}
 \item{apoe.a1}{APOE allele a1}
