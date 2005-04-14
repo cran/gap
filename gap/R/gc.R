@@ -1,5 +1,20 @@
-genecounting <- function(data,weight=NULL,loci=NULL,convll=1,handle.miss=0,eps=0.00001,maxit=50,pl=0.001)
+# 10/4/2005, 13/4/2005
+gc.control <- function(convll=1,handle.miss=0,eps=0.000001,
+                       tol=0.00000001, maxit=50,pl=0.001,verbose=T)
 {
+   list(convll=convll,handle.miss=handle.miss,eps=eps,tol=tol,
+        maxit=maxit,pl=pl,verbose=verbose)
+}
+
+genecounting <- function(data,weight=NULL,loci=NULL,xdata=FALSE,control=gc.control())
+{
+  if (xdata)
+  {
+     sex <- data[,1]
+     data <- data[,-1]
+  }
+  else
+  sex <- rep(dim(data)[1],2)
   if(is.null(weight)) weight<-rep(1,dim(data)[1])
 # precis<-1
 # to call dpmach
@@ -35,15 +50,15 @@ genecounting <- function(data,weight=NULL,loci=NULL,convll=1,handle.miss=0,eps=0
 # 13/11/2003
 # change to reduce memory request
 # htrtable<-matrix(rep(0,obscom*hapall),nrow=obscom)
-  htrtable<-0 
   iter<-0
   converge<-0
-  z <- .C("gc",
-           Rhandlemissing=as.integer(handle.miss),
-           convll=as.integer(convll),
-           eps=as.double(eps),
-           maxit=as.integer(maxit),
-           Rpl=as.double(pl),
+  z <- .C("gc",verbose=as.integer(control$verbose),
+           Rhandlemissing=as.integer(control$handle.miss),
+           Rconvll=as.integer(control$convll),
+           Reps=as.double(control$eps),
+           Rtol=as.double(control$tol),
+           Rmaxit=as.integer(control$maxit),
+           Rpl=as.double(control$pl),
            precis=as.double(precis),
            gid=as.integer(gid),
            Rnloci=as.integer(nloci),
@@ -52,6 +67,8 @@ genecounting <- function(data,weight=NULL,loci=NULL,convll=1,handle.miss=0,eps=0
            Rhapall=as.integer(hapall),
            genotype=as.integer(data),
            count=as.integer(weight),
+           Rxdata=as.integer(xdata),
+           sex=as.integer(sex),
            hapid=as.integer(hapid),
            prob=as.double(prob),
            Rh0=as.double(h0),
@@ -60,7 +77,6 @@ genecounting <- function(data,weight=NULL,loci=NULL,convll=1,handle.miss=0,eps=0
            lnl1=as.double(lnl1),
            npusr=as.integer(npusr),
            npdat=as.integer(npdat),
-           htrtable=as.double(htrtable),
            iter=as.integer(iter),
            converge=as.integer(converge),PACKAGE="gap"
            )

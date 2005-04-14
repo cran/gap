@@ -14,7 +14,7 @@ hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.v
      locus.label<- paste("loc-",1:nloci,sep="")
   }
 ##
-  z<- hap(id=id,data=data,nloci,loci=loci,ss=1)
+  z<- hap(id=id,data=data,nloci,loci=loci,control=hap.control(ss=1))
 #
   tmp1<-read.table("hap.out",header=T)
 # unlink("hap.out")

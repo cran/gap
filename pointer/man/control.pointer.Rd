@@ -11,7 +11,8 @@ Set various parameters for function pointer
 \usage{control.pointer(sexlink=FALSE, split=FALSE, 
                        mating.type='00,01,02,10,11,12,20,21,22',
                        pointer.selection='0,4,5,6', 
-                       pointer.degree='1,2,3,4,5', ascertainment='C')}
+                       pointer.degree='1,2,3,4,5', 
+                       ascertainment='C')}
 
 \arguments{
 \item{sexlink}{TRUE if X-linked data are used}

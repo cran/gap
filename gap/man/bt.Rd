@@ -31,8 +31,10 @@ test ({TDT}) for multi-allelic marker loci. Ann. Hum. Genet. 59:323-336
 
 \examples{
 \dontrun{
-# Copeman JB, Cucca F, Hearne CM, Cornall RJ, Reed PW, Ronningen KS, Undlien DE, Nistico L, Buzzetti R, Tosi R, et al.
-# (1995) Linkage disequilibrium mapping of a type 1 diabetes susceptibility gene (IDDM7) to chromosome 2q31-q33. 
+# Copeman JB, Cucca F, Hearne CM, Cornall RJ, Reed PW, 
+# Ronningen KS, Undlien DE, Nistico L, Buzzetti R, Tosi R, et al.
+# (1995) Linkage disequilibrium mapping of a type 1 
+# diabetes susceptibility gene (IDDM7) to chromosome 2q31-q33. 
 # Nat Genet 9: 80-5
 
 x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
@@ -48,7 +50,8 @@ x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
               0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
               0,0, 1, 0, 0,0, 0, 0, 0, 0, 0, 0),nrow=12)
 
-# Bradley-Terry model, only deviance is available in glm (SAS gives score and Wald statistics as well)
+# Bradley-Terry model, only deviance is available in glm
+# (SAS gives score and Wald statistics as well)
 bt.ex<-bt(x)
 anova(bt.ex$bt.glm)
 summary(bt.ex$bt.glm)

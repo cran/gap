@@ -15,7 +15,8 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle
      locus.label<- paste("loc-",1:nloci,sep="")
   }
 # to run genecounting
-  data.gc<-genecounting(data,weight=weight,loci=loci,eps=converge.eps,pl=0.001,maxit=maxiter,handle.miss=handle.miss)
+  data.gc<-genecounting(data,weight=weight,loci=loci,verbose=F,
+           control=gc.control(eps=converge.eps,pl=0.001,maxit=maxiter,handle.miss=handle.miss))
   hap.prob<-data.gc$h
   hap.prob.noLD<-data.gc$h0
   lnlike<-data.gc$l1

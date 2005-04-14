@@ -1,7 +1,7 @@
 \name{genecounting}
 \alias{genecounting}
 \title{Gene counting for haplotype analysis}
-\usage{genecounting(data,weight=NULL,loci=NULL,convll=1,handle.miss=0,eps=0.00001,maxit=50,pl=0.001)}
+\usage{genecounting(data,weight=NULL,loci=NULL,xdata=FALSE,control=gc.control())}
 \description{
 Gene counting for haplotype analysis with missing data
 }
@@ -9,11 +9,20 @@ Gene counting for haplotype analysis with missing data
  \item{data}{genotype table}
  \item{weight}{a column of frequency weights}
  \item{loci}{an array containing number of alleles at each locus}
- \item{convll}{set convergence criteria according to log-likelihood, if its value set to 1}
- \item{handle.miss}{to handle missing data, if its value set to 1}
- \item{eps}{the actual convergence criteria, with default value 1e-5}
- \item{maxit}{maximum number of iterations, with default value 50}
- \item{pl}{criteria for trimming haplotypes according to posterior probabilities}
+ \item{xdata}{a flag indicating if the data involves X chromosome, if so, the
+first column of data indicates sex of each subject: 1=male, 2=female. The marker 
+data are nodifferent from the autosomal version for females, but for males, two copies
+of the single allele present at a given locus.}
+ \item{control}{is a function with the following elements: 
+      \enumerate{
+      \item{convll}{set convergence criteria according to log-likelihood, if its value set to 1}
+      \item{handle.miss}{to handle missing data, if its value set to 1}
+      \item{eps}{the actual convergence criteria, with default value 1e-5}
+      \item{tol}{tolerance for genotype probabilities with default value 1e-8}
+      \item{maxit}{maximum number of iterations, with default value 50}
+      \item{pl}{criteria for trimming haplotypes according to posterior probabilities}
+      }
+  }
 }
 
 \value{
@@ -44,6 +53,9 @@ Bioinformatics 18(12):1694-1695
 Zhao, J. H. and P. C. Sham (2003). Generic number systems and haplotype
 analysis. Comp Meth Prog Biomed 70: 1-9
 
+Zhao, J. H. (2004). 2LD, GENECOUNTING and HAP: Computer programs for linkage
+disequilibrium analysis. Bioinformatics, 20, 1325-1326 
+
 }
 \seealso{
 \code{\link[gap]{gc.em}}, \code{\link[gap]{kbyl}}
@@ -53,17 +65,28 @@ analysis. Comp Meth Prog Biomed 70: 1-9
 \dontrun{
 # Now we use the HLA data for testing
 data(hla)
-hla.gc<-genecounting(hla[,3:8])
+hla.gc <- genecounting(hla[,3:8])
 summary(hla.gc)
 hla.gc$l0
 hla.gc$l1
 
 # Now we use ALDH2 data
 data(aldh2)
-aldh2.gc<-genecounting(aldh2[,3:6],handle.miss=1)
+control <- gc.control(handle.miss=1)
+aldh2.gc <- genecounting(aldh2[,3:6],control=control)
 summary(aldh2.gc)
 aldh2.gc$l0
 aldh2.gc$l1
+
+# Now we perform gene counting with Chromosome X data
+# assuming allelic data have been extracted in columns 3-13
+# and column 3 is sex
+dat <- mao[,3:13]
+loci <- c(12,9,6,5,3)
+contr <- gc.control(handle.miss=1)
+mao.gc <- genecounting(dat,xdata=TRUE,loci=loci,control=contr)
+mao.gc$npusr
+mao.gc$npdat
 }
 }
 \author{Jing hua Zhao}

@@ -47,8 +47,8 @@ selection on a quantitative trait can be defined, and (2) ascertainment probabil
 }
 
 \usage{
-pointer(datfile="poidat",jobfile="poijob",profile="poipro",terfile="poiter",
-        control=control.pointer())
+pointer(datfile="poidat",jobfile="poijob",profile="poipro",
+        terfile="poiter",control=control.pointer())
 }
 
 \arguments{

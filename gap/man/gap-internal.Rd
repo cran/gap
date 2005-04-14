@@ -6,8 +6,10 @@
 \alias{g2a}
 \alias{g2a.c}
 \alias{geno.recode}
+\alias{gc.control}
 \alias{gcode}
 \alias{grec2g}
+\alias{hap.control}
 \alias{hap.score.glm}
 \alias{hap.score.podds}
 \alias{is.miss}

@@ -8,4 +8,3 @@ Description: This is an integrated package for genetic data analysis
         analysis, and association analysis involving one or more
         genetic markers including haplotype analysis with or without
         environmental covariates.
-Depends:  MASS, genetics, R (>= 2.0.0)

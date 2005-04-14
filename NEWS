@@ -1,8 +1,15 @@
+Version 1.0-2
+
+2005-4-14
+
+genecounting with Chromosome X data in place
+
 Version 1.0-1 
 
 2005-4-2
 
-Pass tests under Sun with pathmix
+Pass tests under Sun with pathmix, full R-style control (PA,IT,etc) awaits
+to be implemented for both pointer and pathmix.
 
 2005-3-25
 

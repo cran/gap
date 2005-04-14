@@ -20,7 +20,8 @@ according to information given on the headline of <ps file>.
 }
 
 \usage{
-pedtodot(pedfile,makeped=F,sink=T,page="",url="",height=0.5,width=0.75,rotate=90,dir="none")
+pedtodot(pedfile,makeped=F,sink=T,page="",url="",
+         height=0.5,width=0.75,rotate=90,dir="none")
 }
 
 \arguments{
