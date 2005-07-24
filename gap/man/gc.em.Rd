@@ -2,7 +2,8 @@
 \alias{gc.em}
 \title{Gene counting for haplotype analysis}
 \usage{
-gc.em(data, locus.label=NA, converge.eps=1e-06, maxiter=500, handle.miss=0, miss.val=0)
+gc.em(data, locus.label=NA, converge.eps=1e-06, maxiter=500, 
+      handle.miss=0, miss.val=0, control=gc.control())
 }
 
 \description{
@@ -19,6 +20,7 @@ Gene counting for haplotype analysis with missing data, adapted for hap.score
  \item{maxiter}{Maximum number of iterations of EM.}
  \item{handle.miss}{a flag for handling missing genotype data, 0=no, 1=yes}
  \item{miss.val}{missing value}
+ \item{control}{a function, see \code{\link[gap]{genecounting}}}
 }
 
 \value{

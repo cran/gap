@@ -300,7 +300,12 @@ c
       if (ia(1) .eq. nulls) goto 350
    12 nfamb = ia(7501)
       nout = 0
-      do 240 ii = 1, nfamb
+c mask the following loop
+c     do 240 ii = 1, nfamb
+c to avoid jump into a for block
+c JH Zhao 16/4/2005
+      ii = 1
+999   continue
       icount = icount + 1
       nr = ia(nout + 2)
       lend = 18 + (6 * nr)
@@ -374,7 +379,9 @@ c
       end if
       end if
     4 format(2a6)
-  240 continue
+c 240 continue
+      ii = ii + 1
+240   if (ii <= nfamb) goto 999 
       if (ia(nout) .eq. nulls) goto 190
       if (ia(nout + 1) .eq. nulls) goto 9
       if (nout .eq. 7500) goto 9

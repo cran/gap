@@ -29,7 +29,7 @@ C   DECLARATIONS FOR PART B:
      +          0,    0,    0,    0,  820, 1120,
      +          0,    0,    0,    0,  300,  900,
      +          0,    0,    0,    0,  500, 1200/
-      data dvec /mxfmsz*0./ 
+      data dvec /mxfmsz*0./,
      +     sigma /(mxfmsz*mxfmsz)*0./, nold /ngroup*-99/
 
 C PART A:        D E F I N I T I O N   O F   R H O ()

@@ -1,6 +1,6 @@
+#include <R.h>
 #include <stdio.h>
 #include <math.h>
-
 void tbyt(double *h, double *haplotypes, double *D, double *VarD,
           double *Dmax, double *VarDmax, double *Dprime, double *VarDprime,
           double *x2, double *lor, double *vlor)
@@ -78,13 +78,12 @@ int kbylem(double *,double *,double *);
 void abp(int,int,double*,double*,double*,double*);
 
 void kbyl(int *nalleles1, int *nalleles2, double *h, double *haplotypes,
-          double *VarDp, double *Dijtable, double *Dmaxtable, double *Dijptable,
-          double *VarDijtable, double *VarDijptable,
+          double *Dp, double *VarDp, double *Dijtable, double *VarDijtable,
+          double *Dmaxtable, double *Dijptable, double *VarDijptable,
           double *x2, double *seX2, double *rho, double *seR, int *optrho,
-          double *klinfo)
+          double *klinfo, int *verbose)
 {
 double Dij,VarDij,Dmax,Xij,Dijp,VarDijp,a,b,Eijtable[maxalleles*maxalleles];
-double Dp;
 double ai,aip,bj,bjp,ak,akp,bl,blp;
 double AI,AIP,BJ,BJP;
 double W,t,tt[4],sgn=0;
@@ -95,6 +94,7 @@ double po,pe;
 double phi2=0,p2[maxalleles],q2[maxalleles];
 double s0,s1,s2,s3,s4;
 
+if(*verbose==1) Rprintf("Maximum number of alleles = %d\n",maxalleles);
 alleles1=(*nalleles1);
 alleles2=(*nalleles2);
 for(i=0;i<alleles1;i++) {
@@ -112,7 +112,7 @@ for(j=0;j<alleles2;j++) {
   q[j]=t;
 }
 
-Dp=0;
+*Dp=0;
 for(i=0;i<alleles1;i++) {
   for(j=0;j<alleles2;j++) {
      ij=i*alleles2+j;
@@ -159,7 +159,7 @@ for(i=0;i<alleles1;i++) {
      }
      Dijptable[i*alleles2+j]=Dijp;
      VarDijptable[i*alleles2+j]=VarDijp;
-     Dp+=p[i]*q[j]*fabs(Dijp);
+     *Dp+=p[i]*q[j]*fabs(Dijp);
      Eijtable[i*alleles2+j]=(p[i]*aip*bj+q[j]*ai*bjp)*Dij+ai*bj*(Dij-p[i]*q[j]);
    }
 }

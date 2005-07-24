@@ -2,13 +2,38 @@ Version history of R genetic analysis package (R/gap)
 
 Todo list:
 
+. to be compatible with definitions in genetics
 . standard error of haplotypes
-. hap/hap.em to handle missing only one allele
+. phase routine to include hap, genecounting or PHASE
+. hap/hap.em to handle missing only one allele and X Chromsome data
 . joint genetic and environmental effects and mixed models
 . pca regression and htSNP
 . linkage analysis programs
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
+
+Version 1.0-3
+
+24-7-2005
+
+genecounting (gc.c):
+Change nhet2 from short to long (int)
+Change ll() in gc.c according to report by Iris Grossman on a "Crazy" data
+
+hwe.hardy:
+Fix bug report by Lize van der Merwe <lize.van.der.merwe@mrc.ac.za> on data
+three=c("A/A",rep("A/B",4),rep("B/B",4),rep("A/C",14),rep("B/C",28),rep("C/C",49))
+g3=genotype(three)
+hwe.hardy(g3)
+
+It benefits from the original author of HWE ("Guo, Sun-Wei" <swguo@mail.mcw.edu>)
+
+17-4-2005
+
+Refine 2ld.R and 2ld.c according to the C program 2LD 
+Revisit pfm.sim.f (f95 -PIC -xlibmil -xO5 -dalign -c by Brian Ripley).
+
+Version 1.0-2
 
 14-4-2005
 
@@ -62,7 +87,7 @@ Version 0.8
 
 4-2-2004
 
-Crashes by hwe.hardy goes away, chi-squared tests to be implemented
+Crashes by hwe.hardy go away, chi-squared tests to be implemented
 
 8-2-2004
 

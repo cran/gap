@@ -1,5 +1,5 @@
 useDynLib(gap)
-import(MASS,genetics)
+import(genetics)
 export(Ginv,
        a2g, allele.recode,
        bt,

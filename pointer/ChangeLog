@@ -1,3 +1,8 @@
+2005-4-16
+
+The illegal jump to for-loop in emx.f has been fixed (masked 
+with -w Makevars but gfortran -w -fPIC -O2 -g -c picks it up).
+
 2005-3-23
 
 To apply -Wall -pedantic to emx.f, nucfama.f, pointr.f.

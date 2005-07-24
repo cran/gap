@@ -15,10 +15,10 @@ To calculate probability of familial clustering of disease using Monte Carlo sim
 The returned value is a list containing:
 
 \item{n.sim}{a copy of the number of simulations in a single Monte Carlo run}
-\item{n.loop}{a copy of the total number of Monte Carlo runs}
+\item{n.loop}{the total number of Monte Carlo runs}
 \item{p}{the observed p value}
-\item{tailpl}{probabilities at the lower tails}
-\item{tailpu}{probabilities at the upper tails}
+\item{tailpl}{accumulated probabilities at the lower tails}
+\item{tailpu}{simulated p values}
 }
 
 \section{References}{
@@ -32,8 +32,10 @@ Meth 30:2293-2305
 
 \examples{
 \dontrun{
+# Li FP, Fraumeni JF Jr, Mulvihill JJ, Blattner WA, Dreyfus MG, Tucker MA, Miller RW
+# A cancer family syndrome in twenty-four kindreds.
+# Cancer Res. 1988 Sep 15;48(18):5358-62. 
 
-# Li, Fraumeni, Mulvihill, et al., 1988
 # family_size  #_of_affected frequency
 
 famtest<-c(

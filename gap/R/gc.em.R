@@ -1,5 +1,10 @@
-gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle.miss=0, miss.val=0)
+gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, 
+       handle.miss=0, miss.val=0, control=gc.control())
 {
+  if (control$xdata) {
+     sex <- data[,1]
+     data <- data[,-1]
+  }
   tmp0<-geno.recode(data,miss.val=miss.val)
   geno<-tmp0$grec
   geno[is.na(geno)]<-0
@@ -15,8 +20,11 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, handle
      locus.label<- paste("loc-",1:nloci,sep="")
   }
 # to run genecounting
-  data.gc<-genecounting(data,weight=weight,loci=loci,verbose=F,
-           control=gc.control(eps=converge.eps,pl=0.001,maxit=maxiter,handle.miss=handle.miss))
+  if (control$xdata) data <- cbind(sex,data)
+  data.gc<-genecounting(data,weight=weight,loci=loci,
+           control=gc.control(xdata=control$xdata,
+           eps=converge.eps,pl=0.001,maxit=maxiter,
+           handle.miss=handle.miss,verbose=F))
   hap.prob<-data.gc$h
   hap.prob.noLD<-data.gc$h0
   lnlike<-data.gc$l1

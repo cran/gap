@@ -7,7 +7,8 @@ hwe.hardy<-function(x, a, alleles=3, seed=3000, sample=c(1000, 1000, 5000)) {
             # Get genotype counts
             tab <- table(factor(allele(x, 1), levels=allele.names(x)),
                          factor(allele(x, 2), levels=allele.names(x)))
-            a <- as.integer(tab[upper.tri(tab, diag=T)])
+            a <- as.integer(t(tab)[lower.tri(t(tab), diag=T)])
+            a <- a[order(a)]
             # Get number of alleles
             alleles <- length(allele.names(x))
         }        

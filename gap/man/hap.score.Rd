@@ -1,6 +1,6 @@
 \name{hap.score}
 \alias{hap.score}
-\title{Score Statistics for Association of Traits with Haplotypes}
+\title{Score statistics for association of traits with haplotypes}
 \description{
 Compute score statistics to evaluate the association of a trait with haplotypes, when linkage phase is unknown and diploid marker 
 phenotypes are observed among unrelated subjects. For now, only autosomal loci are considered. This package haplo.score

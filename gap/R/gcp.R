@@ -7,7 +7,7 @@ gcp <- function(y,cc,g,handle.miss=1,miss.val=0,n.sim=0,locus.label=NULL,quietly
   loci <- rep(0,nloci)
   for(i in 1:nloci) loci[i] <- length(tmp$alist[[i]]$allele)
   g[is.na(g)] <- 0
-  control <- gc.control(handle.miss=handle.miss)
+  control <- gc.control(handle.miss=handle.miss,verbose=F)
 # marker-marker association
   if (cc==0)
   {
@@ -15,7 +15,7 @@ gcp <- function(y,cc,g,handle.miss=1,miss.val=0,n.sim=0,locus.label=NULL,quietly
     n.obs <- length(g[,1])
     n.loci <- length(g[1,])/2
     g <- g
-    g.gc <- genecounting(g,loci=loci,control=control,verbose=F)
+    g.gc <- genecounting(g,loci=loci,control=control)
     n.haps <- length(g.gc$h)
     x2obs <- 2*(g.gc$l1-g.gc$l0)
     pobs <- 1 - pchisq(x2obs, n.haps-1)
@@ -37,7 +37,7 @@ gcp <- function(y,cc,g,handle.miss=1,miss.val=0,n.sim=0,locus.label=NULL,quietly
           g[,(2*j-1)] <- g[,(2*j-1)][rand.ord]
           g[,(2*j)] <- g[,(2*j)][rand.ord]
       }
-      g.gc <- genecounting(g,loci=loci,control=control,verbose=F)
+      g.gc <- genecounting(g,loci=loci,control=control)
       x2sim <- 2*(g.gc$l1-g.gc$l0)
       if (x2sim >= x2obs) x <- x + 1
       h0 <- g.gc$h0
@@ -53,8 +53,8 @@ gcp <- function(y,cc,g,handle.miss=1,miss.val=0,n.sim=0,locus.label=NULL,quietly
 #   marker-disease association
     is.case <- (y==1)
     caco.obs <- genecounting(g,loci=loci,control=control)
-    ca.obs <- genecounting(g[is.case,],loci=loci,control=control,verbose=F)
-    co.obs <- genecounting(g[!is.case,],loci=loci,control=control,verbose=F)
+    ca.obs <- genecounting(g[is.case,],loci=loci,control=control)
+    co.obs <- genecounting(g[!is.case,],loci=loci,control=control)
     yobs <- y
     n.haps <- length(caco.obs$h)
     x2obs <- 2*(ca.obs$l1+co.obs$l1-caco.obs$l1)

@@ -1,7 +1,7 @@
 \name{genecounting}
 \alias{genecounting}
 \title{Gene counting for haplotype analysis}
-\usage{genecounting(data,weight=NULL,loci=NULL,xdata=FALSE,control=gc.control())}
+\usage{genecounting(data,weight=NULL,loci=NULL,control=gc.control())}
 \description{
 Gene counting for haplotype analysis with missing data
 }
@@ -9,12 +9,12 @@ Gene counting for haplotype analysis with missing data
  \item{data}{genotype table}
  \item{weight}{a column of frequency weights}
  \item{loci}{an array containing number of alleles at each locus}
- \item{xdata}{a flag indicating if the data involves X chromosome, if so, the
-first column of data indicates sex of each subject: 1=male, 2=female. The marker 
-data are nodifferent from the autosomal version for females, but for males, two copies
-of the single allele present at a given locus.}
- \item{control}{is a function with the following elements: 
+ \item{control}{is a function with the following arguments: 
       \enumerate{
+      \item{xdata}{a flag indicating if the data involves X chromosome, if so, the
+first column of data indicates sex of each subject: 1=male, 2=female. The marker 
+data are no different from the autosomal version for females, but for males, two copies
+of the single allele present at a given locus.}
       \item{convll}{set convergence criteria according to log-likelihood, if its value set to 1}
       \item{handle.miss}{to handle missing data, if its value set to 1}
       \item{eps}{the actual convergence criteria, with default value 1e-5}
@@ -47,7 +47,7 @@ The returned value is a list containing:
 \section{References}{
 
 Zhao, J. H., Lissarrague, S., Essioux, L. and P. C. Sham (2002).
-Gene-counting for haplotype analysis with missing genotypes.
+GENECOUNTING: haplotype analysis with missing genotypes.
 Bioinformatics 18(12):1694-1695
 
 Zhao, J. H. and P. C. Sham (2003). Generic number systems and haplotype
@@ -63,14 +63,14 @@ disequilibrium analysis. Bioinformatics, 20, 1325-1326
 
 \examples{
 \dontrun{
-# Now we use the HLA data for testing
+# HLA data
 data(hla)
 hla.gc <- genecounting(hla[,3:8])
 summary(hla.gc)
 hla.gc$l0
 hla.gc$l1
 
-# Now we use ALDH2 data
+# ALDH2 data
 data(aldh2)
 control <- gc.control(handle.miss=1)
 aldh2.gc <- genecounting(aldh2[,3:6],control=control)
@@ -78,13 +78,13 @@ summary(aldh2.gc)
 aldh2.gc$l0
 aldh2.gc$l1
 
-# Now we perform gene counting with Chromosome X data
+# Chromosome X data
 # assuming allelic data have been extracted in columns 3-13
 # and column 3 is sex
 dat <- mao[,3:13]
 loci <- c(12,9,6,5,3)
-contr <- gc.control(handle.miss=1)
-mao.gc <- genecounting(dat,xdata=TRUE,loci=loci,control=contr)
+contr <- gc.control(xdata=TRUE,handle.miss=1)
+mao.gc <- genecounting(dat,loci=loci,control=contr)
 mao.gc$npusr
 mao.gc$npdat
 }

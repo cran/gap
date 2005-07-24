@@ -48,7 +48,8 @@ data(fsnps)
 hap(id=fsnps[,1],gdata=fsnps[,3:10],nloci=4)
 
 # to generate results of imputations
-hap(id=fsnps[,1],gdata=fsnps[,3:10],nloci=4,ss=1,mi=5)
+control <- hap.control(ss=1,mi=5)
+hap(id=fsnps[,1],gdata=fsnps[,3:10],nloci=4,control=control)
 
 # to extract information from the second run above
 mia(so=1,ns=1,mi=5)

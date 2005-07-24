@@ -9,7 +9,7 @@
 #include <math.h>
 #include <time.h>
 
-#define version 2.0
+#define version 2.2
 #define mxloc 60
 #define mxalleles 50
 
@@ -205,7 +205,7 @@ if(!convll)
 for(io=0;io<obscom;io++) prob[io]=table[io].prob;
 if(*verbose)
 {
-  Rprintf("\nGENECOUNTING, %s (%s) version %.2f \n\t\tJH Zhao 03/01--08/03\n\n",
+  Rprintf("\nGENECOUNTING, %s (%s) version %.2f \n\t\tJH Zhao 03/01--07/05\n\n",
   (!handlemissing)?"ordinary":"missing-value handling",
   (!xdata)?"autosome data":"X chromosome data",version);
   time(&now);
@@ -300,8 +300,8 @@ for(i=0;i<hapall;i++)
 
 void counting(pat *table, long int io)
 {
-long int j,k,l,k1,k2;
-short la[mxloc],ua[mxloc],hetid[mxloc],nhet,nhet2,d[mxloc+1];
+long int j,k,l,k1,k2,nhet2;
+short la[mxloc],ua[mxloc],hetid[mxloc],nhet,d[mxloc+1];
 double s,ej;
 
 l=0;
@@ -371,9 +371,9 @@ else
 void geth(pat *table)
 /*haplotype frequencies with missing data (conditioned)*/
 {
-long int io,i,j,k,l,k1,k2,cycle,ncycle;
+long int io,i,j,k,l,k1,k2,cycle,ncycle,nhet2;
 short loci1[mxloc],l0[mxloc],l1[mxloc],lk[mxloc],lq[mxloc];
-short la[mxloc],ua[mxloc],hetid[mxloc],nhet,nhet2,d[mxloc+1];
+short la[mxloc],ua[mxloc],hetid[mxloc],nhet,d[mxloc+1];
 double s,tc,ej;
 
 if(!handlemissing)
@@ -643,8 +643,8 @@ for(i=0;i<hapall;i++) h[i]=(h[i]*d_sample+hm[i]/2)/(d_sample+tc);
 double phasep(short *l0,short *l1)
 /*phase probability*/
 {
-long int k,k1,k2;
-short i,j,l,nhet,nhet2,hetid[mxloc],d[mxloc+1],la[mxloc],ua[mxloc];
+long int k,k1,k2,nhet2;
+short i,j,l,nhet,hetid[mxloc],d[mxloc+1],la[mxloc],ua[mxloc];
 double s;
 
 for(j=0;j<nloci;j++) hetid[j]=0;
@@ -691,10 +691,10 @@ return s;
 void genp(pat *table,long int io)
 /*get genotype probability */
 {
-long int i,j,k,l,k1,k2;
+long int i,j,k,l,k1,k2,nhet2;
 long int cycle;
 short loci1[mxloc],l0[mxloc],l1[mxloc],lk[mxloc],lq[mxloc];
-short la[mxloc],ua[mxloc],hetid[mxloc],nhet,nhet2,d[mxloc+1];
+short la[mxloc],ua[mxloc],hetid[mxloc],nhet,d[mxloc+1];
 double tc,s;
 
 if(xdata&&table[io].sex==MALE)
@@ -881,7 +881,7 @@ for(i=0;i<obscom;i++)
     }
     if(l>0&&!handlemissing) continue;
     t=table[i].count;
-    if(t!=0&&table[i].prob>tol) xlnl+=t*log(table[i].prob);
+    if(t!=0&&table[i].prob>0) xlnl+=t*log(table[i].prob);
     continue;
   }
   l=0;
@@ -893,7 +893,7 @@ for(i=0;i<obscom;i++)
   }
   if(l>0&&!handlemissing) continue;
   t=table[i].count;
-  if(t!=0) lnl+=t*log(table[i].prob);
+  if(t!=0&&table[i].prob>0) lnl+=t*log(table[i].prob);
 }
 return (lnl+xlnl);
 }
@@ -903,9 +903,9 @@ void ch(pat *table)
 {
 FILE *fo;
 long int i,j,l,a1,a2;
-long int k,k1,k2;
+long int k,k1,k2,nhet2;
 short k0,la[mxloc],ua[mxloc];
-short hetid[mxloc],nhet,nhet2;
+short hetid[mxloc],nhet;
 short d[mxloc+1],loci1[mxloc];
 long int cycle, ncycle;
 short l0[mxloc],l1[mxloc],lk[mxloc],lq[mxloc];

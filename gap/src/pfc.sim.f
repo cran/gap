@@ -13,7 +13,7 @@ c     December 15, 1997
       double precision zero,const,obsp,slf,p
 
       integer maxfac,m(20),sib,aff,freq,oldsib,i,
-     &  naff,nsibs,nfam,fm(20,20),j,maxsize
+     &  naff,nsibs,nfam,fm(20,20),j,maxsize,k
       logical trace,initial
       double precision fac(8000),fac0(8001)
       double precision ptail
@@ -84,15 +84,15 @@ cc     write(16,1120)nsim,ncycle
        call runirandom(rfm,m,1,maxsize,nsibs,naff,initial)
        if (trace) then
        do 900 j=1,maxsize
-       write(6,905)j,m(j),(rfm(i,j),i=1,j+1)
+       write(6,905)j,m(j),(rfm(k,j),k=1,j+1)
 900    continue
        endif
 c       call runiout(rfm,m,nsibs,naff,nfam,1,maxsize)
        call runiprob(rfm,1,maxsize,slf,const,p)
 cc     write(6,1008)p
       if (p.le.obsp) then
-c      ptail=ptail+p
-      ntail=ntail+1
+         ptail=ptail+p
+         ntail=ntail+1
       endif 
 50    continue
       tailpl(c)=ptail

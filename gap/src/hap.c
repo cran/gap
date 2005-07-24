@@ -1452,4 +1452,3 @@ void freeU(double **oldU)
    for (v = 0; v < size1; v++) free(oldU[v]);
    free(oldU);
 }
-

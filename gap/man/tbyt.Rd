@@ -44,7 +44,8 @@ measure of gametic disequilibrium D'. Am. J. Hum. Genet. 61:771-774
 \dontrun{
 h <- c(0.442356,0.291532,0.245794,0.020319)
 n <- 481*2
-tbyt(h,n)
+t <- tbyt(h,n)
+t
 }
 }
 \author{Jing hua Zhao}

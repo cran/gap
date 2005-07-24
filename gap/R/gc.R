@@ -1,20 +1,20 @@
 # 10/4/2005, 13/4/2005
-gc.control <- function(convll=1,handle.miss=0,eps=0.000001,
+gc.control <- function(xdata=FALSE, convll=1,handle.miss=0,eps=0.000001,
                        tol=0.00000001, maxit=50,pl=0.001,verbose=T)
 {
-   list(convll=convll,handle.miss=handle.miss,eps=eps,tol=tol,
+   list(xdata=xdata,convll=convll,handle.miss=handle.miss,eps=eps,tol=tol,
         maxit=maxit,pl=pl,verbose=verbose)
 }
 
-genecounting <- function(data,weight=NULL,loci=NULL,xdata=FALSE,control=gc.control())
+genecounting <- function(data,weight=NULL,loci=NULL,control=gc.control())
 {
-  if (xdata)
+  if (control$xdata)
   {
      sex <- data[,1]
      data <- data[,-1]
   }
   else
-  sex <- rep(dim(data)[1],2)
+  sex <- rep(2,dim(data)[1])
   if(is.null(weight)) weight<-rep(1,dim(data)[1])
 # precis<-1
 # to call dpmach
@@ -50,6 +50,7 @@ genecounting <- function(data,weight=NULL,loci=NULL,xdata=FALSE,control=gc.contr
 # 13/11/2003
 # change to reduce memory request
 # htrtable<-matrix(rep(0,obscom*hapall),nrow=obscom)
+  verbose<-0
   iter<-0
   converge<-0
   z <- .C("gc",verbose=as.integer(control$verbose),
@@ -67,7 +68,7 @@ genecounting <- function(data,weight=NULL,loci=NULL,xdata=FALSE,control=gc.contr
            Rhapall=as.integer(hapall),
            genotype=as.integer(data),
            count=as.integer(weight),
-           Rxdata=as.integer(xdata),
+           Rxdata=as.integer(control$xdata),
            sex=as.integer(sex),
            hapid=as.integer(hapid),
            prob=as.double(prob),

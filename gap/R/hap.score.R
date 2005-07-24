@@ -58,12 +58,12 @@ hap.score<-function(y, geno, trait.type="gaussian",
   }
   n.subj <- length(y)
   if(all(is.na(id))) id <- 1:n.subj
-  method.id<-charmatch(method, c("gc", "hap"))
+  method.id<-charmatch(method, c("gc", "hap", "phase"))
   if(is.na(method.id)) stop("Invalid selection of method")
   if(method.id == 0)   stop("Ambiguous method")
   else if(method.id==1) haplo <- gc.em(data=geno, locus.label, converge.eps=0.00001, maxiter=5000, handle.miss=handle.miss, miss.val=miss.val)
-  else haplo <- hap.em(id, data=geno, locus.label, converge.eps=0.00001, maxiter=5000, miss.val=miss.val)
-  if(!haplo$converge) stop("EM for haplo failed to converge")
+  else if(method.id==2) haplo <- hap.em(id, data=geno, locus.label, converge.eps=0.00001, maxiter=5000, miss.val=miss.val)
+  if(method.id<3 & !haplo$converge) stop("EM for haplo failed to converge")
   hap1 <- haplo$hap1code
   hap2 <- haplo$hap2code
   indx <- haplo$indx.subj
