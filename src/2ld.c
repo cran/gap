@@ -79,6 +79,7 @@ void abp(int,int,double*,double*,double*,double*);
 
 void kbyl(int *nalleles1, int *nalleles2, double *h, double *haplotypes,
           double *Dp, double *VarDp, double *Dijtable, double *VarDijtable,
+          double *X2table,
           double *Dmaxtable, double *Dijptable, double *VarDijptable,
           double *x2, double *seX2, double *rho, double *seR, int *optrho,
           double *klinfo, int *verbose)
@@ -226,8 +227,12 @@ for(l=0;l<alleles2;l++) {
 W=0;
 for(i=0;i<alleles1;i++) {
   for(j=0;j<alleles2;j++) {
-     Dij=Dijtable[i*alleles2+j];
-     W+=Dij*Dij/p[i]/q[j];
+     if(p[i]==0||q[j]==0) continue;
+     else {
+       Dij=Dijtable[i*alleles2+j];
+       X2table[i*alleles2+j]=Dij*Dij/VarDijtable[i*alleles2+j];
+       W+=Dij*Dij/p[i]/q[j];
+     }
   }
 }
 

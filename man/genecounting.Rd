@@ -21,6 +21,7 @@ of the single allele present at a given locus.}
       \item{tol}{tolerance for genotype probabilities with default value 1e-8}
       \item{maxit}{maximum number of iterations, with default value 50}
       \item{pl}{criteria for trimming haplotypes according to posterior probabilities}
+      \item{verbose}{If T, yield print out from the C routine}
       }
   }
 }

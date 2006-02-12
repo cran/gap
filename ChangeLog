@@ -12,6 +12,19 @@ Todo list:
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
 
+Version 1.0-6
+
+12-2-2006
+
+fix bug in genecounting when multiple runs of chromosome X data is used
+Add example to pedtodot as in R News and Bioinformatics
+
+Version 1.0-5
+
+16-1-2006
+
+Drop pathmix and pointer
+
 Version 1.0-4
 
 13-12-2005

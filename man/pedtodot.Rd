@@ -128,6 +128,31 @@ collection of all pedigrees (*.dot) can also be put together.
 \seealso{package sem in CRAN and Rgraphviz in BioConductor \url{http://www.bioconductor.org}}
 
 \examples{\dontrun{
+# example as in R News and Bioinformatics (see also plot.pedigree in package kinship)
+# it works from screen paste only
+p1 <- scan(nlines=16,what=list(0,0,0,0,0,"",""))
+ 1   2   3  2  2  7/7  7/10 
+ 2   0   0  1  1  -/-  -/-  
+ 3   0   0  2  2  7/9  3/10 
+ 4   2   3  2  2  7/9  3/7  
+ 5   2   3  2  1  7/7  7/10 
+ 6   2   3  1  1  7/7  7/10 
+ 7   2   3  2  1  7/7  7/10 
+ 8   0   0  1  1  -/-  -/-  
+ 9   8   4  1  1  7/9  3/10 
+10   0   0  2  1  -/-  -/- 
+11   2  10  2  1  7/7  7/7 
+12   2  10  2  2  6/7  7/7 
+13   0   0  1  1  -/-  -/- 
+14  13  11  1  1  7/8  7/8 
+15   0   0  1  1  -/-  -/- 
+16  15  12  2  1  6/6  7/7 
+
+p2 <- as.data.frame(p1)
+names(p2) <-c("id","fid","mid","sex","aff","GABRB1","D4S1645")
+p3 <- data.frame(pid=10081,p2)
+attach(p3)
+pedtodot(p3)
 #
 # Three examples of pedigree-drawing
 # assuming pre-MakePed LINKAGE file in which IDs are characters

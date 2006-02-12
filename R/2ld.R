@@ -21,13 +21,14 @@ kbyl<-function(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)
 {
    Dp<-x2<-seX2<-rho<-seR<-klinfo<-0
    VarDp<-0
-   Dijtable<-Dmaxtable<-Dijptable<-VarDijtable<-VarDijptable<-matrix(rep(0,n1*n2),nrow=n1)
+   Dijtable<-Dmaxtable<-Dijptable<-VarDijtable<-X2table<-VarDijptable<-matrix(rep(0,n1*n2),nrow=n1)
 
    z<-.C("kbyl",nalleles1=as.integer(n1), nalleles2=as.integer(n2),
           h=as.double(h), haplotypes=as.double(n),
           Dp=as.double(Dp),VarDp=as.double(VarDp),
           Dijtable=matrix(Dijtable,nrow=n1),
           VarDijtable=matrix(VarDijtable,nrow=n1),
+          X2table=matrix(X2table,nrow=n1),
           Dmaxtable=matrix(Dmaxtable,nrow=n1),
           Dijptable=matrix(Dijptable,nrow=n1),
           VarDijptable=matrix(VarDijptable,nrow=n1),
@@ -43,10 +44,10 @@ kbyl<-function(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)
    VarDp <- z$VarDp
    Dijtable <- t(matrix(z$Dijtable,nrow=n2))
    VarDijtable <- t(matrix(z$VarDijtable,nrow=n2))
+   X2table <- t(matrix(z$X2table,nrow=n2))
    Dmaxtable <- t(matrix(z$Dmaxtable,nrow=n2))
    Dijptable <- t(matrix(z$Dijptable,nrow=n2))
    VarDijptable <- t(matrix(z$VarDijptable,nrow=n2))
-   X2table <- Dijtable*Dijtable/VarDijtable
    ptable <- 1-pchisq(X2table,1)
    x2 <- z$x2
    seX2 <- z$seX2
@@ -67,7 +68,7 @@ kbyl<-function(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)
       print(Dijptable)
       cat("\nTable of SE(D')\n\n")
       print(sqrt(VarDijptable))
-      cat("\nTable of Chi-squares (based on Dij)\n\n")
+      cat("\nTable of Chi-squares (based on D)\n\n")
       print(X2table)
       cat("\nTable of p values\n\n")
       print(ptable)

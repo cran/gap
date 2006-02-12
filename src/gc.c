@@ -123,7 +123,7 @@ for(i=0;i<nloci;i++)
 hs=(double*)xmalloc(hapall*sizeof(double));
 c=(double*)xmalloc(hapall*sizeof(double));
 if(handlemissing) hm=(double*)xmalloc(hapall*sizeof(double));
-nhaploid=ndiploid=0;
+nhaploid=ndiploid=h_sample=h_msample=0;
 table=(pat*)xmalloc(obscom*sizeof(pat));
 for(i=0;i<obscom;i++)
 {
