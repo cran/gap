@@ -90,6 +90,6 @@ cat("This is only an approximation, a more accurate result\n")
 cat("can be obtained by Fisher's exact test\n")
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{extracted from rm.c}
 \keyword{models}

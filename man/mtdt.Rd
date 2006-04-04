@@ -65,5 +65,5 @@ x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
 mtdt(x)
 }
 }
-\author{Mike Miller, Jing hua Zhao}
+\author{Mike Miller, Jing Hua Zhao}
 \keyword{models}

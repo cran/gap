@@ -50,5 +50,5 @@ a.out <- hwe(a,data.type="count")
 a.out
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \keyword{htest}

@@ -61,6 +61,6 @@ test<-t(matrix(famtest,nrow=3))
 famp<-pfc(test)
 }
 }
-\author{Dani Zelterman, Jing hua Zhao}
+\author{Dani Zelterman, Jing Hua Zhao}
 \note{Adapted from family.for by Dani Zelterman, 25/7/03}
 \keyword{models}

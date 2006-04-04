@@ -90,6 +90,6 @@ mao.gc$npusr
 mao.gc$npdat
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{adapted from GENECOUNTING}
 \keyword{models}

@@ -48,6 +48,6 @@ t <- tbyt(h,n)
 t
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{extracted from 2ld.c}
 \keyword{models}

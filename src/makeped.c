@@ -1399,6 +1399,7 @@ void get_probands(int *auto_proband,char **probandfile)
 #endif
 {
   s_byte response;
+  response='y';
 #ifdef executable
   fprintf(stdout,"\n");
   fprintf(stdout,"Do you want probands selected automatically?   (y/n) -> ");

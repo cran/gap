@@ -76,6 +76,6 @@ h <- scan("h")
 t <- kbyl(9,5,h,213*2,verbose=T)
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{adapted from 2ld.c}
 \keyword{models}

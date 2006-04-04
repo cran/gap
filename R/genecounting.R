@@ -53,7 +53,7 @@ genecounting <- function(data,weight=NULL,loci=NULL,control=gc.control())
   verbose<-0
   iter<-0
   converge<-0
-  z <- .C("gc",verbose=as.integer(control$verbose),
+  z <- .C("gcx",verbose=as.integer(control$verbose),
            Rhandlemissing=as.integer(control$handle.miss),
            Rconvll=as.integer(control$convll),
            Reps=as.double(control$eps),

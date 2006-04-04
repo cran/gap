@@ -34,6 +34,6 @@ whscore(c,type=1)
 whscore(c,type=2)
 }
 }
-\author{Leonid Kruglyak, Jing hua Zhao}
+\author{Leonid Kruglyak, Jing Hua Zhao}
 \note{adapted from GENEHUNTER}
 \keyword{utilities}

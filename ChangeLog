@@ -12,6 +12,22 @@ Todo list:
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
 
+Version 1.0-8
+
+4-4-2006
+
+Add heritability estimate to twinan90
+Remove unused definitions according to compiling error from Kurt Hornik
+Temporarily disable dependence on R/genetics due to problems with mvtnorm
+
+Version 1.0-7
+
+1-4-2006
+
+Remove comments about haplo.score in gap.Rnw
+Add twinan90 by Chris Williams
+Add byrow=TRUE to a number of matrix() calls
+
 Version 1.0-6
 
 12-2-2006

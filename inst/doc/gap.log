@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.1.20)  13 FEB 2006 09:44
+This is pdfTeXk, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.1.20)  4 APR 2006 08:16
  file:line:error style messages enabled.
 **\nonstopmode \input /home/jhz22/work/gap/inst/doc/gap.tex
 (/home/jhz22/work/gap/inst/doc/gap.tex
@@ -82,7 +82,7 @@ Style option: `fancyvrb' v2.7, with DG/SPQR fixes <2000/03/21> (tvz)
 \FV@StepNumber=\count90
 \FV@OutFile=\write3
 )
-(/usr/local/lib/R/share/texmf/upquote.sty
+(/home/jhz22/R-2.2.1/share/texmf/upquote.sty
 Package: upquote 2003/08/11 v1.1 Covington's upright-quote modification to verb
 atim and verb
 
@@ -235,39 +235,39 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--47
 
  []
 
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 112
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 113
 .
-(/usr/local/lib/R/share/texmf/ts1aett.fd
+(/home/jhz22/R-2.2.1/share/texmf/ts1aett.fd
 File: ts1aett.fd 
 )
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 112
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 113
 .
 
 (/usr/share/texmf/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <10.95> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 112.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 113.
  [1
 
 {/usr/share/texmf/dvips/config/pdftex.map}]
-Overfull \hbox (10.55128pt too wide) in paragraph at lines 112--112
+Overfull \hbox (10.55128pt too wide) in paragraph at lines 113--113
 []/aett10@10.95pt/nep499                  A study of Alzheimer/tctt1095/'/aett1
 0@10.95pt/s disease with eight SNPs and APOE[] 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 114--117
+Underfull \hbox (badness 10000) in paragraph at lines 115--118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--127
+Underfull \hbox (badness 10000) in paragraph at lines 121--127
 
  []
 
@@ -286,10 +286,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 134--138
 
  []
 
-(./gap.bbl [3] [4]) [5] (./gap.aux) ) 
+[3] (./gap.bbl [4]) [5] (./gap.aux) ) 
 Here is how much of TeX's memory you used:
  3011 strings out of 95437
- 38246 string characters out of 1190233
+ 38261 string characters out of 1190233
  89147 words of memory out of 1000001
  5945 multiletter control sequences out of 10000+50000
  28175 words of font info for 65 fonts, out of 500000 for 1000
@@ -307,4 +307,4 @@ ib/texmf/pk/ljfour/jknappen/tc/tctt1095.600pk>{/usr/share/texmf/dvips/tetex/f7b
 t10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fo
 nts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr17.p
 fb>
-Output written on gap.pdf (5 pages, 82326 bytes).
+Output written on gap.pdf (5 pages, 82246 bytes).

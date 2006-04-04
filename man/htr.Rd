@@ -51,6 +51,6 @@ htr(y,apoeapoc.gc$htrtable)
 }
 }
 
-\author{Dimitri Zaykin, Jing hua Zhao}
+\author{Dimitri Zaykin, Jing Hua Zhao}
 \note{adapted from emgi.cpp, a pseudorandom number seed will be added on}
 \keyword{regression}

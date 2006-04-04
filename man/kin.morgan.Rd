@@ -47,6 +47,6 @@ werner<-t(matrix(werner,nrow=4))
 kin.morgan(werner[,1:3])
 }
 }
-\author{Morgan development team, Jing hua Zhao}
+\author{Morgan development team, Jing Hua Zhao}
 \note{The input data is required to be sorted so that parents preceed their children}
 \keyword{datagen}

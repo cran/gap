@@ -22,12 +22,12 @@ c     December 15, 1997
       equivalence (fac(1),fac0(2))
       common/factab/fac0
       
-      data maxfac/8000/, zero/0.000d0/, trace/.false./
-      data fm/400*0/,rfm/400*0/
-
       integer famsize
       integer famdata(famsize,3),tailpu(ncycle)
       double precision tailpl(ncycle)
+
+      data maxfac/8000/, zero/0.000d0/, trace/.false./
+      data fm/400*0/,rfm/400*0/
 
 c   table of log factorials w/ zero subscript
       fac0(1)=zero
@@ -107,22 +107,22 @@ c       write(6,1100)ptail,ntail,nsim,dble(ntail)/dble(nsim)
 c       write(16,1100)ptail,ntail,nsim,dble(ntail)/dble(nsim) 
 
   905  format(' trace:',2i3,1x,10i3)
- 1000  format(' cmulte test:m,n',i4,5x,10i4)
+cc 1000  format(' cmulte test:m,n',i4,5x,10i4)
  1001  format(5x,3i15)
- 1002  format(' Test factorials..',2f12.6)
+cc 1002  format(' Test factorials..',2f12.6)
  1003  format(' Totals',i5)
- 1004  format(17x,'Family frequency data read in:'/
-     &  t18,'Sibs        Affected       Frequency  ')
- 1005  format(12i5)
- 1006  format(1x,i4,5x,20i4)
+cc 1004  format(17x,'Family frequency data read in:'/
+cc     &  t18,'Sibs        Affected       Frequency  ')
+cc 1005  format(12i5)
+cc 1006  format(1x,i4,5x,20i4)
  1007  format(' Probability of the observed table:  ',e15.7/)
- 1008  format(' Probability of this random table:  ',e15.7/)
- 1100  format(' The M-C p-value :  ',e15.7/
-     &  i15, '  tables out of ', i15, '  simulations are on the tail.'/
-     &  ' The ratio(M-C p-value) is : ', e15.7/)
- 1110  format(i12)     
- 1120  format(' Simulation replicates and # of runs : ', 2i12)
- 1130  format(' Run # and M-C p-value : ', i12, f15.10)
+cc 1008  format(' Probability of this random table:  ',e15.7/)
+cc 1100  format(' The M-C p-value :  ',e15.7/
+cc     &  i15, '  tables out of ', i15, '  simulations are on the tail.'/
+cc     &  ' The ratio(M-C p-value) is : ', e15.7/)
+cc 1110  format(i12)     
+cc 1120  format(' Simulation replicates and # of runs : ', 2i12)
+cc 1130  format(' Run # and M-C p-value : ', i12, f15.10)
        return
        end
 
@@ -305,7 +305,7 @@ c                                       i-1 = number affected
 c      if(trace)write(6,1001)const,slf,p
       return
  1000  format(' PROB: first,last,const: ',2i6,f15.5)
- 1001   format(' PROB: const,slf,p:  ',3e15.5)
+cc 1001   format(' PROB: const,slf,p:  ',3e15.5)
       end
 
 c------------------------------------------------------------------------
@@ -353,7 +353,7 @@ C                               INITIALIZE FOR THE FIRST CALL TO CMULTE
        DONE=.FALSE.
 C<---  WRITE(6,1000)(N(J),J=1,K)
        RETURN
- 1000    FORMAT(' CMULTE',15I4)
+cc 1000    FORMAT(' CMULTE',15I4)
        END
 
 
@@ -1188,6 +1188,7 @@ C***ROUTINES CALLED  (NONE)
 C***END PROLOGUE  XERABT
       CHARACTER*(*) MESSG
 C***FIRST EXECUTABLE STATEMENT  XERABT
+      write(*,*) nmessg, messg
       STOP
       END
       SUBROUTINE XERCTL(MESSG1,NMESSG,NERR,LEVEL,KONTRL)
@@ -1235,6 +1236,7 @@ C***ROUTINES CALLED  (NONE)
 C***END PROLOGUE  XERCTL
       CHARACTER*20 MESSG1
 C***FIRST EXECUTABLE STATEMENT  XERCTL
+      write(*,*) nerr,level,kontrl,messg1,nmessg
       RETURN
       END
       SUBROUTINE XERPRT(MESSG,NMESSG)
@@ -1269,6 +1271,7 @@ C***FIRST EXECUTABLE STATEMENT  XERPRT
             WRITE (IUNIT,'(1X,A)') MESSG(ICHAR:LAST)
    10    CONTINUE
    20 CONTINUE
+      write(*,*) nmessg
       RETURN
       END
       SUBROUTINE XERROR(MESSG,NMESSG,NERR,LEVEL)

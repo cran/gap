@@ -1,18 +1,18 @@
-hwe.hardy<-function(x, a, alleles=3, seed=3000, sample=c(1000, 1000, 5000)) {
+hwe.hardy<-function(a, alleles=3, seed=3000, sample=c(1000, 1000, 5000)) {
 #   require(genetics)
-    if (!missing(x)) {
-        if (!is.genotype(x)) {
-            stop("'x' must be of class 'genotype' or 'haplotype'")
-        } else {
-            # Get genotype counts
-            tab <- table(factor(allele(x, 1), levels=allele.names(x)),
-                         factor(allele(x, 2), levels=allele.names(x)))
-            a <- as.integer(t(tab)[lower.tri(t(tab), diag=T)])
-            a <- a[order(a)]
-            # Get number of alleles
-            alleles <- length(allele.names(x))
-        }        
-    }
+#    if (!missing(x)) {
+#        if (!is.genotype(x)) {
+#            stop("'x' must be of class 'genotype' or 'haplotype'")
+#        } else {
+#            # Get genotype counts
+#            tab <- table(factor(allele(x, 1), levels=allele.names(x)),
+#                         factor(allele(x, 2), levels=allele.names(x)))
+#            a <- as.integer(t(tab)[lower.tri(t(tab), diag=T)])
+#            a <- a[order(a)]
+#            # Get number of alleles
+#            alleles <- length(allele.names(x))
+#        }        
+#    }
     if (alleles<3) stop("number of alleles should be at least 3")
     p <- 1.0
     se <- 0.0

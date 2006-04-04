@@ -62,7 +62,7 @@ c  Generate test statistics, expected values under null hypothesis
       call test(fm,m,1,maxsize,stat,ns,naff,nsibs,.true.)
 c  Enumerate all possible tables for exact tail area
       if(toenum.ne.1) return
-      call enum(nsibs,naff,nfam,m,maxsize,stat,const,p)
+      call enum(nsibs,naff,nfam,m,maxsize,const,p)
       tailp=ptail
       sump=psum
       nenum=dcase
@@ -166,11 +166,11 @@ c                                    exact log-likelihood
 
 c===========================================================
 
-      subroutine enum(nsibs,naff,nfam,m,maxsize,refstat,
+      subroutine enum(nsibs,naff,nfam,m,maxsize,
      &    const,p0)
 
       logical done(20),alldone
-      double precision refstat(20),p,ptail,const,
+      double precision p,ptail,const,
      &  psum,p0,one,zero,dcase,pasum,proba
       integer freq(20,20),m(20),maxsize,level,j,naff,nsibs,
      &  nfam,alloc(20),per,mod,ncase
@@ -207,7 +207,7 @@ c INNER LOOP: generate family frequencies with these allocations
    40 done(level)=.true.
    50 call cfe(m(level),alloc(level),level,freq(1,level),done(level))
 c                            go up one level when done at this level
-   60 if(.NOT. done(level))go to 70
+      if(.NOT. done(level))go to 70
       if(level .GE. maxsize)go to 10
       level=level+1
       go to 50
@@ -229,7 +229,7 @@ c        write(6,1002)p,psum,ptail,dcase
       level=1
       go to 50
 
- 1001 format(/' ENUM:ncase: ',i14,' alloc: ',15i3)
+cc 1001 format(/' ENUM:ncase: ',i14,' alloc: ',15i3)
  1002 format(/' Prob of this table:',e16.8,  
      &   4x, ' Cumulative prob: ',e16.8, /
      &       ' Tail probability:  ',e16.8,
@@ -349,9 +349,9 @@ c     write(6,1001)csibs,caff,cfam
 c     write(6,1006)(cm(j),j=first,last)
       stop 8888
 
- 1000 format(' OUT: error detected',3i5)
- 1001 format(/1x,i5,' sibs',i8,' affected',i8,' families')
- 1006 format(1x,i4,5x,20i4)
+cc 1000 format(' OUT: error detected',3i5)
+cc 1001 format(/1x,i5,' sibs',i8,' affected',i8,' families')
+cc 1006 format(1x,i4,5x,20i4)
       end
 
 c =====================================================

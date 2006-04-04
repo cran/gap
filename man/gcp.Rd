@@ -59,6 +59,6 @@ gcp(y,cc,g,miss.val="Z",n.sim=5)
 hap.score(y,g,method="hap",miss.val="Z")
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{Built on gcp.c}
 \keyword{models}

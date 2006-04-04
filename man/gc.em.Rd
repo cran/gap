@@ -79,6 +79,6 @@ gc.em(hla[,3:8],locus.label=c("DQR","DQA","DQB"))
 }
 }
 
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{Adapted from GENECOUNTING}
 \keyword{models}

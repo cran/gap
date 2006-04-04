@@ -81,6 +81,6 @@ cat("\nAlzheimer's:\n\n")
 fbsize(g,p)
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{extracted from rm.c}
 \keyword{models}

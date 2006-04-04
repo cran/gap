@@ -139,6 +139,6 @@ for(pD in s_pD)
 }
 }
 }
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \note{Programmed for EPIC study}
 \keyword{misc}

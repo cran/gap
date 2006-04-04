@@ -26,7 +26,7 @@ ex<-c(
 1007.2, 0,  1,2,  1,1)
 
 library(gap)
-ex<-t(matrix(ex,nrow=6))
+ex<-matrix(ex,ncol=6,byrow=TRUE)
 ex
 ex.gc<-genecounting(ex[,3:6])
 summary(ex.gc)

@@ -82,6 +82,6 @@ x2<-dat2[,1:2]
 chow.test.r<-chow.test(y1,x1,y2,x2)
 }
 }
-\author{Shigenobu Aoki, Jing hua Zhao}
+\author{Shigenobu Aoki, Jing Hua Zhao}
 \note{adapted from chow.R}
 \keyword{htest}

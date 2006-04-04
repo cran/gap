@@ -37,6 +37,6 @@ y2 <- c(0, 6,31,49,120,27,15,8,14,25, 3, 9,3)
 result <- s2k(y1,y2)
 }
 }
-\author{Chihiro Hirotsu, Jing hua Zhao}
+\author{Chihiro Hirotsu, Jing Hua Zhao}
 \note{The lengths of y1 and y2 should be the same}
 \keyword{models}

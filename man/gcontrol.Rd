@@ -60,7 +60,7 @@ gcontrol(test)
 }
 }
 
-\author{Bobby Jones, Jing hua Zhao}
+\author{Bobby Jones, Jing Hua Zhao}
 
 \note{Adapted from gcontrol by Bobby Jones and Kathryn Roeder, 
 use -Dexecutable for standalone program, function getnum in the original 

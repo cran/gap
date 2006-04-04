@@ -1,5 +1,4 @@
 useDynLib(gap)
-import(genetics)
 export(Ginv,
        a2g, allele.recode,
        bt,
@@ -12,10 +11,9 @@ export(Ginv,
        pbsize, pedtodot, pfc, pfc.sim, pgc, plem2m, plot.hap.score, printBanner, print.compositeLD, print.hap.score,
        revhap, revhap.i,
        s2k,
-       tbyt, toETDT,
+       tbyt, toETDT, twinan90,
        ungcode,
-       whscore
-       )
+       whscore)
 S3method(plot, hap.score)
 S3method(print, hap.score)
 S3method(print, compositeLD)

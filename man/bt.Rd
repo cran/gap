@@ -58,7 +58,7 @@ summary(bt.ex$bt.glm)
 }
 }
 
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \keyword{models}
 \note{
 \preformatted{

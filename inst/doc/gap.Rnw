@@ -18,7 +18,7 @@
 \begin{document}
 \SweaveOpts{engine=R,echo=FALSE,pdf=TRUE}
 \title{An Integrated Genetic Analysis Package Using R}
-\author{Jing hua Zhao}
+\author{Jing Hua Zhao}
 \date{}
 \maketitle
 
@@ -40,10 +40,10 @@ MRC Epidemiology Unit, Strangeways Research Laboratory, Worts Causeway, Cambridg
 This package was designed to integrate some C/Fortran/SAS programs I have written 
 or used over the years. As such, it would rather be a long-term project, but an
 immediate benefit would be something complementary to other packages currently
-available in R, e.g. {\bf genetics}, {\bf hwde}, {\bf haplo.score}, etc. I hope
-eventually this will be part of a bigger effort to fulfill most of the requirements
-foreseen by many, e.g. ~\cite{guo00}, within the portable environment of R
-for data management, analysis, graphics and object-oriented programming. \\
+available in R, e.g. {\bf genetics}, {\bf hwde}, etc. I hope eventually this will
+be part of a bigger effort to fulfill most of the requirements foreseen by many, 
+e.g. ~\cite{guo00}, within the portable environment of R for data management, 
+analysis, graphics and object-oriented programming. \\
 
 So far the number of functions is quite limited and experimental, but I already
 feel enormous advantage by shifting to R and would like sooner rather than later
@@ -108,6 +108,7 @@ print.hap.score         Print a hap.score object
 s2k                     Statistics for 2 by K table
 snca                    A study of Parkinson's disease and SNCA makers
 tbyt                    LD statistics for two SNPs
+twinan90                Classic twin models
 whscore                 Whittemore-Halpern scores for allele-sharing
 \end{verbatim}
 
@@ -119,11 +120,10 @@ You can cut and paste examples at end of each function's documentation.\\
 
 Both \textit{genecounting} and \textit{hap} are able to handle SNPs and multiallelic
 markers, with the former be flexible enough to include features such as X-linked data
-and the later being able to handle large number of SNPs, an
-advantage over algorithms in {\bf haplo.score}. But the latter is able to recode
-allele labels automatically, so functions \textit{gc.em} and \textit{hap.em}
-are in {\bf haplo.score}'s \textit{haplo.em} format and used by a modified function
-\textit{hap.score} in association testing.\\
+and the later being able to handle large number of SNPs. But the latter is able to
+recode allele labels automatically, so functions \textit{gc.em} and \textit{hap.em}
+are in \textit{haplo.em} format and used by a modified function \textit{hap.score} in
+association testing.\\
 
 It is notable that multilocus data are handled differently from that in {\bf hwde} and
 elegant definitions of basic genetic data can be found in {\bf genetics} package.\\
@@ -147,10 +147,12 @@ for matrix algebra and linear models. Further advantage can be taken from packag
 Examples can be found from most function documentations. You can also try several simple
 examples via \textit{demo}:
 
-<<echo=TRUE, results=hide>>=
+\begin{Schunk}
+\begin{Scode}
 library(gap)
 demo(gap)
-@
+\end{Scode}
+\end{Schunk}
 
 \section{Known bugs}
 

@@ -64,7 +64,7 @@ long hapallm;
 static int nhaploid,ndiploid,h_sample,h_msample,xdata;
 static double pm[mxloc][mxalleles];
 
-void gc(int *verbose,
+void gcx(int *verbose,
 int *Rhandlemissing,
 int *Rconvll,
 double *Reps,

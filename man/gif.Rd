@@ -59,14 +59,14 @@ test<-c(
 19,      9,     11,
 20,     10,     13,
 22,     21,     20)
-test<-t(matrix(test,nrow=3))
+test<-matrix(test,ncol=3,byrow=TRUE)
 gif(test,gifset=c(20,21,22))
 
 # all individuals
 gif(test,gifset=1:23)
 }
 }
-\author{Alun Thomas, Jing hua Zhao}
+\author{Alun Thomas, Jing Hua Zhao}
 \note{Adapted from gif.c, testable with -Dexecutable as standalone program, 
 which can be use for any pair of indidivuals}
 \keyword{datagen}

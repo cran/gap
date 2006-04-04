@@ -4,23 +4,23 @@
 
 \title{Hardy-Weinberg equilibrium test using MCMC}
 
-\usage{hwe.hardy(x, a, alleles = 3, seed = 3000, sample = c(1000, 1000, 5000))}
+\usage{hwe.hardy(a, alleles = 3, seed = 3000, sample = c(1000, 1000, 5000))}
 
 \description{Hardy-Weinberg equilibrium test by MCMC}
 
 \arguments{
-  \item{x}{a genotype object, as genotype.}
+%  \item{x}{a genotype object, as genotype.}
   \item{a}{an array containing the genotype counts, as integer.}
   \item{alleles}{number of allele at the locus, greater than or equal to 3, 
                  as integer}
   \item{seed}{pseudo-random number seed, as integer.}
   \item{sample}{optional, parameters for MCMC containing number of chunks, 
                 size of a chunk and burn-in steps, as integer.}
-  If \code{x} is given, \code{a} and \code{alleles} are prepaired on the fly.
-  Look in examples.
+%  If \code{x} is given, \code{a} and \code{alleles} are prepaired on the fly.
+%  Look in examples.
 }
 
-\author{Sun-Wei Guo, Jing hua Zhao, Gregor Gorjanc}
+\author{Sun-Wei Guo, Jing Hua Zhao, Gregor Gorjanc}
 
 \source{
   http://www.stat.washington.edu/thompson/Genepi/pangaea.shtml,
@@ -68,6 +68,7 @@
     hwe.hardy(a=z,alleles=n.alleles)
 
     # with use of class 'genotype'
+    # this is to be fixed
     library(genetics)
     hlagen <- genotype(a1=x$DQR.a1, a2=x$DQR.a2, 
                        alleles=sort(unique(c(x$DQR.a1, x$DQR.a2))))
