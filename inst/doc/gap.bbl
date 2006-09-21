@@ -1,0 +1,141 @@
+\begin{thebibliography}{23}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+
+\bibitem[Chow(1960)]{chow60}
+G.~C. Chow.
+\newblock Tests of equality between sets of coefficients in two linear
+  regression.
+\newblock {\em Econometrica}, 28:\penalty0 591--605, 1960.
+
+\bibitem[Devlin and Roeder(1999)]{devlin99}
+B.~Devlin and K.~Roeder.
+\newblock Genomic control for association studies.
+\newblock {\em Biometrics}, 55\penalty0 (4):\penalty0 997--1004, 1999.
+
+\bibitem[Gholamic and Thomas(1994)]{gholamic94}
+K.~Gholamic and A.~Thomas.
+\newblock A linear time algorithm for calculation of multiple pairwise kinship
+  coefficients and genetic index of familiality.
+\newblock {\em Comp Biomed Res}, 27:\penalty0 342--350, 1994.
+
+\bibitem[Guo and Lange(2000)]{guo00}
+S.~W. Guo and K.~Lange.
+\newblock Genetic mapping of complex traits: promises, problems, and prospects.
+\newblock {\em Theor Popul Biol}, 57:\penalty0 1--11, 2000.
+
+\bibitem[Guo and Thompson(1992)]{guo92}
+S.~W. Guo and E.~A. Thompson.
+\newblock Performing the exact test of hardy-weinberg proportion for multiple
+  alleles.
+\newblock {\em Biometrics}, 48:\penalty0 361--372, 1992.
+
+\bibitem[Hirotsu et~al.(2001)Hirotsu, Aoki, Inada, and Kitao]{hirotsu01}
+C.~Hirotsu, S.~Aoki, T.~Inada, and Y.~Kitao.
+\newblock An exact test for the association between the disease and alleles at
+  highly polymorphic loci with particular interest in the haplotype analysis.
+\newblock {\em Biometrics}, 57:\penalty0 769--778, 2001.
+
+\bibitem[Miller(1997)]{miller97}
+M.~B. Miller.
+\newblock Genomic scanning and the transmission/disequilibrium test: analysis
+  of error rates.
+\newblock {\em Genet Epidemiol}, 14:\penalty0 851--856, 1997.
+
+\bibitem[Risch and Merikangas(1996)]{risch96}
+N.~Risch and K.~Merikangas.
+\newblock The future of genetic studies of complex human diseases.
+\newblock {\em Science}, 273\penalty0 (September):\penalty0 1516--1517, 1996.
+
+\bibitem[Risch and Merikangas(1997)]{risch97}
+N.~Risch and K.~Merikangas.
+\newblock Reply to scott el al.
+\newblock {\em Science}, 275:\penalty0 1329--1330., 1997.
+
+\bibitem[Sham(1997)]{sham97}
+P.~C. Sham.
+\newblock Transmission/disequilibrium tests for multiallelic loci.
+\newblock {\em Am J Hum Genet}, 61:\penalty0 774--778, 1997.
+
+\bibitem[Sham(1998)]{sham98}
+P.~C. Sham.
+\newblock {\em Statistics in Human Genetics}.
+\newblock Arnold Applications of Statistics Series. Edward Arnold, London,
+  1998.
+\newblock 11-1-1999.
+
+\bibitem[Skol et~al.(2006)Skol, Scott, Abecasis, and Boehnke]{skol06}
+A.~D. Skol, L.~J. Scott, G.~R. Abecasis, and M.~Boehnke.
+\newblock Joint analysis is more efficient than replication-based analysis for
+  two-stage genome-wide association studies.
+\newblock {\em Nat Genet}, 38\penalty0 (2):\penalty0 209--13, 2006.
+
+\bibitem[Spielman and Ewens(1996)]{spielman96}
+R.~S. Spielman and W.~J. Ewens.
+\newblock The {TDT} and other family-based tests for linkage disequilibrium and
+  association.
+\newblock {\em Am J Hum Genet}, 59\penalty0 (5):\penalty0 983--9, 1996.
+
+\bibitem[Williams et~al.(1992)Williams, Christian, and Norton]{wcn92}
+C.~J. Williams, J.~C. Christian, and J.A.~Jr. Norton.
+\newblock Twinan90: A fortran programfor conducting anova-based and
+  likelihood-based analyses of twin data.
+\newblock {\em Comp Meth Prog Biomed}, 38\penalty0 (2-3):\penalty0 167--76,
+  1992.
+
+\bibitem[Zaykin et~al.(2002)Zaykin, Westfall, Young, Karnoub, Wagner, and
+  Ehm]{zaykin02}
+D.~V. Zaykin, P.~H. Westfall, S.~S. Young, M.~A. Karnoub, M.~J. Wagner, and
+  M.~G. Ehm.
+\newblock Testing association of statistically inferred haplotypes with
+  discrete and continuous traits in samples of unrelated individuals.
+\newblock {\em Hum Hered}, 53\penalty0 (2):\penalty0 79--91, 2002.
+
+\bibitem[Zhao(2004)]{zhao04}
+J.~H. Zhao.
+\newblock {2LD}. {GENECOUNTING} and {HAP}: computer programs for linkage
+  disequilibrium analysis.
+\newblock {\em Bioinformatics}, 20:\penalty0 1325--6, 2004.
+
+\bibitem[Zhao(2005)]{zhao05}
+J.~H. Zhao.
+\newblock Mixed-effects {C}ox models of alcohol dependence in extended
+  families.
+\newblock {\em BMC Genet}, 6\penalty0 (Suppl):\penalty0 S127, 2005.
+
+\bibitem[Zhao(2006)]{zhao06}
+J.~H. Zhao.
+\newblock Pedigree-drawing with {R} and graphviz.
+\newblock {\em Bioinformatics}, 22\penalty0 (8):\penalty0 1013--4, 2006.
+
+\bibitem[Zhao et~al.(2002)Zhao, Lissarrague, Essioux, and Sham]{zhao02}
+J.~H. Zhao, S.~Lissarrague, L.~Essioux, and P.~C. Sham.
+\newblock {GENECOUNTING}: haplotype analysis with missing genotypes.
+\newblock {\em Bioinformatics}, 18\penalty0 (12):\penalty0 1694--5, 2002.
+
+\bibitem[Zhao and Sham(2003)]{zhao03}
+J.~H. Zhao and P.~C. Sham.
+\newblock Generic number systems and haplotype analysis.
+\newblock {\em Comp Meth Prog Biomed}, 70:\penalty0 1--9, 2003.
+
+\bibitem[Zhao et~al.(1999)Zhao, Sham, and Curtis]{zhao99}
+J.~H. Zhao, P.~C. Sham, and D.~Curtis.
+\newblock A program for the {M}onte {C}arlo evaluation of significance of the
+  extended transmission/disequilibrium test.
+\newblock {\em Am J Hum Genet}, 64:\penalty0 1484--1485, 1999.
+
+\bibitem[Zhao and Tan(2006{\natexlab{a}})]{zt06b}
+J.~H. Zhao and Q.~Tan.
+\newblock Genetic dissection of complex traits in silico: approaches, problems
+  and soluations.
+\newblock {\em Current Bioinformatics}, 1\penalty0 (3):\penalty0 in press,
+  2006{\natexlab{a}}.
+
+\bibitem[Zhao and Tan(2006{\natexlab{b}})]{zt06a}
+J.~H. Zhao and Q.~Tan.
+\newblock Integrated analysis of genetic data with {R}.
+\newblock {\em Hum Genomics}, 2\penalty0 (4):\penalty0 258--65,
+  2006{\natexlab{b}}.
+
+\end{thebibliography}

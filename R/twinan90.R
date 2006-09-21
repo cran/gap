@@ -1,21 +1,8 @@
-# 2-4-2006, East Dulwich
+# 13-4-2006, MRC Epid
 
 twinan90 <- function(mzdat,dzdat,vname='mzdz',xlamb=1,const=0,vmiss=-9,path=1,
            ped=0,nvar=1,form='((1x,a1,5x,F6.2))')
 {
-  x <- replace(mzdat,mzdat==vmiss,NA)
-  y <- replace(dzdat,dzdat==vmiss,NA)
-  all.MZ <- apply(is.na(mzdat),1,any)
-  nMZ <- dim(mzdat[!all.MZ,])[1]
-  all.DZ <- apply(is.na(dzdat),1,any)
-  nDZ <- dim(dzdat[!all.DZ,])[1]
-  rMZ <- cor(x[,1],x[,2],use="complete.obs")
-  rDZ <- cor(y[,1],y[,2],use="complete.obs")
-  h2 <- 2*(rMZ-rDZ)
-  var.rMZ <- (1-rMZ^2)^2/nMZ
-  var.rDZ <- (1-rMZ^2)^2/nDZ
-  seh2 <- sqrt(var.rMZ+var.rDZ)
-
   nMZ <- dim(mzdat)[1]
   nDZ <- dim(dzdat)[1]
   max.twin.pairs=max(nMZ,nDZ)
@@ -38,5 +25,19 @@ twinan90 <- function(mzdat,dzdat,vname='mzdz',xlamb=1,const=0,vmiss=-9,path=1,
   cat("Output and log files are ",outfile," and ",logfile,"\n")
   if(ped==1) cat("FISHER data file is ",pedfile,"\n")
   cat("\n")
-  invisible(list(h2=h2,seh2=seh2))
+  x <- replace(mzdat,mzdat==vmiss,NA)
+  y <- replace(dzdat,dzdat==vmiss,NA)
+  all.MZ <- apply(is.na(mzdat),1,any)
+  nMZ <- dim(mzdat[!all.MZ,])[1]
+  all.DZ <- apply(is.na(dzdat),1,any)
+  nDZ <- dim(dzdat[!all.DZ,])[1]
+  rMZ <- cor(x[,1],x[,2],use="complete.obs")
+  rDZ <- cor(y[,1],y[,2],use="complete.obs")
+  h2 <- 2*(rMZ-rDZ)
+  var.rMZ <- (1-rMZ^2)^2/nMZ
+  var.rDZ <- (1-rMZ^2)^2/nDZ
+  seh2 <- sqrt(var.rMZ+var.rDZ)
+  covMZ <- cov(x,use="complete.obs")
+  covDZ <- cov(y,use="complete.obs")
+  invisible(list(h2=h2,seh2=seh2,nMZ=nMZ,nDZ=nDZ,rMZ=rMZ,rDZ=rDZ,covMZ=covMZ,covDZ=covDZ))
 }

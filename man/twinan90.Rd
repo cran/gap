@@ -24,11 +24,18 @@ It further allows for output data in FISHER format.
 }
 
 \value{
-The returned values is in a list with two components, while the MLEs are in two system files:
+The returned values is in a list with the following components, while the MLEs are in 
+two system files (.log and .out):
 
 \item{h2}{The heritability estimate based on 2(rMZ-rDZ), where rMZ and rDZ are the intraclass
 correlation coefficients for MZ and DZ twin pairs}
 \item{seh2}{The standard error for the above statistic}
+\item{nMZ}{The number of MZ pairs used}
+\item{nDZ}{The number of DZ pairs used}
+\item{rMZ}{The intraclass correlation for MZ}
+\item{rDZ}{The intraclass correlation for DZ}
+\item{covMZ}{The variance-covariance matrix for MZ}
+\item{covDZ}{The variance-covariance matrix for DZ}
 \item{vname.log}{the diagnostic file}
 \item{vname.out}{the output file}
 }
@@ -48,6 +55,12 @@ mzdz <- matrix(scan("mzdz.dat",skip=1),ncol=2,byrow=T)
 mzdat <- mzdz[1:131,]
 dzdat <- mzdz[132:206,]
 twinan90(mzdat,dzdat,xlamb=2)
+
+# the normality test can be conducted as follows,
+ks.test(mzdat,"pnorm")
+ks.test(dzdat,"pnorm")
+qqnorm(mzdat)
+qqnorm(dzdat)
 }
 }
 \author{Chris Williams, Jing Hua Zhao}

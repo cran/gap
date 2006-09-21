@@ -34,7 +34,7 @@ Science 275: 1328.
 \code{\link[gap]{fbsize}}
 }
 \examples{
-\dontrun{
+options(echo=FALSE)
 models <- matrix(c(
     4.0, 0.01,
     4.0, 0.10,
@@ -75,20 +75,20 @@ strlen <- function(x) length(unlist(strsplit(as.character(x),split="")))
 kp <- c(0.01,0.05,0.10)
 cat("\nRandom ascertainment with disease prevalence\n")
 cat("\n          1\%          5\%         10\%\n\n")
-for(i in 1:12) \{
+for(i in 1:12) {
   g <- models[i,1]
   p <- models[i,2]
   q <- 1-p
-  for(j in 1:3) \{
+  for(j in 1:3) {
     n <- pbsize(g,p,kp[j])
     cat(rep("",12-strlen(ceiling(n))),format(ceiling(n)))
-  \}
+  }
   cat("\n")
   if(i\%\%4==0) cat("\n")
-\} 
+} 
 cat("This is only an approximation, a more accurate result\n")
 cat("can be obtained by Fisher's exact test\n")
-}
+options(echo=TRUE)
 }
 \author{Jing Hua Zhao}
 \note{extracted from rm.c}

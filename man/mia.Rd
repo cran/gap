@@ -45,11 +45,11 @@ Clayton DG (2001) SNPHAP. \url{http://www-gene.cimr.cam.ac.uk/clayton/software}
 \dontrun{
 # 4 SNP example, to generate hap.out and assign.out alone
 data(fsnps)
-hap(id=fsnps[,1],gdata=fsnps[,3:10],nloci=4)
+hap(id=fsnps[,1],data=fsnps[,3:10],nloci=4)
 
 # to generate results of imputations
 control <- hap.control(ss=1,mi=5)
-hap(id=fsnps[,1],gdata=fsnps[,3:10],nloci=4,control=control)
+hap(id=fsnps[,1],data=fsnps[,3:10],nloci=4,control=control)
 
 # to extract information from the second run above
 mia(so=1,ns=1,mi=5)

@@ -49,7 +49,7 @@ complex diseases. Science 275: 1327.
 \code{\link[gap]{pbsize}}
 }
 \examples{
-\dontrun{
+options(echo=FALSE)
 models <- matrix(c(
     4.0, 0.01,
     4.0, 0.10,
@@ -66,12 +66,12 @@ models <- matrix(c(
     
 cat("\nThe family-based result: \n")
 cat("\ngamma   p     Y     N_asp   P_A    Het    N_tdt  Het N_asp/tdt  L_o  L_s\n\n")
-for(i in 1:12) \{
+for(i in 1:12) {
   g <- models[i,1]
   p <- models[i,2]
   fbsize(g,p)
   if(i\%\%4==0) cat("\n")
-\}
+}
 
 # APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
 # Genetic analysis of complex diseases 1327
@@ -79,7 +79,7 @@ g <- 4.5
 p <- 0.15
 cat("\nAlzheimer's:\n\n")
 fbsize(g,p)
-}
+options(echo=TRUE)
 }
 \author{Jing Hua Zhao}
 \note{extracted from rm.c}

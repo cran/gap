@@ -37,20 +37,21 @@ MRC Epidemiology Unit, Strangeways Research Laboratory, Worts Causeway, Cambridg
 
 \section{Introduction}
 
-This package was designed to integrate some C/Fortran/SAS programs I have written 
+This package was initiated to integrate some C/Fortran/SAS programs I have written 
 or used over the years. As such, it would rather be a long-term project, but an
 immediate benefit would be something complementary to other packages currently
-available in R, e.g. {\bf genetics}, {\bf hwde}, etc. I hope eventually this will
+available from CRAN, e.g. {\bf genetics}, {\bf hwde}, etc. I hope eventually this will
 be part of a bigger effort to fulfill most of the requirements foreseen by many, 
 e.g. ~\cite{guo00}, within the portable environment of R for data management, 
-analysis, graphics and object-oriented programming. \\
+analysis, graphics and object-oriented programming. My view has been outlined
+more formally in ~\cite{zt06a} and ~\cite{zt06b} in relation to other package
+systems. Also reported are ~\cite{zhao05} and ~\cite{zhao06} on package {\bf  kinship}.\\
 
-So far the number of functions is quite limited and experimental, but I already
-feel enormous advantage by shifting to R and would like sooner rather than later
+The number of functions are quite limited and experimental, but I already feel
+the enormous advantage by shifting to R and would like sooner rather than later
 to share my work with others. I will not claim this workas exclusively done by
 me, but would like to invite others to join me and enlarge the collections and
 improve them.
-
 
 \section{Implementation}
 
@@ -108,6 +109,7 @@ print.hap.score         Print a hap.score object
 s2k                     Statistics for 2 by K table
 snca                    A study of Parkinson's disease and SNCA makers
 tbyt                    LD statistics for two SNPs
+tscc                    Power calculation for two-stage case-control design
 twinan90                Classic twin models
 whscore                 Whittemore-Halpern scores for allele-sharing
 \end{verbatim}
@@ -160,10 +162,10 @@ Unaware of any bug. However, better memory management is expected.
 
 \section{Bibliographic note}
 
-The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{gholamic94},
+The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gholamic94},
 ~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97}, ~\cite{sham97}, 
 ~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, 
-~\cite{hirotsu01}, ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}.
+~\cite{hirotsu01}, ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{skol06}.
 
 \bibliography{gap}
 \end{document}

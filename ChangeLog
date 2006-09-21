@@ -12,6 +12,16 @@ Todo list:
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
 
+Version 1.0-9
+
+21-9-2006
+
+Add Design, Hmisc to DESCRIPTION as required by R 2.4.0
+Add more summary statistics to twinan90
+Add mi.inference to mia
+Add power calculation for joint analysis of two-stage design
+Add recent references to gap.Rnw
+
 Version 1.0-8
 
 4-4-2006

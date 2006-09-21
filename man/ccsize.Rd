@@ -14,7 +14,7 @@ where \eqn{B=(Z_{1-\alpha}+Z_\beta)^2/(\theta^2p_1p_2p_D)}{B=(Z_{1-alpha}+Z_beta
 
 }
 \arguments{
-  \item{n}{the total number of subjects in the subcohort}
+  \item{n}{the total number of subjects in the cohort}
   \item{q}{the sampling fraction of the subcohort}
   \item{pD}{the proportion of the failures in the full cohort}
   \item{p1}{proportions of the two groups (p2=1-p1)}
@@ -38,9 +38,9 @@ Biometrics 2004, 60:1015-1024
 }
 
 \examples{
-\dontrun{
 # Table 1 of Cai & Zeng (2004).
 
+options(echo=FALSE)
 cat("n\tpD\tp1\ttheta\tq\tpower\n")
 alpha <- 0.05
 n <- 1000
@@ -74,9 +74,9 @@ for(pD in c(0.05,0.01))
       }
    }
 }
-
+options(echo=TRUE)
 # ARIC study
-
+options(echo=FALSE)
 n <- 15792
 pD <- 0.03
 p1 <- 0.25
@@ -93,9 +93,9 @@ for(i in 1:3)
   ssize <- ccsize(n,q,pD,p1,alpha,log(theta[i]),power)
   cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",signif(power,digits=3),"\t",ceiling(ssize),"\n")
 }
-
+options(echo=TRUE)
 # EPIC study?
-
+options(echo=FALSE)
 n <- 25000
 alpha <- 0.00000001
 power <- 0.8
@@ -119,7 +119,7 @@ for(pD in s_pD)
 
 # exhaustive search
 nrows <- length(s_pD) * length(s_p1) * length(s_theta) * length(s_q)
-powtable <- matrix(rep(0,nrows * 5),ncol=5,byrow=T)
+powtable <- matrix(rep(0,nrows * 5),ncol=5,byrow=TRUE)
 ijkl <- 0
 for(pD in s_pD)
 {
@@ -137,7 +137,7 @@ for(pD in s_pD)
       }
    }
 }
-}
+options(echo=TRUE)
 }
 \author{Jing Hua Zhao}
 \note{Programmed for EPIC study}

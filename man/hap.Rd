@@ -83,4 +83,3 @@ dir()
 }
 \note{adapted from hap}
 \keyword{models}
-

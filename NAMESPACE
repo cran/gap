@@ -7,11 +7,11 @@ export(Ginv,
        g2a, g2a.c, gc.control, gc.em, gcode, gcontrol, gcp, genecounting, geno.recode, gif, grec2g,
        hap, hap.control, hap.em, hap.score, htr, hwe, hwe.hardy,
        kbyl, kin.morgan,
-       m2plem, makeped, mia, mtdt, muvar,
+       m2plem, makeped, mia, mi.inference, mtdt, muvar,
        pbsize, pedtodot, pfc, pfc.sim, pgc, plem2m, plot.hap.score, printBanner, print.compositeLD, print.hap.score,
        revhap, revhap.i,
        s2k,
-       tbyt, toETDT, twinan90,
+       tbyt, toETDT, tscc, twinan90,
        ungcode,
        whscore)
 S3method(plot, hap.score)
