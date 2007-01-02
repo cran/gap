@@ -7,7 +7,7 @@
 Method function to print a class of type hap.score
 }
 \usage{
-print.hap.score(x, ...)
+\method{print}{hap.score}(x, ...)
 }
 \arguments{
 \item{x}{ The object returned from hap.score (which has class hap.score).}

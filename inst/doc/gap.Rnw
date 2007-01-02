@@ -122,7 +122,7 @@ You can cut and paste examples at end of each function's documentation.\\
 
 Both \textit{genecounting} and \textit{hap} are able to handle SNPs and multiallelic
 markers, with the former be flexible enough to include features such as X-linked data
-and the later being able to handle large number of SNPs. But the latter is able to
+and the later being able to handle large number of SNPs. But they are unable to
 recode allele labels automatically, so functions \textit{gc.em} and \textit{hap.em}
 are in \textit{haplo.em} format and used by a modified function \textit{hap.score} in
 association testing.\\

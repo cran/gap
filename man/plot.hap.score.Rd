@@ -7,7 +7,7 @@
 Method function to plot a class of type hap.score
 }
 \usage{
-plot.hap.score(x, ...)
+\method{plot}{hap.score}(x, ...)
 }
 \arguments{
 \item{x}{The object returned from hap.score (which has class hap.score).}

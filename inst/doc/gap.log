@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.1.20)  21 SEP 2006 15:53
+This is pdfTeXk, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.1.20)  2 JAN 2007 12:39
  file:line:error style messages enabled.
 **\nonstopmode \input /home/jhz22/work/gap/inst/doc/gap.tex
 (/home/jhz22/work/gap/inst/doc/gap.tex
@@ -309,4 +309,4 @@ ib/texmf/pk/ljfour/jknappen/tc/tctt1095.600pk>{/usr/share/texmf/dvips/tetex/f7b
 t10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fo
 nts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr17.p
 fb>
-Output written on gap.pdf (5 pages, 84233 bytes).
+Output written on gap.pdf (5 pages, 84224 bytes).

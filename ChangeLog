@@ -12,6 +12,17 @@ Todo list:
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
 
+Version 1.0-10
+
+2-1-2007
+
+remove P1 in powerj of tscc function
+rename mi.inference to micombine to avoid confusion
+
+11-10-2006
+
+add \method markup to plot.hap.score and print.hap.score
+
 Version 1.0-9
 
 21-9-2006

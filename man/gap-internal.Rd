@@ -14,7 +14,7 @@
 \alias{hap.score.podds}
 \alias{is.miss}
 \alias{m2plem}
-\alias{mi.inference}
+\alias{micombine}
 \alias{plem2m}
 \alias{printBanner}
 \alias{print.compositeLD}

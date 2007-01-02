@@ -493,7 +493,7 @@ plem2m <- function(a)
   invisible(list(a1,a2))
 }
 
-mi.inference <- function (est, std.err, confidence = 0.95)
+micombine <- function (est, std.err, confidence = 0.95)
 {
     qstar <- est[[1]]
     for (i in 2:length(est)) {

@@ -87,7 +87,7 @@ tscc <- function(model,GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)
    rootfinding <- TRUE
    Cj <- solve.skol(rootfun,alpha.marker,C2,C,1e-6)
    rootfinding <- FALSE
-   powerj <- P1*(integrate(u,-Inf,-C1)$value+integrate(u,C1,Inf)$value)
+   powerj <- integrate(u,-Inf,-C1)$value+integrate(u,C1,Inf)$value
    invisible(list(model=model,GRR=GRR,p1=p1,pprime=pprime,p=p,n1=n1,n2=n2,M=M,
          pi.samples=pi.samples,pi.markers=pi.markers,alpha.genome=alpha.genome,
          C=c(C,C1,C2,Cj),power=c(power,power1,power2,powerj),K=K))
