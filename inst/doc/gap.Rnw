@@ -55,8 +55,7 @@ improve them.
 
 \section{Implementation}
 
-The following, extracted from the package INDEX, shows the data and functions
-currently available.
+The following list shows the data and functions currently available.
 
 \begin{verbatim}
 aldh2                   ALDH2 markers and Alcoholism
@@ -66,6 +65,8 @@ ccsize                  Power and sample size for case-cohort design
 chow.test               Chow's test for heterogeneity in two
                         regressions
 cf                      Cystic Fibrosis data
+comp.score              score statistics for testing genetic linkage
+                        of quantitative trait
 crohn                   Crohn disease data
 fa                      Friedreich Ataxia data
 fbsize                  Sample size for family-based linkage and
@@ -116,7 +117,8 @@ whscore                 Whittemore-Halpern scores for allele-sharing
 
 Assuming proper installation, you will be able to obtain the list by typing
 \textit{library(help=gap)} or view the list within a web browser via 
-\textit{help.start()}.\\
+\textit{help.start()}. A PDF version of this file can be viewed with command
+\textit{vignette("gap",package="gap")}.\\
 
 You can cut and paste examples at end of each function's documentation.\\
 
@@ -165,7 +167,10 @@ Unaware of any bug. However, better memory management is expected.
 The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gholamic94},
 ~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97}, ~\cite{sham97}, 
 ~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, 
-~\cite{hirotsu01}, ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{skol06}.
+~\cite{hirotsu01}, ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{wang05},
+~\cite{skol06}.
 
 \bibliography{gap}
 \end{document}
+
+% Date last modified: 12 JUNE 2007

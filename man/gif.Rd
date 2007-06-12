@@ -24,7 +24,7 @@ The returned value is a list containing:
 }
 
 \section{References}{
-Gholamic K, Thomas A (1994) A linear time algorithm for calculation of
+Gholami K, Thomas A (1994) A linear time algorithm for calculation of
 multiple pairwise kinship coefficients and genetic index of familiality.
 Comp Biomed Res 27:342-350
 

@@ -13,8 +13,8 @@ The inter-marker distances (Morgan) are as follows
 
 \usage{data(cf)}
 \format{A data frame containing 186 rows and 24 columns}
-\source{Liu JS, Sabatti C, Teng J, Keats BJB, Risch N (2001). Genome Research
-11:1716-1724}
+\source{Liu JS, Sabatti C, Teng J, Keats BJB, Risch N (2001). Bayesian Analysis of Haplotypes for Linkage
+Disequilibrium Mapping. Genome Research 11:1716-1724}
   
 \keyword{datasets}
 \note{
