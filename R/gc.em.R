@@ -5,6 +5,7 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
      sex <- data[,1]
      data <- data[,-1]
   }
+  library(haplo.stats)
   tmp0<-geno.recode(data,miss.val=miss.val)
   geno<-tmp0$grec
   geno[is.na(geno)]<-0

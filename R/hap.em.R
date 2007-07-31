@@ -1,5 +1,6 @@
 hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.val=0)
 {
+  library(haplo.stats)
   tmp0 <- geno.recode(data,miss.val=miss.val)
   geno <- as.matrix(tmp0$grec)
   geno[is.na(geno)] <- 0
@@ -45,3 +46,4 @@ hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.v
 # 15-10-03 WAH
 # 16-10-03 UCL office to add sort=F in merge
 # 25-09-04 first attempt to robust label-handling
+# 29-07-07 add library(haplo.stats)

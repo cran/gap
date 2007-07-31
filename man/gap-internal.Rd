@@ -1,11 +1,7 @@
 \name{gap-internal}
-\alias{Ginv}
 \alias{a2g}
-\alias{allele.recode}
-\alias{compositeLD}
 \alias{g2a}
 \alias{g2a.c}
-\alias{geno.recode}
 \alias{gc.control}
 \alias{gcode}
 \alias{grec2g}
@@ -16,8 +12,6 @@
 \alias{m2plem}
 \alias{micombine}
 \alias{plem2m}
-\alias{printBanner}
-\alias{print.compositeLD}
 \alias{revhap}
 \alias{revhap.i}
 \alias{toETDT}

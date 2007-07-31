@@ -23,7 +23,7 @@
 \maketitle
 
 \begin{center}
-MRC Epidemiology Unit, Strangeways Research Laboratory, Worts Causeway, Cambridge CB1 8RN\\
+MRC Epidemiology Unit, Cambridge, UK \\
 \url{http://www.mrc-epid.cam.ac.uk}
 \end{center}
 
@@ -58,6 +58,8 @@ improve them.
 The following list shows the data and functions currently available.
 
 \begin{verbatim}
+BFDP                    Bayesian false-discovery probability
+FPRP                    False-positive report probability
 aldh2                   ALDH2 markers and Alcoholism
 apoeapoc                APOE/APOC1 markers and Schizophrenia
 bt                      Bradley-Terry model for contingency table
@@ -107,6 +109,8 @@ pgc                     Preparing weight for GENECOUNTING
 plot.hap.score          Plot Haplotype Frequencies versus Haplotype
                         Score Statistics
 print.hap.score         Print a hap.score object
+qqunif                  Q-Q plot for uniformly distributed random
+                        variable
 s2k                     Statistics for 2 by K table
 snca                    A study of Parkinson's disease and SNCA makers
 tbyt                    LD statistics for two SNPs
@@ -166,11 +170,11 @@ Unaware of any bug. However, better memory management is expected.
 
 The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gholamic94},
 ~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97}, ~\cite{sham97}, 
-~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, 
-~\cite{hirotsu01}, ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{wang05},
-~\cite{skol06}.
+~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, ~\cite{hirotsu01}, 
+~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{wacholder04}, ~\cite{wang05},
+~\cite{skol06}, ~\cite{wakefield07}.
 
 \bibliography{gap}
 \end{document}
 
-% Date last modified: 12 JUNE 2007
+% Date last modified: 31 JULY 2007

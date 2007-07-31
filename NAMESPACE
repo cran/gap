@@ -1,14 +1,14 @@
 useDynLib(gap)
-export(Ginv,
-       a2g, allele.recode,
-       bt,
-       ccsize, chow.test, comp.score, compositeLD,
-       fbsize,
-       g2a, g2a.c, gc.control, gc.em, gcode, gcontrol, gcp, genecounting, geno.recode, gif, grec2g,
+export(a2g,
+       BFDP, bt,
+       ccsize, chow.test, comp.score,
+       fbsize, FPRP,
+       g2a, g2a.c, gc.control, gc.em, gcode, gcontrol, gcp, genecounting, gif, grec2g,
        hap, hap.control, hap.em, hap.score, htr, hwe, hwe.hardy,
        kbyl, kin.morgan,
        m2plem, makeped, mia, micombine, mtdt, muvar,
-       pbsize, pedtodot, pfc, pfc.sim, pgc, plem2m, plot.hap.score, printBanner, print.compositeLD, print.hap.score,
+       pbsize, pedtodot, pfc, pfc.sim, pgc, plem2m, plot.hap.score, print.hap.score,
+       qqunif,
        revhap, revhap.i,
        s2k,
        tbyt, toETDT, tscc, twinan90,
@@ -16,4 +16,3 @@ export(Ginv,
        whscore)
 S3method(plot, hap.score)
 S3method(print, hap.score)
-S3method(print, compositeLD)
