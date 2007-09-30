@@ -1,4 +1,4 @@
-# 27-4-2006, MRC Epid, JHZ
+# 29-9-2007, MRC Epid, JHZ
 
 z <- function(p1,p2,n1,n2,r)
 {
@@ -7,7 +7,7 @@ z <- function(p1,p2,n1,n2,r)
    invisible(z.mean/sqrt(z.var/(2*r)))
 }
 
-pexp <- function(model,GRR,p1)
+pexp <- function(model,GRR,p1,K)
 {
    model.idx <- charmatch(model,c("multiplicative","additive","recessive","dominant"))
    if(is.na(model.idx)) stop("Invalid model type")
@@ -54,7 +54,7 @@ tscc <- function(model,GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)
    ce <- environment()
    l <- c(p1,pi.samples,pi.markers,K)
    if(any(lapply(l,">",1))|any(lapply(c(l,GRR,n1,n2,M),"<=",0))) stop("invalid input")
-   x <- pexp(model,GRR,p1)
+   x <- pexp(model,GRR,p1,K)
    pprime <- x$pprime
    p <- x$p
    alpha.marker <- alpha.genome/M

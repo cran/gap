@@ -3,7 +3,7 @@
 \title{Bayesian false-discovery probability}
 \usage{BFDP(a,b,pi1,W,logscale=FALSE)}
 \description{
-This function calculates BFDP, the approximate \eqn{Pr( H0 | thetahat )}{P(H_0|\hat\theta},
+This function calculates BFDP, the approximate \eqn{P(H_0|\hat\theta}{Pr( H0 | thetahat )},
 given an estiamte of the log relative risk, \eqn{\hat\theta}{thetahat}, the variance of
 this estimate, \eqn{V}, the prior variance, \eqn{W}, and the prior probability of
 a non-null association. When logscale=TRUE, the function accepts an estimate of the relative
@@ -11,7 +11,7 @@ risk, \eqn{\hat{RR}}{RRhat}, and the upper point of a 95\% confidence interval \
 }
 \arguments{
   \item{a}{parameter value at which the power is to be evaluated}
-  \item{b}{the variance for a, or the uppoer point of a 95\%CI if logscale=FALSE}
+  \item{b}{the variance for a, or the uppoer point (\eqn{RR_{hi}}{RRhi}) of a 95\%CI if logscale=FALSE}
   \item{pi1}{the prior probabiility of a non-null association}
   \item{W}{the prior variance}
   \item{logscale}{FALSE=the orginal scale, TRUE=the log scale}
@@ -22,8 +22,8 @@ The returned value is a list with the following components:
 
 \item{PH0}{probability given a,b)}
 \item{PH1}{probability given a,b,W)}
-\item{BF}{PH0/PH1}
-\item{BFDP}{Bayesian false-discovery probability based on BF}
+\item{BF}{Bayes factor, \eqn{P_{H_0}/P_{H_1}}{PH0/PH1}}
+\item{BFDP}{Bayesian false-discovery probability}
 \item{ABF}{approxmiate Bayes factor}
 \item{ABFDP}{approximate Bayesian false-discovery probability}
 }

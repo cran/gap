@@ -6,7 +6,29 @@
 The function calculates the false positive report probability (FPRP), the probability of no true
 association beteween a genetic variant and disease given a statistically significant finding,
 which depends not only on the observed P value but also on both the prior probability that the
-assocition is real and the statistical power of the test. See example for the recommended steps.
+assocition is real and the statistical power of the test. An associate result is the
+false negative reported probability (FNRP).  See example for the recommended steps.
+
+The FPRP and FNRP are derived as follows. Let \eqn{H_0}=null hypothesis (no association),
+\eqn{H_A}=alternative hypothesis (association). Since classic frequentist theory considers 
+they are fixed, one has to resort to Bayesian framework by introduing prior,
+\eqn{\pi=P(H_0=TRUE)=P(association)}. Let \eqn{T}=test statistic, and \eqn{P(T>z_\alpha|H_0=TRUE)=P(rejecting\ 
+H_0|H_0=TRUE)=\alpha}, \eqn{P(T>z_\alpha|H_0=FALSE)=P(rejecting\ H_0|H_A=TRUE)=1-\beta}. The joint
+probability of test and truth of hypothesis can be expressed by \eqn{\alpha}, \eqn{\beta} and \eqn{\pi}.
+
+\tabular{llll}{
+%\multicolumn{4}{c}{Joint probability of significance of test and truth of hypothesis}\cr
+%\tab \multicolumn{2}{c}{significance of test} \\ \cline{2-3}
+Truth of \eqn{H_A} \tab significant \tab nonsignificant \tab Total\cr 
+TRUE \tab \eqn{(1-\beta)\pi} \tab \eqn{\beta\pi} \tab \eqn{\pi}\cr
+FALSE \tab \eqn{\alpha (1-\pi)} \tab \eqn{(1-\alpha)(1-\pi)} \tab \eqn{1-\pi}\cr
+Total \tab \eqn{(1-\beta)\pi+\alpha (1-\pi)} \tab \eqn{\beta\pi+(1-\alpha)(1-\pi)} \tab 1\cr
+}
+
+We have \eqn{FPRP=P(H_0=TRUE|T>z_\alpha)= 
+\alpha(1-\pi)/[\alpha(1-\pi)+(1-\beta)\pi]=\{1+\pi/(1-\pi)][(1-\beta)/\alpha]\}^{-1}}
+and similarly \eqn{FNRP=\{1+[(1-\alpha)/\beta][(1-\pi)/\pi]\}^{-1}}.
+
 }
 \arguments{
   \item{a}{parameter value at which the power is to be evaluated}
@@ -22,6 +44,7 @@ The returned value is a list with compoents,
 \item{p}{p value corresponding to a,b}
 \item{power}{the power corresponding to the vector of ORs}
 \item{FPRP}{False-positive report probability}
+\item{FNRP}{False-negative report probability}
 }
 \section{References}{
 Wacholder S, Chanock S, Garcia-Closas M, El ghomli L, Rothman N. (2004) Assessing the probability that a positive
@@ -56,7 +79,7 @@ selogOR <- abs(logOR-log(ORhi))/1.96
 p <- ifelse(logOR>0,2*(1-pnorm(logOR/selogOR)),2*pnorm(logOR/selogOR))
 p
 q <- qnorm(1-p/2)
-POWER <- ifelse(log(ORlist)>0,1-pnorm((q*selogOR-log(ORlist))/selogOR),pnorm((-q*selogOR-log(ORlist))/selogOR))
+POWER <- ifelse(log(ORlist)>0,1-pnorm(q-log(ORlist)/selogOR),pnorm(-q-log(ORlist)/selogOR))
 POWER
 FPRPex <- t(p*(1-pi0)/(p*(1-pi0)+POWER\%o\%pi0))
 row.names(FPRPex) <- pi0

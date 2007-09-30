@@ -2,8 +2,12 @@ pedtodot <- function(pedfile,makeped=F,sink=T,page="",url="",height=0.5,width=0.
 {
   if (makeped) ped <- pedfile[,-c(5,6,7,9)]
   else ped <- pedfile
-  names(ped) <- c("pedigree","member","father","mother","sex","aff")
-  attach(ped)
+  pedigree <- ped[,1]
+  member <- ped[,2]
+  father <- ped[,3]
+  mother <- ped[,4]
+  sex <- ped[,5]
+  aff <- ped[,6]
   page.int <- charmatch(page,c("A4","A5","B5","Legal","Letter","Executive"))
   pagesize <- c("8.2677165,11.692913",
                 "5.83,8.27",

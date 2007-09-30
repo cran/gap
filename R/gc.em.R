@@ -46,7 +46,8 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
   hapdat<-hapas[,-c(1,2,ncol-1)]
   post<-hapas$post[indx1]
   hapid<-hapas$hapid
-  hapdat<-data.frame(hapdat,one=rep(1,nrow*2))
+  one<-rep(1,nrow*2)
+  hapdat<-cbind(hapdat,one)
   attach(hapdat)
   tmp<-by(hapdat,one,unique)
   haplotype<-as.matrix(tmp[[1]])

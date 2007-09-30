@@ -75,7 +75,7 @@ pair.data <- function(pheno,mean,h2,var)
     data.frame(pairID=pairID, v=allv)
 }
 
-score <- function(chrom.pos, pair.data)
+score <- function(chrom.pos, pair.data, ibd)
 {
         ibddata <- ibd[ibd$pos == chrom.pos & ibd$prior.Z0 == 0.25 &
                        ibd$prior.Z1 == 0.5 & ibd$prior.Z2 == 0.25,
@@ -102,17 +102,17 @@ score <- function(chrom.pos, pair.data)
 
 comp.score <- function(ibddata="ibd_dist.out", phenotype="pheno.dat", mean=0, var=1, h2=0.3)
 {
-        ibd <<- read.table(ibddata, skip = 1, col.names = c("pos", "pedigree",
-                "pair", "prior.Z0", "prior.Z1", "prior.Z2", "Z0", "Z1", "Z2"),
-                colClasses=c("numeric", "integer", "character", "numeric",
-                "numeric", "numeric", "numeric", "numeric", "numeric"),
-                comment.char = "")
+        ibd <- read.table(ibddata, skip = 1, col.names = c("pos", "pedigree",
+               "pair", "prior.Z0", "prior.Z1", "prior.Z2", "Z0", "Z1", "Z2"),
+               colClasses=c("numeric", "integer", "character", "numeric",
+               "numeric", "numeric", "numeric", "numeric", "numeric"),
+               comment.char = "")
         pheno <- read.table(phenotype, col.names = c("family",
                 "person", "father", "mother", "gender", "phenotype"))
         paired <- pair.data(pheno,mean,h2,var)
         
         result <- NULL
-        for (i in unique(ibd$pos)) result <- rbind(result, score(i, paired))
+        for (i in unique(ibd$pos)) result <- rbind(result, score(i, paired, ibd))
         dimnames(result) <- 
            list(NULL, c("pos", "stat.S1", "stat.S2", "p.value.S1", "p.value.S2"))
         result

@@ -407,9 +407,9 @@ int *converged
         k++;
         printf("%s: \t", names[j]);
         strcpy(cc, coding[j].one);
-        if (cc) printf("1=%s", cc);
+        printf("1=%s", cc);
         strcpy(cc,coding[j].two);
-        if (cc) printf(", 2=%s", cc);
+        printf(", 2=%s", cc);
         printf("\n");
       }
     }

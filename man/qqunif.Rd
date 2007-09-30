@@ -1,12 +1,13 @@
 \name{qqunif}
 \alias{qqunif}
 \title{Q-Q plot for uniformly distributed random variable}
-\usage{qqunif(u,base=10,...)}
+\usage{qqunif(u,logscale=TRUE,base=10,...)}
 \description{
 This function produces Q-Q plot for a random variable following uniform distribution using log-scale.
 }
 \arguments{
   \item{u}{a vector of uniformly distributed random variables}
+  \item{logscale}{to use logscale}
   \item{base}{the base of the log function}
   \item{...}{other options as appropriae for the qqplot function}
 }

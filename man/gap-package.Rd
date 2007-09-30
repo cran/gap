@@ -18,9 +18,9 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-12\cr
+Version: \tab 1.0-13\cr
 Depends: \tab R(>= 2.0.0)\cr
-Suggests: \tab Design, Hmisc\cr
+Suggests: \tab Design, Hmisc, haplo.stats\cr
 License: \tab Programs included in this package by Jing Hua Zhao will be
         under GPL. Specific requirement may be possible for programs
         written by other authors.\cr

@@ -3,7 +3,7 @@
 \title{LD statistics for two multiallelic loci}
 \usage{kbyl(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)}
 \description{
-LD statistics for two multiallelic loci}
+LD statistics for two multiallelic loci
 }
 \arguments{
   \item{n1}{number of alleles at marker 1}

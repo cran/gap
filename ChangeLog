@@ -12,6 +12,9 @@ Todo list:
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
 
+Version 1.0-13
+01-08-2007	Refine BFDP,FPRP,qqunif
+
 Version 1.0-12
 16-06-2007	Add haplo.stats to Suggest and remove associate functions
 28-07-2007	Add BFDP,FPRP,qqunif

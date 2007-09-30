@@ -20,7 +20,7 @@ C------------------------------------------------------------------C
       CHARACTER*2 PKSMZ,PKSDZ,FF
       CHARACTER*16 NAMA,NAMC,NAMD,NAMP
 cc      CHARACTER*80 FORM
-      character form2
+      character*255 form2
       CHARACTER*55 NAMB
       CHARACTER*65 RES1,RES2,RES3,RESULT
       character*255 names,form1
@@ -1408,7 +1408,7 @@ C----------------------------------------------------------C
       IMPLICIT DOUBLE PRECISION(A-H,O-Z)
       CHARACTER*1 SEX1,SEX2,IS1,IS2
       CHARACTER*16 NAM1,NAM2
-      CHARACTER*80 FORM2
+      CHARACTER*255 FORM2
       integer var
 cc8     FORMAT(A16)
 c     WRITE(*,*) 'ENTER THE NAME OF THE OUTPUT FILE.'
