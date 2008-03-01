@@ -1,6 +1,6 @@
 \name{hwe}
 \alias{hwe}
-\title{Hardy-Weinberg equlibrium test for multiallelic marker}
+\title{Hardy-Weinberg equlibrium test for a multiallelic marker}
 \usage{hwe(data, data.type="allele", yates.correct=FALSE, miss.val=0)}
 
 \description{

@@ -11,6 +11,15 @@ Todo list:
 . linkage analysis programs
 . C/Fortran calls to .Call, etc.
 . NEXUS format, C++ from GDA site
+. to adapt routines from SAS
+
+Version 1.0-14
+01-03-2008	Add pbsize2 and make an internal function from pexp/fexp
+                Add jss07.pdf to inst/doc
+                Add mao.dat to inst/tests and therefore modify genecounting.Rd
+27-02-2008	Change license to GPL (>=2) as suggested by Kurt Hornik
+20-02-2008	Correct reference as suggested by Mark N Grote
+		Change V = -1.,2.1,.1 to J = 1,32, V=-1+0.1*(J-1) in twinan90.f
 
 Version 1.0-13
 01-08-2007	Refine BFDP,FPRP,qqunif

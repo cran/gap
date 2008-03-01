@@ -1,7 +1,7 @@
 \name{apoeapoc}
 \docType{data}
 \alias{apoeapoc}
-\title{APOE/APOC1 markers and Schizophrenia}
+\title{APOE/APOC1 markers and schizophrenia}
 \description{This data set contains APOE/APOC1 markers 
   and Chinese Schizophrenic patients and controls. Variable id is subject
 id and y takes value 0 for controls and 2 for Schizophrenia.

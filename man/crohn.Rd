@@ -1,7 +1,7 @@
 \name{crohn}
 \docType{data}
 \alias{crohn}
-\title{Crohn disease data}
+\title{Crohn's disease data}
 
 \description{
 The data set consist of 103 common (>5\% minor allele frequency) SNPs 

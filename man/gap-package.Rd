@@ -6,10 +6,10 @@
 Genetic analysis package
 }
 \description{
-This is an integrated package for genetic data analysis
-of both population and family data. Currently it contains
+It is designed as an integrated package for genetic data analysis
+of both population and family data. Currently, it contains
 functions for sample size calculations of both population-based
-and family-based designs, classic twin ACE/ADE/AE/CE models, 
+and family-based designs, classic twin models, 
 probability of familial disease aggregation, kinship calculation, 
 some statistics in linkage analysis, and association analysis 
 involving one or more genetic markers including haplotype 
@@ -18,12 +18,10 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-13\cr
+Version: \tab 1.0-14\cr
 Depends: \tab R(>= 2.0.0)\cr
 Suggests: \tab Design, Hmisc, haplo.stats\cr
-License: \tab Programs included in this package by Jing Hua Zhao will be
-        under GPL. Specific requirement may be possible for programs
-        written by other authors.\cr
+License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/~jinghua.zhao\cr
 }
 
@@ -63,6 +61,7 @@ mtdt                    Transmission/disequilibrium test of a multiallelic marke
 muvar                   Means and variances under 1- and 2- locus (biallelic) QTL model
 nep499                  A study of Alzheimer's disease with eight SNPs and APOE
 pbsize                  Power for population-based association design
+pbsize2                 Power for case-control association design
 pedtodot                Converting pedigree(s) to dot file(s)
 pfc                     Probability of familial clustering of disease
 pfc.sim                 Probability of familial clustering of disease
@@ -79,7 +78,7 @@ whscore                 Whittemore-Halpern scores for allele-sharing
 }
 
 We have incorporated functions for a wide range of problems. Nevertheless,
-this largely remains as a preliminary work to be consolidated in the 
+this largely remains as a preliminary work to be consolidated in the
 near future.
 
 }
@@ -90,6 +89,6 @@ Author: Jing Hua Zhao in collaboration with other colleagues, and with
 Maintainer: Jing Hua Zhao <jinghua.zhao@mrc-epid.cam.ac.uk>
 }
 \references{
-Zhao JH, gap: genetic analysis package. Journal of Statistical Software.
+Zhao JH, gap: genetic analysis package. Journal of Statistical Software 2007, 23(8):1-18
 }
 \keyword{package}

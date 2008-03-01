@@ -1,28 +1,10 @@
-# 29-9-2007, MRC Epid, JHZ
+# 1-3-2008, MRC-Epid, JHZ
 
 z <- function(p1,p2,n1,n2,r)
 {
    z.mean <- p1-p2
    z.var <- p1*(1-p1)/n1+p2*(1-p2)/n2
    invisible(z.mean/sqrt(z.var/(2*r)))
-}
-
-pexp <- function(model,GRR,p1,K)
-{
-   model.idx <- charmatch(model,c("multiplicative","additive","recessive","dominant"))
-   if(is.na(model.idx)) stop("Invalid model type")
-   if(model.idx == 0) stop("Ambiguous model type")
-   multiplicative <- c(1,GRR,GRR*GRR)
-   additive <- c(1,GRR,2*GRR-1)
-   recessive <- c(1,1,GRR)
-   dominant <- c(1,GRR,GRR)
-   f <- switch(model.idx,multiplicative,additive,recessive,dominant)
-   scale <- K/(f[1]*(1-p1)^2+f[2]*2*p1*(1-p1)+f[3]*p1^2)
-   f <- f*scale
-   if(f[3]>1) stop("misspecified model")
-   pprime <- (f[3]*p1^2+f[2]*p1*(1-p1))/K
-   p <- ((1-f[3])*p1^2+(1-f[2])*p1*(1-p1))/(1-K)
-   invisible(list(pprime=pprime,p=p))
 }
 
 solve.skol <- function(rootfun,target,lo,hi,e)
@@ -54,7 +36,7 @@ tscc <- function(model,GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)
    ce <- environment()
    l <- c(p1,pi.samples,pi.markers,K)
    if(any(lapply(l,">",1))|any(lapply(c(l,GRR,n1,n2,M),"<=",0))) stop("invalid input")
-   x <- pexp(model,GRR,p1,K)
+   x <- KCC(model,GRR,p1,K)
    pprime <- x$pprime
    p <- x$p
    alpha.marker <- alpha.genome/M

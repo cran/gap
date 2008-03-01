@@ -25,7 +25,7 @@ The returned value is scaler containing the required sample size
 Scott, W. K., M. A. Pericak-Vance, et al. (1997). Genetic analysis of complex 
 diseases. Science 275: 1327.
 		
-Long, A. D. and C. H. Langley (1997). Genetic analysis of complex traits.
+Long, A. D. Grote, M. N. and C. H. Langley (1997). Genetic analysis of complex traits.
 Science 275: 1328.
 	
 }

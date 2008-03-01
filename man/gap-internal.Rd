@@ -9,6 +9,7 @@
 \alias{hap.score.glm}
 \alias{hap.score.podds}
 \alias{is.miss}
+\alias{KCC}
 \alias{m2plem}
 \alias{micombine}
 \alias{plem2m}
@@ -18,5 +19,5 @@
 \alias{ungcode}
 \title{internal functions for gap}
 \description{internal gap functions}
-\details{These functions are not explicitly called by users}
+\details{These functions are not so frequently called by users}
 \keyword{internal}

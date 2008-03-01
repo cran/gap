@@ -1,7 +1,7 @@
 \name{plot.hap.score}
 \alias{plot.hap.score}
 \title{
-  Plot Haplotype Frequencies versus Haplotype Score Statistics
+  Plot haplotype frequencies versus haplotype score statistics
 }
 \description{
 Method function to plot a class of type hap.score

@@ -1,7 +1,7 @@
 \name{cf}
 \docType{data}
 \alias{cf}
-\title{Cystic Fibrosis data}
+\title{Cystic fibrosis data}
 \description{This data set contains a case-control indicator and 23 SNPs.
 
 The inter-marker distances (Morgan) are as follows

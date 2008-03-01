@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (Web2C 7.4.5)
+The top-level auxiliary file: gap.aux
+The style file: plainnat.bst
+Database file #1: gap.bib
+You've used 26 entries,
+            2633 wiz_defined-function locations,
+            727 strings with 8090 characters,
+and the built_in function-call counts, 11847 in all, are:
+= -- 1128
+> -- 550
+< -- 19
++ -- 208
+- -- 174
+* -- 911
+:= -- 1971
+add.period$ -- 80
+call.type$ -- 26
+change.case$ -- 161
+chr.to.int$ -- 25
+cite$ -- 26
+duplicate$ -- 520
+empty$ -- 956
+format.name$ -- 220
+if$ -- 2452
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 27
+newline$ -- 137
+num.names$ -- 104
+pop$ -- 215
+preamble$ -- 1
+purify$ -- 136
+quote$ -- 0
+skip$ -- 390
+stack$ -- 0
+substring$ -- 649
+swap$ -- 28
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 281
+warning$ -- 0
+while$ -- 103
+width$ -- 0
+write$ -- 346
