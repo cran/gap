@@ -28,8 +28,9 @@ according to information given on the headline of <ps file>.
 }
 
 \usage{
-pedtodot(pedfile,makeped=F,sink=T,page="",url="",
-         height=0.5,width=0.75,rotate=90,dir="none")
+pedtodot(pedfile,makeped=FALSE,sink=TRUE,page="B5",
+         url="http://www.mrc-epid.cam.ac.uk/~jinghua.zhao/r-progs.htm",
+         height=0.5,width=0.75,rotate=0,dir="none")
 }
 
 \arguments{
@@ -58,8 +59,8 @@ sh pedtodot <pedigree file>
 # Read a GAS or LINKAGE format pedigree, return a digraph in the dot language 
 # call dot to make pedigree drawing
 # 
-AWK=/usr/local/bin/gawk
-DOTEXE=/people/jzhao/gv1.7c/bin/dot
+AWK=/bin/gawk
+DOTEXE=/usr/local/bin/dot
 # cygwin
 # AWK=/bin/gawk
 # DOTEXE=c:/local/graphviz/bin/dot
@@ -156,20 +157,26 @@ pedtodot(p3)
 #
 # Three examples of pedigree-drawing
 # assuming pre-MakePed LINKAGE file in which IDs are characters
-pre<-read.table("pheno.pre",as.is=T)[,1:6]
+pre<-read.table("pheno.pre",as.is=TRUE)[,1:6]
 pedtodot(pre)
 dir()      
 # for post-MakePed LINKAGE file in which IDs are integers
 ped <-read.table("pheno.ped")[,1:10]
-pedtodot(ped,makeped=T)
+pedtodot(ped,makeped=TRUE)
 dir()
 # for a single file with a list of pedigrees ordered data
 sink("gaw14.dot")
-pedtodot(ped,sink=F)
+pedtodot(ped,sink=FALSE)
 sink()
 file.show("gaw14.dot")
 # more details
-pedtodot(ped,sink=F,page="B5",url="http://www.ucl.ac.uk/~rmjdjhz")
+pedtodot(ped,sink=FALSE,page="B5",url="http://www.mrc-epid.cam.ac.uk/~jinghua.zhao/r-progs.htm")
+
+# An example from Richard Mott and in the demo
+filespec <- file.path(.path.package("gap"),"tests/ped.1.3.pre")
+pre <- read.table(filespec,as.is=TRUE)
+pre
+pedtodot(pre,dir="forward")
 }
 }
 \author{David Duffy, Jing Hua Zhao}

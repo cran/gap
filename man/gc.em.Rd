@@ -75,7 +75,7 @@ analysis. Comp Meth Prog Biomed 70: 1-9
 \examples{
 \dontrun{
 data(hla)
-gc.em(hla[,3:8],locus.label=c("DQR","DQA","DQB"))
+gc.em(hla[,3:8],locus.label=c("DQR","DQA","DQB"),control=gc.control(assignment="t"))
 }
 }
 

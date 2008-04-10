@@ -1,7 +1,7 @@
-\name{tbyt}
-\alias{tbyt}
-\title{LD statistics for two SNPs}
-\usage{tbyt(h,n)}
+\name{LD22}
+\alias{LD22}
+\title{LD statistics for two diallelic markers}
+\usage{LD22(h,n)}
 \description{
 LD statistics for two SNPs
 }
@@ -38,13 +38,13 @@ measure of gametic disequilibrium D'. Am. J. Hum. Genet. 61:771-774
 }
 
 \seealso{
-\code{\link[gap]{kbyl}}
+\code{\link[gap]{LDkl}}
 }
 \examples{
 \dontrun{
 h <- c(0.442356,0.291532,0.245794,0.020319)
 n <- 481*2
-t <- tbyt(h,n)
+t <- LD22(h,n)
 t
 }
 }

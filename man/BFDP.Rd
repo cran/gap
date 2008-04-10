@@ -3,7 +3,7 @@
 \title{Bayesian false-discovery probability}
 \usage{BFDP(a,b,pi1,W,logscale=FALSE)}
 \description{
-This function calculates BFDP, the approximate \eqn{P(H_0|\hat\theta}{Pr( H0 | thetahat )},
+This function calculates BFDP, the approximate \eqn{P(H_0|\hat\theta)}{Pr( H0 | thetahat )},
 given an estiamte of the log relative risk, \eqn{\hat\theta}{thetahat}, the variance of
 this estimate, \eqn{V}, the prior variance, \eqn{W}, and the prior probability of
 a non-null association. When logscale=TRUE, the function accepts an estimate of the relative

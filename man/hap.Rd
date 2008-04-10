@@ -33,6 +33,8 @@ Haplotype reconstruction using sorting and trimming algorithms
      \item{ds}{ Starting value of Dirichlet prior parameter}
      \item{de}{ Finishing value of Dirichlet prior parameter}
      \item{q}{Quiet operation (off)}
+     \item{hapfile}{a file for haplotype frequencies}
+     \item{assignfile}{a file for haplotype assignment}
      }
      }
 }
@@ -76,7 +78,7 @@ file.show("hap.out")
 file.show("assign.out")
 
 # to generate results of imputations
-control <- hap.control(ss=1,mi=5)
+control <- hap.control(ss=1,mi=5,hapfile="h",assignfile="a")
 hap(id=fsnps[,1],data=fsnps[,3:10],nloci=4,control=control)
 dir()
 }

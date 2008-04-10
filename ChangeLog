@@ -1,17 +1,25 @@
 Version history of R genetic analysis package (R/gap)
 
-Todo list:
-
-. to be compatible with definitions in genetics
-. standard error of haplotypes
-. phase routine to include hap, genecounting or PHASE
-. hap/hap.em to handle missing only one allele and X Chromsome data
-. joint genetic and environmental effects and mixed models
-. pca regression and htSNP
-. linkage analysis programs
-. C/Fortran calls to .Call, etc.
-. NEXUS format, C++ from GDA site
-. to adapt routines from SAS
+Version 1.0-15
+10-04-2008      Rename tbyt/kbyl as LD22/LDkl and fix hap.c
+07-04-2008	Add ESplot for Grace Jing Wang's query
+28-03-2008      Add regional association plot (asplot)
+25-03-2008	Add qqfun according to qq.plot of package car by John Fox
+22-03-2008	Add gcontrol2 (experimental)
+21-03-2008	Remove labels "chr" in mhtplot
+20-03-2008	Swap order of x, y in qqunif
+14-03-2008	Create mhtplot for Manhattan plot of genomewide p values
+                Add example to qqunif for highlighting p values above certain threshold
+10-03-2008	Revise pedtodot according to pedigrees from Jinliang Wang/Richard Mott
+07-03-2008	Add Fisher's method for meta-analysis to metap
+06-03-2008	Replace get() with data[""] in metap/metareg
+                Refine metap.Rd to make it consistent with the GIANT example
+                Document some functions in gap-internal.Rd
+		Provide option for file of haplotype assignment
+04-03-2008	Add metap, and modify metareg to accept multiple records
+		Add PARn, snp.ES, snp.HWE, snp.PAR
+03-03-2008	Add metareg
+02-03-2008      Add citations.txt to inst/doc
 
 Version 1.0-14
 01-03-2008	Add pbsize2 and make an internal function from pexp/fexp

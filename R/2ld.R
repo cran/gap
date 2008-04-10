@@ -1,6 +1,6 @@
 # worked 28/6/03
 # note that tables are symmetric do not fix, see kbyl below
-tbyt<-function(h,n) 
+LD22<-function(h,n) 
 {
    D<-VarD<-Dmax<-VarDmax<-Dprime<-VarDprime<-x2<-lor<-vlor<-00
 
@@ -17,7 +17,7 @@ tbyt<-function(h,n)
 
 # refine on 17/4/2005
 # verbose, default values, etc.
-kbyl<-function(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)
+LDkl<-function(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)
 {
    Dp<-x2<-seX2<-rho<-seR<-klinfo<-0
    VarDp<-0

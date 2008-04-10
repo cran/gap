@@ -21,7 +21,8 @@ of the single allele present at a given locus.}
       \item{tol}{tolerance for genotype probabilities with default value 1e-8}
       \item{maxit}{maximum number of iterations, with default value 50}
       \item{pl}{criteria for trimming haplotypes according to posterior probabilities}
-      \item{verbose}{If T, yield print out from the C routine}
+      \item{assignment}{filename containing haplotype assignment}
+      \item{verbose}{If TRUE, yields print out from the C routine}
       }
   }
 }
@@ -73,7 +74,7 @@ hla.gc$l1
 
 # ALDH2 data
 data(aldh2)
-control <- gc.control(handle.miss=1)
+control <- gc.control(handle.miss=1,assignment="ALDH2.out")
 aldh2.gc <- genecounting(aldh2[,3:6],control=control)
 summary(aldh2.gc)
 aldh2.gc$l0

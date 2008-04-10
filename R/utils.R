@@ -7,19 +7,19 @@ a2g <- function(a1,a2)
 
 }
 
-g2a.c <- function (s)
+g2a.c <- function (g)
 {
-    d <- 1 + 8 * (s - 1)
+    d <- 1 + 8 * (g - 1)
     u <- 1 + ((1 + (sqrt(d) - 1) - 1) / 2)
     u <- ceiling(u)
-    l = s - u * (u - 1) / 2
+    l = g - u * (u - 1) / 2
     list (l=l,u=u)
 }
 
-g2a <- function (x)
+g2a <- function (g)
 {
-    i <- 1 + floor((sqrt(8 * x + 1) - 1)/2)
-    j <- x - i * (i - 1)/2
+    i <- 1 + floor((sqrt(8 * g + 1) - 1)/2)
+    j <- g - i * (i - 1)/2
     i <- ifelse(j == 0, i - 1, i)
     j <- ifelse(j == 0, i, j)
     return(cbind(j,i))
@@ -107,10 +107,10 @@ gcode <- function(a1,a2) {
 
 }
 
-ungcode <- function(x) {
+ungcode <- function(g) {
 
-  i <- 1 + floor((sqrt(8*x+1)-1)/2)
-  j <- x - i*(i-1)/2
+  i <- 1 + floor((sqrt(8*g+1)-1)/2)
+  j <- g - i*(i-1)/2
   
   # the following 2 lines were added as a patch to make this ungcode work:
   i <- ifelse(j==0,i-1,i)

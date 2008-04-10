@@ -1,8 +1,10 @@
 hap.control <- function(mb=0,pr=0,po=0.001,to=0.001,th=1,maxit=100,n=0,
-      ss=0,rs=0,rp=0,ro=0,rv=0,sd=0,mm=0,mi=0,mc=50,ds=0.1,de=0,q=0)
+      ss=0,rs=0,rp=0,ro=0,rv=0,sd=0,mm=0,mi=0,mc=50,ds=0.1,de=0,q=0,
+      hapfile="hap.out",assignfile="assign.out")
 {
    list(mb=mb,pr=pr,po=po,to=to,th=th,maxit=maxit,n=n,ss=ss,rs=rs,
-       rp=rp,ro=ro,rv=rv,sd=sd,mm=mm,mi=mi,mc=mc,ds=ds,de=de,q=q)
+       rp=rp,ro=ro,rv=rv,sd=sd,mm=mm,mi=mi,mc=mc,ds=ds,de=de,q=q,
+       hapfile=hapfile,assignfile=assignfile)
 }
 
 hap<-function(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep=""),
@@ -39,7 +41,10 @@ hap<-function(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep="")
         q=as.integer(control$q),
         l1=as.double(l1),
         niter=as.integer(niter),
-        converged=as.integer(converge),PACKAGE="gap")
+        converged=as.integer(converge),
+        hapfile=as.character(control$hapfile),
+        assignfile=as.character(control$assignfile),
+        PACKAGE="gap")
 
   list(l1=z$l1,converge=z$converged,niter=z$niter)
 }

@@ -51,7 +51,7 @@ void hrtree(hnode*);
 /*ordinary data*/
 
 void hilo(short*,short*);
-void getp(pat *),geth(pat *),ch(pat *),counting(pat *, long int);
+void getp(pat *),geth(pat *),ch(pat *,char **),counting(pat *, long int);
 void genp(pat *,long int);
 void digit2(int,short*,int),digitm(short*,short*,int);
 int linenum(int*,short*),linenums(int*,short*);
@@ -90,7 +90,7 @@ double *lnl1,
 int *npusr, 
 int *npdat, 
 int *iter,  
-int *converge  
+int *converge,char **assignment  
 )
 {
 time_t now;
@@ -221,7 +221,7 @@ if(*verbose)
 free(hs);
 free(c);
 if(handlemissing) free(hm);
-ch(table);
+ch(table,assignment);
 /*
 hrtree(hrt);
 */
@@ -898,7 +898,7 @@ for(i=0;i<obscom;i++)
 return (lnl+xlnl);
 }
 
-void ch(pat *table)
+void ch(pat *table,char **assignment)
 /*trace observed haplotypes*/
 {
 FILE *fo;
@@ -911,7 +911,7 @@ long int cycle, ncycle;
 short l0[mxloc],l1[mxloc],lk[mxloc],lq[mxloc];
 double tc,ej;
 
-fo=fopen("assign.dat","w");
+fo=fopen(*assignment,"w");
 if(!fo) {
   REprintf("I cannot open file assign.dat for posterior probabilities\n");
   return;

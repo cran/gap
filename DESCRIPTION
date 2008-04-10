@@ -1,12 +1,12 @@
 Package: gap
-Version: 1.0-14
-Date: 2008-3-1
+Version: 1.0-15
+Date: 2008-4-10
 Title: Genetic analysis package
-Author: Jing Hua Zhao in collaboration with other colleagues, and with
-        help from Kurt Hornik and Brian Ripley of the R core development team
+Author: Jing Hua Zhao and colleagues with inputs
+        from Kurt Hornik and Brian Ripley
 Maintainer: Jing Hua Zhao <jinghua.zhao@mrc-epid.cam.ac.uk>
 Depends: R (>= 2.0.0)
-Suggests: Design, Hmisc, haplo.stats
+Suggests: Design, Hmisc, haplo.stats, MASS
 LazyData: Yes
 LazyLoad: Yes
 Description: It is designed as an integrated package for genetic data
@@ -19,4 +19,4 @@ Description: It is designed as an integrated package for genetic data
         analysis with or without environmental covariates.
 License: GPL (>=2)
 URL: http://www.mrc-epid.cam.ac.uk/~jinghua.zhao
-Packaged: Sat Mar  1 22:39:29 2008; jhz22
+Packaged: Thu Apr 10 16:21:14 2008; jhz22

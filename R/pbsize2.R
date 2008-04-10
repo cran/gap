@@ -1,4 +1,4 @@
-# 1-3-2008 MRC-Epid JHZ
+# 3-3-2008 MRC-Epid JHZ
 
 x2 <- function(p1,p2,n1,n2)
 {
@@ -7,7 +7,7 @@ x2 <- function(p1,p2,n1,n2)
    invisible(m*m/v)
 }
 
-pbsize2 <- function(N,fc=0.5,alpha=0.05,gamma=4.5,p=0.15,kp=0.1,model="multiplicative")
+pbsize2 <- function(N,fc=0.5,alpha=0.05,gamma=4.5,p=0.15,kp=0.1,model="additive")
 {
    z <- KCC(model,gamma,p,kp)
    pp <- function(ssize)

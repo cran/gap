@@ -15,9 +15,10 @@ hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.v
      locus.label<- paste("loc-",1:nloci,sep="")
   }
 ##
-  z<- hap(id=id,data=data,nloci,loci=loci,control=hap.control(ss=1))
+  zz <- hap.control(ss=1)
+  z<- hap(id=id,data=data,nloci,loci=loci,control=zz)
 #
-  tmp1<-read.table("hap.out",header=T)
+  tmp1<-read.table(zz$hapfile,header=T)
 # unlink("hap.out")
   haplotype<-as.matrix(tmp1[,1:nloci])
   dimnames(haplotype)<-list(1:length(haplotype[,1]),locus.label)
@@ -25,7 +26,7 @@ hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.v
   tmp1<-data.frame(tmp1,hapid)
   hap.prob<-tmp1[,nloci+1]
 #
-  tmp2<-read.table("assign.out",header=T)
+  tmp2<-read.table(zz$assignfile,header=T)
 # unlink("assign.out")
   nrow<-dim(tmp2)[1]/2
   indx1<-2*1:nrow-1

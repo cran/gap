@@ -1,9 +1,9 @@
 # 10/4/2005, 13/4/2005
 gc.control <- function(xdata=FALSE, convll=1,handle.miss=0,eps=0.000001,
-                       tol=0.00000001, maxit=50,pl=0.001,verbose=T)
+                       tol=0.00000001, maxit=50,pl=0.001,assignment="assign.dat",verbose=T)
 {
    list(xdata=xdata,convll=convll,handle.miss=handle.miss,eps=eps,tol=tol,
-        maxit=maxit,pl=pl,verbose=verbose)
+        maxit=maxit,pl=pl,assignment=assignment,verbose=verbose)
 }
 
 genecounting <- function(data,weight=NULL,loci=NULL,control=gc.control())
@@ -79,7 +79,7 @@ genecounting <- function(data,weight=NULL,loci=NULL,control=gc.control())
            npusr=as.integer(npusr),
            npdat=as.integer(npdat),
            iter=as.integer(iter),
-           converge=as.integer(converge),PACKAGE="gap"
+           converge=as.integer(converge),assignment=as.character(control$assignment),PACKAGE="gap"
            )
   x<-0
   hapid<-0

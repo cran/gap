@@ -1,4 +1,5 @@
-pedtodot <- function(pedfile,makeped=F,sink=T,page="",url="",height=0.5,width=0.75,rotate=90,dir="none")
+pedtodot <- function(pedfile,makeped=FALSE,sink=TRUE,page="B5",
+            url="http://www.mrc-epid.cam.ac.uk/~jinghua.zhao/r-progs.htm",height=0.5,width=0.75,rotate=0,dir="none")
 {
   if (makeped) ped <- pedfile[,-c(5,6,7,9)]
   else ped <- pedfile
@@ -21,10 +22,10 @@ pedtodot <- function(pedfile,makeped=F,sink=T,page="",url="",height=0.5,width=0.
              "f","circle",
              "2","circle"),ncol=2,byrow=T)
   ashade <- matrix(c(
-             "y","blue",
-             "2","blue",
-             "n","grey",
-             "1","grey",
+             "y","style=filled,color=grey",
+             "2","style=filled,color=grey",
+             "n","style=\"setlinewidth(2)\"",
+             "1","style=\"setlinewidth(2)\"",
              "x","green",
              "0","green"),ncol=2,byrow=T)
   ssize <- dim(ped)[1]
@@ -61,7 +62,7 @@ pedtodot <- function(pedfile,makeped=F,sink=T,page="",url="",height=0.5,width=0.
     shade.j <- shade[selected]
     n <- length(id.j)
     for (s in 1:n) cat(paste("\"", id.j[s], "\" [shape=", sep=""), shape.j[s], 
-                      ",height=", height, ",width=",width,",style=filled,color=",shade.j[s], "] ;\n")
+                      ",height=", height, ",width=",width, shade.j[s], "] ;\n")
     fid <- match(dad.j,id.j)
     mid <- match(mom.j,id.j)
     fid <- fid[!is.na(fid)]
@@ -109,13 +110,13 @@ pedtodot <- function(pedfile,makeped=F,sink=T,page="",url="",height=0.5,width=0.
     if(sink) sink()
   }
   cat("\n")
-  detach(ped)
 }
 
 # History
-# 2/1/2005 start experiment
-# 3/1/2005 keep pedtodot in .Rd file with further work
-# 4/1/2005 success with the use of 2-d array in no need of sort, put to gap
+# 02/01/2005 start experiment
+# 03/01/2005 keep pedtodot in .Rd file with further work
+# 04/01/2005 success with the use of 2-d array in no need of sort, put to gap
+# 10/03/2008 use of setlinewidth(2) for unaffected
 #
 # The R/S program for GAW14 was originally written for Xiaoyan Liu's data from Stata
 # the data with the following variables as required in genassoc by David Clayton

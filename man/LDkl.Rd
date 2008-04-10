@@ -1,9 +1,10 @@
-\name{kbyl}
-\alias{kbyl}
-\title{LD statistics for two multiallelic loci}
-\usage{kbyl(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)}
+\name{LDkl}
+\alias{LDkl}
+\title{LD statistics for two multiallelic markers}
+\usage{LDkl(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)}
 \description{
-LD statistics for two multiallelic loci
+LD statistics for two multiallelic loci. For two diallelic makers,
+the familiar \eqn{r^2}{r^2} has standard error seX2.
 }
 \arguments{
   \item{n1}{number of alleles at marker 1}
@@ -32,7 +33,7 @@ The returned value is a list containing:
 \item{X2table}{table of Chi-squares (based on Dij)}
 \item{ptable}{table of p values}
 \item{x2}{the Chi-squared statistic}
-\item{seX2}{the variance of x2}
+\item{seX2}{the standard error of x2/n}
 \item{rho}{the measure of association}
 \item{seR}{the standard error of rho}
 \item{optrho}{the method for calculating rho}
@@ -54,26 +55,26 @@ linkage disequilibrium analysis. Bioinformatics 20:1325-1326
 
 }
 \seealso{
-\code{\link[gap]{tbyt}}
+\code{\link[gap]{LD22}}
 }
 
 \examples{
 \dontrun{
-
 # two examples in the C program 2LD:
 # two SNPs as in 2by2.dat
 # this can be compared with output from tbyt
 
 h <- c(0.442356,0.291532,0.245794,0.020319)
 n <- 481*2
-t <- kbyl(2,2,h,n)
+t <- LDkl(2,2,h,n)
 t
 
 # two multiallelic markers as in kbyl.dat
-# the two-locus haplotype vector is in the file "h"
+# the two-locus haplotype vector is in file "kbyl.dat"
 
-h <- scan("h")
-t <- kbyl(9,5,h,213*2,verbose=T)
+filespec <- file.path(.path.package("gap"),"tests/kbyl.dat")
+h <- scan(filespec,skip=1)
+t <- LDkl(9,5,h,213*2,verbose=TRUE)
 }
 }
 \author{Jing Hua Zhao}

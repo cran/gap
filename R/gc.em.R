@@ -25,7 +25,7 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
   data.gc<-genecounting(data,weight=weight,loci=loci,
            control=gc.control(xdata=control$xdata,
            eps=converge.eps,pl=0.001,maxit=maxiter,
-           handle.miss=handle.miss,verbose=F))
+           handle.miss=handle.miss,assignment=control$assignment,verbose=F))
   hap.prob<-data.gc$h
   hap.prob.noLD<-data.gc$h0
   lnlike<-data.gc$l1
@@ -34,8 +34,8 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
   niter<-data.gc$iter
   converge<-data.gc$converge
 # to further extract information and obtain unique haplotypes
-  hapas<-read.table("assign.dat")
-  unlink("assign.dat")
+  hapas<-read.table(control$assignment)
+  unlink(control$assignment)
   newnames<-c("subj","chr",locus.label,"post","hapid")
   names(hapas)<-newnames
   ncol<-nloci+4

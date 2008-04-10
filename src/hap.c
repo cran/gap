@@ -40,7 +40,7 @@ double *de,
 int *q,
 double *l1,
 int *niter,
-int *converged
+int *converged,char **hapfile, char **assignfile
 )
 {
   CODE *coding;
@@ -87,8 +87,8 @@ int *converged
     printf("Dynamic memory available %.1f Mbyte\n", memmax);
     memory = memmax;
   }
-  strcpy(of1name,"hap.out");
-  strcpy(of2name,"assign.out");
+  strcpy(of1name,*hapfile);
+  strcpy(of2name,*assignfile);
   n_loci=*nloci;
   n_subjects=*nobs;
   all_snps=1;
@@ -419,7 +419,6 @@ int *converged
   else printf("\n");
   free(i_subject);
   free(alleles);
-  free(names);
   freeU(af);
   freeU(pq);
   return;
