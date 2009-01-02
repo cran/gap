@@ -26,9 +26,9 @@ D12S1341   \tab (> 450 000)
   
 \references{
 Koch HG, McClay J, Loh E-W, Higuchi S, Zhao J-H, Sham P, Ball D, et 
-al (2000) Allele association studies with {SSR} and {SNP} markers 
+al (2000) Allele association studies with SSR and SNP markers 
 at known physical distances within a 1 Mb region embracing the 
-{ALDH2} locus in the Japanese, demonstrates linkage disequilibrium 
+ALDH2 locus in the Japanese, demonstrates linkage disequilibrium 
 extending up to 400 kb. Hum. Mol. Genet. 9:2993-2999
 }
 \keyword{datasets}

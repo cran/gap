@@ -1,3 +1,5 @@
+# 7-11-2008 MRC-Epid JHZ
+
 gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, 
        handle.miss=0, miss.val=0, control=gc.control())
 {
@@ -78,7 +80,7 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
   }
   htrtable<-htrtable/2
   dimnames(htrtable)<-list(NULL,as.character(uhap))
-
+  detach(hapdat)
   list(lnlike=lnlike,lr=lr,
        hap.prob=hap.prob,hap.prob.noLD=hap.prob.noLD,indx.subj=indx.subj,
        post=post,hap1code=hap1,hap2code=hap2,haplotype=grec2g(haplotype,nloci,tmp0),

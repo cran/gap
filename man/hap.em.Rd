@@ -58,7 +58,7 @@ See hap
 
 }
 \seealso{
-\code{\link[gap]{hap}}, \code{\link[gap]{kbyl}}
+\code{\link[gap]{hap}}, \code{\link[gap]{LDkl}}
 }
 
 \examples{

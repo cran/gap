@@ -1,9 +1,21 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.0-16
+02-01-2009	Refine asplot, mhtplot and remove braces from Rd files according to CRAN check
+01-01-2009	Modify mhtplot with real position, colors for available chromosomes, default cutoffs and gap
+31-12-2008	Remove psfig.sty from gap.Rnw
+14-11-2008	Change pos <- data[,2] to pos <- 1:length(data[,2]) according to Aron Chiang
+07-11-2008	Add 'base' to mhtplot as pointed by Aron Chiang [Yutin.A.Chiang@uth.tmc.edu]
+		Add detach(hapdat) to gc.em according to Jose Osorio [Jose.OSORIOYFORTEA@limagrain.com]
+		Add comments on permutation test of r2 as for Sofiane MEZMOUK [Sofiane.MEZMOUK@biogemma.com]
+20-08-2008	revise links to LDkl in gc.em.Rd and hap.em.Rd
+                Add HapDesign and HapFreqSE by Andrea Foulkes
+23-04-2008	add mzdz.dat
+
 Version 1.0-15
-10-04-2008      Rename tbyt/kbyl as LD22/LDkl and fix hap.c
+10-04-2008	Rename tbyt/kbyl as LD22/LDkl and fix hap.c
 07-04-2008	Add ESplot for Grace Jing Wang's query
-28-03-2008      Add regional association plot (asplot)
+28-03-2008	Add regional association plot (asplot)
 25-03-2008	Add qqfun according to qq.plot of package car by John Fox
 22-03-2008	Add gcontrol2 (experimental)
 21-03-2008	Remove labels "chr" in mhtplot
@@ -13,8 +25,8 @@ Version 1.0-15
 10-03-2008	Revise pedtodot according to pedigrees from Jinliang Wang/Richard Mott
 07-03-2008	Add Fisher's method for meta-analysis to metap
 06-03-2008	Replace get() with data[""] in metap/metareg
-                Refine metap.Rd to make it consistent with the GIANT example
-                Document some functions in gap-internal.Rd
+		Refine metap.Rd to make it consistent with the GIANT example
+		Document some functions in gap-internal.Rd
 		Provide option for file of haplotype assignment
 04-03-2008	Add metap, and modify metareg to accept multiple records
 		Add PARn, snp.ES, snp.HWE, snp.PAR

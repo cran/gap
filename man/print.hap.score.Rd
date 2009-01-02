@@ -16,9 +16,6 @@ Method function to print a class of type hap.score
 \value{
 Nothing is returned.
 }
-\section{Side Effects}{
-
-}
 \details{
 This is a print method function used to print information from
 hap.score class, with haplotype-specific information given in a
@@ -31,7 +28,7 @@ Score tests for association of traits with haplotypes when
 linkage phase is ambiguous. Amer J Hum Genet 70:425-34
 }
 \seealso{
-hap.score
+\code{\link[gap]{hap.score}}
 }
 \examples{
 \dontrun{

@@ -3,7 +3,14 @@
 \title{LD statistics for two diallelic markers}
 \usage{LD22(h,n)}
 \description{
-LD statistics for two SNPs
+LD statistics for two SNPs.
+
+It is possible to perform permutation test of \eqn{r^2} by re-ordering the genotype through
+R's sample function, obtaining the haplotype frequencies by \code{\link[gap]{gc.em}}
+or \code{\link[gap]{genecounting}}, supplying the estimated haplotype frequencies to
+the current function and record x2, and comparing the observed x2 and that from the
+replicates.
+
 }
 
 \arguments{

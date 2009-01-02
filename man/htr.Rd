@@ -23,9 +23,12 @@ The returned value is a list containing:
 \section{References}{
 Zaykin DV, Westfall PH, Young SS, Karnoub MA, Wagner MJ, Ehm MG (2002) Testing association of statistically inferred haplotypes with 
 discrete and continuous traits in samples of unrelated individuals. Hum. Hered. 53:79-91
+
+Xie R, Stram DO (2005). Asymptotic equivalence between two score tests for haplotype-specific risk in general linear models.
+Genet. Epidemiol. 29:186-170
 }
 \seealso{
-\code{\link[gap]{htr}}
+\code{\link[gap]{hap.score}}
 }
 
 \examples{
@@ -48,6 +51,15 @@ apoeapoc.gc<-gc.em(apoeapoc[,5:8])
 y<-apoeapoc$y
 for(i in 1:length(y)) if(y[i]==2) y[i]<-1
 htr(y,apoeapoc.gc$htrtable)
+
+# 20-8-2008
+# part of the example from useR!2008 tutorial by Andrea Foulkes
+# It may be used beyond the generalized linear model (GLM) framework
+HaploEM <- haplo.em(Geno,locus.label=SNPnames)
+HapMat <- HapDesign(HaploEM)
+m1 <- lm(Trait~HapMat)
+m2 <- lm(Trait~1)
+anova(m2,m1)
 }
 }
 

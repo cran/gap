@@ -1,6 +1,6 @@
 Package: gap
-Version: 1.0-15
-Date: 2008-4-10
+Version: 1.0-17
+Date: 2009-1-2
 Title: Genetic analysis package
 Author: Jing Hua Zhao and colleagues with inputs
         from Kurt Hornik and Brian Ripley
@@ -19,4 +19,4 @@ Description: It is designed as an integrated package for genetic data
         analysis with or without environmental covariates.
 License: GPL (>=2)
 URL: http://www.mrc-epid.cam.ac.uk/~jinghua.zhao
-Packaged: Thu Apr 10 16:21:14 2008; jhz22
+Packaged: Fri Jan  2 14:26:07 2009; jhz22

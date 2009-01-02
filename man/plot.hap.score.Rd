@@ -16,9 +16,6 @@ Method function to plot a class of type hap.score
 \value{
 Nothing is returned.
 }
-\section{Side Effects}{
-
-}
 \details{
 This is a plot method function used to plot haplotype frequencies on
 the x-axis and haplotype-specific scores on the y-axis. Because
@@ -31,7 +28,7 @@ Score tests for association of traits with haplotypes when
 linkage phase is ambiguous. Amer J Hum Genet 70:425-34
 }
 \seealso{
-hap.score
+\code{\link[gap]{hap.score}}
 }
 \examples{
 \dontrun{

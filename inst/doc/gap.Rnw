@@ -2,7 +2,7 @@
 \usepackage{Sweave}
 \usepackage{url}
 \usepackage{a4wide}
-\usepackage{amsmath,epsfig,psfig}
+\usepackage{amsmath,epsfig}
 \usepackage{graphicx}
 \usepackage[authoryear,round]{natbib}
 \bibliographystyle{plainnat}

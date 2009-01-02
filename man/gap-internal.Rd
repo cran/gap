@@ -1,5 +1,7 @@
 \name{gap-internal}
 \alias{PARn}
+\alias{HapDesign}
+\alias{HapFreqSE}
 \alias{a2g}
 \alias{g2a}
 \alias{g2a.c}
@@ -18,7 +20,7 @@
 \alias{revhap.i}
 \alias{toETDT}
 \alias{ungcode}
-\title{internal functions for gap}
+\title{Internal functions for gap}
 \usage{
 a2g(a1,a2)
 g2a(g)
@@ -30,6 +32,13 @@ revhap(loci,hapid)
 These are internal functions.
 
 PARn calculates population attributable risk (PAR) for a list of frequencies and relative risks (RRs).
+
+HapDesign and HapFreqSE both accept a \code{\link[haplo.stats]{haplo.em}} object to derieve a design/dosage
+matrix and standard error of haplotype frequency estimates. The former is appropriate for haplotype trend 
+regression (HTR), e.g., within the generalized linear model (GLM) framework to be equivllant to a formal 
+approach as implemented in the package haplo.stats and hap.score. However, they are expected to be compatible 
+with objects from gc.em() \code{\link[gap]{gc.em}} and \code{\link[gap]{hap.em}}. The two functions are 
+included as courtesy of Prof Andrea Foulkes from the useR!2008 tutorial.
 
 a2g gives allele-to-genotype conversion.
 

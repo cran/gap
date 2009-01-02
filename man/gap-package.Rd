@@ -18,7 +18,7 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-15\cr
+Version: \tab 1.0-16\cr
 Depends: \tab R(>= 2.0.0)\cr
 Suggests: \tab Design, Hmisc, haplo.stats\cr
 License: \tab GPL (>=2)\cr

@@ -1,41 +1,49 @@
-# 25-3-2008 MRC-Epid JHZ
-
-mhtplot <- function(data,logscale=TRUE, base=10, cutoffs=c(3,5,7,9), color=NULL,labels=paste(1:22,sep=""),...)
+mhtplot <- function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8,10), colors=NULL, labels=NULL, gap=NULL, ...)
 {
   chr <- data[,1]
-  pos <- data[,2]
+  pos <- newpos <- data[,2]
   p <- data[,3]
-  affy <- as.vector(table(chr))
-  CM <- cumsum(affy)
-  n.markers <- sum(affy)
-  n.chr <- length(affy)
-  id <- 1:n.chr
-  eps <- .Machine$double.eps
-  dp <- seq(eps,1,length=n.markers)
+  tablechr <- table(chr)
+  allchr <- as.vector(tablechr)
+  n.chr <- length(allchr)
+  colorlist <- colors()
+  if(is.null(colors)) colors <- sample(colorlist,n.chr)
+  if(is.null(labels)) labels <- names(tablechr)
+  if(is.null(gap)) gap <- 1
+  CMindex <- cumsum(allchr)
+  for(i in 1:n.chr)
+  {
+     u <- CMindex[i]
+     l <- CMindex[i]-allchr[i]+1
+     chr <- l:u
+     if (usepos) d <- diff(pos[chr])
+     else d <- rep(1,allchr[i])
+     newpos[chr] <- c(gap,d)
+  }
+  CM <- cumsum(as.numeric(newpos))
+  dp <- seq(base^min(-cutoffs),1,length=sum(allchr))
   if (logscale) y <- -log(dp,base)
   else y <- dp
   par(xaxt="n",yaxt="n")
-  plot(pos,y,type="n",xlab="",ylab="",axes=FALSE,...)
+  plot(CM,y,type="n",xlab="",ylab="",axes=FALSE,...)
   axis(1,tick=FALSE)
   axis(2,tick=FALSE)
-  colorlist <- colors()
-  if(is.null(color)) color <- sample(colorlist,22)
+  par(xaxt="s",yaxt="s")
   for(i in 1:n.chr)
   {
-     u <- CM[i]
-     l <- CM[i]-affy[i]+1
-     cat("Plotting points ",l,"-",u,"\n");
+     u <- CMindex[i]
+     l <- CMindex[i]-allchr[i]+1
      chr <- l:u
-     if (logscale) y <- -log(p[chr])
+     cat("Plotting points ",l,"-",u,"\n");
+     if (logscale) y <- -log(p[chr],base)
      else y <- p[chr]
-     points(pos[chr],y,col=color[i],...)
+     points(CM[chr],y,col=colors[i],...)
+     axis(1,at=ifelse(i==1,0,CM[l]),labels=labels[i])
   }
-  par(xaxt="s",yaxt="s")
-  axis(1,at=c(0,CM[-n.chr]),labels=labels)
-  if (logscale)
-  {
-     abline(h=cutoffs)
-     mtext(eval(expression(cutoffs)),2,at=cutoffs)
-     # axis(2,at=cutoffs,labels=eval(expression(10^(-cutoffs))))
-  }
+  abline(h=cutoffs)
+  mtext(paste(cutoffs," "),2,at=cutoffs)
+  mtext(paste("-log",base,"(Observed p)",sep=""),2,line=2.5,las=0)
+  mtext("Chromosome",1,line=2.5,las=0)
 }
+
+#1-1-2009 MRC-Epid JHZ

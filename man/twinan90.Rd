@@ -51,7 +51,8 @@ data. Biometrics. 49(2):557-68
 
 \examples{
 \dontrun{
-mzdz <- matrix(scan("mzdz.dat",skip=1),ncol=2,byrow=T)
+filespec <- file.path(.path.package("gap"),"tests/mzdz.dat")
+mzdz <- matrix(scan(filespec,skip=1),ncol=2,byrow=T)
 mzdat <- mzdz[1:131,]
 dzdat <- mzdz[132:206,]
 twinan90(mzdat,dzdat,xlamb=2)

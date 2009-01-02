@@ -69,7 +69,7 @@ analysis. Comp Meth Prog Biomed 70: 1-9
 
 }
 \seealso{
-\code{\link[gap]{genecounting}}, \code{\link[gap]{kbyl}}
+\code{\link[gap]{genecounting}}, \code{\link[gap]{LDkl}}
 }
 
 \examples{
