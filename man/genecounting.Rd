@@ -11,18 +11,18 @@ Gene counting for haplotype analysis with missing data
  \item{loci}{an array containing number of alleles at each locus}
  \item{control}{is a function with the following arguments: 
       \enumerate{
-      \item{xdata}{a flag indicating if the data involves X chromosome, if so, the
+      \item xdata a flag indicating if the data involves X chromosome, if so, the
 first column of data indicates sex of each subject: 1=male, 2=female. The marker 
 data are no different from the autosomal version for females, but for males, two copies
-of the single allele present at a given locus.}
-      \item{convll}{set convergence criteria according to log-likelihood, if its value set to 1}
-      \item{handle.miss}{to handle missing data, if its value set to 1}
-      \item{eps}{the actual convergence criteria, with default value 1e-5}
-      \item{tol}{tolerance for genotype probabilities with default value 1e-8}
-      \item{maxit}{maximum number of iterations, with default value 50}
-      \item{pl}{criteria for trimming haplotypes according to posterior probabilities}
-      \item{assignment}{filename containing haplotype assignment}
-      \item{verbose}{If TRUE, yields print out from the C routine}
+of the single allele present at a given locus.
+      \item convll set convergence criteria according to log-likelihood, if its value set to 1
+      \item handle.miss to handle missing data, if its value set to 1
+      \item eps the actual convergence criteria, with default value 1e-5
+      \item tol tolerance for genotype probabilities with default value 1e-8
+      \item maxit maximum number of iterations, with default value 50
+      \item pl criteria for trimming haplotypes according to posterior probabilities
+      \item assignment filename containing haplotype assignment
+      \item verbose If TRUE, yields print out from the C routine
       }
   }
 }
@@ -60,7 +60,7 @@ disequilibrium analysis. Bioinformatics, 20, 1325-1326
 
 }
 \seealso{
-\code{\link[gap]{gc.em}}, \code{\link[gap]{kbyl}}
+\code{\link[gap]{gc.em}}, \code{\link[gap]{LDkl}}
 }
 
 \examples{

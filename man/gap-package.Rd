@@ -18,9 +18,9 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-16\cr
+Version: \tab 1.0-20\cr
 Depends: \tab R(>= 2.0.0)\cr
-Suggests: \tab Design, Hmisc, haplo.stats\cr
+Suggests: \tab Design, Hmisc, haplo.stats, magic, pedigree, MASS\cr
 License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/~jinghua.zhao\cr
 }
@@ -34,6 +34,7 @@ aldh2                   ALDH2 markers and Alcoholism
 apoeapoc                APOE/APOC1 markers and Schizophrenia
 asplot                  Regional association plot
 bt                      Bradley-Terry model for contingency table
+b2r                     Obtain correlation coefficients and their variance-covariances
 ccsize                  Power and sample size for case-cohort design
 chow.test               Chow's test for heterogeneity in two regressions
 cf                      Cystic Fibrosis data
@@ -67,6 +68,7 @@ mhtplot                 Manhattan plot of p values
 mia                     multiple imputation analysis for hap
 mtdt                    Transmission/disequilibrium test of a multiallelic marker
 muvar                   Means and variances under 1- and 2- locus (diallelic) QTL model
+mvmeta                  Multivariate meta-analysis based on generalized least squares
 nep499                  A study of Alzheimer's disease with eight SNPs and APOE
 pbsize                  Power for population-based association design
 pbsize2                 Power for case-control association design

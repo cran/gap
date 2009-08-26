@@ -62,7 +62,7 @@ linkage disequilibrium analysis. Bioinformatics 20:1325-1326
 \dontrun{
 # two examples in the C program 2LD:
 # two SNPs as in 2by2.dat
-# this can be compared with output from tbyt
+# this can be compared with output from LD22
 
 h <- c(0.442356,0.291532,0.245794,0.020319)
 n <- 481*2

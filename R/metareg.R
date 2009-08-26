@@ -1,4 +1,4 @@
-# 6-3-2008 MRC-Epid JHZ
+# 23-7-2009 MRC-Epid JHZ
 
 metareg <- function(data,N,verbose="Y",prefixb="b",prefixse="se")
 {
@@ -40,7 +40,7 @@ metareg <- function(data,N,verbose="Y",prefixb="b",prefixse="se")
           Z_F[j] <- BETA_F[j]/SE_F[j]
           P_F[j] <- 2*pnorm(-abs(Z_F[j]))
       }
-      for (i in 1:N) if(OK[j,i]==1) QW[i] <- QW[i]+W[j,i]*(B[j,i]-BETA_F[j])^2
+      for (i in 1:N) if(OK[j,i]==1) QW[j] <- QW[j]+W[j,i]*(B[j,i]-BETA_F[j])^2
       if (K[j]>1)
       {
          P_HETER[j] <- pchisq(QW[j],K[j]-1,lower.tail=FALSE)

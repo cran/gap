@@ -1,4 +1,4 @@
-mhtplot <- function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8,10), colors=NULL, labels=NULL, gap=NULL, ...)
+mhtplot <- function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, gap=NULL, ...)
 {
   chr <- data[,1]
   pos <- newpos <- data[,2]
@@ -38,12 +38,12 @@ mhtplot <- function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8,
      if (logscale) y <- -log(p[chr],base)
      else y <- p[chr]
      points(CM[chr],y,col=colors[i],...)
-     axis(1,at=ifelse(i==1,0,CM[l]),labels=labels[i])
+     axis(1,at=ifelse(i==1,0,CM[l]),labels=labels[i],...)
   }
   abline(h=cutoffs)
   mtext(paste(cutoffs," "),2,at=cutoffs)
-  mtext(paste("-log",base,"(Observed p)",sep=""),2,line=2.5,las=0)
+  mtext(paste("-log",base,"(Observed value)",sep=""),2,line=2.5,las=0)
   mtext("Chromosome",1,line=2.5,las=0)
 }
 
-#1-1-2009 MRC-Epid JHZ
+#20-2-2009 MRC-Epid JHZ

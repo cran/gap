@@ -1,12 +1,12 @@
 \name{fbsize}
 \alias{fbsize}
 \title{Sample size for family-based linkage and association design}
-\usage{fbsize(gamma,p,debug=0,error=0)}
+\usage{fbsize(gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)}
 \description{
 This function implements Risch and Merikangas (1996) statistics 
-evaluating power for family-based linkage and association design.
-They are potentially useful in the prospect of genome-wide 
-association studies.
+evaluating power for family-based linkage (affected sib pairs, ASP) and
+association design. They are potentially useful in the prospect of
+genome-wide association studies.
 
 The function calls auxiliary functions sn() and strlen; sn() 
 contains the necessary thresholds for power calculation while
@@ -16,6 +16,8 @@ strlen() evaluates length of a string (generic).
 \arguments{
   \item{gamma}{genotype relative risk assuming multiplicative model}
   \item{p}{frequency of disease allele}
+  \item{alpha}{Type I error rates for ASP linkage, TDT and ASP-TDT}
+  \item{beta}{Type II error rate}
   \item{debug}{verbose output}
   \item{error}{0=use the correct formula,1=the original paper}
 }
@@ -80,6 +82,8 @@ p <- 0.15
 cat("\nAlzheimer's:\n\n")
 fbsize(g,p)
 options(echo=TRUE)
+# note to replicate the Table we need set alpha=9.961139e-05,4.910638e-08 and beta=0.2004542.
+# or reset the quantiles in fbsize.R
 }
 \author{Jing Hua Zhao}
 \note{extracted from rm.c}

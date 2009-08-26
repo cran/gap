@@ -1,14 +1,34 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.0-20
+26-08-2009	rename kbyl as LDkl in geneecounting.Rd, add references to vignette for b2r/mvmeta 
+
+Version 1.0-19
+25-08-2009	Attempt to do away with warning from 2ld.c
+
+Version 1.0-18
+25-08-2009	Remove braces for enumerate items in genecounting.Rd and hap.Rd
+18-08-2009	Add b2r in order for meta-analysis via correlations to be conducted
+17-08-2009	Add arguments alpha and beta to fbsize as needed by Tetyana Zayats [zayatst@Cardiff.ac.uk]
+		Add mvmeta from an earlier test, pending on further work on using linear regression estimates
+11-08-2009	Suggests pedigree package
+23-07-2009	Fix subscript for QW in metareg as pointed by Emmanouela Repapi [er82@leicester.ac.uk]
+08-06-2009	Revise mhtplot documentation example according to Meg Rose [mrose19@jhu.edu]
+03-01-2009	Fix link to Citations.txt
+		Modify gap-package.Rd and mhtplot.Rd
+
+Version 1.0-17
+02-01-2009	Remove braces from Rd files according to CRAN check
+
 Version 1.0-16
-02-01-2009	Refine asplot, mhtplot and remove braces from Rd files according to CRAN check
+02-01-2009	Refine asplot and mhtplot
 01-01-2009	Modify mhtplot with real position, colors for available chromosomes, default cutoffs and gap
 31-12-2008	Remove psfig.sty from gap.Rnw
 14-11-2008	Change pos <- data[,2] to pos <- 1:length(data[,2]) according to Aron Chiang
 07-11-2008	Add 'base' to mhtplot as pointed by Aron Chiang [Yutin.A.Chiang@uth.tmc.edu]
 		Add detach(hapdat) to gc.em according to Jose Osorio [Jose.OSORIOYFORTEA@limagrain.com]
 		Add comments on permutation test of r2 as for Sofiane MEZMOUK [Sofiane.MEZMOUK@biogemma.com]
-20-08-2008	revise links to LDkl in gc.em.Rd and hap.em.Rd
+20-08-2008	Revise links to LDkl in gc.em.Rd and hap.em.Rd
                 Add HapDesign and HapFreqSE by Andrea Foulkes
 23-04-2008	add mzdz.dat
 

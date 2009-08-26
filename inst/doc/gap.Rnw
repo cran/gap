@@ -17,7 +17,7 @@
 
 \begin{document}
 \SweaveOpts{engine=R,echo=FALSE,pdf=TRUE}
-\title{An Integrated Genetic Analysis Package Using R}
+\title{A Genetic Analysis Package with R}
 \author{Jing Hua Zhao}
 \date{}
 \maketitle
@@ -45,7 +45,7 @@ be part of a bigger effort to fulfill most of the requirements foreseen by many,
 e.g. ~\cite{guo00}, within the portable environment of R for data management, 
 analysis, graphics and object-oriented programming. My view has been outlined
 more formally in ~\cite{zt06a} and ~\cite{zt06b} in relation to other package
-systems. Also reported are ~\cite{zhao05} and ~\cite{zhao06} on package {\bf  kinship}.\\
+systems. Also reported are ~\cite{zhao05} and ~\cite{zhao06} on package {\bf kinship}.\\
 
 The number of functions are quite limited and experimental, but I already feel
 the enormous advantage by shifting to R and would like sooner rather than later
@@ -65,6 +65,7 @@ aldh2                   ALDH2 markers and alcoholism
 apoeapoc                APOE/APOC1 markers and schizophrenia
 asplot                  Regional association plot
 bt                      Bradley-Terry model for contingency table
+b2r                     Obtain correlation coefficients and their variance-covariances
 ccsize                  Power and sample size for case-cohort design
 chow.test               Chow's test for heterogeneity in two
                         regressions
@@ -108,6 +109,7 @@ mtdt                    Transmission/disequilibrium test of a
                         multiallelic marker
 muvar                   Means and variances under 1- and 2- locus
                         (diallelic) QTL model
+mvmeta                  Multivariate meta-analysis based on generalized least squares
 nep499                  A study of Alzheimer's disease with eight SNPs and APOE
 pbsize                  Power for population-based association design
 pbsize2                 Power for case-control association design
@@ -178,7 +180,8 @@ Unaware of any bug. However, better memory management is expected.
 \section{Bibliographic note}
 
 The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gholamic94},
-~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97}, ~\cite{sham97}, 
+~\cite{hartung08}, ~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97},
+~\cite{sham97}, ~\cite{elston75},
 ~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, ~\cite{hirotsu01}, 
 ~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{wacholder04}, ~\cite{wang05},
 ~\cite{skol06}, ~\cite{wakefield07}.
@@ -186,4 +189,4 @@ The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gho
 \bibliography{gap}
 \end{document}
 
-% Date last modified: 15 March 2008
+% Date last modified: 26 August 2009

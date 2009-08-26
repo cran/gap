@@ -87,7 +87,7 @@ void kbyl(int *nalleles1, int *nalleles2, double *h, double *haplotypes,
 double Dij,VarDij,Dmax,Xij,Dijp,VarDijp,a,b,Eijtable[maxalleles*maxalleles];
 double ai,aip,bj,bjp,ak,akp,bl,blp;
 double AI,AIP,BJ,BJP;
-double W,t=0,tt[4],sgn=0;
+double W=0,t=0,tt[4]={0,0,0,0},sgn=0;
 double Pij,Pil,Pkj,Dkj,Dkl,Dil,Eij,Eil,Ekj,Ekl;
 int i,j,k,l,ij,ik,jl,il,jk;
 double po,pe;

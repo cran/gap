@@ -1,7 +1,7 @@
 \name{mhtplot}
 \alias{mhtplot}
 \title{Manhattan plot of p values}
-\usage{mhtplot(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8,10), colors=NULL, labels=NULL, gap=NULL, ...)}
+\usage{mhtplot(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, gap=NULL, ...)}
 \description{
 To generate Manhattan plot of genomewide significance (p values). It could also be
 used for any random variable that is uniformly distributed. By default, a log10-transformation is applied so 
@@ -38,15 +38,22 @@ n.markers <- sum(affy)
 n.chr <- length(affy)
 test <- data.frame(chr=rep(1:n.chr,affy),pos=1:n.markers,p=runif(n.markers))
 
-#to reduce size of the plot
-#bitmap("mhtplot.bmp",res=72*5)
+# to reduce size of the plot
+# bitmap("mhtplot.bmp",res=72*5)
+oldpar <- par()
 par(las="2",cex=0.6)
 colors <- rep(c("blue","green"),11)
+# other colors, e.g.
+# colors <- c("red","blue","green","cyan","yellow","gray","magenta","red","blue","green",
+#             "cyan","yellow","gray","magenta","red","blue","green","cyan","yellow","gray","magenta","red")
 mhtplot(test,colors=colors,pch=19,bg=colors)
 title("A simulated example according to EPIC-Norfolk QCed SNPs")
+par(cex.axis=1.3)
 mhtplot(test,usepos=TRUE,colors=colors,gap=10000,pch=19,bg=colors)
 title("Real positions with a gap of 10000 bp between chromosomes")
-#dev.off()
+box()
+par(oldpar)
+# dev.off()
 }
 }
 \author{Jing Hua Zhao}

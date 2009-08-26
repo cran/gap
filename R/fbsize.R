@@ -1,24 +1,23 @@
 # program to obtain power for family-based and population-based association study
-# Jing Hua Zhao 30-12-98
+# Jing Hua Zhao 30-12-98, 19-8-2009
 # Risch & Merikangas 1996
 # Science 273: 1516-17 13SEP1996
 # Science 275: 1327-30 28FEB1997
 
-fbsize <- function (gamma,p,debug=0,error=0)
+fbsize <- function (gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)
 # Family-based sample sizes
 {
   strlen <- function(x) length(unlist(strsplit(as.character(x),split="")))
-  sn <- function (all,op)
+  sn <- function (all,alpha,beta,op)
   # m=0,v=1 under the null hypotheses
   # to be used by fbsize()
   {
     m <- all[1]
     v <- all[2]
-    z1beta <- -0.84              # 1-beta=0.8,-.84162123
-    if (op==1) zalpha <- 3.72    # alpha=1E-4,3.7190165
-    else zalpha <- 5.33          # alpha=5E-8,5.3267239
+    z1beta <- qnorm(beta)                # -0.84, 1-beta=0.8 (-.84162123)
+    zalpha <- -qnorm(alpha)              #  3.72, alpha=1E-4 (3.7190165); 5.33, alpha=5E-8 (5.3267239)
     s <- ((zalpha-sqrt(v)*z1beta)/m)^2/2 # shared/transmitted for each parent
-    if(op==3) s <- s/2                  # the sample size is halved
+    if(op==3) s <- s/2                   # the sample size is halved
     s
   }
 
@@ -44,14 +43,14 @@ fbsize <- function (gamma,p,debug=0,error=0)
   else aa.v <- 4*y*(1-y)
   aa <- c(aa.m,aa.v)
 
-  n1 <- sn(aa,1)
+  n1 <- sn(aa,alpha[1],beta,1)
 
 # TDT
   aa.m <- sqrt(h)*(gamma-1)/(gamma+1)
   aa.v <- 1-h*((gamma-1)/(gamma+1))^2
   aa <- c(aa.m,aa.v)
 
-  n2 <- sn(aa,2)
+  n2 <- sn(aa,alpha[2],beta,2)
 
 # ASP-TDT
   h <- h2 <- p*q*(gamma+1)^2/(2*(p*gamma+q)^2+p*q*(gamma-1)^2)
@@ -59,7 +58,7 @@ fbsize <- function (gamma,p,debug=0,error=0)
   aa.v <- 1-h*((gamma-1)/(gamma+1))^2
   aa <- c(aa.m,aa.v)
 
-  n3 <- sn(aa,3)
+  n3 <- sn(aa,alpha[3],beta,3)
 
   cat(format(gamma,width=4,nsmall=2),
       format(p,width=5,nsmall=2),
