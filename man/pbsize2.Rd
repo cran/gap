@@ -9,7 +9,7 @@ size(s), a proportion of which (fc) being cases, the function calculates power e
 for a given type I error (alpha), genotype relative risk (gamma), frequency of the
 risk allele (p), the prevalence of disease in the population (kp) and optionally a
 disease model (model). A major difference would be the consideration of case/control
-ascertainment in neither \code{\link[gap]{pbsize}} nor \code{\link[genetics]{power.casectrl}}.
+ascertainment in \code{\link[gap]{pbsize}}.
 
 Internally, the function obtains a baseline risk to make the disease model consistent
 with Kp as in \code{\link[gap]{tscc}} and should produce accurate power estimate. Note it
@@ -31,7 +31,7 @@ The returned value is the power for the specified design.
 }
 
 \seealso{
-The design follows that of \code{\link[gap]{pbsize}} and \code{\link[genetics]{power.casectrl}}.
+The design follows that of \code{\link[gap]{pbsize}}.
 }
 \examples{
 \dontrun{

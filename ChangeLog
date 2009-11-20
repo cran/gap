@@ -1,7 +1,15 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.0-21
+20-11-2009	Fix bug on read.ms.output when nsam==1 and make mhtplot to accommodate generic data as pointed
+		by Dagmar Kapell [Dagmar.Kapell@sac.ac.uk]
+19-11-2009	Add function read.ms.output after work on EJHG paper and revise link to qqfun from qqunif
+10-11-2009	Add function abc based on EPIC-Norfolk data for QQR for Shengxu Li [shengxu.li@mrc-epid.cam.ac.uk]
+08-11-2009	Add confidence interval option to qqunif as required by Andy Wood [arwood@pms.ac.uk]
+28-08-2009	Remove references to qqline, qqplot of stats in qqfun.Rd and depreciated power.casectrl of genetics
+
 Version 1.0-20
-26-08-2009	rename kbyl as LDkl in geneecounting.Rd, add references to vignette for b2r/mvmeta 
+26-08-2009	Rename kbyl as LDkl in geneecounting.Rd, add references to vignette for b2r/mvmeta 
 
 Version 1.0-19
 25-08-2009	Attempt to do away with warning from 2ld.c

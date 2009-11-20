@@ -1,7 +1,7 @@
 \name{mhtplot}
 \alias{mhtplot}
 \title{Manhattan plot of p values}
-\usage{mhtplot(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, gap=NULL, ...)}
+\usage{mhtplot(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, xlab=NULL, gap=NULL, ...)}
 \description{
 To generate Manhattan plot of genomewide significance (p values). It could also be
 used for any random variable that is uniformly distributed. By default, a log10-transformation is applied so 
@@ -16,6 +16,7 @@ appropriate to plot and some but not all chromosomes.
 \item{cutoffs}{the cut-offs where horizontal line(s) are drawn}
 \item{colors}{the color for different chromosome(s), and random if unspecified}
 \item{labels}{labels for the x-axis}
+\item{xlab}{an enforcement of the x-axis when the plot is requested for data in other context}
 \item{gap}{gap between chromosomes}
 \item{...}{other options in compatible with the R plot function}
 }
@@ -30,6 +31,11 @@ The plot is shown on or saved to the appropriate device.
 
 \examples{
 \dontrun{
+# foo example
+test <- matrix(c(1,1,4,1,1,6,1,10,3,2,1,5,2,2,6,2,4,8),byrow=TRUE,6)
+mhtplot(test)
+mhtplot(test,logscale=F)
+
 # fake example with Affy500k data
 affy <-c(40220, 41400, 33801, 32334, 32056, 31470, 25835, 27457, 22864, 28501, 26273, 
          24954, 19188, 15721, 14356, 15309, 11281, 14881, 6399, 12400, 7125, 6207)

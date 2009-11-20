@@ -1,32 +1,41 @@
 \name{qqunif}
 \alias{qqunif}
 \title{Q-Q plot for uniformly distributed random variable}
-\usage{qqunif(u,logscale=TRUE,base=10,col=palette()[4],lcol=palette()[2],...)}
+\usage{qqunif(u,type="unif",logscale=TRUE,base=10,col=palette()[4],lcol=palette()[2],ci=FALSE,alpha=0.05,...)}
 \description{
 This function produces Q-Q plot for a random variable following uniform distribution with or
-without using log-scale.
+without using log-scale. Note that the log-scale is by default for type "exp", which is a plot based on
+exponential order statistics. This appears to be more appropriate than the commonly used procedure whereby
+the expected value of uniform order statistics is directly log-transformed.
 }
 \arguments{
   \item{u}{a vector of uniformly distributed random variables}
+  \item{type}{string option to specify distribution: "unif"=uniform, "exp"=exponential}
   \item{logscale}{to use logscale}
   \item{base}{the base of the log function}
   \item{col}{color for points}
   \item{lcol}{color for the diagonal line}
+  \item{ci}{logical option to show confidence interval}
+  \item{alpha}{1-confidence level, e.g., 0.05}
   \item{...}{other options as appropriae for the qqplot function}
 }
 
 \value{
 The returned value is a list with components of a qqplot:
 
-\item{x}{-log(expected value for uniform order statistics)}
-\item{y}{-log(observed value)}
+\item{x}{expected value for uniform order statistics or its -log(,base) counterpart}
+\item{y}{observed value or its -log(,base) counterpart}
 }
 
 \section{References}{
+Balakrishnan N, Nevzorov VB. A Primer on Statistical Distributions. Wiley 2003.
+
+Casella G, Berger RL. Statistical Inference, Second Edition. Duxbury 2002.
+
 Davison AC. Statistical Models. Cambridge University Press 2003.
 }
 \seealso{
-\code{\link[gap]{mhtplot}}
+\code{\link[gap]{qqfun}}
 }
 \examples{
 \dontrun{

@@ -18,7 +18,7 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-20\cr
+Version: \tab 1.0-21\cr
 Depends: \tab R(>= 2.0.0)\cr
 Suggests: \tab Design, Hmisc, haplo.stats, magic, pedigree, MASS\cr
 License: \tab GPL (>=2)\cr
@@ -30,6 +30,7 @@ Index:
 BFDP                    Bayesian false-discovery probability
 FPRP                    False-positive report probability
 SNP                     Functions for single nucleotide polymorphisms (SNPs)
+abc                     Test/Power calculation for mediating effect
 aldh2                   ALDH2 markers and Alcoholism
 apoeapoc                APOE/APOC1 markers and Schizophrenia
 asplot                  Regional association plot
@@ -80,6 +81,7 @@ plot.hap.score          Plot Haplotype Frequencies versus Haplotype Score Statis
 print.hap.score         Print a hap.score object
 qqfun                   Quantile-comparison plots
 qqunif                  Q-Q plot for uniformly distributed random variable
+read.ms.output          A utility function to read ms output
 s2k                     Statistics for 2 by K table
 snca                    A study of Parkinson's disease and SNCA makers
 tscc                    Power calculation for two-stage case-control design

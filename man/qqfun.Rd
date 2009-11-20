@@ -65,8 +65,7 @@ qqfun(x, distribution="norm", ylab=deparse(substitute(x)),
 }
 \author{John Fox, Jing Hua Zhao}
 
-\seealso{\code{\link[stats]{qqplot}}, \code{\link[stats]{qqnorm}}, \code{\link[stats]{qqline}}, 
-\code{\link[gap]{qqunif}}, \code{\link[gap]{gcontrol2}}}
+\seealso{\code{\link[stats]{qqnorm}}, \code{\link[gap]{qqunif}}, \code{\link[gap]{gcontrol2}}}
 
 \examples{
 \dontrun{
