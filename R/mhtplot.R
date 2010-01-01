@@ -22,7 +22,8 @@ function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NU
      newpos[chr] <- c(gap,d)
   }
   CM <- cumsum(as.numeric(newpos))
-  dp <- seq(min(p),max(p),length=sum(allchr))
+  if (is.null(ylim)) dp <- seq(min(p),max(p),length=sum(allchr))
+  else dp <- seq(ylim[1],ylim[2],length=sum(allchr))
   if (logscale) y <- -log(dp,base) else y <- dp
   par(xaxt="n",yaxt="n")
   plot(CM,y,type="n",xlab="",ylab="",axes=FALSE,...)
@@ -46,4 +47,4 @@ function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NU
   mtext(xlabel,1,line=2.5,las=0)
 }
 
-#20-11-2009 MRC-Epid JHZ
+#27-11-2009 MRC-Epid JHZ

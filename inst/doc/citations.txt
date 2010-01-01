@@ -1,8 +1,32 @@
 2LD
 
+Zahra Fazeli, Sadeq Vallian
+Estimation Haplotype Frequency of BglII/EcoRI/VNTR Markers at the PAH Gene Region in Iranian Population
+Int J Hum Genet 9(2):115-121, 2009
+
+Chi-Un Pae, Antonio Drago, Alberto Chiesa, Laura Mandelli, Alessandro Serretti, Tae-Youn Jun
+Association analysis of the Tumor necrosis factor gene polymorphisms (TNFA 238 and 302) in the development of schizophrenia: Impact on the  antipsychotic treatment response 
+Gene Ther Mol Biol Vol 13, 152-157, 2009
+
+Hettinger JA
+The role of dopamine-related genes in autism spectrum disorders: evidence for specific genes and risk for ASD in families with affected males
+https://qspace.library.queensu.ca/bitstream/1974/1725/1/Hettinger_Joseph_A_200903_PhD.pdf, 2009
+
+J Varadéa, JR Lamas, M Fernández-Arqueroa, JA Jover, E G. de la Conchaa, A Martíneza, B Fernández-Gutierrez, E Urcelay
+No role of NOS2A susceptibility polymorphisms in rheumatoid arthritis
+Nitric Oxide, 2009
+
+M Wang, D Wu, M Tan, W Gong, H Xue, H Shen, Z Zhang
+FAS and FAS Ligand Polymorphisms in the Promoter Regions and Risk of Gastric Cancer in Southern China
+Biochemical Genetics 47:559-568, 2009
+
 Natalie Colson
 Homonal and Vascular Genes in Migraine, PHD thesis, Griffith University, Australia
 http://www4.gu.edu.au:8080/adt-root/uploads/approved/adt-QGU20071121.104112/public/02Whole.pdf
+
+Rachel H Flomen, Angela F Davies, Marta Di Forti, Caterina La Cascia, Caroline Mackie-Ogilvie, Robin Murray and Andrew J Makoff
+The copy number variant involving part of the alpha7 nicotinic receptor gene contains a polymorphic inversion
+European Journal of Human Genetics (2008) 16, 1364-1371
 
 Li Z, X Peng, Y Wu, Y Xia, X Liu, Q Zhang
 The influence of adiponectin gene polymorphism on the pioglitazone response in the Chinese with type 2 diabetes
@@ -1725,6 +1749,10 @@ Hum Mut 20(6): 473 - 473 Nov 2002
 
 
 GENECOUNTING
+
+Yu-Ting Chung, Ling-Ling Hsieh, I-How Chen, Chun-Ta Liao, Saou-Hsing Liou, Chin-Wen Chi, Yune-Fang Ueng and Tsung-Yun Li
+Sulfotransferase 1A1 haplotypes associated with oral squamous cell carcinoma susceptibility in male Taiwanese
+Carcinogenesis 2009 30(2):286-294
 
 Luigi Nibali, Maurizio S. Tonetti, Derren Ready, Mohamed Parkar, Peter M. Brett, Nikos Donos, Francesco D.Aiuto
 Interleukin-6 Polymorphisms Are Associated With Pathogenic Bacteria in Subjects With Periodontitis

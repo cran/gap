@@ -20,6 +20,7 @@
 \alias{revhap.i}
 \alias{toETDT}
 \alias{ungcode}
+\alias{x2}
 \title{Internal functions for gap}
 \usage{
 a2g(a1,a2)
@@ -75,6 +76,8 @@ revhap.i is similar to revhap.
 toETDT a function used to experiment with ETDT.
 
 ungcode recovers alleles from genotype(s).
+
+x2 is a simple chi-squared test of two proportions.
 
 }
 \arguments{

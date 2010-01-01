@@ -2,7 +2,7 @@
 \alias{read.ms.output}
 \title{A utility function to read ms output}
 \usage{
-read.ms.output(msout,is.file=TRUE,xpose=TRUE)
+read.ms.output(msout,is.file=TRUE,xpose=TRUE,verbose=TRUE,outfile=NULL,outfileonly=FALSE)
 }
 \description{
 This function reads in the output of the program ms, a program to generate
@@ -16,6 +16,9 @@ is appropriate with system(,intern=TRUE), see example below.
 \item{msout}{an ms output}
 \item{is.file}{a flag indicating ms output as a system file or an R object}
 \item{xpose}{a flag to obtain the tranposed format as it is (when TRUE)}
+\item{verbose}{when TRUE, display on screen every 1000 for large nsam}
+\item{outfile}{to save the haplotypes in a tab-delimited ASCII file}
+\item{outfileonly}{to reset gametes to NA when nsam/nreps is very large and is useful with outfile}
 }
 \value{
 The returned value is a list storing the results.
@@ -41,10 +44,13 @@ Press WH, SA Teukolsky, WT Vetterling, BP Flannery (1992). Numerical Recipes in 
 # Assuming ms is on the path
 
 system("ms 5 4 -s 5 > ms.out")
-msout <- read.ms.output("ms.out")
+msout1 <- read.ms.output("ms.out")
+
+system("ms 50 4 -s 5 > ms.out")
+msout2 <- read.ms.output("ms.out",outfile="out",outfileonly=TRUE)
 
 msout <- system("ms 5 4 -s 5 -L", intern=TRUE)
-msout <- read.ms.output(msout,FALSE)
+msout3 <- read.ms.output(msout,FALSE)
 }
 }
 \author{D Davison, RR Hudson, JH Zhao}

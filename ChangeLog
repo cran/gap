@@ -1,5 +1,9 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.0-22
+01-01-2010	refine ccsize, fbsize and pbsize
+21-11-2009	add outfile and outfileonly arguments to read.ms.output
+
 Version 1.0-21
 20-11-2009	Fix bug on read.ms.output when nsam==1 and make mhtplot to accommodate generic data as pointed
 		by Dagmar Kapell [Dagmar.Kapell@sac.ac.uk]

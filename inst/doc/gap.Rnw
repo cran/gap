@@ -61,6 +61,7 @@ The following list shows the data and functions currently available.
 BFDP                    Bayesian false-discovery probability
 FPRP                    False-positive report probability
 SNP                     Functions for single nucleotide polymorphisms (SNPs)
+abc                     Test/Power calculation for mediating effect
 aldh2                   ALDH2 markers and alcoholism
 apoeapoc                APOE/APOC1 markers and schizophrenia
 asplot                  Regional association plot
@@ -123,6 +124,7 @@ print.hap.score         Print a hap.score object
 qqfun                   Quantile-comparison plots
 qqunif                  Q-Q plot for uniformly distributed random
                         variable
+read.ms.output          A utility function to read ms output
 s2k                     Statistics for 2 by K table
 snca                    A study of Parkinson's disease and SNCA markers
 tscc                    Power calculation for two-stage case-control design

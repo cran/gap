@@ -51,7 +51,6 @@ complex diseases. Science 275: 1327.
 \code{\link[gap]{pbsize}}
 }
 \examples{
-options(echo=FALSE)
 models <- matrix(c(
     4.0, 0.01,
     4.0, 0.10,
@@ -65,26 +64,26 @@ models <- matrix(c(
     1.5, 0.10,
     1.5, 0.50,
     1.5, 0.80), ncol=2, byrow=TRUE)
-    
-cat("\nThe family-based result: \n")
-cat("\ngamma   p     Y     N_asp   P_A    Het    N_tdt  Het N_asp/tdt  L_o  L_s\n\n")
+outfile <- "fbsize.txt"
+cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",file=outfile,sep="\t")
 for(i in 1:12) {
   g <- models[i,1]
   p <- models[i,2]
-  fbsize(g,p)
-  if(i\%\%4==0) cat("\n")
+  z <- fbsize(g,p)
+  cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,file=outfile,append=TRUE,sep="\t")
+  cat("\n",file=outfile,append=TRUE)
 }
-
+table1 <- read.table(outfile,header=TRUE,sep="\t")
+unlink(outfile)
 # APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
 # Genetic analysis of complex diseases 1327
 g <- 4.5
 p <- 0.15
 cat("\nAlzheimer's:\n\n")
 fbsize(g,p)
-options(echo=TRUE)
 # note to replicate the Table we need set alpha=9.961139e-05,4.910638e-08 and beta=0.2004542.
 # or reset the quantiles in fbsize.R
 }
 \author{Jing Hua Zhao}
 \note{extracted from rm.c}
-\keyword{models}
+\keyword{misc}

@@ -1,9 +1,3 @@
-# program to obtain power for family-based and population-based association study
-# Jing Hua Zhao 30-12-98, 19-8-2009
-# Risch & Merikangas 1996
-# Science 273: 1516-17 13SEP1996
-# Science 275: 1327-30 28FEB1997
-
 fbsize <- function (gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)
 # Family-based sample sizes
 {
@@ -25,8 +19,6 @@ fbsize <- function (gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)
   k <- (p*gamma+q)^2
   va <- 2*p*q*((gamma-1)*(p*gamma+q))^2
   vd <- (p*q*(gamma-1)^2)^2
-
-  if (debug==1) cat("K=",k, "VA=",va, "VD=",vd,"\n")
 
   w <- p*q*(gamma-1)^2/(p*gamma+q)^2
   y <- (1+w)/(2+w)
@@ -60,17 +52,21 @@ fbsize <- function (gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)
 
   n3 <- sn(aa,alpha[3],beta,3)
 
-  cat(format(gamma,width=4,nsmall=2),
-      format(p,width=5,nsmall=2),
-      format(round(y,digits=3),nsmall=3),
-      rep("",10-strlen(ceiling(n1))),ceiling(n1),
-      format(round(pA,digits=3),nsmall=3),
-      format(round(h1,digits=3),nsmall=3),
-      rep("",8-strlen(ceiling(n2))),ceiling(n2),
-      format(round(h2,digits=3),nsmall=3),
-      rep("",8-strlen(ceiling(n3))),ceiling(n3),
-      format(round(lambdao,digits=2),nsmall=2),
-      format(round(lambdas,digits=2),nsmall=2),"\n")
+  if (debug==1)
+  {
+     cat("K=",k, "VA=",va, "VD=",vd,"\n")
+     cat(format(gamma,width=4,nsmall=2),
+         format(p,width=5,nsmall=2),
+         format(round(y,digits=3),nsmall=3),
+         rep("",10-strlen(ceiling(n1))),ceiling(n1),
+         format(round(pA,digits=3),nsmall=3),
+         format(round(h1,digits=3),nsmall=3),
+         rep("",8-strlen(ceiling(n2))),ceiling(n2),
+         format(round(h2,digits=3),nsmall=3),
+         rep("",8-strlen(ceiling(n3))),ceiling(n3),
+         format(round(lambdao,digits=2),nsmall=2),
+         format(round(lambdas,digits=2),nsmall=2),"\n")
+  }
   list(gamma=gamma,p=p,y=y,n1=n1,pA=pA,h1=h1,n2=n2,h2=h2,n3=n3,
       lambdao=lambdao,lambdas=lambdas)
 
@@ -97,3 +93,9 @@ fbsize <- function (gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)
 #  z <- c(z2,z1,z0)
 #  z
 #}
+
+# program to obtain power for family-based and population-based association study
+# Jing Hua Zhao 30-12-98, 19-8-2009
+# Risch & Merikangas 1996
+# Science 273: 1516-17 13SEP1996
+# Science 275: 1327-30 28FEB1997
