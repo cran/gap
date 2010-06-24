@@ -2,7 +2,8 @@
 \alias{read.ms.output}
 \title{A utility function to read ms output}
 \usage{
-read.ms.output(msout,is.file=TRUE,xpose=TRUE,verbose=TRUE,outfile=NULL,outfileonly=FALSE)
+read.ms.output(msout,is.file=TRUE,xpose=TRUE,verbose=TRUE,
+               outfile=NULL,outfileonly=FALSE)
 }
 \description{
 This function reads in the output of the program ms, a program to generate

@@ -62,3 +62,4 @@ hap.score(y,g,method="hap",miss.val="Z")
 \author{Jing Hua Zhao}
 \note{Built on gcp.c}
 \keyword{models}
+\keyword{htest}

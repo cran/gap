@@ -74,6 +74,10 @@ for(i in 1:12) {
   cat("\n",file=outfile,append=TRUE)
 }
 table1 <- read.table(outfile,header=TRUE,sep="\t")
+nc <- c(4,7,9)
+table1[,nc] <- ceiling(table1[,nc])
+dc <- c(3,5,6,8,10,11)
+table1[,dc] <- round(table1[,dc],2)
 unlink(outfile)
 # APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
 # Genetic analysis of complex diseases 1327

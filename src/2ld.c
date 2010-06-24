@@ -69,12 +69,11 @@ return;
 enum {PEARSON,TSCHUPROW,CRAMER};
 
 static int alleles1,alleles2;
-static double obs[maxgenotypes][maxgenotypes];
 static double p[maxalleles],q[maxalleles];
 static double sample_size,z1,z2;
 static int Dmaxij[maxalleles*maxalleles];
 
-int kbylem(double *,double *,double *);
+int kbylem(double *,int *,int *,double *,double *,double *);
 void abp(int,int,double*,double*,double*,double*);
 
 void kbyl(int *nalleles1, int *nalleles2, double *h, double *haplotypes,
@@ -358,12 +357,37 @@ default:;
  19/02/2001 fix bug on k1,k2
  */
 
-int kbylem(double *h,double *l0,double *l1)
+int kbylem(double *obs,int *nalleles1,int *nalleles2,double *Rh,double *l0,double *l1)
 {
-int iter,i,j,k,l,k1,k2,ik,jl,il,jk;
-double pobs,e1,e2,r1,r2;
-double hc[maxalleles*maxalleles];
+int g2,iter,i,j,k,l,j1,j2,k1,k2,ik,jl,il,jk;
+double o12,pobs,e1,e2,r1,r2;
+double *h,hc[maxalleles*maxalleles];
 
+alleles1=(*nalleles1);
+alleles2=(*nalleles2);
+g2=alleles2*(alleles2+1)/2;
+sample_size=0;
+j1=0;
+for(i=0;i<alleles1;i++) {
+   for(j=0;j<=i;j++) {
+      j2=0;
+      for(k=0;k<alleles2;k++) {
+         for(l=0;l<=k;l++) {
+            o12=obs[j1*g2+j2];
+            sample_size+=o12;
+            p[i]+=o12;
+            p[j]+=o12;
+            q[k]+=o12;
+            q[l]+=o12;
+            j2++;
+         }
+      }
+      j1++;
+   }
+}
+for(i=0;i<alleles1;i++) p[i]/=sample_size*2;
+for(j=0;j<alleles2;j++) q[j]/=sample_size*2;
+h=Rh;
 k=0;
 for(i=0;i<alleles1;i++) for(j=0;j<alleles2;j++) {
   h[i*alleles2+j]=p[i]*q[j];
@@ -380,31 +404,32 @@ do {
         for(l=0;l<=k;l++) {
           ik = i * alleles2 + k;
           jl = j * alleles2 + l;
+          o12 = obs[k1*g2+k2];
           if((i!=j)&&(k!=l)) {
             il = i * alleles2 + l;
             jk = j * alleles2 + k;
             r1 = 2.0 * h[ik] * h[jl];
             r2 = 2.0 * h[il] * h[jk];
             pobs=r1+r2;
-            if(obs[k1][k2]>0) {
+            if(obs[k1*g2+k2]>0) {
                e1=r1/pobs;
                e2=r2/pobs;
-               hc[ik] += e1*obs[k1][k2];
-               hc[il] += e2*obs[k1][k2];
-               hc[jk] += e2*obs[k1][k2];
-               hc[jl] += e1*obs[k1][k2];
+               hc[ik] += e1*o12;
+               hc[il] += e2*o12;
+               hc[jk] += e2*o12;
+               hc[jl] += e1*o12;
             }
           } else {
             if((i==j)&&(k==l)) {
               pobs = h[ik]*h[ik];
-              hc[ik] += 2*obs[k1][k2];
+              hc[ik] += 2*o12;
             } else {
               pobs = 2.0*h[ik]*h[jl];
-              hc[ik] += obs[k1][k2];
-              hc[jl] += obs[k1][k2];
+              hc[ik] += o12;
+              hc[jl] += o12;
             }
           }
-          if (obs[k1][k2]>0) *l1+= obs[k1][k2] * log(pobs);
+          if (o12) *l1+= o12 * log(pobs);
           ++k2;
         }
       }
@@ -425,6 +450,7 @@ return 0;
 enum {EHOUTPUT,RAWDATA,CONTINGTABLE};
 static int dfobs;
 static double x2obs,x2lrt;
+static double obs[maxgenotypes][maxgenotypes];
 
 int getobs(char *obsfile)
 {

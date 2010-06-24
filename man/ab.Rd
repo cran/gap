@@ -1,7 +1,7 @@
-\name{abc}
-\alias{abc}
+\name{ab}
+\alias{ab}
 \title{Test/Power calculation for mediating effect}
-\usage{abc(type,n=25000,a=0.15,sa=0.01,b=log(1.19),sb=0.01,alpha=0.05,fold=1)}
+\usage{ab(type,n=25000,a=0.15,sa=0.01,b=log(1.19),sb=0.01,alpha=0.05,fold=1)}
 \description{
 This function tests for or obtains power of mediating effect based on estimates of
 two regression coefficients and their standard errors. Note that for binary outcome
@@ -42,11 +42,11 @@ http://www.people.ku.edu/~preacher/sobel/sobel.htm
 \examples{
 \dontrun{
 
-abc()
+ab()
 n <- power <- vector()
 for (j in 1:10)
 {
-   z <- abc(fold=j*0.01)
+   z <- ab(fold=j*0.01)
    n[j] <- z[1]
    power[j] <- z[2]
 }

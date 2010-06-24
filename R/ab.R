@@ -1,4 +1,4 @@
-abc <- function(type="power",n=25000,a=0.15,sa=0.01,b=log(1.19),sb=0.01,alpha=0.05,fold=1)
+ab <- function(type="power",n=25000,a=0.15,sa=0.01,b=log(1.19),sb=0.01,alpha=0.05,fold=1)
 {
    ab <- a*b
    s <- sqrt(a^2*sb^2+b^2*sa^2)

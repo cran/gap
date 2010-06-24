@@ -1,8 +1,20 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.0-23
+24-06-2010	Refine keywords
+23-06-2010	Add masize for sample size calculation in mediation analysis
+08-06-2010	Add references to apoeapoc following a query from Breitling Lutz [l.breitling@Dkfz-Heidelberg.de]
+27-05-2010	Rename abc as ab, pending addition of a formal abc
+14-05-2010	Add hwe.cc based on codes by Chang Yu [chang.yu@vanderbilt.edu]
+29-04-2010	Add ACE.R for ACE, AE, CE and E twin models using OpenMx and create h2
+20-04-2010      Add mtdt2 calling BradleyTerry2
+01-04-2010	Add klem with .C("kbylem") for LD statistics based on imputed SNPs to be calculated
+24-03-2010	Fix problems of no specification of ylim=NULL at mhtplot
+03-01-2010	Add example data to comp.score and refine makeped example
+
 Version 1.0-22
-01-01-2010	refine ccsize, fbsize and pbsize
-21-11-2009	add outfile and outfileonly arguments to read.ms.output
+01-01-2010	Refine ccsize, fbsize and pbsize
+21-11-2009	Add outfile and outfileonly arguments to read.ms.output
 
 Version 1.0-21
 20-11-2009	Fix bug on read.ms.output when nsam==1 and make mhtplot to accommodate generic data as pointed
@@ -116,7 +128,7 @@ Version 1.0-5
 16-01-2006	Drop pathmix and pointer
 
 Version 1.0-4
-13-12-2005	Add ccize
+13-12-2005	Add ccsize
 
 Version 1.0-3
 24-07-2005	genecounting (gc.c):

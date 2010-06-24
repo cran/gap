@@ -97,8 +97,8 @@ hap.score<-function(y, geno, trait.type="gaussian",
    }
    if(trait.int ==4) {
       if(adjusted){
-         library("Design")
-         library("Hmisc")
+         require("Design")
+         require("Hmisc")
          reg.out <- lrm(y ~ x.adj)
          K <- max(y)
          n.xadj <- ncol(x.adj)

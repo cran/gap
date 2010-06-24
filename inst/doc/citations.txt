@@ -2142,6 +2142,10 @@ ASHG 2000, No 1989
 
 R/gap
 
+Sole X, Gonzalez JR, Moreno V.
+Analysis of Population-Based Genetic Association Studies Applied to Cancer Susceptibility and Prognosis. 
+In Pham T (ed). Computational Biology: Issues and Applications in Oncology. Springer 2009.
+
 Christine F Skibola, Alexandra Nieters, Paige M Bracci, John D Curry, Luz Agana, Danica R. Skibola, Alan Hubbard, Nikolaus Becker, Martyn T Smith and Elizabeth A. Holly
 A functional TNFRSF5 gene variant is associated with risk of lymphoma
 Blood 2008, 111:4348-4354

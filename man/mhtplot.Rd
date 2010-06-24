@@ -1,12 +1,15 @@
 \name{mhtplot}
 \alias{mhtplot}
 \title{Manhattan plot of p values}
-\usage{mhtplot(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, xlab=NULL, gap=NULL, ...)}
+\usage{mhtplot(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, gap=NULL, ...)}
 \description{
 To generate Manhattan plot of genomewide significance (p values). It could also be
 used for any random variable that is uniformly distributed. By default, a log10-transformation is applied so 
 that a different set of cutoffs can be more appropriate. Note that with real chromosomal positions, it is also
 appropriate to plot and some but not all chromosomes.
+
+It is possible to specify options such as xlab and ylim when the plot is requested for data in other context.
+
 }
 \arguments{
 \item{data}{a data frame with three columns representing chromosome, position and p values}
@@ -16,7 +19,6 @@ appropriate to plot and some but not all chromosomes.
 \item{cutoffs}{the cut-offs where horizontal line(s) are drawn}
 \item{colors}{the color for different chromosome(s), and random if unspecified}
 \item{labels}{labels for the x-axis}
-\item{xlab}{an enforcement of the x-axis when the plot is requested for data in other context}
 \item{gap}{gap between chromosomes}
 \item{...}{other options in compatible with the R plot function}
 }

@@ -49,17 +49,17 @@ models <- matrix(c(
     1.5, 0.50,
     1.5, 0.80), ncol=2, byrow=TRUE)
 outfile <- "pbsize.txt"
-cat("p1","p5","p10","p20\n",sep="\t",file=outfile)
+cat("gamma","p","p1","p5","p10","p20\n",sep="\t",file=outfile)
 for(i in 1:dim(models)[1])
 {
   g <- models[i,1]
   p <- models[i,2]
   n <- vector()
   for(k in kp) n <- c(n,ceiling(pbsize(k,g,p)))
-  cat(n[1],n[2],n[3],n[4],sep="\t",file=outfile,append=TRUE)
+  cat(models[i,1:2],n,sep="\t",file=outfile,append=TRUE)
   cat("\n",file=outfile,append=TRUE)
 } 
-read.table(outfile,header=TRUE,sep="\t")
+table5 <- read.table(outfile,header=TRUE,sep="\t")
 unlink(outfile)
 
 # Alzheimer's disease
@@ -67,10 +67,10 @@ g <- 4.5
 p <- 0.15
 alpha <- 5e-8
 beta <- 0.2
-z1alpha <- qnorm(1-alpha/2)   # 5.4513104
+z1alpha <- qnorm(1-alpha/2)   # 5.45
 z1beta <- qnorm(1-beta)
 q <- 1-p
-pi <- 0.065      # 0.07 generates 163, equivalent to ASP
+pi <- 0.065                   # 0.07 and zbeta generate 163
 k <- pi*(g*p+q)^2
 s <- (1-pi*g^2)*p^2+(1-pi*g)*2*p*q+(1-pi)*q^2
 # LGL formula

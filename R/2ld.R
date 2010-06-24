@@ -84,3 +84,14 @@ LDkl<-function(n1=2,n2=2,h,n,optrho=2,verbose=FALSE)
    X2table=X2table, ptable=ptable,
    x2=x2, seX2=seX2, rho=rho, seR=seR, optrho=optrho, klinfo=klinfo))
 }
+
+klem <- function(obs,k=2,l=2)
+{
+  if(length(obs)!=k*l*(k+1)*(l+1)/4) stop("incorrect length of genotype table")
+  h <- rep(0,k*l)
+  l0 <- l1 <- 0
+  z <- .C("kbylem",obs=as.double(obs),nalleles1=as.integer(k),nalleles2=as.integer(l),
+        Rh=as.double(h),l0=as.double(l0),l1=as.double(l1))
+  invisible(list(h=z$Rh,l0=z$l0,l1=z$l1))
+}
+

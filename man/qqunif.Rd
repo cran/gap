@@ -1,7 +1,10 @@
 \name{qqunif}
 \alias{qqunif}
 \title{Q-Q plot for uniformly distributed random variable}
-\usage{qqunif(u,type="unif",logscale=TRUE,base=10,col=palette()[4],lcol=palette()[2],ci=FALSE,alpha=0.05,...)}
+\usage{
+qqunif(u,type="unif",logscale=TRUE,base=10,
+       col=palette()[4],lcol=palette()[2],ci=FALSE,alpha=0.05,...)
+}
 \description{
 This function produces Q-Q plot for a random variable following uniform distribution with or
 without using log-scale. Note that the log-scale is by default for type "exp", which is a plot based on
@@ -49,3 +52,5 @@ points(r$x[hits],u_exp[hits],pch=21,bg="green")
 }
 \author{Jing Hua Zhao}
 \keyword{hplot}
+\keyword{distribution}
+\keyword{univar}

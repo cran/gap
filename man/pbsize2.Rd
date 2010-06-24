@@ -66,4 +66,4 @@ print(round(m,2))
 }
 \author{Jing Hua Zhao}
 \note{Why is the comparison with power.casectrl so bad?}
-\keyword{models}
+\keyword{misc}

@@ -1,8 +1,8 @@
 ccsize <- function(n,q,pD,p1,alpha,theta,power=NULL,verbose=FALSE)
 {
-   if (p1<0 | p1>1) stop("p1 should lie in (0,1)")
-   if (pD<0 | pD>1) stop("pD should lie in (0,)]")
-   if (q<0 | q>1) stop("q is should lie in (0,1]")
+   if (p1<0 | p1>1) stop("p1 should lie in [0,1]")
+   if (pD<0 | pD>1) stop("pD should lie in [0,1]")
+   if (q<0 | q>1) stop("q is should lie in [0,1]")
    p2 <- 1 - p1
    if(is.null(power))
 # equation (5)

@@ -18,7 +18,7 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-22\cr
+Version: \tab 1.0-23\cr
 Depends: \tab R(>= 2.0.0)\cr
 Suggests: \tab Design, Hmisc, haplo.stats, magic, pedigree, MASS\cr
 License: \tab GPL (>=2)\cr
@@ -30,9 +30,9 @@ Index:
 BFDP                    Bayesian false-discovery probability
 FPRP                    False-positive report probability
 SNP                     Functions for single nucleotide polymorphisms (SNPs)
-abc                     Test/Power calculation for mediating effect
+ab                      Test/Power calculation for mediating effect
 aldh2                   ALDH2 markers and Alcoholism
-apoeapoc                APOE/APOC1 markers and Schizophrenia
+apoeapoc                APOE/APOC1 markers and Alzheimer's
 asplot                  Regional association plot
 bt                      Bradley-Terry model for contingency table
 b2r                     Obtain correlation coefficients and their variance-covariances
@@ -51,14 +51,17 @@ gcontrol2               genomic control based on p values
 gcp                     Permutation tests using GENECOUNTING
 genecounting            Gene counting for haplotype analysis
 gif                     Kinship coefficient and genetic index of familiality
+h2                      Heritability estimation according to twin correlations
 hap                     Haplotype reconstruction
 hap.em                  Gene counting for haplotype analysis
 hap.score               Score Statistics for Association of Traits with Haplotypes
 hla                     HLA markers and Schizophrenia
 htr                     Haplotype trend regression
 hwe                     Hardy-Weinberg equlibrium test for multiallelic marker
+hwe.cc                  A likelihood ratio test of population Hardy-Weinberg equilibrium for case-control studies
 hwe.hardy               Hardy-Weinberg equlibrium test using MCMC
 kin.morgan              kinship matrix for simple pedigree
+klem                    Haplotype frequency estimation based on a genotype table of two multiallelic markers
 LD22                    LD statistics for two diallelic markers
 LDkl                    LD statistics for two multiallelic markers
 makeped                 A function to prepare pedigrees in post-MAKEPED format
@@ -68,6 +71,7 @@ metareg                 Fixed and random effects model for meta-analysis
 mhtplot                 Manhattan plot of p values
 mia                     multiple imputation analysis for hap
 mtdt                    Transmission/disequilibrium test of a multiallelic marker
+mtdt2                   Transmission/disequilibrium test of a multiallelic marker by Bradley-Terry model
 muvar                   Means and variances under 1- and 2- locus (diallelic) QTL model
 mvmeta                  Multivariate meta-analysis based on generalized least squares
 nep499                  A study of Alzheimer's disease with eight SNPs and APOE

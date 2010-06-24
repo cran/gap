@@ -83,5 +83,5 @@ hap.score(y,geno,handle.miss=1,mloci=7,method="hap",n.sim=10000)
 hap.score(y,geno,n.sim=10000)
 }
 }
- 
 \keyword{models}
+\keyword{regression}

@@ -41,4 +41,4 @@ plot(save)
 plot.hap.score(save)
 }
 }
-\keyword{misc}
+\keyword{hplot}

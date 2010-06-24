@@ -56,14 +56,19 @@ selected pedigrees. Biometrics 61:465-473
 }
 
 \examples{
-\dontrun{
 # An example based on GENEHUNTER version 2.1, with quantitative trait data in file "pheno.dat" 
-# generated from the  standard normal distribution. It is possible to automatically call 
-# GENEHUNTER using R function "system"
+# generated from the  standard normal distribution. The following exmaple shows that it is 
+# possible to automatically call GENEHUNTER using R function "system".
 
-comp.score(ibddata="ibd_dist.out", phenotype="pheno.dat", mean=0, var=1, h2=0.3)
-}
+cwd <- getwd()
+cs.dir <- file.path(.path.package("gap"),"comp.score")
+setwd(cs.dir)
+dir()
+# system("gh < gh.inp")
+cs.default <- comp.score()
+setwd(cwd)
+
 }
 \author{Yingwei Peng, Kai Wang}
 \note{Adapt from score2.r}
-\keyword{models}
+\keyword{htest}

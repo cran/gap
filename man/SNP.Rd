@@ -42,4 +42,4 @@ necessary.
   \item{g}{Observed genotype vector}
 }
 \author{Jing Hua Zhao, Shengxu Li}
-\keyword{models}
+\keyword{utilities}

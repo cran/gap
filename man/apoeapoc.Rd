@@ -1,10 +1,10 @@
 \name{apoeapoc}
 \docType{data}
 \alias{apoeapoc}
-\title{APOE/APOC1 markers and schizophrenia}
+\title{APOE/APOC1 markers and Alzheimer's}
 \description{This data set contains APOE/APOC1 markers 
-  and Chinese Schizophrenic patients and controls. Variable id is subject
-id and y takes value 0 for controls and 2 for Schizophrenia.
+  and Chinese Alzheimer's patients and controls. Variable id is subject
+id and y takes value 0 for controls and 2 for Alzheimer's.
 
 The last six variables are age, sex and genotypes for APOE and APOC 
 with suffixes for each of two alleles (".a1" and ".a2").
@@ -12,6 +12,8 @@ with suffixes for each of two alleles (".a1" and ".a2").
 }
 \usage{data(apoeapoc)}
 \format{A data frame}
-\source{Dr JJ Shi of Western China Medical University}
+\source{Shi J, Zhang S, Ma C, Liu X, Li T, Tang M, Han H, Guo Y, Zhao JH, Zheng K, Kong X, Zhang K, 
+Su Z, Zhao Z. Association between apolipoprotein CI HpaI polymorphism and sporadic Alzheimer's
+disease in Chinese. Acta Neurol Scan 2004, 109:140-145.}
   
 \keyword{datasets}

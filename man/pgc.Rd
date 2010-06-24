@@ -53,4 +53,4 @@ pgc(x,handle.miss=1,with.id=0)
 
 \author{Jing Hua Zhao}
 \note{Built on pgc.c}
-\keyword{models}
+\keyword{utilities}

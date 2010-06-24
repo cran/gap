@@ -1,5 +1,5 @@
 mhtplot <- 
-function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, xlab=NULL, gap=NULL, ...)
+function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NULL, labels=NULL, gap=NULL, ...)
 {
   data2 <- data[!apply(is.na(data),1,any),]
   chr <- data2[,1]
@@ -22,8 +22,9 @@ function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NU
      newpos[chr] <- c(gap,d)
   }
   CM <- cumsum(as.numeric(newpos))
-  if (is.null(ylim)) dp <- seq(min(p),max(p),length=sum(allchr))
-  else dp <- seq(ylim[1],ylim[2],length=sum(allchr))
+  args <- list(...)
+  if ("ylim"%in%names(args)) dp <- seq(ylim[1],ylim[2],length=sum(allchr))
+  else dp <- seq(min(p),max(p),length=sum(allchr))
   if (logscale) y <- -log(dp,base) else y <- dp
   par(xaxt="n",yaxt="n")
   plot(CM,y,type="n",xlab="",ylab="",axes=FALSE,...)
@@ -43,8 +44,8 @@ function(data, usepos=FALSE, logscale=TRUE, base=10, cutoffs=c(4,6,8), colors=NU
   abline(h=cutoffs)
   axis(2,at=cutoffs,lwd=0)
   mtext(ifelse(logscale,paste("-log",base,"(Observed value)",sep=""),"Observed value"),2,line=2.5,las=0)
-  if (!is.null(xlab)) xlabel <- xlab else xlabel <- ifelse(is.null(names(chr)),"Chromosome",names(chr))
+  if ("xlab"%in%names(args)) xlabel <- xlab else xlabel <- ifelse(is.null(names(chr)),"Chromosome",names(chr))
   mtext(xlabel,1,line=2.5,las=0)
 }
 
-#27-11-2009 MRC-Epid JHZ
+#13-5-2010 MRC-Epid JHZ

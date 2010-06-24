@@ -3,24 +3,53 @@
 \alias{HapDesign}
 \alias{HapFreqSE}
 \alias{a2g}
+\alias{ci}
+\alias{Cox.est}
+\alias{Cox.T}
+\alias{cov.invlogit}
+\alias{Dev}
+\alias{Dev.est}
+\alias{DevH0dominant}
+\alias{DevH0dominant.est}
+\alias{DevH0recessive}
+\alias{DevH0recessive.est}
+\alias{DevHaGdominant}
+\alias{DevHaGdominant.est}
+\alias{DevHaGrecessive}
+\alias{DevHaGrecessive.est}
+\alias{DevHa.recessive}
+\alias{DevHa.recessive.est}
+\alias{ExpN.recessiveH0}
+\alias{ExpN.recessiveHa}
 \alias{g2a}
 \alias{g2a.c}
 \alias{gc.control}
 \alias{gcode}
+\alias{geno.p}
+\alias{getb1star}
+\alias{getPTE}
 \alias{grec2g}
 \alias{hap.control}
 \alias{hap.score.glm}
 \alias{hap.score.podds}
+\alias{hw}
+\alias{invlogit}
 \alias{is.miss}
 \alias{KCC}
+\alias{k}
+\alias{logit}
 \alias{m2plem}
 \alias{micombine}
 \alias{plem2m}
 \alias{revhap}
 \alias{revhap.i}
+\alias{se.exp}
+\alias{se.invlogit}
+\alias{solve_skol}
 \alias{toETDT}
 \alias{ungcode}
 \alias{x2}
+\alias{z}
 \title{Internal functions for gap}
 \usage{
 a2g(a1,a2)
@@ -63,6 +92,8 @@ KCC calculates disease prevalences in cases and controls for a given genotype re
 allele frequency and prevalencen of the disease in the whole population. It is used by tscc
 and pbsize2.
 
+k obtains 1st and 2nd order culumants for correlation coefficient.
+
 m2plem is an experimental function for PLEM format.
 
 micombine is used to combine imputation results.
@@ -73,11 +104,15 @@ revhap recovers the allele indices for a given haplotype ID in a multiallelic sy
 
 revhap.i is similar to revhap.
 
+solve.skol is a function used by tscc.
+
 toETDT a function used to experiment with ETDT.
 
 ungcode recovers alleles from genotype(s).
 
 x2 is a simple chi-squared test of two proportions.
+
+z is a normal z-test of two proportions used by tscc.
 
 }
 \arguments{

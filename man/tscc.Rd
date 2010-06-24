@@ -87,4 +87,4 @@ options(echo=TRUE)
 }
 \author{Jing Hua Zhao}
 \note{solve.skol is adapted from CaTS}
-\keyword{htest}
+\keyword{misc}
