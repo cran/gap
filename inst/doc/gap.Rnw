@@ -57,73 +57,80 @@ improve them.
 
 The following list shows the data and functions currently available.
 
-\begin{verbatim}
-BFDP                    Bayesian false-discovery probability
-FPRP                    False-positive report probability
-SNP                     Functions for single nucleotide polymorphisms (SNPs)
-abc                     Test/Power calculation for mediating effect
-aldh2                   ALDH2 markers and alcoholism
-apoeapoc                APOE/APOC1 markers and schizophrenia
-asplot                  Regional association plot
-bt                      Bradley-Terry model for contingency table
-b2r                     Obtain correlation coefficients and their variance-covariances
-ccsize                  Power and sample size for case-cohort design
-chow.test               Chow's test for heterogeneity in two regressions
-cf                      Cystic Fibrosis data
-comp.score              score statistics for testing genetic linkage of quantitative trait
-crohn                   Crohn's disease data
-ESplot                  Effect-size plot
-fa                      Friedreich ataxia data
-fbsize                  Sample size for family-based linkage and association design
-fsnps                   A case-control data involving four SNPs with missing genotype
-gc.em                   Gene counting for haplotype analysis
-gcontrol                genomic control
-gcontrol2               genomic control based on p values
-gcp                     Permutation tests using GENECOUNTING
-genecounting            Gene counting for haplotype analysis
-gif                     Kinship coefficient and genetic index of familiality
-hap                     Haplotype reconstruction
-hap.em                  Gene counting for haplotype analysis
-hap.score               Score statistics for association of traits with haplotypes
-hla                     HLA markers and schizophrenia
-htr                     Haplotype trend regression
-h2                      Heritability estimation according to twin correlations
-hwe                     Hardy-Weinberg equilibrium test for a multiallelic marker
-hwe.cc                  A likelihood ratio test of population Hardy-Weinberg equilibrium for case-control studies
-hwe.hardy               Hardy-Weinberg equilibrium test using MCMC
-kin.morgan              kinship matrix for simple pedigree
-klem                    Haplotype frequency estimation based on a genotype table of two multiallelic markers
-LD22                    LD statistics for two diallelic markers
-LDkl                    LD statistics for two multiallelic markers
-makeped                 A function to prepare pedigrees in post-MAKEPED format
-mao                     A study of Parkinson's disease and MAO gene
-masize                  Sample size calculation for mediation analysis
-metap                   Meta-analysis of p values
-metareg                 Fixed and random effects model for meta-analysis
-mhtplot                 Manhattan plot of p values
-mia                     multiple imputation analysis for hap
-mtdt                    Transmission/disequilibrium test of a multiallelic marker
-mtdt2                   Transmission/disequilibrium test of a multiallelic marker by Bradley-Terry model
-muvar                   Means and variances under 1- and 2- locus (diallelic) QTL model
-mvmeta                  Multivariate meta-analysis based on generalized least squares
-nep499                  A study of Alzheimer's disease with eight SNPs and APOE
-pbsize                  Power for population-based association design
-pbsize2                 Power for case-control association design
-pedtodot                Converting pedigree(s) to dot file(s)
-pfc                     Probability of familial clustering of disease
-pfc.sim                 Probability of familial clustering of disease
-pgc                     Preparing weight for GENECOUNTING
-plot.hap.score          Plot haplotype frequencies versus haplotype score statistics
-print.hap.score         Print a hap.score object
-qqfun                   Quantile-comparison plots
-qqunif                  Q-Q plot for uniformly distributed random variable
-read.ms.output          A utility function to read ms output
-s2k                     Statistics for 2 by K table
-snca                    A study of Parkinson's disease and SNCA markers
-tscc                    Power calculation for two-stage case-control design
-twinan90                Classic twin models
-whscore                 Whittemore-Halpern scores for allele-sharing
-\end{verbatim}
+\begin{tabular}{ll}
+BFDP              &      Bayesian false-discovery probability\\
+FPRP              &      False-positive report probability\\
+SNP               &      Functions for single nucleotide polymorphisms (SNPs)\\
+ab                &      Test/Power calculation for mediating effect\\
+aldh2             &      ALDH2 markers and alcoholism\\
+apoeapoc          &      APOE/APOC1 markers and schizophrenia\\
+asplot            &      Regional association plot\\
+bt                &      Bradley-Terry model for contingency table\\
+b2r               &      Obtain correlation coefficients and their variance-covariances\\
+ccsize            &      Power and sample size for case-cohort design\\
+chow.test         &      Chow's test for heterogeneity in two regressions\\
+cf                &      Cystic Fibrosis data\\
+comp.score        &      score statistics for testing genetic linkage of quantitative trait\\
+crohn             &      Crohn's disease data\\
+ESplot            &      Effect-size plot\\
+fa                &      Friedreich ataxia data\\
+fbsize            &      Sample size for family-based linkage and association design\\
+fsnps             &      A case-control data involving four SNPs with missing genotype\\
+gc.em             &      Gene counting for haplotype analysis\\
+gcontrol          &      genomic control\\
+gcontrol2         &      genomic control based on p values\\
+gcp               &      Permutation tests using GENECOUNTING\\
+genecounting      &      Gene counting for haplotype analysis\\
+gif               &      Kinship coefficient and genetic index of familiality\\
+hap               &      Haplotype reconstruction\\
+hap.em            &      Gene counting for haplotype analysis\\
+hap.score         &      Score statistics for association of traits with haplotypes\\
+hla               &      HLA markers and schizophrenia\\
+htr               &      Haplotype trend regression\\
+h2                &      Heritability estimation according to twin correlations\\
+hwe               &      Hardy-Weinberg equilibrium test for a multiallelic marker\\
+hwe.cc            &      A likelihood ratio test of population Hardy-Weinberg equilibrium \\
+                  &      for case-control studies\\
+hwe.hardy         &      Hardy-Weinberg equilibrium test using MCMC\\
+kin.morgan        &      kinship matrix for simple pedigree\\
+klem              &      Haplotype frequency estimation based on a genotype table\\
+                  &      of two multiallelic markers\\
+LD22              &      LD statistics for two diallelic markers\\
+LDkl              &      LD statistics for two multiallelic markers\\
+makeped           &      A function to prepare pedigrees in post-MAKEPED format\\
+mao               &      A study of Parkinson's disease and MAO gene\\
+masize            &      Sample size calculation for mediation analysis\\
+metap             &      Meta-analysis of p values\\
+metareg           &      Fixed and random effects model for meta-analysis\\
+mhtplot           &      Manhattan plot of p values\\
+mia               &      multiple imputation analysis for hap\\
+\end{tabular}
+
+\begin{tabular}{ll}
+mtdt              &      Transmission/disequilibrium test of a multiallelic marker\\
+mtdt2             &      Transmission/disequilibrium test of a multiallelic marker\\
+                  &      by Bradley-Terry model\\
+muvar             &      Means and variances under 1- and 2- locus (diallelic) QTL model\\
+mvmeta            &      Multivariate meta-analysis based on generalized least squares\\
+nep499            &      A study of Alzheimer's disease with eight SNPs and APOE\\
+pbsize            &      Power for population-based association design\\
+pbsize2           &      Power for case-control association design\\
+pedtodot          &      Converting pedigree(s) to dot file(s)\\
+pfc               &      Probability of familial clustering of disease\\
+pfc.sim           &      Probability of familial clustering of disease\\
+pgc               &      Preparing weight for GENECOUNTING\\
+plot.hap.score    &      Plot haplotype frequencies versus haplotype score statistics\\
+print.hap.score   &      Print a hap.score object\\
+qqfun             &      Quantile-comparison plots\\
+qqunif            &      Q-Q plot for uniformly distributed random variable\\
+read.ms.output    &      A utility function to read ms output\\
+s2k               &      Statistics for 2 by K table\\
+snca              &      A study of Parkinson's disease and SNCA markers\\
+tscc              &      Power calculation for two-stage case-control design\\
+twinan90          &      Classic twin models\\
+whscore           &      Whittemore-Halpern scores for allele-sharing\\
+\\
+\end{tabular}
 
 Assuming proper installation, you will be able to obtain the list by typing
 \texttt{library(help=gap)} or view the list within a web browser via 

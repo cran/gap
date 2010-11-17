@@ -32,6 +32,7 @@
 \alias{hap.control}
 \alias{hap.score.glm}
 \alias{hap.score.podds}
+\alias{hmht.control}
 \alias{hw}
 \alias{invlogit}
 \alias{is.miss}
@@ -39,6 +40,7 @@
 \alias{k}
 \alias{logit}
 \alias{m2plem}
+\alias{mht.control}
 \alias{micombine}
 \alias{plem2m}
 \alias{revhap}

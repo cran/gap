@@ -37,7 +37,7 @@ the confounder.
 }
 
 \arguments{
- \item{model}{"lineari", "logisticj", "poissonk", "coxl", where i,j,k,l=4,5,9,9}
+ \item{model}{"lineari", "logisticj", "poissonk", "coxl", where i,j,k,l range from 1 to 4,5,9,9, respectively.}
  \item{opts}{A list specific to the model
 
    \tabular{ll}{
@@ -58,7 +58,7 @@ the confounder.
     }
 
 For linear model, the arguments are b2, rho, sdx2, sdy, alpha, and gamma. For cases CpBm and BpBm, set sdx2 = 
-\eqn{\sqrt{f2*(1-f2)}}{sqrt(f2*(1-f2))}. Three alternative functions are included for the linear model. These functions 
+\eqn{\sqrt{f2(1-f2)}}{sqrt(f2*(1-f2))}. Three alternative functions are included for the linear model. These functions 
 make it possible to supply other combinations of input parameters affecting mediation:
 
 \tabular{ll}{
@@ -89,7 +89,7 @@ obtain the expected information matrix instead.
 
 For logistic model, the approximate solution due to Hsieh is implemented in the function logistic.approx, and can be 
 used for all four cases. Arguments are p, b2, rho, sdx2, alpha, and gamma. For a binary mediator with prevalence f2, 
-sdx2 should be reset to \eqn{\sqrt{f2*(1-f2)}}{sqrt(f2*(1-f2))}. Simulating the information matrix of the logistic model 
+sdx2 should be reset to \eqn{\sqrt{f2(1-f2)}}{sqrt(f2*(1-f2))}. Simulating the information matrix of the logistic model 
 provides somewhat more accurate sample size estimates than the Hsieh approximation. The functions for cases CpCm, BpCm, 
 CpBm, and BpBm are respectively logistic.ccs, logistic.bcs, logistic.cbs, and logistic.bbs, as for the Poisson and Cox 
 models. Arguments for these functions include p, b1, sdx1 or f1, b2, sdx2 or f2, rho, alpha, gamma, and ns. As in other 
@@ -99,7 +99,7 @@ functions, getb0 (to calculate the intercept parameter from the others) and anti
 For Poisson model, The function implementing the approximate solution based on the variance inflation factor is 
 poisson.approx, and can be used for all four cases. Arguments are EY (the marginal mean of the Poisson outcome), b2, 
 sdx2, rho, alpha and gamma, with sdx2, alpha and gamma set to the usual defaults; use 
-sdx2=\eqn{\sqrt{f2*(1-f2)}}{sqrt(f2*(1-f2))} for a binary mediator with prevalence f2 (cases CpBm and BpBm). For cases 
+sdx2=\eqn{\sqrt{f2(1-f2)}}{sqrt(f2*(1-f2))} for a binary mediator with prevalence f2 (cases CpBm and BpBm). For cases 
 CpCm and BpCm (continuous mediators), the approximate formula is also the analytic solution. For these cases, we supply 
 redundant functions poisson.cc and poisson.bc, with the same arguments and defaults as for poisson.approx (it's the same 
 function). For the two cases with binary mediators, the functions are poisson.cb and poisson.bb. In addition to m, b2, 
@@ -111,7 +111,7 @@ distributions.
 
 For Cox model, the function implementing the approximate solution, using the variance inflation factor and derived by 
 Schmoor et al., is cox.approx, and can be used for all four cases. Arguments are b2, sdx2, rho, alpha, gamma, and f. For 
-binary X2 set sdx2 = \eqn{\sqrt{f2*(1-f2)}}{sqrt(f2*(1-f2))}. The approximation works very well for cases CpCm and BpCm 
+binary X2 set sdx2 = \eqn{\sqrt{f2(1-f2)}}{sqrt(f2*(1-f2))}. The approximation works very well for cases CpCm and BpCm 
 (continuous mediators), but is a bit less accurate for cases CpBm and BpBm (binary mediators). We get some improvement 
 for those cases using the simulation approach. This approach is implemented for all four, as functions cox.ccs, cox.bcs, 
 cox.cbs, and cox.bbs. Arguments are b1, sdx1 or f1, b2, sdx2 or f2, rho, alpha, gamma, f, and ns, with defaults as 

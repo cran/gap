@@ -1,5 +1,13 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1-0
+17-11-2010	Enable rotated ticks on the x-axis and retain cutoffs argument after HaemGenRBC plot
+14-11-2010	Relocate highlight region in mhtplot after the usual data points
+05-11-2010	Remove attach/detach data statements in mtdt2 due to bug-fix in BradleyTerry2
+03-11-2010	Further reivision of mhtplot using real data from Tuomas.Kilpelainen@mrc-epid.cam.ac.uk
+07-07-2010	Revise mhtplot at suggestion of Peter Ehlers [ehlers@ucalgary.ca]
+30-06-2010	Replace qqplot within gcontrol2 by qqunif
+
 Version 1.0-23
 24-06-2010	Refine keywords
 23-06-2010	Add masize for sample size calculation in mediation analysis

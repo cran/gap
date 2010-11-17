@@ -3,15 +3,9 @@ mtdt2 <- function(x,verbose=TRUE,n.sim=NULL,...)
   require(BradleyTerry2)
   colnames(x) <- paste(1:12,sep="")
   rownames(x) <- paste(1:12,sep="")
-  c2b <- countsToBinomial(x)
+  c2b <- as.data.frame(countsToBinomial(x))
   names(c2b) <- c("allele1","allele2","transmitted","nontransmitted")
-  allele1 <- c2b[,1]
-  allele2 <- c2b[,2]
-  transmitted <- c2b[,3]
-  nontransmitted <- c2b[,4]
-  attach(c2b)
-  btx <- BTm(cbind(transmitted,nontransmitted), allele1, allele2, ~ allele, id="allele", ...)
-  detach(c2b)
+  btx <- BTm(cbind(transmitted,nontransmitted), allele1, allele2, ~ allele, id="allele", data=c2b, ...)
   t1 <- btx$null.deviance
   t2 <- btx$deviance
   t3 <- t1-t2
@@ -22,21 +16,19 @@ mtdt2 <- function(x,verbose=TRUE,n.sim=NULL,...)
   df <- c(f3,f2,f1)
   pexp <- pchisq(ctest,df,lower.tail=FALSE,log.p=TRUE)/log(10)
   p <- 10^pexp
-  transmissions <- transmitted+nontransmitted
+  transmissions <- with(c2b,transmitted+nontransmitted)
   if(!missing(n.sim))
   {
     transmissionlen <- length(transmissions)
-    transmittedn <- transmitted
-    nontransmittedn <- nontransmitted
+    transmittedn <- with(c2b,transmitted)
+    nontransmittedn <- with(c2b,nontransmitted)
     pn <- rep(0,3)
     for(i in 1:n.sim)
     {
        for(j in 1:transmissionlen) transmittedn[j] <- rbinom(1,transmissions[j],0.5)
        nontransmittedn <- transmissions-transmittedn
-       c2bn <- data.frame(allele1,allele2,transmittedn,nontransmittedn)
-       attach(c2bn)
-       btn <- BTm(cbind(transmittedn,nontransmittedn), allele1, allele2, ~ allele, id="allele", ...)
-       detach(c2bn)
+       c2bn <- data.frame(c2b,transmittedn,nontransmittedn)
+       btn <- BTm(cbind(transmittedn,nontransmittedn), allele1, allele2, ~ allele, id="allele", data=c2bn, ...)
        t1 <- btn$null.deviance
        t2 <- btn$deviance
        t3 <- t1-t2

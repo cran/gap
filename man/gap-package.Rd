@@ -18,79 +18,84 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.0-23\cr
+Version: \tab 1.1-0\cr
 Depends: \tab R(>= 2.0.0)\cr
-Suggests: \tab Design, Hmisc, haplo.stats, magic, pedigree, MASS\cr
+Suggests: \tab BradleyTerry2, Design, Hmisc, MASS, grid, haplo.stats, magic, pedigree, survival\cr
 License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/~jinghua.zhao\cr
 }
 
 Index:
-\preformatted{
-BFDP                    Bayesian false-discovery probability
-FPRP                    False-positive report probability
-SNP                     Functions for single nucleotide polymorphisms (SNPs)
-ab                      Test/Power calculation for mediating effect
-aldh2                   ALDH2 markers and Alcoholism
-apoeapoc                APOE/APOC1 markers and Alzheimer's
-asplot                  Regional association plot
-bt                      Bradley-Terry model for contingency table
-b2r                     Obtain correlation coefficients and their variance-covariances
-ccsize                  Power and sample size for case-cohort design
-chow.test               Chow's test for heterogeneity in two regressions
-cf                      Cystic Fibrosis data
-comp.score              score statistics for testing genetic linkage of quantitative trait
-crohn                   Crohn disease data
-ESplot                  Effect-size plot
-fa                      Friedreich Ataxia data
-fbsize                  Sample size for family-based linkage and association design
-fsnps                   A case-control data involving four SNPs with missing genotype
-gc.em                   Gene counting for haplotype analysis
-gcontrol                genomic control
-gcontrol2               genomic control based on p values
-gcp                     Permutation tests using GENECOUNTING
-genecounting            Gene counting for haplotype analysis
-gif                     Kinship coefficient and genetic index of familiality
-h2                      Heritability estimation according to twin correlations
-hap                     Haplotype reconstruction
-hap.em                  Gene counting for haplotype analysis
-hap.score               Score Statistics for Association of Traits with Haplotypes
-hla                     HLA markers and Schizophrenia
-htr                     Haplotype trend regression
-hwe                     Hardy-Weinberg equlibrium test for multiallelic marker
-hwe.cc                  A likelihood ratio test of population Hardy-Weinberg equilibrium for case-control studies
-hwe.hardy               Hardy-Weinberg equlibrium test using MCMC
-kin.morgan              kinship matrix for simple pedigree
-klem                    Haplotype frequency estimation based on a genotype table of two multiallelic markers
-LD22                    LD statistics for two diallelic markers
-LDkl                    LD statistics for two multiallelic markers
-makeped                 A function to prepare pedigrees in post-MAKEPED format
-mao                     A study of Parkinson's disease and MAO gene
-metap                   Meta-analysis of p values
-metareg                 Fixed and random effects model for meta-analysis
-mhtplot                 Manhattan plot of p values
-mia                     multiple imputation analysis for hap
-mtdt                    Transmission/disequilibrium test of a multiallelic marker
-mtdt2                   Transmission/disequilibrium test of a multiallelic marker by Bradley-Terry model
-muvar                   Means and variances under 1- and 2- locus (diallelic) QTL model
-mvmeta                  Multivariate meta-analysis based on generalized least squares
-nep499                  A study of Alzheimer's disease with eight SNPs and APOE
-pbsize                  Power for population-based association design
-pbsize2                 Power for case-control association design
-pedtodot                Converting pedigree(s) to dot file(s)
-pfc                     Probability of familial clustering of disease
-pfc.sim                 Probability of familial clustering of disease
-pgc                     Preparing weight for GENECOUNTING
-plot.hap.score          Plot Haplotype Frequencies versus Haplotype Score Statistics
-print.hap.score         Print a hap.score object
-qqfun                   Quantile-comparison plots
-qqunif                  Q-Q plot for uniformly distributed random variable
-read.ms.output          A utility function to read ms output
-s2k                     Statistics for 2 by K table
-snca                    A study of Parkinson's disease and SNCA makers
-tscc                    Power calculation for two-stage case-control design
-twinan90                Classic twin models
-whscore                 Whittemore-Halpern scores for allele-sharing
+\tabular{ll}{
+BFDP              \tab  Bayesian false-discovery probability \cr
+FPRP              \tab  False-positive report probability \cr
+SNP               \tab  Functions for single nucleotide polymorphisms (SNPs) \cr
+ab                \tab  Test/Power calculation for mediating effect \cr
+aldh2             \tab  ALDH2 markers and Alcoholism \cr
+apoeapoc          \tab  APOE/APOC1 markers and Alzheimer's \cr
+asplot            \tab  Regional association plot \cr
+bt                \tab  Bradley-Terry model for contingency table \cr
+b2r               \tab  Obtain correlation coefficients and their variance-covariances \cr
+ccsize            \tab  Power and sample size for case-cohort design \cr
+chow.test         \tab  Chow's test for heterogeneity in two regressions \cr
+cf                \tab  Cystic Fibrosis data \cr
+comp.score        \tab  score statistics for testing genetic linkage of quantitative trait \cr
+crohn             \tab  Crohn disease data \cr
+ESplot            \tab  Effect-size plot \cr
+fa                \tab  Friedreich Ataxia data \cr
+fbsize            \tab  Sample size for family-based linkage and association design \cr
+fsnps             \tab  A case-control data involving four SNPs with missing genotype \cr
+gc.em             \tab  Gene counting for haplotype analysis \cr
+gcontrol          \tab  genomic control \cr
+gcontrol2         \tab  genomic control based on p values \cr
+gcp               \tab  Permutation tests using GENECOUNTING \cr
+genecounting      \tab  Gene counting for haplotype analysis \cr
+gif               \tab  Kinship coefficient and genetic index of familiality \cr
+h2                \tab  Heritability estimation according to twin correlations \cr
+hap               \tab  Haplotype reconstruction \cr
+hap.em            \tab  Gene counting for haplotype analysis \cr
+hap.score         \tab  Score Statistics for Association of Traits with Haplotypes \cr
+hla               \tab  HLA markers and Schizophrenia \cr
+htr               \tab  Haplotype trend regression \cr
+hwe               \tab  Hardy-Weinberg equlibrium test for multiallelic marker \cr
+hwe.cc            \tab  A likelihood ratio test of population Hardy-Weinberg equilibrium \cr
+                  \tab  for case-control studies \cr
+hwe.hardy         \tab  Hardy-Weinberg equlibrium test using MCMC \cr
+kin.morgan        \tab  kinship matrix for simple pedigree \cr
+klem              \tab  Haplotype frequency estimation based on a genotype table \cr
+                  \tab  of two multiallelic markers \cr
+LD22              \tab  LD statistics for two diallelic markers \cr
+LDkl              \tab  LD statistics for two multiallelic markers \cr
+makeped           \tab  A function to prepare pedigrees in post-MAKEPED format \cr
+masize            \tab  Sample size calculation for mediation analysis \cr
+mao               \tab  A study of Parkinson's disease and MAO gene \cr
+metap             \tab  Meta-analysis of p values \cr
+metareg           \tab  Fixed and random effects model for meta-analysis \cr
+mhtdata           \tab  An example data for Manhattan plot \cr
+mhtplot           \tab  Manhattan plot of p values \cr
+mia               \tab  multiple imputation analysis for hap \cr
+mtdt              \tab  Transmission/disequilibrium test of a multiallelic marker \cr
+mtdt2             \tab  Transmission/disequilibrium test of a multiallelic marker \cr
+                  \tab  by Bradley-Terry model \cr
+muvar             \tab  Means and variances under 1- and 2- locus (diallelic) QTL model \cr
+mvmeta            \tab  Multivariate meta-analysis based on generalized least squares \cr
+nep499            \tab  A study of Alzheimer's disease with eight SNPs and APOE \cr
+pbsize            \tab  Power for population-based association design \cr
+pbsize2           \tab  Power for case-control association design \cr
+pedtodot          \tab  Converting pedigree(s) to dot file(s) \cr
+pfc               \tab  Probability of familial clustering of disease \cr
+pfc.sim           \tab  Probability of familial clustering of disease \cr
+pgc               \tab  Preparing weight for GENECOUNTING \cr
+plot.hap.score    \tab  Plot Haplotype Frequencies versus Haplotype Score Statistics \cr
+print.hap.score   \tab  Print a hap.score object \cr
+qqfun             \tab  Quantile-comparison plots \cr
+qqunif            \tab  Q-Q plot for uniformly distributed random variable \cr
+read.ms.output    \tab  A utility function to read ms output \cr
+s2k               \tab  Statistics for 2 by K table \cr
+snca              \tab  A study of Parkinson's disease and SNCA makers \cr
+tscc              \tab  Power calculation for two-stage case-control design \cr
+twinan90          \tab  Classic twin models \cr
+whscore           \tab  Whittemore-Halpern scores for allele-sharing \cr
 }
 
 We have incorporated functions for a wide range of problems. Nevertheless,

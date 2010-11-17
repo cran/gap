@@ -3,7 +3,8 @@
 \alias{pm}
 \alias{pmplus}
 \title{Permutation tests using GENECOUNTING}
-\usage{gcp(y, cc, g, handle.miss=1, miss.val=0, n.sim=0, locus.label=NULL, quietly=FALSE)}
+\usage{gcp(y, cc, g, handle.miss=1, miss.val=0, n.sim=0,
+       locus.label=NULL, quietly=FALSE)}
 \description{
 This function is a R port of the GENECOUNTING/PERMUTE program which
 generates EHPLUS-type statistics including z-tests for individual haplotypes

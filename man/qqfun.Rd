@@ -7,8 +7,9 @@
 \usage{
 qqfun(x, distribution="norm", ylab=deparse(substitute(x)),
       xlab=paste(distribution, "quantiles"), main=NULL, las=par("las"),
-      envelope=.95, labels=FALSE, col=palette()[4], lcol=palette()[2], xlim=NULL, ylim=NULL, lwd=1,
-      pch=1, bg=palette()[4], cex=.4, line=c("quartiles", "robust", "none"), ...)
+      envelope=.95, labels=FALSE, col=palette()[4], lcol=palette()[2],
+      xlim=NULL, ylim=NULL, lwd=1, pch=1, bg=palette()[4], cex=.4,
+      line=c("quartiles", "robust", "none"), ...)
 }
 \arguments{
   \item{x}{vector of numeric values.}
