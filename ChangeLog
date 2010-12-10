@@ -1,5 +1,13 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1-1
+10-12-2010	Add into vignette results from pbsize/fbsize/ccsize and figures as produced by asplot, ESplot, mhtplot, and qqunif
+25-11-2010	Add type argument to mht.control() so that it is appropriate for lod score analysis
+23-11-2010	Clarify colors and hcolors in mhtplot
+19-11-2010	Add /usr/share/texlive/texmf-dist/tex/latex/ltxmisc/a4wide.sty under Fedora 13
+		and Comment on \usepackage{a4wide/amsmath/epsfig} in gap.Rnw enable build/check
+		Change some table() calls to unique in Mhtplot to keep genes in order
+
 Version 1.1-0
 17-11-2010	Enable rotated ticks on the x-axis and retain cutoffs argument after HaemGenRBC plot
 14-11-2010	Relocate highlight region in mhtplot after the usual data points

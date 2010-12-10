@@ -14,6 +14,7 @@ It is possible to specify options such as xlab and ylim when the plot is request
 \item{data}{a data frame with three columns representing chromosome, position and p values}
 \item{control}{A control function named mht.control() with the following arguments,
     \enumerate{
+    \item type. a flag with value "p" or "l" indicating if points or lines are to be drawn.
     \item usepos. a flag to use real chromosomal positions as composed to ordinal positions with default value FALSE
     \item logscale. a flag to indicate if p value is to be log-transformed with default value TRUE
     \item base. the base of the logarithm with default value 10
