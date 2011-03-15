@@ -1,4 +1,5 @@
-       subroutine family(famdata,famsize,p,stat,toenum,tailp,sump,nenum)
+       subroutine family(famdata,famsize,pobs,p,stat,toenum,tailp,sump,
+     & nenum)
        integer famsize, toenum
        integer famdata(famsize,3)
 c      based on a version for Sun (without implicit) dated 27/2/2003
@@ -13,7 +14,7 @@ c       DZ   3/96,   7/99, 1/02
      &   naff,nsibs,nfam,fm(20,20),j,maxsize
 c     logical done
       double precision fac(8000),fac0(8001),ptail,psum,dcase
-      double precision tailp,sump,nenum
+      double precision pobs,tailp,sump,nenum
       equivalence (fac(1),fac0(2))
       common/factab/fac0
       common /jhzhao/psum,ptail,dcase
@@ -27,23 +28,18 @@ c                  build table of log factorials w/ zero subscript
 
 c   read frequency data, build frequency matrix table -fm-
 c     open(10,file='family.dat')
-      write(6,1001)
       oldsib=-1
       maxsize=1
 c     do 20 j=1,10000000
       do 20 i=1,famsize
-c       read(10,*,end=25,err=25)sib,aff,freq
         sib=famdata(i,1)
         aff=famdata(i,2)
         freq=famdata(i,3)
         fm(aff+1,sib)=freq
         if(sib .GT. maxsize)maxsize=sib
-        if(sib .NE. oldsib)write(6,*)
+*       if(sib .NE. oldsib)write(6,*)
         oldsib=sib
-        write(6,1000)sib,aff,freq
-        if(i.eq.famsize)goto 25
    20 continue
-   25 write(6,1000)
 
 c Find marginal totals from -fm- and constant part of the likelihood
       call build(fm,m,1,maxsize,nfam,nsibs,naff,const)
@@ -57,7 +53,7 @@ c   const  = constant part of the log-likelihood
 
 c  Probability of the observed table
       call prob(fm,1,maxsize,const,p)
-      write(6,1002)p
+      pobs=p
 c  Generate test statistics, expected values under null hypothesis
       call test(fm,m,1,maxsize,stat,ns,naff,nsibs,.true.)
 c  Enumerate all possible tables for exact tail area
@@ -68,10 +64,6 @@ c  Enumerate all possible tables for exact tail area
       nenum=dcase
 
 c     stop 9999
- 1000 format(5x,3i15)
- 1001 format(17x,'Family frequency data read in:'/
-     &  t18,'Sibs        Affected       Frequency  ')
- 1002 format(t14,'Probability of this table:  ',e15.7)
       return
       end
 
@@ -93,7 +85,7 @@ c       frequencies in -fm-. If -trace- then print them out
       data zero/0.0d0/, one/1.0d0/, two/2.0d0/, eps/1.0d-9/
       data nssave/5/
 
-      if(trace)write(6,1000)
+*     if(trace)write(6,1000)
       ns=nssave
       do 10 j=1,ns
          stat(j)=zero
@@ -103,7 +95,7 @@ c         j=# of sibs
 c         fm(i,j)=# of families with jsibs, i-1 affected
 c         be=binomial expectation
 c         he=hypergeometric expectation
-      write(6,1001)
+*     write(6,1001)
       do 100 j=first,last
          if(m(j) .LE. 0)go to 100
          sbe=zero
@@ -129,7 +121,7 @@ c                      two chi residuals
             chi2=zero
             if(be .GT. eps)chi1=(fmij-be)/dsqrt(be)
             if(he .GT. eps)chi2=(fmij-he)/dsqrt(he)
-            if(trace)write(6,1001)j,ia,fm(i,j),be,he,chi1,chi2
+*           if(trace)write(6,1001)j,ia,fm(i,j),be,he,chi1,chi2
             sbe=sbe+be
             she=she+he
 c                       test statistics:
@@ -144,12 +136,12 @@ c                                             chi-squared
 c                                    exact log-likelihood
             stat(ns)=stat(ns)+fmij*(fac(ia)+fac(j-ia))
    80    continue
-         if(trace)write(6,1002)m(j),sbe,she
-         if(trace)write(6,1001)
+*        if(trace)write(6,1002)m(j),sbe,she
+*        if(trace)write(6,1001)
   100 continue
       stat(1)=stat(1)*two
       stat(2)=stat(2)*two
-      if(trace)write(6,1003)(stat(j),j=1,ns)
+*     if(trace)write(6,1003)(stat(j),j=1,ns)
       return
  
  1000 format(/t20,'Test Statistics for Family Clusters',
@@ -186,7 +178,7 @@ c     OUTER LOOP: allocate cases to various sized families
       dcase=zero
    10 call cmulte(alloc,naff,maxsize,alldone)
       if(alldone .OR. alloc(maxsize) .GT. maxsize*m(maxsize))then
-         write(6,1002)p0,psum,ptail,dcase
+*        write(6,1002)p0,psum,ptail,dcase
          return
       endif
 c       alloc(i) cases in families of size i:  Is this valid?
@@ -347,7 +339,7 @@ c 900 write(6,1000)
   900 continue
 c     write(6,1001)csibs,caff,cfam
 c     write(6,1006)(cm(j),j=first,last)
-      stop 8888
+      call rexit("8888")
 
 cc 1000 format(' OUT: error detected',3i5)
 cc 1001 format(/1x,i5,' sibs',i8,' affected',i8,' families')
@@ -368,9 +360,9 @@ c   Done signifies the start and end of the sequence.
 
       ip1=i+1
 c                     test for valid parameter values
-      if(i .LT. 1)stop 440
-      if(m .LT. 0)stop 441
-      if(m .GT. i*n)stop 442
+      if(i .LT. 1) call rexit("440")
+      if(m .LT. 0) call rexit("441")
+      if(m .GT. i*n) call rexit("442")
 c      Special cases where only one outcome is possible:
 c                                                    m=i*n
       if(m .EQ. i*n)then
@@ -385,7 +377,7 @@ c                                                    n=0 or 1
          done=.NOT. done
          do 4 j=1,ip1
     4    x(j)=0
-         if(m .GT. i)stop 443
+         if(m .GT. i) call rexit("443")
          x(m+1)=n
          return
       endif
@@ -402,7 +394,7 @@ c                                Initialize the general case
       if(done)then
          j=m/n
          j=j+1
-         if(j .GT. i)stop 444
+         if(j .GT. i) call rexit("444")
          do 20 k=1,ip1
    20    x(k)=0
 c                     two smallest possible frequencies

@@ -1325,7 +1325,7 @@ void *mem;
 mem=malloc(len);
 if(mem) return mem;
 REprintf("Sorry, but I cannot allocate memory\n");
-exit(-1);
+error("%d",-1);
 
 }
 
@@ -1344,8 +1344,8 @@ void xgenp(haploid *);
 double xll(haploid *);
 
 #define checkid() {\
-    printf("[%5d]",men[io].id); \
-    for(i=0;i<nlocim;i++) printf(" %2d",lk[i]);printf("\n");}
+    Rprintf("[%5d]",men[io].id); \
+    for(i=0;i<nlocim;i++) Rprintf(" %2d",lk[i]);Rprintf("\n");}
 #define lli() {\
   l=0;\
   for(j=0;j<nloci;j++)\
@@ -1557,16 +1557,16 @@ while(fgets(record,300,fi)
   else j++;
 }
 fclose(fi);
-printf("\nNo of nonmissing individuals at each locus\n\n");
-for(i=0;i<nloci;i++) printf("%3d %.0f\n",i+1,n[i]);
-printf("\n%d/%d individuals with F/P information\n",h_sample,h_msample);
+Rprintf("\nNo of nonmissing individuals at each locus\n\n");
+for(i=0;i<nloci;i++) Rprintf("%3d %.0f\n",i+1,n[i]);
+Rprintf("\n%d/%d individuals with F/P information\n",h_sample,h_msample);
 for(i=0;i<nloci;i++) for(j=0;j<loci[i];j++) pm[i][j]/=n[i];
-printf("\nAllele frequencies\n\nLocus/Frequecies\n\n");
+Rprintf("\nAllele frequencies\n\nLocus/Frequecies\n\n");
 for(i=0;i<nloci;i++)
 {
-  printf("%3d",i+1);
-  for(j=0;j<loci[i];j++) printf(" %.4f",pm[i][j]);
-  printf("\n");
+  Rprintf("%3d",i+1);
+  for(j=0;j<loci[i];j++) Rprintf(" %.4f",pm[i][j]);
+  Rprintf("\n");
 }
 hapall=1;
 for(i=0;i<nloci;i++) hapall*=loci[i];
@@ -1589,7 +1589,7 @@ for(i=0;i<=nloci;i++) d[i]=0;
 for(i=0;i<nloci;i++) loci1[i]=loci[nloci-i-1]-1;
 k=0;
 lnl0=xll(htable);
-printf("\nlog-likelihood assuming linkage equilibrium = %.2f\n\n",lnl0);
+Rprintf("\nlog-likelihood assuming linkage equilibrium = %.2f\n\n",lnl0);
 k=1;
 iter=1;
 do
@@ -1603,15 +1603,15 @@ do
   }
   else
   {
-    printf("Iteration %3d, ",k++);
+    Rprintf("Iteration %3d, ",k++);
     lnl1=xll(htable);
-    printf("log-likelihood=%.2f\n",lnl1);
+    Rprintf("log-likelihood=%.2f\n",lnl1);
     s=lnl1-lnls;
     lnls=lnl1;
   }
 } while(s>eps&&iter++<maxit);
 if(!convll) lnl1=xll(htable);
-printf("\nHaplotype frequencies under linkage disequilibrium\n\n");
+Rprintf("\nHaplotype frequencies under linkage disequilibrium\n\n");
 s=h_sample+h_msample;
 for(i=0;i<=nloci;i++) d[i]=0;
 for(i=0;i<nloci;i++) loci1[i]=loci[nloci-i-1]-1;
@@ -1621,15 +1621,15 @@ for(i=0;i<hapall;i++)
   if(h[i]>tol)
   {
     ft=sqrt(h[i]*s)+sqrt(h[i]*s+1)-sqrt(4*h0[i]*s+1);
-    printf("%6d %.6f %.12f %.6f %6.2f",k+1,h[i],h[i],h0[i],ft);
-    for(j=nloci-1;j>=0;j--) printf("%3d",d[j]+1);
-    printf(" %d\n",i+1);
+    Rprintf("%6d %.6f %.12f %.6f %6.2f",k+1,h[i],h[i],h0[i],ft);
+    for(j=nloci-1;j>=0;j--) Rprintf("%3d",d[j]+1);
+    Rprintf(" %d\n",i+1);
     k++;
   }
   digitm(loci1,d,0);
 }
-printf("\n%d haplotypes >%f\n\n",k,tol);
-printf("log-likelihood assuming linkage disequilibrium = %.2f\n",lnl1);
+Rprintf("\n%d haplotypes >%f\n\n",k,tol);
+Rprintf("log-likelihood assuming linkage disequilibrium = %.2f\n",lnl1);
 
 return 0;
 }

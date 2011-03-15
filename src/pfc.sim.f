@@ -45,19 +45,17 @@ cc    write(6,1004)
       oldsib=-1
       maxsize=1
       do 20 j=1,10000000
-cc      read(10,*,end=25,err=25)sib,aff,freq
         do 20 i=1,famsize
         sib=famdata(i,1)
         aff=famdata(i,2)
         freq=famdata(i,3)
         fm(aff+1,sib)=freq
         if(sib.gt.maxsize)maxsize=sib
-        if(sib.ne.oldsib)write(6,*)
+*       if(sib.ne.oldsib)write(6,*)
         oldsib=sib
-        write(6,1001)sib,aff,freq
         if(i.eq.famsize)goto 25
  20   continue
- 25   write(6,1003)
+ 25   continue
 
 c   Find marginal totals from -fm- and constant part of the likelihood
 
@@ -72,7 +70,6 @@ c   const  = constant part of the log-likelihood
       
       call runiout(fm,m,nsibs,naff,nfam,1,maxsize)
       call runiprob(fm,1,maxsize,slf,const,obsp)
-       write(6,1007)obsp
        
 cc     write(16,1120)nsim,ncycle
 
@@ -84,7 +81,7 @@ cc     write(16,1120)nsim,ncycle
        call runirandom(rfm,m,1,maxsize,nsibs,naff,initial)
        if (trace) then
        do 900 j=1,maxsize
-       write(6,905)j,m(j),(rfm(k,j),k=1,j+1)
+*      write(6,905)j,m(j),(rfm(k,j),k=1,j+1)
 900    continue
        endif
 c       call runiout(rfm,m,nsibs,naff,nfam,1,maxsize)
@@ -139,8 +136,9 @@ c==========================================================================
       data trace/.false./
 c      data rfm/400*0/
 
-      if (nsibs.gt.3000) write(6,1000)
-c      print*, 'Too many family members, change size of rvector?'
+      if (nsibs.gt.3000) 
+     & call dblepr("Too many family members, change size of rvector?",
+     & 120,1,0)
 
       if (initial) then
       p=uni(naff)
@@ -163,7 +161,7 @@ c   refresh rfm for each call
         rvector(i)=0
         endif
 10    continue
-      if (trace) write(6,1005)naff,ones
+*     if (trace) write(6,1005)naff,ones
 
       index=0
       do 20 j=minsize,maxsize
@@ -209,7 +207,7 @@ c   const  = constant part of the log-likelihood
       common/factab/fac0
       data zero/0.0000d0/, trace/.false./
 
-      if(trace)write(6,1000)
+*     if(trace)write(6,1000)
       nfam=0
       nsibs=0
       naff=0
@@ -227,8 +225,8 @@ c   const  = constant part of the log-likelihood
  20       continue
       const=const-fac(nsibs)
       const=const+fac(naff)+fac(nsibs-naff)
-      if(trace)call runiout(fm,m,nsibs,naff,nfam,first,last)
-      if(trace)write(6,1000)const
+*     if(trace)call runiout(fm,m,nsibs,naff,nfam,first,last)
+*     if(trace)write(6,1000)const
       return
  1000  format(' Build:const ',e15.5)
       end
@@ -246,10 +244,10 @@ c   output a table of frequencies and check for consistency
       csibs=0
       cfam=0
       caff=0
-      write(6,1001)nsibs,naff,nfam
+*     write(6,1001)nsibs,naff,nfam
       do 30 j=first,last
          cm(j)=0
-         write(6,1006)m(j),(freq(i,j),i=1,j+1)
+*        write(6,1006)m(j),(freq(i,j),i=1,j+1)
          do 30 i=1,j+1
             cfam=cfam+freq(i,j)
             cm(j)=cm(j)+freq(i,j)
@@ -262,10 +260,11 @@ c                                check!
          if(cm(j).ne.m(j))go to 900
  50       continue
       return
- 900   write(6,1000)
-      write(6,1001)csibs,caff,cfam
-      write(6,1006)(cm(j),j=first,last)
-      stop 8888
+ 900  continue
+*     write(6,1000)
+*     write(6,1001)csibs,caff,cfam
+*     write(6,1006)(cm(j),j=first,last)
+      call rexit("8888")
 
 
  1000  format(' OUT: error detected:')
@@ -290,7 +289,7 @@ c  Find the sum of log-factorials (slf) for the interior of the table
 c            lminf is double precision log of smallest positive number
       data zero/0.000d0/, trace/.false./, lminf/-708.7500d0/
 
-      if(trace)write(6,1000)first,last,const
+*     if(trace)write(6,1000)first,last,const
       slf=zero
 
       do 20 j=first,last
@@ -1188,8 +1187,8 @@ C***ROUTINES CALLED  (NONE)
 C***END PROLOGUE  XERABT
       CHARACTER*(*) MESSG
 C***FIRST EXECUTABLE STATEMENT  XERABT
-      write(*,*) nmessg, messg
-      STOP
+      call dblepr(messg,255, nmessg, 5)
+*     STOP
       END
       SUBROUTINE XERCTL(MESSG1,NMESSG,NERR,LEVEL,KONTRL)
 C***BEGIN PROLOGUE  XERCTL
@@ -1236,7 +1235,7 @@ C***ROUTINES CALLED  (NONE)
 C***END PROLOGUE  XERCTL
       CHARACTER*20 MESSG1
 C***FIRST EXECUTABLE STATEMENT  XERCTL
-      write(*,*) nerr,level,kontrl,messg1,nmessg
+*     write(*,*) nerr,level,kontrl,messg1,nmessg
       RETURN
       END
       SUBROUTINE XERPRT(MESSG,NMESSG)
@@ -1268,10 +1267,10 @@ C***FIRST EXECUTABLE STATEMENT  XERPRT
          IF (IUNIT.EQ.0) IUNIT = I1MACH(4)
          DO 10 ICHAR=1,LENMES,72
             LAST = MIN0(ICHAR+71 , LENMES)
-            WRITE (IUNIT,'(1X,A)') MESSG(ICHAR:LAST)
+            call dblepr(MESSG(ICHAR:LAST),120,1,0)
    10    CONTINUE
    20 CONTINUE
-      write(*,*) nmessg
+      call dblepr("",0,nmessg,5)
       RETURN
       END
       SUBROUTINE XERROR(MESSG,NMESSG,NERR,LEVEL)
@@ -1439,21 +1438,21 @@ C        MESSAGE
             IUNIT = LUN(KUNIT)
             IF (IUNIT.EQ.0) IUNIT = I1MACH(4)
             DO 22 I=1,MIN(NI,2)
-               WRITE (FORM,21) I,ISIZEI
+*              WRITE (FORM,21) I,ISIZEI
    21          FORMAT ('(11X,21HIN ABOVE MESSAGE, I',I1,'=,I',I2,')   ')
-               IF (I.EQ.1) WRITE (IUNIT,FORM) I1
-               IF (I.EQ.2) WRITE (IUNIT,FORM) I2
+*              IF (I.EQ.1) WRITE (IUNIT,FORM) I1
+*              IF (I.EQ.2) WRITE (IUNIT,FORM) I2
    22       CONTINUE
             DO 24 I=1,MIN(NR,2)
-               WRITE (FORM,23) I,ISIZEF+10,ISIZEF
+*              WRITE (FORM,23) I,ISIZEF+10,ISIZEF
    23          FORMAT ('(11X,21HIN ABOVE MESSAGE, R',I1,'=,E',
      1         I2,'.',I2,')')
-               IF (I.EQ.1) WRITE (IUNIT,FORM) R1
-               IF (I.EQ.2) WRITE (IUNIT,FORM) R2
+*              IF (I.EQ.1) WRITE (IUNIT,FORM) R1
+*              IF (I.EQ.2) WRITE (IUNIT,FORM) R2
    24       CONTINUE
             IF (LKNTRL.LE.0) GO TO 40
 C              ERROR NUMBER
-               WRITE (IUNIT,30) LERR
+*              WRITE (IUNIT,30) LERR
    30          FORMAT (15H ERROR NUMBER =,I10)
    40       CONTINUE
    50    CONTINUE
@@ -1531,20 +1530,20 @@ C        PRINT TO EACH UNIT
             IUNIT = LUN(KUNIT)
             IF (IUNIT.EQ.0) IUNIT = I1MACH(4)
 C           PRINT TABLE HEADER
-            WRITE (IUNIT,10)
+*           WRITE (IUNIT,10)
    10       FORMAT (32H0          ERROR MESSAGE SUMMARY/
      1      51H MESSAGE START             NERR     LEVEL     COUNT)
 C           PRINT BODY OF TABLE
             DO 20 I=1,10
                IF (KOUNT(I).EQ.0) GO TO 30
-               WRITE (IUNIT,15) MESTAB(I),NERTAB(I),LEVTAB(I),KOUNT(I)
+*              WRITE (IUNIT,15) MESTAB(I),NERTAB(I),LEVTAB(I),KOUNT(I)
    15          FORMAT (1X,A20,3I10)
    20       CONTINUE
    30       CONTINUE
 C           PRINT NUMBER OF OTHER ERRORS
-            IF (KOUNTX.NE.0) WRITE (IUNIT,40) KOUNTX
+*           IF (KOUNTX.NE.0) WRITE (IUNIT,40) KOUNTX
    40       FORMAT (41H0OTHER ERRORS NOT INDIVIDUALLY TABULATED=,I10)
-            WRITE (IUNIT,50)
+*           WRITE (IUNIT,50)
    50       FORMAT (1X)
    60    CONTINUE
          IF (NMESSG.LT.0) RETURN

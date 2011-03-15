@@ -22,10 +22,10 @@ the degrees of freedom should take into account the number of marginals used}
 }
 
 \section{References}{
-Yu C and D Zelterman (2001) Exact inference for family disease clusters. Commun Stat -- Theory
+Yu C, Zelterman D (2001) Exact inference for family disease clusters. Commun Stat -- Theory
 Meth 30:2293-2305
 
-Yu C and Zelterman D (2002) Statistical inference for familial disease clusters. Biometrics
+Yu C, Zelterman D (2002) Statistical inference for familial disease clusters. Biometrics
 58:481-491
 }
 \seealso{

@@ -465,8 +465,8 @@ for(j=0;j<maxalleles;j++) q[j]=0;
 for(i=0;i<maxgenotypes;i++) rt[i]=ct[i]=0;
 fp=fopen(obsfile,"r");
 if(!fp) {
-  printf("Sorry, I cannot open file %s\n",obsfile);
-  exit(1);
+  Rprintf("Sorry, I cannot open file %s\n",obsfile);
+  error("%d",1);
 }
 if(fgets(line,301,fp)&&sscanf(line,"%s %d %d %d %d",id,&a1,&a2,&b1,&b2)>4)
 {
@@ -508,15 +508,15 @@ else {
     }
     goto ok;
   }
-  printf("Sorry, but what type of file is this ?\n");
-  exit(1);
+  Rprintf("Sorry, but what type of file is this ?\n");
+  error("%d",1);
 }
 if(filetype==EHOUTPUT)
 {
   i=1;
   while(fgets(line,301,fp)&&sscanf(line,"%f",&h[i-1])&&(i<alleles1*alleles2)) i++;
-  if(i<alleles1*alleles2) fprintf(stderr,"I need %d haplotype frequencies\n",alleles1*alleles2);
-  printf("%d haplotype frequencies based on a sample of %.0f diploid individuals\n",i,sample_size);
+  if(i<alleles1*alleles2) Rprintf("I need %d haplotype frequencies\n",alleles1*alleles2);
+  Rprintf("%d haplotype frequencies based on a sample of %.0f diploid individuals\n",i,sample_size);
   for(i=0;i<alleles1;i++) {
     t=0;
     for(j=0;j<alleles2;j++) {
@@ -551,7 +551,7 @@ while(fgets(line,301,fp)&&sscanf(line,"%s %d %d %d %d",id,&a1,&a2,&b1,&b2)>3) {
   } else nmiss++;
 }
 fclose(fp);
-printf("%.0f individuals with full genotypic information and %d not.\n",sample_size,nmiss);
+Rprintf("%.0f individuals with full genotypic information and %d not.\n",sample_size,nmiss);
 l1=0;
 for(i=0;i<alleles1;i++) {
   for(j=0;j<=i;j++) {

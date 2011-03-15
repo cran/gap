@@ -2,6 +2,7 @@
   Program for preparing genecounting files
   JH Zhao 13/06/2001, 19/04/2002, 28/01/2004
 */
+#include <R.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,7 +25,7 @@ if (!r)
   r=malloc(sizeof(node));
   if (!r)
   {
-    printf("out of memory\n");exit(0);
+    REprintf("out of memory\n");error("%d",0);
   }
   r->left=r->right=NULL;
   r->genid=genid;
@@ -115,7 +116,7 @@ void inorder(node *t)
 {
 if (!t) return;
 inorder(t->left);
-printf("%f ",t->genid);
+REprintf("%f ",t->genid);
 inorder(t->right);
 }
 
@@ -125,7 +126,7 @@ void preorder(node *t)
 */
 {
 if (!t) return;
-printf("%f ",t->genid);
+REprintf("%f ",t->genid);
 preorder(t->left);
 preorder(t->right);
 }
@@ -138,7 +139,7 @@ void postorder(node *t)
 if (!t) return;
 postorder(t->left);
 postorder(t->right);
-printf("%f ",t->genid);
+REprintf("%f ",t->genid);
 }
 
 void ptree(node *r,int l,FILE *gdat)
@@ -187,8 +188,8 @@ float kp;
 fp=fopen(locfile,"r");
 if(!fp)
 {
-  fprintf(stderr,"Error opening %s",locfile);
-  exit(1);
+  REprintf("Error opening %s",locfile);
+  error("%d",1);
 }
 for(i=0;i<MAX_LOC;i++) selidx[i]=selndx[i]=selpdx[i]=0;
 fgets(line,240,fp);
@@ -196,7 +197,7 @@ sscanf(line,"%d %d %d %d",&nloci,&cc,&permute,&npermute);
 if(nloci>=MAX_LOC)
 {
   perror("Error: maximum number of loci exceeded");
-  exit(1);
+  error("%d",1);
 }
 fgets(line,240,fp);
 for(i=0;i<nloci;++i,strcpy(line,rest),*rest='\0')
@@ -213,19 +214,19 @@ if(fgets(line,240,fp)&&sscanf(line,"%f %f %f %f",&freq,&pen0,&pen1,&pen2)==4)
   if(pen0>pen2) perror("The order of penetrances is wrong !");
 fclose(fp);
 
-printf("Number of loci in this analysis = %d \n",nloci);
+REprintf("Number of loci in this analysis = %d \n",nloci);
 i=(permute||(!cc&&(npermute>0)));
-printf("Permutation procedure %s invoked ",(i)?"will be":"will not be");
-if(i) printf("%d times\n",npermute);else printf("\n");
-printf("Number of alleles at these loci and their\n");
-printf("  selection/permutation statuses [1=yes,0=no]:\n");
+REprintf("Permutation procedure %s invoked ",(i)?"will be":"will not be");
+if(i) REprintf("%d times\n",npermute);else REprintf("\n");
+REprintf("Number of alleles at these loci and their\n");
+REprintf("  selection/permutation statuses [1=yes,0=no]:\n");
 for(i=0;i<nloci;++i)
-printf("  locus %3d: alleles=%2d selection= %d permutation= %d\n",i+1,alleles[i],sel[i],selp[i]);
+REprintf("  locus %3d: alleles=%2d selection= %d permutation= %d\n",i+1,alleles[i],sel[i],selp[i]);
 if(cc)
 {
-  printf("The disease model (q,f0,f1,f2) specified: %.4f %.4f %.4f %.4f \n",freq,pen0,pen1,pen2);
+  REprintf("The disease model (q,f0,f1,f2) specified: %.4f %.4f %.4f %.4f \n",freq,pen0,pen1,pen2);
   kp=pow(1-freq,2)*pen0+2*freq*(1-freq)*pen1+pow(freq,2)*pen2;
-  printf("  amounts to a population disease prevalence of %.4f\n",kp);
+  REprintf("  amounts to a population disease prevalence of %.4f\n",kp);
 }
 m=l=0;
 l1=l2=0;
@@ -272,7 +273,7 @@ for(i=l2;i>0;--i)
   j=i-1;
   k2*=npg[j];nnp[j]=k2;
 }
-if(!cc) printf("Blocks 1 and 2 have %d, %d loci\n",l1,l2);
+if(!cc) REprintf("Blocks 1 and 2 have %d, %d loci\n",l1,l2);
 return 0;
 }
 
@@ -286,10 +287,10 @@ int i,j,k,l,n,a1,a2,genotype[MAX_LOC],gid;
 char line[1000],rest[1000];
 double p;
 
-if((fp=fopen(datfile,"r"))==NULL) fprintf(stderr,"Error opening %s",datfile);
+if((fp=fopen(datfile,"r"))==NULL) REprintf("Error opening %s",datfile);
 i=0;n=0;
 cases=0;
-if(iogenotype) printf("\n   ID  label locus genotype \n\n");
+if(iogenotype) REprintf("\n   ID  label locus genotype \n\n");
 while(fgets(line,1000,fp)
    &&sscanf(line,"%s %d %[^\n]",p_t.id,&p_t.affection,rest)==3)
 {
@@ -314,15 +315,15 @@ while(fgets(line,1000,fp)
    }
    if(iogenotype)
    {
-      printf("%5s %3d",p_t.id,p_t.affection);
+      REprintf("%5s %3d",p_t.id,p_t.affection);
       l=0;
       for(j=0;j<nloci;++j)
       {
         if(!sel[j]) continue;
-        printf(" %6d",p_t.gtype[l]);
+        REprintf(" %6d",p_t.gtype[l]);
         l++;
       }
-      printf("\n");
+      REprintf("\n");
    }
    if(k!=0)
    {
@@ -344,8 +345,8 @@ while(fgets(line,1000,fp)
 }
 fclose(fp);
 sample_size=i;
-printf("There are %d cases out of %d individuals\n",cases,sample_size);
-if(n>0) printf("%d records with partial information have been left out \n",n);
+REprintf("There are %d cases out of %d individuals\n",cases,sample_size);
+if(n>0) REprintf("%d records with partial information have been left out \n",n);
 return 0;
 }
 
@@ -428,15 +429,15 @@ float kp;
 fp=fopen(locfile,"r");
 if(!fp)
 {
-  fprintf(stderr,"Error opening %s",locfile);
-  exit(1);
+  REprintf("Error opening %s",locfile);
+  error("%d",1);
 }
 fgets(line,500,fp);
 sscanf(line,"%d %d %d %d",&nloci,&cc,&permute,&npermute);
 if(nloci>=MAX_LOC)
 {
   perror("Error: maximum number of loci exceeded");
-  exit(1);
+  error("%d",1);
 }
 fgets(line,500,fp);
 for(i=0;i<nloci;++i,strcpy(line,rest),*rest='\0')
@@ -453,19 +454,19 @@ if(fgets(line,500,fp)&&sscanf(line,"%f %f %f %f",&freq,&pen0,&pen1,&pen2)==4)
   if(pen0>pen2) perror("The order of penetrances is wrong !");
 fclose(fp);
 
-printf("Number of loci in this analysis = %d \n",nloci);
+REprintf("Number of loci in this analysis = %d \n",nloci);
 i=(permute||(!cc&&(npermute>0)));
-printf("Permutation procedure %s invoked ",(i)?"will be":"will not be");
-if(i) printf("%d times\n",npermute);else printf("\n");
-printf("Number of alleles at these loci and their\n");
-printf("  selection/permutation statuses [1=yes,0=no]:\n");
+REprintf("Permutation procedure %s invoked ",(i)?"will be":"will not be");
+if(i) REprintf("%d times\n",npermute);else REprintf("\n");
+REprintf("Number of alleles at these loci and their\n");
+REprintf("  selection/permutation statuses [1=yes,0=no]:\n");
 for(i=0;i<nloci;++i)
-printf("  locus %3d: alleles=%2d selection= %d permutation= %d\n",i+1,alleles[i],sel[i],selp[i]);
+REprintf("  locus %3d: alleles=%2d selection= %d permutation= %d\n",i+1,alleles[i],sel[i],selp[i]);
 if(cc)
 {
-  printf("The disease model (q,f0,f1,f2) specified: %.4f %.4f %.4f %.4f \n",freq,pen0,pen1,pen2);
+  REprintf("The disease model (q,f0,f1,f2) specified: %.4f %.4f %.4f %.4f \n",freq,pen0,pen1,pen2);
   kp=pow(1-freq,2)*pen0+2*freq*(1-freq)*pen1+pow(freq,2)*pen2;
-  printf("  amounts to a population disease prevalence of %.4f\n",kp);
+  REprintf("  amounts to a population disease prevalence of %.4f\n",kp);
 }
 m=l=0;
 l1=l2=0;
@@ -509,7 +510,7 @@ for(i=l2;i>0;--i)
   j=i-1;
   k2*=npg[j];nnp[j]=k2;
 }
-if(!cc) printf("Blocks 1 and 2 have %d, %d loci\n",l1,l2);
+if(!cc) REprintf("Blocks 1 and 2 have %d, %d loci\n",l1,l2);
 return 0;
 }
 
@@ -523,10 +524,10 @@ int i,j,k,l,n,a1,a2,genotype[MAX_LOC],gid;
 char line[1000],rest[1000];
 double p;
 
-if((fp=fopen(datfile,"r"))==NULL) fprintf(stderr,"Error opening %s",datfile);
+if((fp=fopen(datfile,"r"))==NULL) REprintf("Error opening %s",datfile);
 i=0;n=0;
 cases=0;
-if(iogenotype) printf("\n   ID  label locus genotype \n\n");
+if(iogenotype) REprintf("\n   ID  label locus genotype \n\n");
 while(fgets(line,1000,fp)
    &&sscanf(line,"%s %d %[^\n]",p_t.id,&p_t.affection,rest)==3)
 {
@@ -547,9 +548,9 @@ while(fgets(line,1000,fp)
         if(a1>a2) _swap_(&a1,&a2);
         if((a1>alleles[j])||(a2>alleles[j]))
         {
-          fprintf(stderr,"Error in record %d,",i+1);
-          fprintf(stderr,"reset allele number (or <=0 for missing alleles)\n");
-          exit(1);
+          REprintf("Error in record %d,",i+1);
+          REprintf("reset allele number (or <=0 for missing alleles)\n");
+          error("%d",1);
         }
         p_t.locus[j][0]=a1;
         p_t.locus[j][1]=a2;
@@ -561,15 +562,15 @@ while(fgets(line,1000,fp)
    }
    if (iogenotype)
    {
-      printf("%5s %3d",p_t.id,p_t.affection);
+      REprintf("%5s %3d",p_t.id,p_t.affection);
       l=0;
       for(j=0;j<nloci;++j)
       {
         if(!sel[j]) continue;
-        printf(" %6d",p_t.gtype[l]);
+        REprintf(" %6d",p_t.gtype[l]);
         l++;
       }
-      printf("\n");
+      REprintf("\n");
    }
    if(k==selected+1)
    {
@@ -591,8 +592,8 @@ while(fgets(line,1000,fp)
 }
 fclose(fp);
 sample_size=i;
-printf("There are %d cases out of %d individuals\n",cases,sample_size);
-if(n>0) printf("%d records with no information have been left out \n",n);
+REprintf("There are %d cases out of %d individuals\n",cases,sample_size);
+if(n>0) REprintf("%d records with no information have been left out \n",n);
 return 0;
 }
 
@@ -689,7 +690,7 @@ list t;
 ff=(ids*)malloc(sample_size*sizeof(ids));
 if (!ff) {
    perror("error allocating memory in getsize()");
-   exit(1);
+   error("%d",1);
 }
 t=r;
 k1=k2=0;
@@ -759,12 +760,12 @@ char line[1000],rest[1000];
 double p;
 list listi;
 
-if((fp=fopen(datfile,"r"))==NULL) fprintf(stderr,"Error opening %s",datfile);
+if((fp=fopen(datfile,"r"))==NULL) REprintf("Error opening %s",datfile);
 r = NULL;
 i=0;
 n=0;
 cases=0;
-if(iogenotype) printf("\n   ID  label locus genotype \n\n");
+if(iogenotype) REprintf("\n   ID  label locus genotype \n\n");
 while(fgets(line,1000,fp)
    &&sscanf(line,"%s %d %[^\n]",p_t.id,&p_t.affection,rest)==3)
 {
@@ -787,9 +788,9 @@ while(fgets(line,1000,fp)
         p_t.locus[j][1]=a2;
         if((a1>alleles[j])||(a2>alleles[j]))
         {
-          fprintf(stderr,"Error in record %d,",i+1);
-          fprintf(stderr,"reset allele number (or <=0 for missing alleles)\n");
-          exit(1);
+          REprintf("Error in record %d,",i+1);
+          REprintf("reset allele number (or <=0 for missing alleles)\n");
+          error("%d",1);
         }
         p_t.gtype[j]=a2g(a1,a2);
       }
@@ -797,15 +798,15 @@ while(fgets(line,1000,fp)
    }
    if (iogenotype)
    {
-      printf("%5s %3d",p_t.id,p_t.affection);
+      REprintf("%5s %3d",p_t.id,p_t.affection);
       l=0;
       for(j=0;j<nloci;++j)
       {
         if(!sel[j]) continue;
-        printf(" %6d",p_t.gtype[l]);
+        REprintf(" %6d",p_t.gtype[l]);
         l++;
       }
-      printf("\n");
+      REprintf("\n");
    }
    if(k==selected+1)
    {
@@ -816,7 +817,7 @@ while(fgets(line,1000,fp)
         else p_t.affection=false;
    ++i;
    listi = (list)malloc(sizeof(struct newrec));
-   if(!listi) exit(1);
+   if(!listi) error("%d",1);
    listi->id=i;
    listi->cc=p_t.affection;
    for(j=0;j<nloci;j++)
@@ -830,8 +831,8 @@ while(fgets(line,1000,fp)
 }
 fclose(fp);
 sample_size=i;
-printf("There are %d cases out of %d individuals\n",cases,sample_size);
-if(n>0) printf("%d records with no information have been left out \n",n);
+REprintf("There are %d cases out of %d individuals\n",cases,sample_size);
+if(n>0) REprintf("%d records with no information have been left out \n",n);
 
 l=0;
 for(j=0;j<nloci;j++) if(sel[j]) ++l;
@@ -849,7 +850,7 @@ while (listi!=NULL) {
       listi = listi->next;
 }
 p=getsize(gdat);
-printf("There are %.0f observed multilocus genotypes\n",p);
+REprintf("There are %.0f observed multilocus genotypes\n",p);
 #ifdef DEBUG
 r = rsort1(r);
 #endif
@@ -863,25 +864,25 @@ FILE *gout;
 int j;
 time_t t;
 
-printf("Data preparation for GENECOUNTING %.1f JH Zhao 9-7-2002\n",version);
+REprintf("Data preparation for GENECOUNTING %.1f JH Zhao 9-7-2002\n",version);
 #ifdef NOHM
-  printf("(Omit individuals with missing genotypes)\n\n");
+  REprintf("(Omit individuals with missing genotypes)\n\n");
 #elif ID
-  printf("(Collect all information via genotype identifier)\n\n");
+  REprintf("(Collect all information via genotype identifier)\n\n");
 #else
-  printf("(Collapse over genotypes)\n\n");
+  REprintf("(Collapse over genotypes)\n\n");
 #endif
 time(&t);
-printf("%s\n",ctime(&t));
-printf("Maximum number of loci = %d\n",maxloci);
-printf("Maximum number of alleles = %d\n",maxalleles);
+REprintf("%s\n",ctime(&t));
+REprintf("Maximum number of loci = %d\n",maxloci);
+REprintf("Maximum number of alleles = %d\n",maxalleles);
 
 if(argc<4)
 {
-  fprintf(stderr,"\nUsage: %s parfile datfile outfile\n",argv[0]);
-  fprintf(stderr,"\nwhere parfile/datfile are EHPLUS parameter/data files\n");
-  fprintf(stderr,"\noutfile is the target file with condensed information\n");
-  exit(1);
+  REprintf("\nUsage: %s parfile datfile outfile\n",argv[0]);
+  REprintf("\nwhere parfile/datfile are EHPLUS parameter/data files\n");
+  REprintf("\noutfile is the target file with condensed information\n");
+  error("%d",1);
 }
 else
 {
@@ -889,7 +890,7 @@ else
   gout=fopen(outfile,"w");
   if(!gout)
   {
-    fprintf(stderr,"I can't open file %s for output...exit\n",outfile);
+    REprintf("I can't open file %s for output...exit\n",outfile);
     return 1;
   }
 #ifdef NOHM /*use only individuals with complete information*/
@@ -961,7 +962,7 @@ if (!r)
   r=malloc(sizeof(node));
   if (!r)
   {
-    printf("out of memory\n");exit(0);
+    REprintf("out of memory\n");error("%d",0);
   }
   r->left=r->right=NULL;
   r->genid=genid;
@@ -1024,7 +1025,7 @@ list t;
 ff=(ids*)malloc(sample_size*sizeof(ids));
 if (!ff) {
    perror("error allocating memory in getsize()");
-   exit(1);
+   error("%d",1);
 }
 t=r;
 for (l=0;l<n_loci;l++) l1[l]=l2[l]=t->k[l];
@@ -1086,8 +1087,8 @@ nloci2=2*n_loci;
 alist=(phenotype*)malloc(n_obs*sizeof(phenotype));
 if (!alist)
 {
-   fprintf(stderr,"I cannot allocate memory\n");
-   exit(1);
+   REprintf("I cannot allocate memory\n");
+   error("%d",1);
 }
 p=1;
 for(i=n_loci;i>0;--i)
@@ -1184,8 +1185,8 @@ else
       listi = (list)malloc(sizeof(struct newrec));
       if(!listi)
       {
-        fprintf(stderr,"I cannot allocate memory\n");
-        exit(1);
+        REprintf("I cannot allocate memory\n");
+        error("%d",1);
       }
       listi->id=i+1;
       listi->cc=p_t.affection;

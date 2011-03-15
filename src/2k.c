@@ -1,3 +1,4 @@
+#include <R.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -48,17 +49,17 @@ void x22k(int *a, int *tablen, double *x2a, double *x2b, int *col1, int *col2, d
     }
     BasicStatistic();
     CheckZero();
-    printf("\n");
-    printf("Data : \n         ");
-    for(i = 0; i < K; i++) printf("%3d ",i + 1);
-    printf("Total\n-----------------------------------\nCase     ");
-    for(i = 0; i < K; i++) printf("%3d ",Y1[i]);
-    printf("%4d\nControl  ",N1);
-    for(i = 0; i < K; i++) printf("%3d ",Y2[i]);
-    printf("%4d\n-----------------------------------\nTotal    ",N2);
-    for(i = 0; i < K; i++) printf("%3d ",Y[i]);
-    printf("%4d\n",N);
-    printf("-------------------------------------------------------\n");
+    Rprintf("\n");
+    Rprintf("Data : \n         ");
+    for(i = 0; i < K; i++) Rprintf("%3d ",i + 1);
+    Rprintf("Total\n-----------------------------------\nCase     ");
+    for(i = 0; i < K; i++) Rprintf("%3d ",Y1[i]);
+    Rprintf("%4d\nControl  ",N1);
+    for(i = 0; i < K; i++) Rprintf("%3d ",Y2[i]);
+    Rprintf("%4d\n-----------------------------------\nTotal    ",N2);
+    for(i = 0; i < K; i++) Rprintf("%3d ",Y[i]);
+    Rprintf("%4d\n",N);
+    Rprintf("-------------------------------------------------------\n");
 
     C_obs = MaxChiSquare();
     Cout_obs = MaxAmongOneToOthers();
@@ -70,27 +71,27 @@ void x22k(int *a, int *tablen, double *x2a, double *x2b, int *col1, int *col2, d
         C_max_obs = C_obs;
         maxcol_obs = Ccol_obs;
         Chi2Flag = 1;
-        printf("observed max is %f\n",C_max_obs);
-        printf("max chi2 %d...%d vs %d...%d\n",1,maxcol_obs+1,maxcol_obs+2,K);
-        printf("-------------------------------------------\n");
+        Rprintf("observed max is %f\n",C_max_obs);
+        Rprintf("max chi2 %d...%d vs %d...%d\n",1,maxcol_obs+1,maxcol_obs+2,K);
+        Rprintf("-------------------------------------------\n");
     }
     else {
         C_max_obs = Cout_obs;
         maxcol_obs = Coutcol_obs;
         Chi2Flag = 0;
-        printf("observed max is %f\n",C_max_obs);
-        printf("max 1-to-thers %d vs off %d\n",maxcol_obs + 1,maxcol_obs + 1);
-        printf("-------------------------------------------\n");
+        Rprintf("observed max is %f\n",C_max_obs);
+        Rprintf("max 1-to-thers %d vs off %d\n",maxcol_obs + 1,maxcol_obs + 1);
+        Rprintf("-------------------------------------------\n");
     }
     if(CutFlag == 1) {
       maxcol_obs = ColumnONE - 1;
       Chi2Flag = 0;
-      printf("calculate Pr(T >= max(%d vs others))\n",maxcol_obs + 1);
+      Rprintf("calculate Pr(T >= max(%d vs others))\n",maxcol_obs + 1);
     }
     if(CutFlag == 2) {
       maxcol_obs = ColumnACCUM-1;
       Chi2Flag = 1;
-      printf("calculate Pr(T >= max(-%d vs %d-))\n",maxcol_obs+1,maxcol_obs+2);
+      Rprintf("calculate Pr(T >= max(-%d vs %d-))\n",maxcol_obs+1,maxcol_obs+2);
     }
 
     Lz[0] = CalcLj(0);
@@ -161,8 +162,8 @@ void x22k(int *a, int *tablen, double *x2a, double *x2b, int *col1, int *col2, d
     for(i = Lzsum; i <= Uzsum; i++) F[N1] += F_prev[i]
           * Combi(N1, i) * Combi(N2, S[K - 2] - i) / Combi(N, S[K - 2]);
     *p = 1.0 - F[N1];
-    printf("p-value = %.10f\n",1.0 - F[N1]);
-    printf("------------------------------------------------\n");
+    Rprintf("p-value = %.10f\n",1.0 - F[N1]);
+    Rprintf("------------------------------------------------\n");
 }
 
 double MaxChiSquare()
@@ -176,8 +177,8 @@ double MaxChiSquare()
   int     z11WM=0,z12WM=0,z21WM=0,z22WM=0;
   int     c1WM=0,c2WM=0;
   maxchi = -1.0;
-  printf("# ------------------------------------\n");
-  printf("# cut point   statistic values\n");
+  Rprintf("# ------------------------------------\n");
+  Rprintf("# cut point   statistic values\n");
   for(i = 0; i < K - 1; i++)
   {
     z11 = 0;
@@ -201,7 +202,7 @@ double MaxChiSquare()
     chi[i] = (double)N *
       (double)((z11 * z22) - (z12 * z21)) * ((z11 * z22) - (z12 * z21))
       / ((double)N1 * N2 * c1 * c2);
-    printf("#    %d-%d      %f\n",i+1,i+2,chi[i]);
+    Rprintf("#    %d-%d      %f\n",i+1,i+2,chi[i]);
     if(maxchi < chi[i]){
       maxchi = chi[i];
       maxindex = i;
@@ -213,16 +214,16 @@ double MaxChiSquare()
       c2WM = c2;
     }
   }
-  printf("# ------------------------------------\n");
+  Rprintf("# ------------------------------------\n");
   Ccol_obs = maxindex;
-  printf("Max chi square = %f\n",maxchi);
-  printf("where the table is divided between\n");
-  printf("before the %d th and after the %d th category\n\n",maxindex + 1, maxindex + 2);
-  printf("1,...,%d  %d,...,%d\n",maxindex + 1, maxindex + 2,K);
-  printf("  %3d      %3d       %3d\n",z11WM,z12WM,N1);
-  printf("  %3d      %3d       %3d\n",z21WM,z22WM,N2);
-  printf("  %3d      %3d       %3d\n",c1WM,c2WM,N);
-  printf("-------------------------------------------------------\n");
+  Rprintf("Max chi square = %f\n",maxchi);
+  Rprintf("where the table is divided between\n");
+  Rprintf("before the %d th and after the %d th category\n\n",maxindex + 1, maxindex + 2);
+  Rprintf("1,...,%d  %d,...,%d\n",maxindex + 1, maxindex + 2,K);
+  Rprintf("  %3d      %3d       %3d\n",z11WM,z12WM,N1);
+  Rprintf("  %3d      %3d       %3d\n",z21WM,z22WM,N2);
+  Rprintf("  %3d      %3d       %3d\n",c1WM,c2WM,N);
+  Rprintf("-------------------------------------------------------\n");
   return maxchi;
 }
 
@@ -238,8 +239,8 @@ double MaxAmongOneToOthers()
   int     c1WM=0,c2WM=0;
   double  E1,E2;
   maxchi = -1.0;
-  printf("# ----------------------------\n");
-  printf("# considered column   statistic values\n");
+  Rprintf("# ----------------------------\n");
+  Rprintf("# considered column   statistic values\n");
   for(i = 0; i < K; i++)
   {
     z11 = Y1[i];
@@ -254,7 +255,7 @@ double MaxAmongOneToOthers()
     chi = (double)N *
       (double)((z11 * z22) - (z12 * z21)) * ((z11 * z22) - (z12 * z21))
       / ((double)N1 * N2 * c1 * c2);
-    printf("#    %d                %f\n",i+1,chi);
+    Rprintf("#    %d                %f\n",i+1,chi);
     if(chi > maxchi)
     {
       maxchi = chi;
@@ -267,16 +268,16 @@ double MaxAmongOneToOthers()
       c2WM = c2;
     }
   }
-  printf("# ----------------------------\n");
+  Rprintf("# ----------------------------\n");
   Coutcol_obs = maxindex;
-  printf("Max Chi Square (among all 1-to-others) = %f\n",maxchi);
-  printf("where the table is divided between\n");
-  printf("the %d th category and the others\n\n",maxindex + 1);
-  printf(" %d th  the others\n",maxindex + 1);
-  printf("  %3d      %3d       %3d\n",z11WM,z12WM,N1);
-  printf("  %3d      %3d       %3d\n",z21WM,z22WM,N2);
-  printf("  %3d      %3d       %3d\n",c1WM,c2WM,N);
-  printf("-------------------------------------------------------\n");
+  Rprintf("Max Chi Square (among all 1-to-others) = %f\n",maxchi);
+  Rprintf("where the table is divided between\n");
+  Rprintf("the %d th category and the others\n\n",maxindex + 1);
+  Rprintf(" %d th  the others\n",maxindex + 1);
+  Rprintf("  %3d      %3d       %3d\n",z11WM,z12WM,N1);
+  Rprintf("  %3d      %3d       %3d\n",z21WM,z22WM,N2);
+  Rprintf("  %3d      %3d       %3d\n",c1WM,c2WM,N);
+  Rprintf("-------------------------------------------------------\n");
   return maxchi;
 }
 
@@ -429,19 +430,19 @@ void ReadData()
 {
   int i;
     while(1){
-      printf("num of category : ");
+      Rprintf("num of category : ");
       fgets(line[0],sizeof(line[0]),stdin);
       sscanf(line[0],"%d",&K);
-      if(K > 100) printf("Sorry, num of category must be less than 100\n");
+      if(K > 100) Rprintf("Sorry, num of category must be less than 100\n");
       else break;
     }
     for(i = 0; i < K; i++){
-      printf("N[1,%d] : ",i+1);
+      Rprintf("N[1,%d] : ",i+1);
       fgets(line[i],sizeof(line[i]),stdin);
       sscanf(line[i],"%d",&Y1[i]);
     }
     for(i = 0; i < K; i++){
-      printf("N[2,%d] : ",i+1);
+      Rprintf("N[2,%d] : ",i+1);
       fgets(line[i],sizeof(line[i]),stdin);
       sscanf(line[i],"%d",&Y2[i]);
     }
@@ -450,25 +451,25 @@ void ReadData()
 void DisplayData()
 {
   int i;
-  printf("\n");
-  printf("Data : \n         ");
+  Rprintf("\n");
+  Rprintf("Data : \n         ");
   for(i = 0; i < K; i++){
-    printf("%3d ",i + 1);
+    Rprintf("%3d ",i + 1);
   }
-  printf("Total\n-----------------------------------\nCase     ");
+  Rprintf("Total\n-----------------------------------\nCase     ");
   for(i = 0; i < K; i++){
-    printf("%3d ",Y1[i]);
+    Rprintf("%3d ",Y1[i]);
   }
-  printf("%4d\nControl  ",N1);
+  Rprintf("%4d\nControl  ",N1);
   for(i = 0; i < K; i++){
-    printf("%3d ",Y2[i]);
+    Rprintf("%3d ",Y2[i]);
   }
-  printf("%4d\n-----------------------------------\nTotal    ",N2);
+  Rprintf("%4d\n-----------------------------------\nTotal    ",N2);
   for(i = 0; i < K; i++){
-    printf("%3d ",Y[i]);
+    Rprintf("%3d ",Y[i]);
   }
-  printf("%4d\n",N);
-  printf("-------------------------------------------------------\n");
+  Rprintf("%4d\n",N);
+  Rprintf("-------------------------------------------------------\n");
 }
 
 int main(int argc,char **argv)
@@ -507,27 +508,27 @@ int main(int argc,char **argv)
         C_max_obs = C_obs;
         maxcol_obs = Ccol_obs;
         Chi2Flag = 1;
-        printf("observed max is %f\n",C_max_obs);
-        printf("max chi2 %d...%d vs %d...%d\n",1,maxcol_obs+1,maxcol_obs+2,K);
-        printf("-------------------------------------------\n");
+        Rprintf("observed max is %f\n",C_max_obs);
+        Rprintf("max chi2 %d...%d vs %d...%d\n",1,maxcol_obs+1,maxcol_obs+2,K);
+        Rprintf("-------------------------------------------\n");
     }
     else{
         C_max_obs = Cout_obs;
         maxcol_obs = Coutcol_obs;
         Chi2Flag = 0;
-        printf("observed max is %f\n",C_max_obs);
-        printf("max 1-to-thers %d vs off %d\n",maxcol_obs + 1,maxcol_obs + 1);
-        printf("-------------------------------------------\n");
+        Rprintf("observed max is %f\n",C_max_obs);
+        Rprintf("max 1-to-thers %d vs off %d\n",maxcol_obs + 1,maxcol_obs + 1);
+        Rprintf("-------------------------------------------\n");
     }
     if(CutFlag == 1){
       maxcol_obs = ColumnONE - 1;
       Chi2Flag = 0;
-      printf("calculate Pr(T >= max(%d vs others))\n",maxcol_obs + 1);
+      Rprintf("calculate Pr(T >= max(%d vs others))\n",maxcol_obs + 1);
     }
     if(CutFlag == 2){
       maxcol_obs = ColumnACCUM-1;
       Chi2Flag = 1;
-      printf("calculate Pr(T >= max(-%d vs %d-))\n",maxcol_obs+1,maxcol_obs+2);
+      Rprintf("calculate Pr(T >= max(-%d vs %d-))\n",maxcol_obs+1,maxcol_obs+2);
     }
 
     Lz[0] = CalcLj(0);
@@ -603,8 +604,8 @@ int main(int argc,char **argv)
           * Combi(N1, i) * Combi(N2, S[K - 2] - i)
             / Combi(N, S[K - 2]);
     }
-    printf("p-value = %.10f\n",1.0 - F[N1]);
-    printf("------------------------------------------------\n");
+    Rprintf("p-value = %.10f\n",1.0 - F[N1]);
+    Rprintf("------------------------------------------------\n");
 }
 
 /******************************************************************

@@ -1,5 +1,22 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1-6
+15-03-2012	Change version to MAKEPED_VERSION in makeped.c according to Prof Brian Ripley
+14-03-2012	Add inst/doc/results, figures to .Rinstignore
+		Revise mtdt2
+
+Version 1.1-5
+14-03-2012	Add .Rinstignore
+		Remove Sweave.sty in inst/doc and reorganse sub-directories there
+13-03-2012	Change env to envir and lapply to sapply in tscc
+
+Version 1.1-4
+13-03-2012	Withdraw twinan90 to comply with new R CMD check
+		Suppress write statements in pfc.f, pfc.sim.f; replace stop with rexit
+		Replace fprintf(stderr,) with REprintf(), printf() with Rprint(), exit() with error()
+		Restore allele.recode, geno.recode
+		Remove Hmisc and suggests kinship2
+
 Version 1.1-3
 06-12-2011	Revise gap.Rnw to be compatible with kinship_1.1.2
 30-11-2011	Revise hwe.cc components and therefore NAMESPACE according to Wang, Li [li.wang@vanderbilt.edu]

@@ -1,3 +1,4 @@
+#include <R.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -60,7 +61,7 @@ void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
   ln_p_simulated = ln_p_observed = 0.0;
   work=(int*)malloc(MAX_ALLELE*sizeof(int));
   if(!work) {
-    fprintf(stderr,"not enough memory\n");
+    REprintf("not enough memory\n");
     return;
   }
   for ( i = 0; i < sample.step; ++i ) {
@@ -325,10 +326,10 @@ int main(int argc, char *argv[])
   time_t t1;
   register int i, j;
 
-  if ( check_file ( argc, argv, &infile, &outfile ) ) exit ( 1 );
+  if ( check_file ( argc, argv, &infile, &outfile ) ) error("%d",1);
   time(&t1);
   srand(3000);
-  if ( read_data ( a, &no_allele, &total, &sample, &infile ) ) exit (2);
+  if ( read_data ( a, &no_allele, &total, &sample, &infile ) ) error("%d",2);
   print_data ( a, no_allele, sample, &outfile );
   ln_p_observed = 0.0;
   ln_p_simulated = ln_p_observed;
@@ -337,7 +338,7 @@ int main(int argc, char *argv[])
   result.swch_count[0] = result.swch_count[1] = result.swch_count[2] = 0;
   work=(int*)malloc(MAX_ALLELE*sizeof(int));
   if(!work) {
-    fprintf(stderr,"not enough memory\n");
+    REprintf("not enough memory\n");
     return;
   }
   for ( i = 0; i < sample.step; ++i ) {
@@ -381,15 +382,15 @@ int check_file (int argc, char *argv[], FILE **infile, FILE **outfile)
   int exit_value = 0;
 
   if ( argc != 3 ) {
-    fprintf (stderr, "Bad commond.\nCorrect usage: hwe infile outfile.\n");
+    REprintf ("Bad commond.\nCorrect usage: hwe infile outfile.\n");
     exit_value = 1;
   }
   if ( ( *infile = fopen (argv[1], "r")) == (FILE *) NULL ) {
-    fprintf (stderr, "Can't read %s\n", argv[1]);
+    REprintf ( "Can't read %s\n", argv[1]);
     exit_value = 2;
   }
   if( ( *outfile = fopen (argv[2], "w")) == (FILE *) NULL ) {
-    fprintf (stderr, "Can't write %s\n", argv[2]);
+    REprintf ("Can't write %s\n", argv[2]);
     exit_value = 3;
   }
   return (exit_value);
@@ -401,11 +402,11 @@ int read_data (int *a, int *no_allele, int *total, randomization *sample, FILE *
 
   *total = 0;
   if( fscanf(*infile, "%d", no_allele) != 1) {
-    fprintf(stderr, "Please supply number of alleles\n");
+    REprintf("Please supply number of alleles\n");
     return ( err );
   }
   if ( *no_allele < 3 ) {
-    fprintf(stderr, "***Error! Number of alleles less than 3. \n");
+    REprintf("***Error! Number of alleles less than 3. \n");
     return ( err );
   }
   for ( i = 0; i < *no_allele; ++i ) {
@@ -417,11 +418,11 @@ int read_data (int *a, int *no_allele, int *total, randomization *sample, FILE *
   }
   if( fscanf(*infile, "%d %d %d \n", &sample->step,
                    &sample->group, &sample->size) != 3 ) {
-    fprintf( stderr, " Please supply parameters.\n" );
+    REprintf( " Please supply parameters.\n" );
     return ( err );
   }
   if ( sample->step < 1 || sample->group <= 1 ) {
-    fprintf( stderr, "***Error in parameter specification.\n" );
+    REprintf( "***Error in parameter specification.\n" );
     return ( err );
   }
   return (0);

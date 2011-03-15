@@ -1,10 +1,15 @@
 mtdt2 <- function(x,verbose=TRUE,n.sim=NULL,...)
 {
   require(BradleyTerry2)
-  colnames(x) <- paste(1:12,sep="")
-  rownames(x) <- paste(1:12,sep="")
+  dims <- dim(x)[1]
+  colnames(x) <- paste(1:dims,sep="")
+  rownames(x) <- paste(1:dims,sep="")
   c2b <- as.data.frame(countsToBinomial(x))
   names(c2b) <- c("allele1","allele2","transmitted","nontransmitted")
+  allele1 <- with(c2b, allele1)
+  allele2 <- with(c2b, allele2)
+  transmitted <- with(c2b, transmitted)
+  nontransmitted <- with(c2b, nontransmitted)
   btx <- BTm(cbind(transmitted,nontransmitted), allele1, allele2, ~ allele, id="allele", data=c2b, ...)
   t1 <- btx$null.deviance
   t2 <- btx$deviance

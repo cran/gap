@@ -320,14 +320,14 @@ unlink(outfile)
 Next, I will provide an example for kinship calculation using {\em kin.morgan}.
 It is recommended that individuals in a pedigree are ordered so that parents
 always precede their children. In this regard, package {\bf pedigree} can be
-used, and package {\bf kinship} can be used to produce pedigree diagram as with
+used, and package {\bf kinship2} can be used to produce pedigree diagram as with
 kinship matrix.
 
 \subsubsection*{Pedigree diagram}
 <<echo=TRUE>>=
 # pedigree diagram
 data(lukas,package="gap")
-library(kinship)
+library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
 png("figures/lukas.png",1280,960)
 plot(ped)
@@ -347,7 +347,7 @@ library(gap)
 gk1 <- kin.morgan(lukas)
 write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
 
-library(kinship)
+library(kinship2)
 kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
 write.table(kk1,"results/kinship_1.txt",quote=FALSE)
 
@@ -370,7 +370,7 @@ z <- gk2$kin.matrix-kk2
 sum(abs(z))
 @
 
-We see that in the second case, the result agrees with {\bf kinship}.
+We see that in the second case, the result agrees with {\bf kinship2}.
 
 
 \subsection{Graphics examples}

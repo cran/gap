@@ -38,8 +38,8 @@
 /*           supposed to be unique.  Added by Xiaoli Xie.                    */
 /*  1-19-04  No further warnings for R port. Jing hua Zhao                   */
 /*****************************************************************************/
-#define version 2.21
-
+#define MAKEPED_VERSION 2.21
+#include <R.h>
 #include <stdio.h>
 #include <ctype.h>
 /* #include <Storage.h> */
@@ -161,7 +161,7 @@ u_byte ped_integers;
 void read_pedigree(pedigree_s)
  s_byte pedigree_s[];   /* string id's  */
 {
-  fprintf(stdout,"\n\tPedigree   -> ");
+  Rprintf("\n\tPedigree   -> ");
   fscanf(stdin,"%s",pedigree_s);
 }
 /****************************************************************************/
@@ -175,7 +175,7 @@ void read_pedigree(pedigree_s)
 void read_person(person_s)
  s_byte person_s[];   /* string id's  */
 {
-  fprintf(stdout,"\tPerson     -> ");
+  Rprintf("\tPerson     -> ");
   fscanf(stdin,"%s",person_s);
 }
 /****************************************************************************/
@@ -231,7 +231,7 @@ while (i <= lineperson) {
   else
    if (!strcmp(lineind[i],name) ) /* if they match */
     { 
-      fprintf(stdout,"\nWARNING! Individual id. %s in family %s is duplicated%c\n",name,curped_s,BELL);
+      Rprintf("\nWARNING! Individual id. %s in family %s is duplicated%c\n",name,curped_s,BELL);
       return(1);
      }
   else
@@ -276,9 +276,9 @@ void getind(id,sequence,newped_s,nuped)
   
 /* Should have checking if !ind_integers
     if ((ind_integers) && (temp_i > maxind)) {
-     fprintf(stderr,"\nERROR: Ped: %d  Per: %d - ",newped_i,temp_i);
-     fprintf(stderr,"maximum id of %d exceeded.\n",maxind - 1);
-     exit(1);
+     REprintf("\nERROR: Ped: %d  Per: %d - ",newped_i,temp_i);
+     REprintf("maximum id of %d exceeded.\n",maxind - 1);
+     error("%d",1);
     }  */
 
 
@@ -292,8 +292,7 @@ void getind(id,sequence,newped_s,nuped)
 	person[*id] = (struct ind *) calloc ( 1, sizeof( struct ind ) );
 
 	if ( person[*id] == NULL ) {
-	  fprintf(stderr,"\nERROR: Cannot allocate memory.\n");
-          exit(1);
+	  error("\nERROR: Cannot allocate memory.\n");
 	}
 
         strcpy(person[*id]->oldped_s,newped_s);
@@ -351,9 +350,9 @@ void getindpa(id,sequence,newped_s,nuped)
   
 /* Should have checking if !ind_integers
     if ((ind_integers) && (temp_i > maxind)) {
-     fprintf(stderr,"\nERROR: Ped: %d  Per: %d - ",newped_i,temp_i);
-     fprintf(stderr,"maximum id of %d exceeded.\n",maxind - 1);
-     exit(1);
+     REprintf("\nERROR: Ped: %d  Per: %d - ",newped_i,temp_i);
+     REprintf("maximum id of %d exceeded.\n",maxind - 1);
+     error("%d",1);
     }  */
 
 
@@ -367,8 +366,7 @@ void getindpa(id,sequence,newped_s,nuped)
 	person[*id] = (struct ind *) calloc ( 1, sizeof( struct ind ) );
 
 	if ( person[*id] == NULL ) {
-	  fprintf(stderr,"\nERROR: Cannot allocate memory.\n");
-          exit(1);
+	  error("\nERROR: Cannot allocate memory.\n");
 	}
 
         strcpy(person[*id]->oldped_s,newped_s);
@@ -416,8 +414,7 @@ void getphenotype(id)
   person[*id]->phen =
     (struct phenotype *) calloc ( 1, sizeof( struct phenotype ) );
   if ( person[*id]->phen == NULL ) {
-      fprintf(stderr,"\nERROR: Cannot allocate memory.\n");
-     exit(1);
+      error("\nERROR: Cannot allocate memory.\n");
   }
 
   i = 0;
@@ -515,8 +512,7 @@ void readped()
   /* Note: C uses zero-based arrays, so the indices go from 0 to maxind-1, */
   /* but we are not using person zero. */
   if (totperson > maxind-1) {
-   fprintf(stderr,"\nERROR: maximum number %d of individuals exceeded \n",maxind-1);
-   exit(1);
+   error("\nERROR: maximum number %d of individuals exceeded \n",maxind-1);
   }
 }
 
@@ -610,18 +606,18 @@ void save_loops(count)
   FILE   *loopf;
 
 
-  fprintf(stdout,"\n\nDo you want these selections saved ");
-  fprintf(stdout,"for later use?  (y/n) -> ");
+  Rprintf("\n\nDo you want these selections saved ");
+  Rprintf("for later use?  (y/n) -> ");
   fscanf(stdin,"%1s",&response);
 
   if ((response == 'y') || (response == 'Y')) {
     loop_file[0] = '\0';
-    fprintf(stdout,"\nEnter filename -> ");
+    Rprintf("\nEnter filename -> ");
     while ( loop_file[0] == '\0' ) {
       gets(loop_file);
     }
     if ( (loopf = fopen(loop_file,"w")) == NULL) {
-      fprintf(stderr,"\nERROR: Cannot open file %s\n",loop_file);
+      REprintf("\nERROR: Cannot open file %s\n",loop_file);
     }
     else {
       for(i=0; i<count; i++) {
@@ -712,14 +708,12 @@ void add_loop(start_of_ped,old)
   new = i + 1;
   totperson++;
   if (totperson > maxind-1) {
-   fprintf(stderr,"\nERROR: maximum number %d of individuals exceeded \n",maxind-1);
-   exit(1);
+   error("\nERROR: maximum number %d of individuals exceeded \n",maxind-1);
   }
 
   person[new] = (struct ind *) calloc ( 1, sizeof( struct ind ) );
   if ( person[new] == NULL ) {
-    fprintf(stderr,"\nERROR: Cannot allocate memory.\n");
-    exit(1);
+    error("\nERROR: Cannot allocate memory.\n");
   }
 
   /* Copy the original record to the new record  */
@@ -801,18 +795,16 @@ void file_loops(char **loopfile)
 #ifdef executable 
   s_byte loop_file[max_filespec];
   loop_file[0] = '\0';
-  fprintf(stdout,"\nEnter filename -> ");
+  Rprintf("\nEnter filename -> ");
   while ( loop_file[0] == '\0' ) {
     gets(loop_file);
   }
   if ( (loopf = fopen(loop_file,"r")) == NULL) {
-   fprintf(stderr,"\nERROR: Cannot open file %s\n",loop_file);
-   exit(1);
+   error("\nERROR: Cannot open file %s\n",loop_file);
   }
 #else
    if ((loopf = fopen(*loopfile,"r")) == NULL) {
-       fprintf(stderr,"\nERROR: Cannot open file %s\n",*loopfile);
-       exit(1);
+       error("\nERROR: Cannot open file %s\n",*loopfile);
    }
 #endif
 
@@ -841,10 +833,9 @@ void file_loops(char **loopfile)
     }
     i++;
 	if (( i>totperson) && (!found_person)) {
-  fprintf(stderr,"\nERROR: Ped: %s Per: %s - Not found, check loop file.\n",
+           error("\nERROR: Ped: %s Per: %s - Not found, check loop file.\n",
 		  pedigree_s,
 		  person_s);
-	  exit(1);
 	}
       }
      }
@@ -876,9 +867,9 @@ void some_loops()
 
   count = 0;
 
-  fprintf(stdout,"\n\n\tEnter identifiers for ");
-  fprintf(stdout,"each pedigree and person...\n");
-  fprintf(stdout,"\tenter pedigree 0 when finished.\n");
+  Rprintf("\n\n\tEnter identifiers for ");
+  Rprintf("each pedigree and person...\n");
+  Rprintf("\tenter pedigree 0 when finished.\n");
 
   done = FALSE;
   while(!done) {
@@ -902,7 +893,7 @@ void some_loops()
          }
 
        if ((i>= totperson) && (!found_ped))
-	 fprintf(stdout,"\tPedigree not found...\n");
+	 Rprintf("\tPedigree not found...\n");
        }
 
        if((!done) && (found_ped)) {
@@ -934,7 +925,7 @@ void some_loops()
 	 /* for a new id.                                       */
 
 	 if (!found_per) {
-	   fprintf(stdout,"\tPerson not found...\n");
+	   Rprintf("\tPerson not found...\n");
 	   i = start_of_ped;
 	 }
        }  /* end of while(!found_per) */
@@ -957,11 +948,11 @@ void get_loops(int *withloop, char **loopfile)
 {
 #ifdef executable
   s_byte response;
-  fprintf(stdout,"\n");
-  fprintf(stdout,"Does your pedigree file contain any loops?    (y/n) -> ");
+  Rprintf("\n");
+  Rprintf("Does your pedigree file contain any loops?    (y/n) -> ");
   fscanf(stdin,"%1s",&response);
   if ((response == 'y') || (response == 'Y')) {
-    fprintf(stdout,"\nDo you have a file of loop assignments?       (y/n) -> ");
+    Rprintf("\nDo you have a file of loop assignments?       (y/n) -> ");
     fscanf(stdin,"%1s",&response);
     if ((response == 'y') || (response == 'Y')) file_loops();
     else some_loops();
@@ -1053,18 +1044,18 @@ void save_probands(count)
   FILE   *prof;
 
 
-  fprintf(stdout,"\n\nDo you want these selections saved ");
-  fprintf(stdout,"for later use?  (y/n) -> ");
+  Rprintf("\n\nDo you want these selections saved ");
+  Rprintf("for later use?  (y/n) -> ");
   fscanf(stdin,"%1s",&response);
 
   if ((response == 'y') || (response == 'Y')) {
     proband_file[0] = '\0';
-    fprintf(stdout,"\nEnter filename -> ");
+    Rprintf("\nEnter filename -> ");
     while ( proband_file[0] == '\0' ) {
       gets(proband_file);
     }
     if ( (prof = fopen(proband_file,"w")) == NULL) {
-      fprintf(stderr,"\nERROR: Cannot open file %s\n",proband_file);
+      REprintf("\nERROR: Cannot open file %s\n",proband_file);
     }
     else {
       for(i=0; i<count; i++) {
@@ -1110,12 +1101,12 @@ try_again:
  i = istart;
 trys++;
 if (trys > 20) {
- fprintf(stderr,"\nERROR: auto_probands is unable to find in 20 tries a male proband");
- fprintf(stderr,"\nwho has no parents in the pedigree and");
- fprintf(stderr,"\nwho is either not in a loop or is in the first loop.");
- fprintf(stderr,"\nThe problem is in pedigree %s.",person[i]->oldped_s);
- fprintf(stderr,"\nChange the order in which you choose the loops.\n");
- exit(1);
+ REprintf("\nERROR: auto_probands is unable to find in 20 tries a male proband");
+ REprintf("\nwho has no parents in the pedigree and");
+ REprintf("\nwho is either not in a loop or is in the first loop.");
+ REprintf("\nThe problem is in pedigree %s.",person[i]->oldped_s);
+ REprintf("\nChange the order in which you choose the loops.\n");
+ error("%d",1);
 }
 while(i<=totperson) {
   ped_num = person[i]->ped;
@@ -1169,18 +1160,16 @@ void file_probands(char **probandfile)
 #ifdef executable 
   s_byte proband_file[max_filespec];
   proband_file[0] = '\0';
-  fprintf(stdout,"\nEnter filename -> ");
+  Rprintf("\nEnter filename -> ");
   while ( proband_file[0] == '\0' ) {
        gets(proband_file);
   }
   if ( (prof = fopen(proband_file,"r")) == NULL) {
-      fprintf(stderr,"\nERROR: Cannot open file %s\n",proband_file);
-      exit(1);
+      error("\nERROR: Cannot open file %s\n",proband_file);
   }
 #else
    if ((prof = fopen(*probandfile,"r")) == NULL) {
-       fprintf(stderr,"\nERROR: Cannot open file %s\n",*probandfile);
-       exit(1);
+       error("\nERROR: Cannot open file %s\n",*probandfile);
    }
 #endif
     auto_probands();  /* makes sure a proband is set for each pedigree */
@@ -1199,21 +1188,20 @@ void file_probands(char **probandfile)
              (strcmp(person_s,person[j]->oldid_s ) == 0)) {
             clear_proband(j);
             if (person[j]->proband > 2) {
-   fprintf(stderr,"\nERROR: If a loopperson is also the proband, that person \n");
-   fprintf(stderr,"       must be in the first loop (#2). \n");
-   fprintf(stderr,"Proband %s in pedigree %s is in loop %d \n"
+   REprintf("\nERROR: If a loopperson is also the proband, that person \n");
+   REprintf("       must be in the first loop (#2). \n");
+   REprintf("Proband %s in pedigree %s is in loop %d \n"
    ,person[j]->oldid_s,person[j]->oldped_s,person[j]->proband);
-   exit(1);
+   error("%d",1);
    } else person[j]->proband = 1;
           found = TRUE;
         }
 
         j++;
 	if (( j>totperson) && (!found)) {
-  fprintf(stderr,"\nERROR: Ped: %s Per: %s - Not found, check proband file.\n",
+             error("\nERROR: Ped: %s Per: %s - Not found, check proband file.\n",
 		  pedigree_s,
 		  person_s);
-	  exit(1);
 	}
        }
       }
@@ -1243,16 +1231,16 @@ void all_probands()
 
   count = 0;
 
-      fprintf(stdout,"\n\nEnter the identifier of the ");
-      fprintf(stdout,"person who is to be the proband for...\n\n");
+      Rprintf("\n\nEnter the identifier of the ");
+      Rprintf("person who is to be the proband for...\n\n");
       pedigree = 0;
       for(i=1; i<=totperson; i++) {
         if (pedigree != person[i]->ped) {
           start_of_ped = i;
           pedigree = person[i]->ped;
 
-          fprintf(stdout,"\n\n\tPedigree   -> ");
-          fprintf(stdout,"%s\n",person[i]->oldped_s);
+          Rprintf("\n\n\tPedigree   -> ");
+          Rprintf("%s\n",person[i]->oldped_s);
 
           read_person(person_s);
 
@@ -1263,11 +1251,11 @@ void all_probands()
 
              if (!strcmp(person[i]->oldid_s,person_s)) {
               if (person[i]->proband > 2) {
-   fprintf(stderr,"\nERROR: If a loopperson is also the proband, that person \n");
-   fprintf(stderr,"       must be in the first loop (#2). \n");
-   fprintf(stderr,"Proband %s in pedigree %s is in loop %d \n"
+   REprintf("\nERROR: If a loopperson is also the proband, that person \n");
+   REprintf("       must be in the first loop (#2). \n");
+   REprintf("Proband %s in pedigree %s is in loop %d \n"
    ,person[i]->oldid_s,person[i]->oldped_s,person[i]->proband);
-   exit(1);
+   error("%d",1);
    } else person[i]->proband = 1;
                probands[count++] = i;
                found = TRUE;
@@ -1282,7 +1270,7 @@ void all_probands()
              /* for a new id.                                       */
 
              if (!found) {
-               fprintf(stdout,"\tPerson not found...\n");
+               Rprintf("\tPerson not found...\n");
                i = start_of_ped -1;  /* -1 because the for loop will +1 */
                pedigree = 0;
              }
@@ -1317,9 +1305,9 @@ void some_probands()
   auto_probands();      /* Set all probands before the user selects a few. */
   count = 0;            /* Count number of successful entries. */
 
-  fprintf(stdout,"\n\n\tEnter identifiers for ");
-  fprintf(stdout,"each pedigree and person...\n");
-  fprintf(stdout,"\tenter pedigree 0 when finished.\n");
+  Rprintf("\n\n\tEnter identifiers for ");
+  Rprintf("each pedigree and person...\n");
+  Rprintf("\tenter pedigree 0 when finished.\n");
 
   done = FALSE;
   while(!done) {
@@ -1342,7 +1330,7 @@ void some_probands()
          }
 
        if ((i>= totperson) && (!found_ped))
-	 fprintf(stdout,"\tPedigree not found...\n");
+	 Rprintf("\tPedigree not found...\n");
        }
 
        if((!done) && (found_ped)) {
@@ -1358,11 +1346,11 @@ void some_probands()
 		   if (!strcmp(person[i]->oldid_s,person_s)) {
 		     clear_proband(i);
               if (person[i]->proband > 2) {
-   fprintf(stderr,"\nERROR: If a loopperson is also the proband, that person \n");
-   fprintf(stderr,"       must be in the first loop (#2). \n");
-   fprintf(stderr,"Proband %s in pedigree %s is in loop %d \n"
+   REprintf("\nERROR: If a loopperson is also the proband, that person \n");
+   REprintf("       must be in the first loop (#2). \n");
+   REprintf("Proband %s in pedigree %s is in loop %d \n"
    ,person[i]->oldid_s,person[i]->oldped_s,person[i]->proband);
-   exit(1);
+   error("%d",1);
    } else person[i]->proband = 1;
              probands[count++] = i;
 		     found_per = TRUE;
@@ -1377,7 +1365,7 @@ void some_probands()
 	 /* for a new id.                                       */
 
 	 if (!found_per) {
-	   fprintf(stdout,"\tPerson not found...\n");
+	   Rprintf("\tPerson not found...\n");
 	   i = start_of_ped;
 	 }
        }  /* end of while(!found_per) */
@@ -1401,8 +1389,8 @@ void get_probands(int *auto_proband,char **probandfile)
   s_byte response;
   response='y';
 #ifdef executable
-  fprintf(stdout,"\n");
-  fprintf(stdout,"Do you want probands selected automatically?   (y/n) -> ");
+  Rprintf("\n");
+  Rprintf("Do you want probands selected automatically?   (y/n) -> ");
   fscanf(stdin,"%1s",&response);
 #else
   if (*auto_proband) response='y';
@@ -1410,7 +1398,7 @@ void get_probands(int *auto_proband,char **probandfile)
   if ((response == 'y') || (response == 'Y')) auto_probands();
   else {
 #ifdef executable
-  fprintf(stdout,"\nDo you have a file of proband assignments?    (y/n) -> ");
+  Rprintf("\nDo you have a file of proband assignments?    (y/n) -> ");
   fscanf(stdin,"%1s",&response);
   if ((response == 'y') || (response == 'Y')) file_probands();
 #else
@@ -1419,7 +1407,7 @@ void get_probands(int *auto_proband,char **probandfile)
 #endif
   else {
  
-  fprintf(stdout,"\nDo you want to select all probands?           (y/n) -> ");
+  Rprintf("\nDo you want to select all probands?           (y/n) -> ");
   fscanf(stdin,"%1s",&response);
   if ((response == 'y') || (response == 'Y')) all_probands();
   else some_probands();
@@ -1604,7 +1592,7 @@ void check_sex()
 
     if(((person[i]->pa != NULL) && (person[i]->ma == NULL)) ||
        ((person[i]->pa == NULL) && (person[i]->ma != NULL))){
-       fprintf(stderr,"\nERROR: Ped: %s  Per: %s - Only one parent.\n",
+       REprintf("\nERROR: Ped: %s  Per: %s - Only one parent.\n",
 	      person[i]->oldped_s,person[i]->oldid_s);
        found_error = TRUE;
     }
@@ -1612,7 +1600,7 @@ void check_sex()
     /* Verify that father is male. */
 
    if((person[i]->pa != NULL) && (person[i]->pa->sex != 1)) {
-       fprintf(stderr,"\nERROR: Ped: %s  Per: %s - Sex of father.\n",
+       REprintf("\nERROR: Ped: %s  Per: %s - Sex of father.\n",
 	      person[i]->oldped_s,person[i]->oldid_s);
        found_error = TRUE;
     }
@@ -1620,7 +1608,7 @@ void check_sex()
     /* Verify that mother is female. */
 
    if((person[i]->ma != NULL) && (person[i]->ma->sex != 2)) {
-       fprintf(stderr,"\nERROR: Ped: %s  Per: %s - Sex of mother.\n",
+       REprintf("\nERROR: Ped: %s  Per: %s - Sex of mother.\n",
 	      person[i]->oldped_s,person[i]->oldid_s);
        found_error = TRUE;
     }
@@ -1644,7 +1632,7 @@ void check_no_phen()
   for(i=1; i<=totperson; i++) {
 
    if (person[i]->phen == NULL){
-       fprintf(stderr,"\nERROR: Ped: %s  Per: %s - No data.\n",
+       REprintf("\nERROR: Ped: %s  Per: %s - No data.\n",
 	      person[i]->oldped_s,person[i]->oldid_s);
        found_error = TRUE;
    }
@@ -1677,7 +1665,7 @@ void check_no_family()
     if ((!person[i]->is_parent) &&
         (person[i]->pa == NULL) &&
         (person[i]->ma == NULL)) {
-	fprintf(stderr,"\nERROR: Ped: %s  Per: %s - No family.\n",
+	REprintf("\nERROR: Ped: %s  Per: %s - No family.\n",
 		person[i]->oldped_s,person[i]->oldid_s);
 	found_error = TRUE;
 	}
@@ -1699,30 +1687,29 @@ main(argc,argv)
   s_intg no_ques = FALSE;
   u_byte response;
 
-  fprintf(stdout,"\n           MAKEPED Version %4.2f\n\n",version);
-  fprintf(stdout, "Usage: makeped pedigree.file output.file n \n");
-  fprintf(stdout, "where the 'n' argument tells MAKEPED that \n");
-  fprintf(stdout, "  1) there are no loops \n");
-  fprintf(stdout, "  2) all probands should be chosen automatically \n\n");
-  fprintf(stdout, "This version treats all ids as strings\n");
-  fprintf(stdout, "but will use original pedigree ids if they ALL are integers\n");
-  fprintf(stdout, "In addition, this version allows for multiple loops\n");
+  Rprintf("\n           MAKEPED Version %4.2f\n\n",MAKEPED_VERSION);
+  Rprintf("Usage: makeped pedigree.file output.file n \n");
+  Rprintf("where the 'n' argument tells MAKEPED that \n");
+  Rprintf("  1) there are no loops \n");
+  Rprintf("  2) all probands should be chosen automatically \n\n");
+  Rprintf("This version treats all ids as strings\n");
+  Rprintf("but will use original pedigree ids if they ALL are integers\n");
+  Rprintf("In addition, this version allows for multiple loops\n");
 /*  fprintf(stdout, "Please report all problems and suggestions to \n");
-  fprintf(stdout, "  Daniel E. Weeks or Jurg Ott \n");
-  fprintf(stdout, "  Columbia University, Unit 58 \n");
-  fprintf(stdout, "  722 West 168th Street  \n");
-  fprintf(stdout, "  New York, NY 10032 \n");
-  fprintf(stdout, "  Tel (212) 960-2507  Fax (212) 568-2750 \n\n"); */
+  Rprintf("  Daniel E. Weeks or Jurg Ott \n");
+  Rprintf("  Columbia University, Unit 58 \n");
+  Rprintf("  722 West 168th Street  \n");
+  Rprintf("  New York, NY 10032 \n");
+  Rprintf("  Tel (212) 960-2507  Fax (212) 568-2750 \n\n"); */
   
-  fprintf(stdout," Constants in effect \n");
-  fprintf(stdout,"Maximum number of pedigrees                %d\n",maxped-1);
-  fprintf(stdout,"Maximum number of individuals              %d\n",maxind-1);
-  fprintf(stdout,"Maximum characters used in phenotypic data %d\n", maxallchars);
-  fprintf(stdout,"Maximum number of characters in an id      %d\n\n",maxname);
+  Rprintf(" Constants in effect \n");
+  Rprintf("Maximum number of pedigrees                %d\n",maxped-1);
+  Rprintf("Maximum number of individuals              %d\n",maxind-1);
+  Rprintf("Maximum characters used in phenotypic data %d\n", maxallchars);
+  Rprintf("Maximum number of characters in an id      %d\n\n",maxname);
  
   if (argc > 4) {
-    fprintf(stderr,"\nERROR: Two many command line arguments");
-    exit(1);
+    error("\nERROR: Two many command line arguments");
   }
 
   pifile[0] = '\0';
@@ -1734,11 +1721,11 @@ main(argc,argv)
 
   else{                                 /* FILES ARE NOT ON COMMAND LINE */
     while ( pifile[0] == '\0' ) {
-      fprintf(stdout,"Pedigree file -> ");
+      Rprintf("Pedigree file -> ");
       gets(pifile);
     }
     while ( pofile[0] == '\0') {
-      fprintf(stdout,"Output file   -> ");
+      Rprintf("Output file   -> ");
       gets(pofile);
     }
   }
@@ -1749,7 +1736,7 @@ main(argc,argv)
   }
   else {
     while ( pofile[0] == '\0') {
-      fprintf(stdout,"Output file   -> ");
+      Rprintf("Output file   -> ");
       gets(pofile);
     }
   }
@@ -1762,20 +1749,18 @@ main(argc,argv)
   found_error = FALSE;
 
   if ((pedfile = fopen(pifile, "r")) == NULL){
-   fprintf(stderr,"\nERROR: Cannot open %s\n",pifile);
-   exit(1);
+   error("\nERROR: Cannot open %s\n",pifile);
  }
 
   if ((pedout = fopen(pofile, "w")) == NULL){
-   fprintf(stderr,"\nERROR: Cannot open %s\n",pofile);
-   exit(1);
+   error("\nERROR: Cannot open %s\n",pofile);
  }
   readped();
   check_ids();
   check_sex();
   check_no_phen();
   check_no_family();
-  if(found_error) exit(1);
+  if(found_error) error("%d",1);
   pointers();
   if (no_ques) auto_probands(); /* Set all probands automatically */
   else {
@@ -1793,30 +1778,28 @@ void makeped(char **pifile, char **pofile, int *autoselect,
              int *withloop, char **loopfile, 
              int *autoproband, char **probandfile)
 {
-  fprintf(stdout,"\n           MAKEPED Version %4.2f\n\n",version);
-  fprintf(stdout," Constants in effect \n");
-  fprintf(stdout,"Maximum number of pedigrees                %d\n",maxped-1);
-  fprintf(stdout,"Maximum number of individuals              %d\n",maxind-1);
-  fprintf(stdout,"Maximum characters used in phenotypic data %d\n", maxallchars);
-  fprintf(stdout,"Maximum number of characters in an id      %d\n\n",maxname);
+  Rprintf("\n           MAKEPED Version %4.2f\n\n",MAKEPED_VERSION);
+  Rprintf(" Constants in effect \n");
+  Rprintf("Maximum number of pedigrees                %d\n",maxped-1);
+  Rprintf("Maximum number of individuals              %d\n",maxind-1);
+  Rprintf("Maximum characters used in phenotypic data %d\n", maxallchars);
+  Rprintf("Maximum number of characters in an id      %d\n\n",maxname);
  
   found_error = FALSE;
 
   if ((pedfile = fopen(*pifile, "r")) == NULL){
-   fprintf(stderr,"\nERROR: Cannot open %s\n",*pifile);
-   exit(1);
+   error("\nERROR: Cannot open %s\n",*pifile);
  }
 
   if ((pedout = fopen(*pofile, "w")) == NULL){
-   fprintf(stderr,"\nERROR: Cannot open %s\n",*pofile);
-   exit(1);
+   error("\nERROR: Cannot open %s\n",*pofile);
  }
   readped();
   check_ids();
   check_sex();
   check_no_phen();
   check_no_family();
-  if(found_error) exit(1);
+  if(found_error) error("%d",1);
   pointers();
   if (*autoselect) auto_probands(); /* Set all probands automatically */
   else {

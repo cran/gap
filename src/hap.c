@@ -1,3 +1,4 @@
+#include <R.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -76,15 +77,15 @@ int *converged,char **hapfile, char **assignfile
   double head_room = 0.5;  /* Dynamic memory headroom in Mb */
 
   time(&now);
-  printf("\nHAP, Version %s", VERSION);
+  Rprintf("\nHAP, Version %s", VERSION);
   if (now != -1) {
-    printf(" run on  %s", asctime(localtime(& now)));
-    fprintf(stderr,"hap warnings: %s", asctime(localtime(& now)));
+    Rprintf(" run on  %s", asctime(localtime(& now)));
+    Rprintf("hap warnings: %s", asctime(localtime(& now)));
   }
-  else printf(": time not available\n");
+  else Rprintf(": time not available\n");
   memmax = memavail(1024)/1.0e6;
   if (memory<head_room || memory> memmax) {
-    printf("Dynamic memory available %.1f Mbyte\n", memmax);
+    Rprintf("Dynamic memory available %.1f Mbyte\n", memmax);
     memory = memmax;
   }
   strcpy(of1name,*hapfile);
@@ -111,18 +112,18 @@ int *converged,char **hapfile, char **assignfile
   mph = 3*sizeof(HAP *) + sizeof(HAP);
   if (mmle > 0 || mimp > 0) mph += sizeof(double);
   max_haps = ((memory-head_room)*1.e6 - n_loci*mpl - maxs*mps)/mph;
-  printf("Maximum memory usage            : %10.1f Mb\n", memory);
-  printf("Maximum haplotype instances     : %10ld\n", max_haps);
+  Rprintf("Maximum memory usage            : %10.1f Mb\n", memory);
+  Rprintf("Maximum haplotype instances     : %10ld\n", max_haps);
   if (rano || rs || mimp>0) {
     if (!seed) seed = (long) now;
-    printf("Seed for random numbers         : %10ld\n", seed);
+    Rprintf("Seed for random numbers         : %10ld\n", seed);
     SEED (seed);
   }
   if (rano) {
     order = (int *) calloc(n_loci, sizeof(int));
     if (order) {
       ranord(n_loci, order);
-      printf("Loci added in random order\n");
+      Rprintf("Loci added in random order\n");
     }
     else goto no_room;
   }
@@ -169,76 +170,76 @@ int *converged,char **hapfile, char **assignfile
       n_hap += 2;
       break;
     case 2:
-      fprintf(stderr, "Skipping this subject(%s)\n", (*h1).id);
+      REprintf("Skipping this subject(%s)\n", (*h1).id);
       break;
     case 3:
-      fprintf(stderr, "Exiting while reading subject %d\n", n_subject);
+      REprintf("Exiting while reading subject %d\n", n_subject);
       return;
     }
   }
-  printf("Thresholds for trimming\n");
-  printf("\tPrior probability       : %10.2f\n", min_prior);
-  printf("\tPosterior probability   : %10.2f\n", min_posterior);
-  printf("EM convergence criteria\n");
-  printf("\tMaximum iterations      : %10d\n", maxit);
-  printf("\tTolerated LLH change    : %10.2f\n", tol);
+  Rprintf("Thresholds for trimming\n");
+  Rprintf("\tPrior probability       : %10.2f\n", min_prior);
+  Rprintf("\tPosterior probability   : %10.2f\n", min_posterior);
+  Rprintf("EM convergence criteria\n");
+  Rprintf("\tMaximum iterations      : %10d\n", maxit);
+  Rprintf("\tTolerated LLH change    : %10.2f\n", tol);
   if (mmle > 0) {
-    printf("Repetions of final EM iteration : %10d\n", mmle);
+    Rprintf("Repetions of final EM iteration : %10d\n", mmle);
   }
   if (mimp > 0) {
-    printf("Multiple imputed datasets       : %10d\n", mimp);
-    printf("\tMCMC steps              : %10d\n", mcmc);
+    Rprintf("Multiple imputed datasets       : %10d\n", mimp);
+    Rprintf("\tMCMC steps              : %10d\n", mcmc);
     dfs *= (2*n_subject);
     dfe *= (2*n_subject);
     df_step = (dfs - dfe)/(double) mcmc;
-    printf("\tStarting Dirichlet df   : %10.2f\n", dfs);
-    printf("\tFinishing Dirichlet df  : %10.2f\n", dfe);
+    Rprintf("\tStarting Dirichlet df   : %10.2f\n", dfs);
+    Rprintf("\tFinishing Dirichlet df  : %10.2f\n", dfe);
   }
   if (of1name[0]) {
-    printf("Haplotype frequencies output to : %10s", of1name);
-    if (mimp>0) printf("(.*)\n");
-    else printf("\n");
+    Rprintf("Haplotype frequencies output to : %10s", of1name);
+    if (mimp>0) Rprintf("(.*)\n");
+    else Rprintf("\n");
   }
   if (of2name[0]) {
-    printf("Haplotype assignments output to : %10s", of2name);
-    if (mimp>0) printf("(.*)\n");
-    else printf("\n");
+    Rprintf("Haplotype assignments output to : %10s", of2name);
+    if (mimp>0) Rprintf("(.*)\n");
+    else Rprintf("\n");
   }
-  printf("\nAllele frequencies:\n");
-  printf("\nMarker\\Allele number\n\n");
-  printf("    ");
-  for(i=0;i<max_alleles;i++) printf("%9ld",i+1);
-  printf("\n\n");
+  Rprintf("\nAllele frequencies:\n");
+  Rprintf("\nMarker\\Allele number\n\n");
+  Rprintf("    ");
+  for(i=0;i<max_alleles;i++) Rprintf("%9ld",i+1);
+  Rprintf("\n\n");
   for(i=0;i<n_loci;i++) {
-    printf("%3ld ",i+1);
+    Rprintf("%3ld ",i+1);
     for(j=0;j<alleles[i];j++) {
       af[i][j]/=(double)i_subject[i];
-      printf(" %f",af[i][j]);
+      Rprintf(" %f",af[i][j]);
     }
-    printf("\n");
+    Rprintf("\n");
   }
-  printf("\nSubjects (%% of %d) with full genotype at each locus:\n\n",n_subject);
+  Rprintf("\nSubjects (%% of %d) with full genotype at each locus:\n\n",n_subject);
   for(i=0;i<n_loci;i++)
-    printf("%3ld %5d %6.2f\n",i+1,i_subject[i]/2,50.0*i_subject[i]/n_subject);
+    Rprintf("%3ld %5d %6.2f\n",i+1,i_subject[i]/2,50.0*i_subject[i]/n_subject);
   if (!quiet) {
-    printf("\nProgress of maximum likelihood estimation:\n");
-    printf("\nLoci Phased\tht instances\tIteration\tLog Likelihood");
-    printf("\n-----------\t------------\t---------\t--------------\n");
+    Rprintf("\nProgress of maximum likelihood estimation:\n");
+    Rprintf("\nLoci Phased\tht instances\tIteration\tLog Likelihood");
+    Rprintf("\n-----------\t------------\t---------\t--------------\n");
   }
   n_phase = 0;
   while (n_phase < n_loci) {
     n_hap = hap_expand(n_hap, max_haps, so_list, rs);
     if (!n_hap) goto no_room;
     if (!quiet) {
-      printf("\r%11d\t%12ld\t%9s", n_phase, n_hap, "(sorting)");
-      fflush(stdout);
+      Rprintf("\r%11d\t%12ld\t%9s", n_phase, n_hap, "(sorting)");
+      R_FlushConsole();
     }
     for (i=0; i<n_hap; i++) ho_list[i] = so_list[i];
     qsort(ho_list, n_hap, sizeof(HAP *), cmp_hap);
 #if 0
     /* debugging information JH Zhao */
     hap_list(stdout,n_hap,coding,so_list);
-    printf("\nafter sorting\n");
+    Rprintf("\nafter sorting\n");
     hap_list(stdout,n_hap,coding,ho_list);
 #endif
     carry_on =  1;
@@ -251,24 +252,24 @@ int *converged,char **hapfile, char **assignfile
       carry_on = (iter==1) || ((logl - lastl)>tol);
       if (carry_on && (iter==maxit)) {
         carry_on = 0;
-        fprintf(stderr, "No convergence in %d iterations", iter);
-        fprintf(stderr, "\t(at %d-locus step)\n",n_phase);
+        REprintf("No convergence in %d iterations", iter);
+        REprintf("\t(at %d-locus step)\n",n_phase);
         n_warn++;
       }
       else *converged=1;
       *niter=iter;
       lastl = logl;
       if (!quiet) {
-        printf("\r%11d\t%12ld\tEM%7d\t%14.3f", n_phase, n_hap, iter, logl);
-        fflush(stdout);
+        Rprintf("\r%11d\t%12ld\tEM%7d\t%14.3f", n_phase, n_hap, iter, logl);
+        R_FlushConsole();
       }
     }
     n_hap = hap_posterior(n_hap, so_list, min_posterior, &logl, 1);
   }
   logl_s=lastl;
   if (!quiet) {
-    printf("\r\t\t%12ld", n_hap);
-    fflush(stdout);
+    Rprintf("\r\t\t%12ld", n_hap);
+    R_FlushConsole();
   }
   for (i=0; i<n_hap; i++) ho_list[i] = so_list[i];
   qsort(ho_list, n_hap, sizeof(HAP *), cmp_hap);
@@ -301,34 +302,34 @@ int *converged,char **hapfile, char **assignfile
         carry_on = (iter==1) || ((logl - lastl)>tol);
         if (carry_on && (iter==maxit)) {
           carry_on = 0;
-          fprintf(stderr, "No convergence in %d iterations", iter);
-          fprintf(stderr, "\t(at %d-locus step)\n",n_phase);
+          REprintf("No convergence in %d iterations", iter);
+          REprintf("\t(at %d-locus step)\n",n_phase);
           n_warn++;
         }
         else *converged=1;
         *niter=iter;
         lastl = logl;
         if (!quiet) {
-          printf("\r%6d/%04d\t%12ld\tEM%7d\t%14.3f", n_loci, j+1,
+          Rprintf("\r%6d/%04d\t%12ld\tEM%7d\t%14.3f", n_loci, j+1,
                n_hap, iter, logl);
-          fflush(stdout);
+          R_FlushConsole();
         }
       }
       if (logl > best_logl) {
         best_logl = logl;
         for (i=0; i<hap_n; i++) p_unique[i] = unique[i]->prior;
         if (!quiet) {
-          printf("\r\t\t\t\t\t\t\t\t(%.3f)", best_logl);
-          fflush(stdout);
+          Rprintf("\r\t\t\t\t\t\t\t\t(%.3f)", best_logl);
+          R_FlushConsole();
         }
       }
     }
     hap_prior_restore(n_hap, ho_list, p_unique);
-    if (quiet) printf("\n\nBest solution has log likelihood %.3f", best_logl);
+    if (quiet) Rprintf("\n\nBest solution has log likelihood %.3f", best_logl);
   }
   qsort(unique, hap_n, sizeof(HAP *), more_probable);
-  if (!quiet) printf("\n");
-  printf("\n");
+  if (!quiet) Rprintf("\n");
+  Rprintf("\n");
   if (of1name[0]) {
     outfile = fopen(of1name, "w");
     if (!outfile) goto open_error;
@@ -341,7 +342,7 @@ int *converged,char **hapfile, char **assignfile
     }
     j = hap_write(outfile, n_loci, names, coding, order, hap_n, unique, 0, 0.0, num, ss);
     fclose(outfile);
-    printf("%d haplotypes written to output file %s\n", j, of1name);
+    Rprintf("%d haplotypes written to output file %s\n", j, of1name);
   }
   *l1=logl_s;
   if(mmle>0) *l1=best_logl;
@@ -350,13 +351,13 @@ int *converged,char **hapfile, char **assignfile
     if (!outfile) goto open_error;
     j = hap_write(outfile, n_loci, names, coding, order, n_hap, so_list, 1, of_max, num, ss);
     fclose(outfile);
-    printf("%d possible assignments to %d subjects written to output file %s\n",
+    Rprintf("%d possible assignments to %d subjects written to output file %s\n",
            j, n_subject, of2name);
   }
   if (mimp > 0 && !quiet) {
-    printf("\nProgress of multiple imputation:\n");
-    printf("\nImputation\tIP step\t    Prior df");
-    printf("\n----------\t-------\t    --------\n");
+    Rprintf("\nProgress of multiple imputation:\n");
+    Rprintf("\nImputation\tIP step\t    Prior df");
+    Rprintf("\n----------\t-------\t    --------\n");
   }
   for (j=1; j<=mimp; j++) {
     hap_prior_restore(n_hap, ho_list, p_unique);
@@ -364,8 +365,8 @@ int *converged,char **hapfile, char **assignfile
     for (iter=0; iter<mcmc; iter++) {
       df -= df_step;
       if (!quiet) {
-        printf("\r%10d\t%7d\t%12.2f", j, iter+1, df);
-        fflush(stdout);
+        Rprintf("\r%10d\t%7d\t%12.2f", j, iter+1, df);
+        R_FlushConsole();
       }
       sample_posterior(n_hap, so_list); /* I step */
       sample_prior(n_hap, ho_list, df); /* P step */
@@ -389,34 +390,34 @@ int *converged,char **hapfile, char **assignfile
       fclose(outfile);
     }
   }
-  if (!quiet) printf("\n");
+  if (!quiet) Rprintf("\n");
   if (mimp>0 && of1name[0]) {
-    printf("\nSamples from posterior distribution of haplotype frequencies ");
-    printf("written to \n\tfiles %s.001 ... %s.%03d\n", of1name, of1name,
+    Rprintf("\nSamples from posterior distribution of haplotype frequencies ");
+    Rprintf("written to \n\tfiles %s.001 ... %s.%03d\n", of1name, of1name,
            mimp);
   }
   if (mimp>0 && of2name[0]) {
-    printf("Multiply imputed datasets written to files %s.001 ... %s.%03d\n",
+    Rprintf("Multiply imputed datasets written to files %s.001 ... %s.%03d\n",
            of2name, of2name, mimp);
   }
 
   if (num) {
-    printf("\nNumerical recoding of alleles was forced:\n");
+    Rprintf("\nNumerical recoding of alleles was forced:\n");
     for (j=k=0; j<n_loci; j++) {
       if (coding[j].anum == 2) {
         k++;
-        printf("%s: \t", names[j]);
+        Rprintf("%s: \t", names[j]);
         strcpy(cc, coding[j].one);
-        printf("1=%s", cc);
+        Rprintf("1=%s", cc);
         strcpy(cc,coding[j].two);
-        printf(", 2=%s", cc);
-        printf("\n");
+        Rprintf(", 2=%s", cc);
+        Rprintf("\n");
       }
     }
-    if (!k) printf("\t... but no recoding was necessary\n");
+    if (!k) Rprintf("\t... but no recoding was necessary\n");
   }
-  if (n_warn) printf("\nNote: %ld messages\n", n_warn);
-  else printf("\n");
+  if (n_warn) Rprintf("\nNote: %ld messages\n", n_warn);
+  else Rprintf("\n");
   free(i_subject);
   free(alleles);
   freeU(af);
@@ -424,11 +425,11 @@ int *converged,char **hapfile, char **assignfile
   return;
 
  no_room:
-  fprintf(stderr, "Insufficient memory\n");
+  REprintf("Insufficient memory\n");
   return;
 
  open_error:
-  fprintf(stderr, "Error opening output file\n");
+  REprintf("Error opening output file\n");
   return;
 
 }
@@ -888,8 +889,8 @@ long hap_posterior(long n_hap, HAP **so_list, double min_posterior,
       small = 1;
     }
     if (if_pack && !any)  {
-      fprintf(stderr, "Subject %s dropped from data ", id);
-      fprintf(stderr, "\t(at %d-locus step)\n", n_phase);
+      REprintf("Subject %s dropped from data ", id);
+      REprintf("\t(at %d-locus step)\n", n_phase);
       n_warn++;
     }
     hs = hn;
@@ -1044,14 +1045,14 @@ int gt_read(int i, char **idstr, char **gdata, int *order, CODE *code, HAP **one
 {
   char *id;
   char a1[3], a2[3];
-  int j, error, i1, i2;
+  int j, err, i1, i2;
 
   id = malloc(1+strlen(idstr[i]));
   if (!id) goto no_room;
   strcpy(id, idstr[i]);
   if(!((*one) = new_hap(id, 0.0, 1.0, 0))) goto no_room;
   if(!((*two) = new_hap(id, 0.0, 1.0, 0))) goto no_room;
-  for (error=j=0; j<n_loci; j++) {
+  for (err=j=0; j<n_loci; j++) {
       strcpy(a1,gdata[i*n_loci*2+2*j]);
       strcpy(a2,gdata[i*n_loci*2+2*j+1]);
 /*
@@ -1061,8 +1062,8 @@ int gt_read(int i, char **idstr, char **gdata, int *order, CODE *code, HAP **one
       i1 = encode(a1, code+j);
       i2 = encode(a2, code+j);
       if (i1<0 || i2<0 || (i1&&!i2) || (i2&&!i1)) {
-        fprintf(stderr, "Data error on locus %d: %2s/%2s\n", j+1, a1, a2);
-        error = 1;
+        REprintf("Data error on locus %d: %2s/%2s\n", j+1, a1, a2);
+        err = 1;
       }
       if (order) {
         (*one)->loci[order[j]] = i1;
@@ -1073,7 +1074,7 @@ int gt_read(int i, char **idstr, char **gdata, int *order, CODE *code, HAP **one
         (*two)->loci[j] = i2;
       }
     }
-  if (error) return 2;
+  if (err) return 2;
   else return 1;
 no_room:
   return 3;
@@ -1427,15 +1428,15 @@ double **allocateU(int allele[])
    size1 = n_loci;
    newU = (double**) malloc(size1 * sizeof(double*));
    if (NULL == newU) {
-     fprintf(stderr, "\nCould not allocate first dim of U\n");
-     exit(EXIT_FAILURE);
+     REprintf("\nCould not allocate first dim of U\n");
+     error("%d",EXIT_FAILURE);
    }
    for (v = 0; v < size1; v++) {
      size2 = allele[v];
      newU[v] = (double *) malloc(size2 * sizeof(double));
      if (NULL == newU[v]) {
-       fprintf(stderr, "\nCould not allocate second dim of U level v %d\n ", v);
-       exit(EXIT_FAILURE);
+       REprintf("\nCould not allocate second dim of U level v %d\n ", v);
+       error("%d",EXIT_FAILURE);
      }
      for(i = 0; i < size2; i++) newU[v][i] = 0.0;
    }

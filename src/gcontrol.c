@@ -1,3 +1,4 @@
+#include <R.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -7,13 +8,15 @@
 
 #define FALSE 0
 #define TRUE 1
+#ifndef MAX_INPUT
 #define MAX_INPUT 80
+#endif
 #define NUM_VRTS 2
 #define MBIG 1000000000
 #define MSEED 161803398
 #define MZ 0
 #define FAC (1.0/MBIG)
-#define PI 3.14159265
+/*#define PI 3.14159265*/
 
 int getnum(FILE *, double *);
 double poz(double);
@@ -126,16 +129,16 @@ double median(double *x,int *n)
   xmed = x[1];
   goto L101;
 L50:
-  printf("Invalid vector length in median routine");
-  exit(1);
+  REprintf("Invalid vector length in median routine");
+  error("%d",1);
 L55:
   xmed = x[1];
   goto L101;
 L90:
   if((y=(double *)malloc((*n)*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory: median routine");
-    exit(1);
+    REprintf("I can't allocate memory: median routine");
+    error("%d",1);
   }
   sort(&x[1], n, y);
   iflag = *n - (*n / 2 << 1);
@@ -367,8 +370,8 @@ void rgamma(int *m,double *na,double *nb,double *x,long *idum)
       }
       else
       {
-        printf(" Error in rgamma routine\n");
-        exit(1);
+        REprintf(" Error in rgamma routine\n");
+        error("%d",1);
       }
       x[i + j * x_dim1] *= nb[i + j * nb_dim1];
     }
@@ -530,28 +533,23 @@ int main()
 
   if ((dwork=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory. (perform.c)\n");
-    exit(1);
+    error("I can't allocate memory. (perform.c)\n");
   }
   if ((iwork=(int *)malloc(n*sizeof(int)))==NULL)
   {
-    printf("I can't allocate memory. (perform.c)\n");
-    exit(1);
+    error("I can't allocate memory. (perform.c)\n");
   }
   if ((x=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory. (perform.c)\n");
-    exit(1);
+    error("I can't allocate memory. (perform.c)\n");
   }
   if ((xt=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory. (perform.c)\n");
-    exit(1);
+    error("I can't allocate memory. (perform.c)\n");
   }
   if ((pp=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory. (perform.c)\n");
-    exit(1);
+    error("I can't allocate memory. (perform.c)\n");
   }
   for (i=0;i<r+1;i++) out1[i]=out2[i]=0.;
   for (iter=0;iter<reps;iter++)
@@ -567,8 +565,8 @@ int main()
     for (j=0;j<(n-oo);j++) out2[r]+=(x[j]>3.66);
     for (j=(n-oo);j<n;j++) out1[r]+=(x[j]>3.66);
   }
-  for (i=0;i<r;i++) printf("%5.2f %16.8f %16.8f\n",level[i],out1[i]/(double)reps,out2[i]/(double)reps);
-  printf("%5.2f %16.8f %16.8f\n",0.,out1[r]/(double)reps,out2[r]/(double)reps);
+  for (i=0;i<r;i++) REprintf("%5.2f %16.8f %16.8f\n",level[i],out1[i]/(double)reps,out2[i]/(double)reps);
+  REprintf("%5.2f %16.8f %16.8f\n",0.,out1[r]/(double)reps,out2[r]/(double)reps);
 
   return 0;
 }
@@ -587,8 +585,7 @@ int main()
   rslttxt=fopen("rslt.txt","w+");
   if ((pinfile=fopen("kdata.txt","rt"))==NULL)
   {
-    printf("I can't open file.");
-    exit(1);
+    error("I can't open file.");
   }
   n=getnum(pinfile,jnk);
   while (!feof(pinfile)) n+=getnum(pinfile,jnk);
@@ -596,28 +593,23 @@ int main()
 
   if ((x=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory.");
-    exit(1);
+    error("I can't allocate memory.");
   }
   if ((A=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory.\n");
-    exit(1);
+    error("I can't allocate memory.\n");
   }
   if ((deltot=(double *)malloc(n*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory.\n");
-    exit(1);
+    error("I can't allocate memory.\n");
   }
   if ((delta=(int *)malloc(n*sizeof(int)))==NULL)
   {
-    printf("I can't allocate memory.\n");
-    exit(1);
+    error("I can't allocate memory.\n");
   }
   if ((out=(double *)malloc((burn+ngib)*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory.\n");
-    exit(1);
+    error("I can't allocate memory.\n");
   }
   for (i=0;i<n;i++)
   {
@@ -628,7 +620,7 @@ int main()
   while (!feof(pinfile))
   {
     itmp=getnum(pinfile,jnk);
-    if (itmp!=6) printf("Bad data (n=%d) at line %d\n",itmp,n+1);
+    if (itmp!=6) REprintf("Bad data (n=%d) at line %d\n",itmp,n+1);
     else
     {
       R=0;N=0;
@@ -643,7 +635,7 @@ int main()
     }
   }
   fclose(pinfile);
-  printf("\n%d lines read.\n\n",n);
+  REprintf("\n%d lines read.\n\n",n);
   rsig=median(x,&n)/.675;
   kappa=kappa*rsig;
   tau2=tau2*rsig*rsig;
@@ -687,7 +679,7 @@ int main()
   }
   for(j=0;j<n;j++)
   {
-    if(j==0) printf("%d %14.9f \n",ngib,deltot[j]);
+    if(j==0) REprintf("%d %14.9f \n",ngib,deltot[j]);
     deltot[j]=deltot[j]/ngib;
     fprintf(rslttxt,"%14.9f\n",deltot[j]);
   }
@@ -707,13 +699,11 @@ void gcontrol(double *kdata, int *nkdata, double *zeta, double *kappa,
   n=*nkdata;
   if ((delta=(int *)malloc(n*sizeof(int)))==NULL)
   {
-    printf("I can't allocate memory.\n");
-    return;
+    error("I can't allocate memory.\n");
   }
   if ((out=(double *)malloc((*burn+(*ngib))*sizeof(double)))==NULL)
   {
-    printf("I can't allocate memory.\n");
-    return;
+    error("I can't allocate memory.\n");
   }
   for (i=0;i<n;i++) delta[i]=0;;
   n=0;
@@ -774,6 +764,6 @@ void gcontrol(double *kdata, int *nkdata, double *zeta, double *kappa,
   for(j=0;j<n;j++)
   {
     deltot[j]=deltot[j]/(*ngib);
-    printf("%14.9f %14.9f\n",x[j],deltot[j]);
+    REprintf("%14.9f %14.9f\n",x[j],deltot[j]);
   }
 }

@@ -1,13 +1,16 @@
-BFDP.xls	The original Excel file with BFDP
+index.html	System-generated index file
+README		This file
 citations.txt	The citations
-FPRP.xls	The original Excel file with FPRP
+no		# of citations
 gap.bib
 gap.enl
 gap.pdf		vignette
 gap.Rnw
-index.html
-jss07.pdf	A revised form of JSS paper
+jss07.pdf	A revised version of the J Stat Soft paper
+copm.score/	Example files using comp.score
+haplo.stats/	Example files using haplo.stats
+klem/		Example files using klem
 ms/		ms source code
-no		# of citations
-README
-Sweave.sty
+OpenMx/		Twin models using OpenMx
+twinan90/	Deprecated twinan90 files
+xls/		The original BFDP and FPRP function

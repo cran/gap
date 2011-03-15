@@ -1,3 +1,4 @@
+#include <R.h>
 #include <stdio.h>
 #include <string.h>
 #ifdef UNIX
@@ -138,8 +139,7 @@ vertex  *new_vertex()
   vertex  *v;
   if (!(v = (vertex *) calloc(1,sizeof(vertex))))
   {
-    fprintf(stderr,"\nnew_vertex: cannot allocate vertex");
-    exit(1);
+    error("\nnew_vertex: cannot allocate vertex");
   }
   return(v);
 }
@@ -165,8 +165,7 @@ vertex_list     *new_vertex_list()
   vertex_list     *vl;
   if (!(vl = (vertex_list *)calloc(1,sizeof(vertex_list))))
   {
-    fprintf(stderr,"\nnew_vertex_list: cannot alloate vertex_list");
-    exit(1);
+    error("\nnew_vertex_list: cannot alloate vertex_list");
   }
   return(vl);
 }
@@ -190,8 +189,7 @@ edge    *new_edge()
   edge    *e;
   if (!(e = (edge *)calloc(1,sizeof(edge))))
   {
-    fprintf(stderr,"\nnew_edge: cannot allocate edge");
-    exit(1);
+    error("\nnew_edge: cannot allocate edge");
   }
   e->free = 1;
   return(e);
@@ -319,9 +317,9 @@ char    *newline()
   if (!fgets(line_buff,MAXLINE,stdin)) return(NULL);
   while (line_buff[0] == '%')
   {
-    if (line_buff[1] == '#') printf("%%# %6.3f (0.000 on PC)\n",cpu_time());
-    else if (line_buff[1] =='%') printf("%s",line_buff);
-    fflush(stdout);
+    if (line_buff[1] == '#') Rprintf("%%# %6.3f (0.000 on PC)\n",cpu_time());
+    else if (line_buff[1] =='%') Rprintf("%s",line_buff);
+    R_FlushConsole();
     if (!fgets(line_buff,MAXLINE,stdin)) return(NULL);
   }
   for (i=0, blank=1; line_buff[i] != '\n' && blank; i++)
@@ -346,7 +344,7 @@ void print_profile(int n)
 {
   int     i, m;
   m = (n < max_path_length ? n : max_path_length);
-  for (i=2; i<m; i++) printf(" %d",path_length[i]);
+  for (i=2; i<m; i++) Rprintf(" %d",path_length[i]);
 }
 
 /*==============*/
@@ -367,8 +365,7 @@ int main(int argc, char **argv)
   {
     if (sscanf(line,"%d%d%d",&i,&j,&k) != 3)
     {
-      fprintf(stderr,"\n %s(%d): cannot read triplet",progname,line_no);
-      exit(1);
+      error("\n %s(%d): cannot read triplet",progname,line_no);
     }
     if (i > 0) bot = find_vertex(i);
     if (j > 0)
@@ -390,8 +387,7 @@ int main(int argc, char **argv)
     {
       if (sscanf(line,"%d",&i) != 1)
       {
-        fprintf(stderr,"\n %s(%d): cannot read integer",progname,line_no);
-        exit(1);
+        error("\n %s(%d): cannot read integer",progname,line_no);
       }
       if (i > 0)
       {
@@ -399,11 +395,11 @@ int main(int argc, char **argv)
         if (new_proband(bot)) n_prob +=1;
       }
     }
-    printf("%9.3f",100000.0*total_kinship()/n_prob/(n_prob-1)*2.0);
-    printf("\n\n");
-    fflush(stdout);
+    Rprintf("%9.3f",100000.0*total_kinship()/n_prob/(n_prob-1)*2.0);
+    Rprintf("\n\n");
+    R_FlushConsole();
   }
-  fflush(stderr);
+  R_ClearerrConsole();
   return(0);
 }
 

@@ -1,3 +1,4 @@
+#include <R.h>
 #include "nghds.h"
 #include <R.h>
 
@@ -18,7 +19,7 @@ nullify(&nullnode);
 ind=(Ind *)malloc((max_size)*sizeof(Ind));
 if (!ind)
 {
-  printf("\nError to allocate memory for pedigree\n");
+  Rprintf("\nError to allocate memory for pedigree\n");
   return;
 }
 for (i=0;i<max_size;i++) nullify(&ind[i]);
@@ -64,21 +65,21 @@ for (j=1;j<=*pedsize;j++)
 for (i=1;i<=*pedsize;i++)
 {
     t2=&ind[i];
-    printf("%5d ",t2->self);
+    Rprintf("%5d ",t2->self);
 }
-printf("\n");
+Rprintf("\n");
 k=0;
 for (i=1;i<=*pedsize;i++)
 {
     t1=&ind[i];
-    printf("%5d ",t1->self);
+    Rprintf("%5d ",t1->self);
     for (j=1;j<=i;j++)
     {
         kin[k]=kinship(&(ind[i]),&(ind[j]));
-        printf(" %f",kin[k]);
+        Rprintf(" %f",kin[k]);
         k++;
     }
-    printf("\n");
+    Rprintf("\n");
 }
 
 for (i=0;i<=*pedsize;i++) nullify(&ind[i]);

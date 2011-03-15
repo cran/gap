@@ -18,8 +18,8 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.1-3\cr
-Depends: \tab R(>= 2.0.0)\cr
+Version: \tab 1.1-6\cr
+Depends: \tab R(>= 2.1.0)\cr
 Suggests: \tab BradleyTerry2, rms, Hmisc, MASS, grid, haplo.stats, magic, pedigree, survival\cr
 License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/~jinghua.zhao\cr
@@ -95,7 +95,7 @@ qqunif            \tab  Q-Q plot for uniformly distributed random variable \cr
 read.ms.output    \tab  A utility function to read ms output \cr
 s2k               \tab  Statistics for 2 by K table \cr
 tscc              \tab  Power calculation for two-stage case-control design \cr
-twinan90          \tab  Classic twin models \cr
+% twinan90          \tab  Classic twin models \cr
 whscore           \tab  Whittemore-Halpern scores for allele-sharing \cr
 }
 

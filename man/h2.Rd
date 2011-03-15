@@ -29,10 +29,6 @@ for "h2","c2","e2","vh","vc","ve".
 Keeping ES. Introduction to Statistical Inference, Dover Pulications, Inc. 1995
 }
 
-\seealso{
-\code{\link[gap]{twinan90}}
-}
-
 \examples{
 \dontrun{
 

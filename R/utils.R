@@ -1,3 +1,39 @@
+allele.recode <- function (a1, a2, miss.val = NA)
+{
+    n <- length(a1)
+    if (is.factor(a1))
+        a1 <- as.character(a1)
+    if (is.factor(a2))
+        a2 <- as.character(a2)
+    is.ch <- is.character(a1) | is.character(a2)
+    if (is.ch) {
+        t <- factor(c(a1, a2), exclude = miss.val)
+    }
+    if (!is.ch) {
+        lev <- sort(unique(c(a1, a2)))
+        t <- factor(c(a1, a2), levels = lev, exclude = miss.val)
+    }
+    allele.label <- levels(t)
+    t <- as.numeric(t)
+    a1 <- t[1:n]
+    a2 <- t[(n + 1):(2 * n)]
+    return(list(a1 = a1, a2 = a2, allele.label = allele.label))
+}
+
+geno.recode <- function (geno, miss.val = 0)
+{
+    n.loci <- ncol(geno)/2
+    alist <- vector("list", n.loci)
+    grec <- NULL
+    for (i in 1:n.loci) {
+        t <- (i - 1) * 2 + 1
+        tmp <- allele.recode(geno[, t], geno[, t + 1], miss.val = miss.val)
+        grec <- cbind(grec, tmp$a1, tmp$a2)
+        alist[[i]] <- list(allele = tmp$allele.label)
+    }
+    return(list(grec = grec, alist = alist))
+}
+
 a2g <- function(a1,a2)
 {
   i <- ifelse(a1 < a2,a2,a1)

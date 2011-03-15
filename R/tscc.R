@@ -35,7 +35,7 @@ tscc <- function(model,GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)
 {
    ce <- environment()
    l <- c(p1,pi.samples,pi.markers,K)
-   if(any(lapply(l,">",1))|any(lapply(c(l,GRR,n1,n2,M),"<=",0))) stop("invalid input")
+   if(any(sapply(l,">",1))|any(sapply(c(l,GRR,n1,n2,M),"<=",0))) stop("invalid input")
    x <- KCC(model,GRR,p1,K)
    pprime <- x$pprime
    p <- x$p
@@ -62,7 +62,7 @@ tscc <- function(model,GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)
       (pnorm(u1)+1-pnorm(u2))/sqrt(2*pi)*exp(-0.5*(z1-m1)^2)
    }
    rootfun <- function(x) {
-       assign("Cj",x,env=ce)
+       assign("Cj",x,envir=ce)
        integrate(u,-Inf,-C1)$value+integrate(u,C1,Inf)$value
    }
    Cj <- 0

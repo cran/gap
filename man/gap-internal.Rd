@@ -2,6 +2,8 @@
 \alias{PARn}
 \alias{HapDesign}
 \alias{HapFreqSE}
+\alias{allele.recode}
+\alias{geno.recode}
 \alias{a2g}
 \alias{ci}
 \alias{Cox.est}

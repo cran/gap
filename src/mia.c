@@ -1,3 +1,4 @@
+#include <R.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,7 +35,7 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
 
   mimp=*mi;
   if(mimp==0) {
-    fprintf(stderr,"\nPlease specify -mi #, # being number of imputations\n");
+    REprintf("\nPlease specify -mi #, # being number of imputations\n");
     return;
   }
 
@@ -46,7 +47,7 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
   n_loci=0;
   n_hap=0;
 
-  sasfile=stderr;
+  sasfile=NULL;
   if(!*so) /*haplotype order*/
   {
     sprintf(tpname,"%s.%03d",*hapfile,1);
@@ -177,7 +178,7 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
     }
     if(*sas) {
       fprintf(sasfile,";\n");
-      fprintf(stderr,"\nSAS program file has been written to %s\n",tpname);
+      REprintf("\nSAS program file has been written to %s\n",tpname);
       fclose(sasfile);
     }
     for(i=0;i<n_hap;i++) {
@@ -292,7 +293,7 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
         fprintf(sasfile,"\n");
       }
       fprintf(sasfile,";\n");
-      fprintf(stderr,"\nSAS program has been written to %s\n",tpname);
+      REprintf("\nSAS program has been written to %s\n",tpname);
       fclose(sasfile);
     }
     if(!*ns) qsorts(0,n_hap-1);
@@ -319,20 +320,20 @@ void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *
   for(j=0;j<n_loci;j++) free(names[j]);
   free(names);
   fclose(outfile);
-  fprintf(stderr,"Output has been written to %s",ofname);
+  REprintf("Output has been written to %s",ofname);
 
   return;
 
   open_error:
-  fprintf(stderr, "Error opening file\n");
+  REprintf("Error opening file\n");
   return;
 
   read_error:
-  fprintf(stderr, "Error reading file %s\n",tpname);
+  REprintf("Error reading file %s\n",tpname);
   return;
 
   no_room:
-  fprintf(stderr, "Insufficient memory\n");
+  REprintf("Insufficient memory\n");
   return;
 
 }
@@ -360,27 +361,27 @@ int main (int argc, char **argv)
       get_flag(argc, argv, "sas",0 , &sas) < 0 ||
       !get_arg(argc, argv, ifname)
      ) {
-    fprintf(stderr, "\nMIANALYZE version %.2f JH Zhao 2002\n\n",version);
-    fprintf(stderr, "Usage: %s [options]", argv[0]);
-    fprintf(stderr, " input-file-root [output-file]\n");
-    fprintf(stderr, "\n Where options (defaults) are:\n\n");
-    fprintf(stderr, "\t-so \tTally haplotypes by subject order\n");
-    fprintf(stderr, "\t-ns \tDo not sort by individual ID\n");
-    fprintf(stderr, "\t-mi #\tNumber of imputations use in HAP\n");
-    fprintf(stderr, "\t-as \tAll markers are SNPs\n");
-    fprintf(stderr, "\t-sas \tTo generate SAS data step statements\n");
-    fprintf(stderr, "\n input-file-root is output filename");
-    fprintf(stderr, " produced by HAP with -mi# and -ss options\n");
-    printf("\n");
-    printf("Max. length of finenames   = %d\n",MAX_FILENAME_LEN);
-    printf("Max. length of input lines = %d\n",MAX_LINE_LEN);
-    printf("Max. length of locus names = %d\n",MAX_NAME_LEN);
-    printf("\n");
+    REprintf("\nMIANALYZE version %.2f JH Zhao 2002\n\n",version);
+    REprintf("Usage: %s [options]", argv[0]);
+    REprintf(" input-file-root [output-file]\n");
+    REprintf("\n Where options (defaults) are:\n\n");
+    REprintf("\t-so \tTally haplotypes by subject order\n");
+    REprintf("\t-ns \tDo not sort by individual ID\n");
+    REprintf("\t-mi #\tNumber of imputations use in HAP\n");
+    REprintf("\t-as \tAll markers are SNPs\n");
+    REprintf("\t-sas \tTo generate SAS data step statements\n");
+    REprintf("\n input-file-root is output filename");
+    REprintf(" produced by HAP with -mi# and -ss options\n");
+    Rprintf("\n");
+    Rprintf("Max. length of finenames   = %d\n",MAX_FILENAME_LEN);
+    Rprintf("Max. length of input lines = %d\n",MAX_LINE_LEN);
+    Rprintf("Max. length of locus names = %d\n",MAX_NAME_LEN);
+    Rprintf("\n");
     return 1;
   }
 
   if(mimp==0) {
-    fprintf(stderr,"\nPlease specify -mi #, # being number of imputations\n");
+    REprintf("\nPlease specify -mi #, # being number of imputations\n");
     return 1;
   }
   get_arg(argc, argv, ofname);
@@ -523,7 +524,7 @@ int main (int argc, char **argv)
     }
     if(sas) {
       fprintf(sasfile,";\n");
-      fprintf(stderr,"\nSAS program file has been written to %s\n",tpname);
+      REprintf("\nSAS program file has been written to %s\n",tpname);
       fclose(sasfile);
     }
     for(i=0;i<n_hap;i++) {
@@ -638,7 +639,7 @@ int main (int argc, char **argv)
         fprintf(sasfile,"\n");
       }
       fprintf(sasfile,";\n");
-      fprintf(stderr,"\nSAS program has been written to %s\n",tpname);
+      REprintf("\nSAS program has been written to %s\n",tpname);
       fclose(sasfile);
     }
     if(!ns) qsorts(0,n_hap-1);
@@ -665,20 +666,20 @@ int main (int argc, char **argv)
   for(j=0;j<n_loci;j++) free(names[j]);
   free(names);
   fclose(outfile);
-  fprintf(stderr,"Output has been written to %s",ofname);
+  REprintf("Output has been written to %s",ofname);
 
   return 0;
 
   open_error:
-  fprintf(stderr, "Error opening file\n");
+  REprintf("Error opening file\n");
   return 1;
 
   read_error:
-  fprintf(stderr, "Error reading file\n");
+  REprintf("Error reading file\n");
   return 1;
 
   no_room:
-  fprintf(stderr, "Insufficient memory\n");
+  REprintf("Insufficient memory\n");
   return 1;
 
 }
