@@ -1,6 +1,6 @@
-kin.morgan<-function(ped)
+kin.morgan<-function(ped,verbose=FALSE)
 {
-   vector.to.kin <- function (pars) 
+   v2k <- function (pars) 
    # 5/6/2004
    # this function is in spirit similar to g2a and make.del(mvnmle)
    {
@@ -16,8 +16,24 @@ kin.morgan<-function(ped)
    }
    pedsize<-dim(ped)[1]
    kin<-rep(0,pedsize*(pedsize+1)/2)
-   z<-.C("kin_morgan",data=as.integer(t(ped)),
-          pedsize=as.integer(pedsize),kin=as.double(array(kin)),PACKAGE="gap")
-
-   list(kin=z$kin,kin.matrix=vector.to.kin(z$kin))
+   id <- ped[,1]
+   father <- ped[,2]
+   mother <- ped[,3]
+   tid <- c(id,father,mother)
+   uid <- unique(tid[tid!=0])
+   iid <- match(id,uid)
+   fid <- match(father,uid,nomatch=0)
+   mid <- match(mother,uid,nomatch=0)
+   peddata <- rbind(id,father,mother)
+   pedindex <- rbind(iid,fid,mid)
+   if (verbose)
+   {
+      cat("The original pedigree IDs and their indices:\n")
+      print(t(rbind(peddata,pedindex)))
+   }
+   z<-.C("kin_morgan",data=as.integer(peddata),pedsize=as.integer(pedsize),
+         pedinex=as.integer(pedindex),kin=as.double(array(kin)),PACKAGE="gap")
+   kin.matrix=v2k(z$kin)
+   colnames(kin.matrix) <- rownames(kin.matrix) <- id
+   list(kin=z$kin,kin.matrix=kin.matrix)
 }

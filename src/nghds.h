@@ -1,8 +1,6 @@
 #ifndef NGHDS_H
 #define NGHDS_H
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "gdef.h"
 
 typedef struct _Ind {

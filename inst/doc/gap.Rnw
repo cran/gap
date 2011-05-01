@@ -58,6 +58,7 @@ improve them.
 The following list shows the data and functions currently available.
 
 \begin{tabular}{ll}
+\\
 BFDP              &      Bayesian false-discovery probability\\
 FPRP              &      False-positive report probability\\
 SNP               &      Functions for single nucleotide polymorphisms (SNPs)\\
@@ -97,6 +98,10 @@ klem              &      Haplotype frequency estimation based on a genotype tabl
                   &      of two multiallelic markers\\
 LD22              &      LD statistics for two diallelic markers\\
 LDkl              &      LD statistics for two multiallelic markers\\
+lukas             &      An example pedigree\\
+\end{tabular}
+
+\begin{tabular}{ll}
 makeped           &      A function to prepare pedigrees in post-MAKEPED format\\
 mao               &      A study of Parkinson's disease and MAO gene\\
 masize            &      Sample size calculation for mediation analysis\\
@@ -104,9 +109,6 @@ metap             &      Meta-analysis of p values\\
 metareg           &      Fixed and random effects model for meta-analysis\\
 mhtplot           &      Manhattan plot of p values\\
 mia               &      multiple imputation analysis for hap\\
-\end{tabular}
-
-\begin{tabular}{ll}
 mtdt              &      Transmission/disequilibrium test of a multiallelic marker\\
 mtdt2             &      Transmission/disequilibrium test of a multiallelic marker\\
                   &      by Bradley-Terry model\\
@@ -139,9 +141,58 @@ Assuming proper installation, you will be able to obtain the list by typing
 
 You can cut and paste examples at end of each function's documentation.\\
 
+Both \textit{genecounting} and \textit{hap} are able to handle SNPs and multiallelic
+markers, with the former be flexible enough to include features such as X-linked data
+and the later being able to handle large number of SNPs. But they are unable to
+recode allele labels automatically, so functions \textit{gc.em} and \textit{hap.em}
+are in \textit{haplo.em} format and used by a modified function \textit{hap.score} in
+association testing.\\
+
+It is notable that multilocus data are handled differently from that in {\bf hwde} and
+elegant definitions of basic genetic data can be found in {\bf genetics} package.\\
+
+Incidentally, I found my C mixed-radixed sorting routine as in \cite{zhao03} is much
+faster than R's internal function.\\
+
+With exceptions such as function \textit{pfc} which is very computer-intensive, most
+functions in the package can easily be adapted for analysis of large datasets involving
+either SNPs or multiallelic markers. Some are utility functions, e.g. \textit{muvar}
+and \textit{whscore}, which will be part of the other analysis routines in the future.\\
+
+The benefit with R compared to standalone programs is that for users, all functions have
+unified format. For developers, it is able to incorporate their C/C++ programs more
+easily and avoid repetitive work such as preparing own routines for matrix algebra and
+linear models. Further advantage can be taken from packages in {\bf Bioconductor}, which
+are designed and written to deal with large number of genes.\\
+
+I have included {ms} code and .xls files to accompany {\em read.ms.output} and {\em FPRP}
+and {\em BFDP} functions as with a classic twin example for ACE model in {\bf OpenMx}. The
+package can be installed with command,
+
+\begin{Schunk}
+\begin{Scode}
+source('http://openmx.psyc.virginia.edu/getOpenMx.R')
+\end{Scode}
+\end{Schunk}
+
+\section{Demos}
+
+You can also try several simple examples via \textit{demo}:
+
+\begin{Schunk}
+\begin{Scode}
+library(gap)
+demo(gap)
+\end{Scode}
+\end{Schunk}
+
+\section{Examples}
+
 I would like to highlight {\em pbsize}, {\em fbsize} and {\em ccsize} functions used for
 power/sample calculations in a genome-wide asssociatoin study as reported in~\cite{zhao07}.\\
 
+\subsection{Study design}
+\subsubsection*{Family-based design}
 The example involving family-based design is as follows,
 <<echo=TRUE>>=
 library(gap)
@@ -182,6 +233,7 @@ fbsize(g,p)
 table1
 @
 
+\subsubsection*{Population-based design}
 The example involving population-based design is as follows,
 <<echo=TRUE>>=
 library(gap)
@@ -214,6 +266,7 @@ table5 <- read.table(outfile,header=TRUE,sep="\t")
 table5
 @
 
+\subsubsection*{Case-cohort design}
 For case-cohort design, we obtain results for ARIC and EPIC studies.
 <<echo=TRUE>>=
 library(gap)
@@ -263,8 +316,69 @@ read.table(outfile,header=TRUE,sep="\t")
 unlink(outfile)
 @
 
-I include some figures from the documentation that may be of interest.\\
+\subsection{Kinship calculation}
+Next, I will provide an example for kinship calculation using {\em kin.morgan}.
+It is recommended that individuals in a pedigree are ordered so that parents
+always precede their children. In this regard, package {\bf pedigree} can be
+used, and package {\bf kinship} can be used to produce pedigree diagram as with
+kinship matrix.
 
+\subsubsection*{Pedigree diagram}
+<<echo=TRUE>>=
+# pedigree diagram
+data(lukas,package="gap")
+library(kinship)
+kmat <- with(lukas,kinship(id,father,mother))
+ped <- with(lukas,pedigree(id,father,mother,sex))
+png("figures/lukas.png")
+par(xpd=TRUE)
+with(ped, plot(ped, id=paste("\n",id)))
+dev.off()
+@
+
+The pedigree diagram is as follows,
+
+\includegraphics[height=14cm,width=15cm]{figures/lukas.png}
+
+\subsubsection*{Kinship calculation}
+We then turn to the kinship calculation.
+
+<<echo=TRUE>>=
+# unordered individuals
+library(gap)
+gk1 <- kin.morgan(lukas)
+write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
+
+library(kinship)
+kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
+write.table(kk1,"results/kinship_1.txt",quote=FALSE)
+
+d <- gk1$kin.matrix-kk1
+sum(abs(d))
+
+# order individuals so that parents precede their children
+library(pedigree)
+op <- orderPed(lukas)
+olukas <- lukas[order(op),]
+gk2 <- kin.morgan(olukas)
+
+write.table(olukas,"olukas.csv",quote=FALSE)
+write.table(gk2$kin.matrix,"results/gap_2.txt",quote=FALSE)
+
+kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
+write.table(kk2,"results/kinship_2.txt",quote=FALSE)
+
+z <- gk2$kin.matrix-kk2
+sum(abs(z))
+@
+
+We see that in the second case, the result agrees with {\bf kinship}.
+
+
+\subsection{Graphics examples}
+I now include some figures from the documentation that may be of interest.\\
+
+\subsubsection*{Genome-wide association}
 The following code is used to obtain a Q-Q plot via {\em qqunif} function,
 <<echo=TRUE>>=
 library(gap)
@@ -311,6 +425,9 @@ dev.off()
 
 \includegraphics[height=14cm,width=14cm]{figures/asplot.png}
 
+\subsubsection*{Effect size plot}
+The purpose of this function is simply for illustration.
+
 The code below obtains an effect size plot via the {ESplot} function,
 <<echo=TRUE>>=
 library(gap)
@@ -326,52 +443,7 @@ dev.off()
 
 \includegraphics[height=10cm,width=10cm]{figures/ESplot.png}
 
-Note that these can serve as templates to customize features of your own.\\
-
-Both \textit{genecounting} and \textit{hap} are able to handle SNPs and multiallelic
-markers, with the former be flexible enough to include features such as X-linked data
-and the later being able to handle large number of SNPs. But they are unable to
-recode allele labels automatically, so functions \textit{gc.em} and \textit{hap.em}
-are in \textit{haplo.em} format and used by a modified function \textit{hap.score} in
-association testing.\\
-
-It is notable that multilocus data are handled differently from that in {\bf hwde} and
-elegant definitions of basic genetic data can be found in {\bf genetics} package.\\
-
-Incidentally, I found my C mixed-radixed sorting routine as in \cite{zhao03} is much
-faster than R's internal function.\\
-
-With exceptions such as function \textit{pfc} which is very computer-intensive, most
-functions in the package can easily be adapted for analysis of large datasets involving
-either SNPs or multiallelic markers. Some are utility functions, e.g. \textit{muvar}
-and \textit{whscore}, which will be part of the other analysis routines in the future.\\
-
-The benefit with R compared to standalone programs is that for users, all functions have 
-unified format. For developers, it is able to incorporate their C/C++ programs more 
-easily and avoid repetitive work such as preparing own routines for matrix algebra and 
-linear models. Further advantage can be taken from packages in {\bf Bioconductor}, which
-are designed and written to deal with large number of genes.\\
-
-I have included {ms} code and .xls files to accompany {\em read.ms.output} and {\em FPRP}
-and {\em BFDP} functions as with a classic twin example for ACE model in {\bf OpenMx}. The
-package can be installed with command,
-
-\begin{Schunk}
-\begin{Scode}
-source('http://openmx.psyc.virginia.edu/getOpenMx.R')
-\end{Scode} 
-\end{Schunk}
-
-\section{Demos}
-
-You can also try several simple examples via \textit{demo}:
-
-\begin{Schunk}
-\begin{Scode}
-library(gap)
-demo(gap)
-\end{Scode}
-\end{Schunk}
+Note that all these can serve as templates to customize features of your own.\\
 
 \section{Known bugs}
 
@@ -389,4 +461,4 @@ The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gho
 \bibliography{gap}
 \end{document}
 
-% Date last modified: 16 December 2010
+% Date last modified: 3 May 2011

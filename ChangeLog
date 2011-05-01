@@ -1,5 +1,10 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1-2
+03-05-2011	Modify package vignette after cross-check with package kinship
+01-05-2011	Revise kin.morgan (finally) as reported by Lukas Keller [lukas.keller@ieu.uzh.ch]
+14-04-2011	Add --resave-data option when running R CMD build
+
 Version 1.1-1
 10-12-2010	Add into vignette results from pbsize/fbsize/ccsize and figures as produced by asplot, ESplot, mhtplot, and qqunif
 25-11-2010	Add type argument to mht.control() so that it is appropriate for lod score analysis

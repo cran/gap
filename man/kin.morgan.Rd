@@ -1,13 +1,14 @@
 \name{kin.morgan}
 \alias{kin.morgan}
 \title{kinship matrix for simple pedigree}
-\usage{kin.morgan(ped)}
+\usage{kin.morgan(ped,verbose=FALSE)}
 \description{
 kinship matrix according to Morgan v2.1
 }
 
 \arguments{
-\item{ped}{pedigree id and family trio (id, father id, morther id}
+\item{ped}{individual's id, father's id and mother's id}
+\item{verbose}{an option to print out the original pedigree}
 }
 
 \value{

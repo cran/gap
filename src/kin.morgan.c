@@ -1,6 +1,7 @@
 #include "nghds.h"
+#include <R.h>
 
-#define max_size 400
+#define max_size 1001
 #define STRICT_CHECK
 
 static void nullify(Ind *);
@@ -8,65 +9,80 @@ double kinship(Ind *, Ind *),inbreeding(Ind *);
 
 Ind nullnode;
 
-void kin_morgan(int *data, int *pedsize, double *kin)
+void kin_morgan(int *data, int *pedsize, int *pedindex, double *kin)
 {
-Ind *ped,*t1,*t2;
-int i,j,k,id,pa,ma;
+Ind *ind,*t1,*t2;
+int i0,i1,i2,i,j,k,id,pa,ma;
 
 nullify(&nullnode);
-ped=(Ind *)malloc((max_size+1)*sizeof(Ind));
-if (!ped)
+ind=(Ind *)malloc((max_size)*sizeof(Ind));
+if (!ind)
 {
   printf("\nError to allocate memory for pedigree\n");
   return;
 }
-for (i=0;i<=max_size;i++) nullify(&ped[i]);
+for (i=0;i<max_size;i++) nullify(&ind[i]);
 
-printf("\nThe original family (ID PA MA): \n\n");
-i=0;
-for(i=1;i<=*pedsize;i++)
+for (j=1;j<=*pedsize;j++)
 {
-      id=data[(i-1)*3];
-      pa=data[(i-1)*3+1];
-      ma=data[(i-1)*3+2];
-      ped[i].self=id;
-      ped[i].index=i;
-      printf("%5d %5d %5d\n",id,pa,ma);
+    i=j-1;
+    id=data[i*3];
+    pa=data[i*3+1];
+    ma=data[i*3+2];
+    i0=pedindex[i*3];
+    i1=pedindex[i*3+1];
+    i2=pedindex[i*3+2];
+    if (i0) {ind[i0].self=id;ind[i0].index=i0;}
+    if (i1) {ind[i1].self=pa;ind[i1].index=i1;}
+    if (i2) {ind[i2].self=ma;ind[i2].index=i2;}
+    ind[j].self=id;
+    ind[j].index=i0;
+}
+for (j=1;j<=*pedsize;j++)
+{
+    i=j-1;
+    pa=data[i*3+1];
+    ma=data[i*3+2];
+    i1=pedindex[i*3+1];
+    i2=pedindex[i*3+2];
+    t1=t2=&nullnode;
+    if (pa) t1=&ind[i1];
+    if (ma) t2=&ind[i2];
+    ind[j].pa=t1;
+    ind[j].ma=t2;
 #ifdef STRICT_CHECK
-      t1=&ped[pa];
-      t2=&ped[ma];
-      if ((pa && t1->self==UNKNOWN)||(ma && t2->self==UNKNOWN))
-      {
-         printf("\nParents not in datafile, quit\n");
-         return;
-      }
+    t1=&ind[i1];
+    t2=&ind[i2];
+    if ((pa && t1->self==UNKNOWN)||(ma && t2->self==UNKNOWN))
+    {
+       Rprintf("\nParents not in datafile, quit\n");
+       Rprintf("pa=%5d ma=%5d t1->self=%5d t2->self=%5d\n",pa,ma,t1->self,t2->self);
+       return;
+    }
 #endif
 }
 for (i=1;i<=*pedsize;i++)
 {
-    t1=t2=&nullnode;
-    pa=data[(i-1)*3+1];
-    ma=data[(i-1)*3+2];
-    if (pa) t1=&ped[pa];
-    if (ma) t2=&ped[ma];
-    ped[i].pa=t1;
-    ped[i].ma=t2;
+    t2=&ind[i];
+    printf("%5d ",t2->self);
 }
+printf("\n");
 k=0;
 for (i=1;i<=*pedsize;i++)
 {
-    printf("%5d ",i);
+    t1=&ind[i];
+    printf("%5d ",t1->self);
     for (j=1;j<=i;j++)
     {
-        kin[k]=kinship(&(ped[i]),&(ped[j]));
+        kin[k]=kinship(&(ind[i]),&(ind[j]));
         printf(" %f",kin[k]);
         k++;
     }
     printf("\n");
 }
 
-for (i=0;i<=*pedsize;i++) nullify(&ped[i]);
-free(ped);
+for (i=0;i<=*pedsize;i++) nullify(&ind[i]);
+free(ind);
 
 return;
 
