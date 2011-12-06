@@ -2142,6 +2142,8 @@ ASHG 2000, No 1989
 
 R/gap
 
+Galvan A, Skorpen F, Klepstad P, Knudsen AK, Fladvad T, Falvella FS, Pigni A, Brunelli C, Caraceni A, Kaasa S, Dragani TA. Multiple Loci modulate opioid therapy response for cancer pain. Clin Cancer Res. 2011 Jul 1;17(13):4581-7. Epub 2011 May 27.
+
 Sole X, Gonzalez JR, Moreno V.
 Analysis of Population-Based Genetic Association Studies Applied to Cancer Susceptibility and Prognosis. 
 In Pham T (ed). Computational Biology: Issues and Applications in Oncology. Springer 2009.

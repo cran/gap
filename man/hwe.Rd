@@ -40,14 +40,23 @@ The returned value is a list containing:
 
 \examples{
 \dontrun{
-data(hla)
-hla.DQR <- hwe(hla[,3:4])
-summary(hla.DQR)
 a <- c(3,2,2)
 a.out <- hwe(a,data.type="genotype")
 a.out
 a.out <- hwe(a,data.type="count")
 a.out
+require(haplo.stats)
+data(hla)
+hla.DQR <- hwe(hla[,3:4])
+summary(hla.DQR)
+# multiple markers
+s <- vector()
+for(i in seq(3,8,2))
+{
+  hwe_i <- hwe(hla[,i:(i+1)])
+  s <- rbind(s,hwe_i)
+}
+s
 }
 }
 \author{Jing Hua Zhao}

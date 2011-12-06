@@ -18,9 +18,9 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.1-2\cr
+Version: \tab 1.1-3\cr
 Depends: \tab R(>= 2.0.0)\cr
-Suggests: \tab BradleyTerry2, Design, Hmisc, MASS, grid, haplo.stats, magic, pedigree, survival\cr
+Suggests: \tab BradleyTerry2, rms, Hmisc, MASS, grid, haplo.stats, magic, pedigree, survival\cr
 License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/~jinghua.zhao\cr
 }
@@ -29,6 +29,7 @@ Index:
 \tabular{ll}{
 BFDP              \tab  Bayesian false-discovery probability \cr
 FPRP              \tab  False-positive report probability \cr
+PD                \tab  A study of Parkinson's disease and APOE, LRRK2, SNCA makers \cr
 SNP               \tab  Functions for single nucleotide polymorphisms (SNPs) \cr
 ab                \tab  Test/Power calculation for mediating effect \cr
 aldh2             \tab  ALDH2 markers and Alcoholism \cr
@@ -66,6 +67,7 @@ klem              \tab  Haplotype frequency estimation based on a genotype table
                   \tab  of two multiallelic markers \cr
 LD22              \tab  LD statistics for two diallelic markers \cr
 LDkl              \tab  LD statistics for two multiallelic markers \cr
+lukas             \tab  An example pedigree \cr
 makeped           \tab  A function to prepare pedigrees in post-MAKEPED format \cr
 masize            \tab  Sample size calculation for mediation analysis \cr
 mao               \tab  A study of Parkinson's disease and MAO gene \cr
@@ -92,7 +94,6 @@ qqfun             \tab  Quantile-comparison plots \cr
 qqunif            \tab  Q-Q plot for uniformly distributed random variable \cr
 read.ms.output    \tab  A utility function to read ms output \cr
 s2k               \tab  Statistics for 2 by K table \cr
-snca              \tab  A study of Parkinson's disease and SNCA makers \cr
 tscc              \tab  Power calculation for two-stage case-control design \cr
 twinan90          \tab  Classic twin models \cr
 whscore           \tab  Whittemore-Halpern scores for allele-sharing \cr

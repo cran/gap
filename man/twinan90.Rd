@@ -62,6 +62,8 @@ ks.test(mzdat,"pnorm")
 ks.test(dzdat,"pnorm")
 qqnorm(mzdat)
 qqnorm(dzdat)
+# contact e-mail for Prof Williams
+# http://www.webpages.uidaho.edu/~chrisw/
 }
 }
 \author{Chris Williams, Jing Hua Zhao}

@@ -1,8 +1,21 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1-3
+06-12-2011	Revise gap.Rnw to be compatible with kinship_1.1.2
+30-11-2011	Revise hwe.cc components and therefore NAMESPACE according to Wang, Li [li.wang@vanderbilt.edu]
+		Suggest rms instead of Design in DESCRIPTIOIN and therefore modify hap.score.R
+11-11-2011	Add examples of HWE for multiple markers as done for Roger Vallejo [Roger.Vallejo@ARS.USDA.GOV]
+03-10-2011	Add url to twinan90 example and .png example for mhtplot
+29-08-2011	Revise asplot to allow for is.na(RSQR) and add NCBI2R example
+12-08-2011	Revise asplot as with the package vignette
+09-06-2011	Activate ylab, according to Marcel den Hoed [marcel.denhoed@mrc-epid.cam.ac.uk]
+03-06-2011	Replace snca.RData with PD.rda
+31-05-2011	Refine mhtplot and documentation according to Franco, Luis Miguel [lfranco@bcm.edu]
+04-05-2011	Tidy up some loose ends from Version 1.1-2
+
 Version 1.1-2
 03-05-2011	Modify package vignette after cross-check with package kinship
-01-05-2011	Revise kin.morgan (finally) as reported by Lukas Keller [lukas.keller@ieu.uzh.ch]
+01-05-2011	Revise kin.morgan (finally) with bug-fix as reported by Lukas Keller [lukas.keller@ieu.uzh.ch]
 14-04-2011	Add --resave-data option when running R CMD build
 
 Version 1.1-1

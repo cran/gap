@@ -49,7 +49,7 @@ systems. Also reported are ~\cite{zhao05} and ~\cite{zhao06} on package {\bf kin
 
 The number of functions are quite limited and experimental, but I already feel
 the enormous advantage by shifting to R and would like sooner rather than later
-to share my work with others. I will not claim this workas exclusively done by
+to share my work with others. I will not claim this work as exclusively done by
 me, but would like to invite others to join me and enlarge the collections and
 improve them.
 
@@ -61,6 +61,7 @@ The following list shows the data and functions currently available.
 \\
 BFDP              &      Bayesian false-discovery probability\\
 FPRP              &      False-positive report probability\\
+PD                &      A study of Parkinson's disease and APOE, LRRK2, SNCA makers \\
 SNP               &      Functions for single nucleotide polymorphisms (SNPs)\\
 ab                &      Test/Power calculation for mediating effect\\
 aldh2             &      ALDH2 markers and alcoholism\\
@@ -127,7 +128,6 @@ qqfun             &      Quantile-comparison plots\\
 qqunif            &      Q-Q plot for uniformly distributed random variable\\
 read.ms.output    &      A utility function to read ms output\\
 s2k               &      Statistics for 2 by K table\\
-snca              &      A study of Parkinson's disease and SNCA markers\\
 tscc              &      Power calculation for two-stage case-control design\\
 twinan90          &      Classic twin models\\
 whscore           &      Whittemore-Halpern scores for allele-sharing\\
@@ -328,11 +328,9 @@ kinship matrix.
 # pedigree diagram
 data(lukas,package="gap")
 library(kinship)
-kmat <- with(lukas,kinship(id,father,mother))
 ped <- with(lukas,pedigree(id,father,mother,sex))
-png("figures/lukas.png")
-par(xpd=TRUE)
-with(ped, plot(ped, id=paste("\n",id)))
+png("figures/lukas.png",1280,960)
+plot(ped)
 dev.off()
 @
 
@@ -419,7 +417,8 @@ The code below obtains a regional association plot with the {\em asplot} functio
 <<echo=TRUE>>=
 library(gap)
 png("figures/asplot.png")
-asplot("rs10811661", "CDKN2A/CDKN2B region", "9", CDKNlocus, CDKNmap, CDKNgenes, 5.4e-8, c(3,6))
+asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
+title("CDKN2A/CDKN2B Region")
 dev.off()
 @
 

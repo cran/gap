@@ -8,6 +8,6 @@ A multi-generational pedigree containing individual, father, mother IDs and sex.
 
 \usage{data(lukas)}
 \format{An example pedigree}
-\source{Lukas}
+\source{Lukas Keller}
 
 \keyword{datasets}

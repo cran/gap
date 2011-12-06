@@ -51,9 +51,9 @@ qqfun(x, distribution="norm", ylab=deparse(substitute(x)),
   \code{q} and \code{d}, respectively) may be used. 
   Studentized residuals are plotted against the appropriate t-distribution.
 
-  This is adapted from \code{\link[car]{qq.plot}} with different values for points and lines,
+  This is adapted from qq.plot of package car with different values for points and lines,
   more options, more transparent code and examples in the current setting. Another similar but
-  sophisticated function is \code{\link[lattice]{qqmath}}.
+  sophisticated function is qqmath of package lattice.
 }
 \value{
   \code{NULL}. These functions are used only for their side effect (to make a graph).
@@ -75,12 +75,12 @@ alpha <- 1/log(10)
 qqfun(p,dist="unif")
 qqfun(-log10(p),dist="exp",rate=alpha,pch=21)
 
-library(car)
-qq.plot(p,dist="unif")
-qq.plot(-log10(p),dist="exp",rate=alpha)
+#library(car)
+#qq.plot(p,dist="unif")
+#qq.plot(-log10(p),dist="exp",rate=alpha)
 
-library(lattice)
-qqmath(~ -log10(p), distribution = function(p) qexp(p,rate=alpha))
+#library(lattice)
+#qqmath(~ -log10(p), distribution = function(p) qexp(p,rate=alpha))
 }
 }
 \keyword{distribution}

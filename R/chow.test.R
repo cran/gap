@@ -27,7 +27,7 @@ chow.test <- function(y1,x1,y2,x2,x=NULL)
         df1 <- ncol(xy1)
 	df2 <- nrow(xy1)+nrow(xy2)-2*(df1)
 	f <- (sse-sse12)*df2/(df1*sse12)
-	p <- pf(f, df1, df2, lower=F)
+	p <- pf(f, df1, df2, lower.tail=FALSE)
 	z <- c(f, df1, df2, p)
 	names(z) <- c("F value", "d.f.1", "d.f.2", "P value")
 	z

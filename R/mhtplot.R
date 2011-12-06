@@ -1,5 +1,7 @@
-mht.control <- function(type="p", usepos=FALSE, logscale=TRUE, base=10, cutoffs=NULL, colors=NULL, labels=NULL, gap=NULL, cex=0.4, yline=3, xline=3) {
-   list(type=type, usepos=usepos, logscale=logscale, base=base, cutoffs=cutoffs, colors=colors, labels=labels, gap=gap, cex=cex, yline=yline, xline=3)
+mht.control <- function(type="p", usepos=FALSE, logscale=TRUE, base=10, cutoffs=NULL, colors=NULL, 
+                        labels=NULL, srt=45, gap=NULL, cex=0.4, yline=3, xline=3) {
+   list(type=type, usepos=usepos, logscale=logscale, base=base, cutoffs=cutoffs, colors=colors, 
+        labels=labels, srt=srt, gap=gap, cex=cex, yline=yline, xline=xline)
 }
 
 hmht.control <- function(data=NULL, colors=NULL, yoffset=0.25, cex=1.5, boxed=FALSE) {
@@ -21,13 +23,15 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
   cutoffs <- control$cutoffs
   colors <- control$colors
   labels <- control$labels
+  srt <- control$srt
   gap <- control$gap
   pcex <- control$cex
   yline <- control$yline
   xline <- control$xline
   colorlist <- colors()
   if(is.null(colors)) colors <- sample(colorlist,n.chr)
-  if(is.null(labels)) tablechr <- unique(chr)
+  tablechr <- unique(chr)
+  if(is.null(labels)) labels <- tablechr
   if(is.null(gap)) gap <- 0
   if (!is.null(hcontrol$data))
   {
@@ -64,7 +68,8 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
   if (logscale) y <- -log(dp,base) else y <- dp
   y1 <- min(y)
   par(xaxt="n",yaxt="n")
-  plot(CM,y,type="n",ann=FALSE,axes=FALSE,...)
+  xy <- xy.coords(CM,y)
+  plot(xy$x,xy$y,type="n",ann=FALSE,axes=FALSE,...)
   axis(1)
   axis(2)
   par(xaxt="s",yaxt="s")
@@ -78,7 +83,7 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
      col.chr <- colors[i]
      if(type=="l") lines(CM[chr],y,col=col.chr,cex=pcex,...)
      else points(CM[chr],y,col=col.chr,cex=pcex,...)
-     text(ifelse(i==1,CM[1],CM[l]),y1,pos=1,offset=1.5,tablechr[i],srt=45,...)
+     text(ifelse(i==1,CM[1],CM[l]),y1,pos=1,offset=1.5,labels[i],srt=srt,...)
   }
   j <- 1
   for(i in 1:n.chr)
@@ -118,8 +123,10 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
      }
   }
   if(!is.null(cutoffs)) abline(h=cutoffs)
-  mtext(ifelse(logscale,paste("-log",base,"(Observed value)",sep=""),"Observed value"),2,line=yline,las=0)
-  if ("xlab"%in%names(args)) xlabel <- xlab else xlabel <- ifelse(is.null(names(chr)),"Chromosome",names(chr))
+  if ("ylab"%in%names(args)) mtext(args$ylab,2,line=yline,las=0) else
+     mtext(ifelse(logscale,paste("-log",base,"(Observed value)",sep=""),"Observed value"),2,line=yline,las=0)
+  if ("xlab"%in%names(args)) xlabel <- args$xlab else
+      xlabel <- ifelse(is.null(names(chr)),"Chromosome",names(chr))
   mtext(xlabel,1,line=xline,las=0) }
 
 #25-11-2010 MRC-Epid JHZ
