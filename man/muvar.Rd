@@ -1,13 +1,11 @@
 \name{muvar}
 \alias{muvar}
 \title{Means and variances under 1- and 2- locus (biallelic) QTL model}
-\synopsis{
-  muvar(n.loci,y1,y12,p1,p2)
-}
-\usage{
+\details{
+\preformatted{
 muvar(n.loci=1,y1=c(0,1,1),p1=0.5)
 muvar(n.loci=2,y12=c(1,1,1,1,1,0,0,0,0),p1=0.99,p2=0.9)
-}
+}}
 \description{
 Function muvar() gives means and variances under 1-locus and 2-locus QTL model (simple); 
 in the latter case it gives results from different avenues. This function is included for

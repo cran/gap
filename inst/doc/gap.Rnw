@@ -1,3 +1,7 @@
+%% \VignetteIndexEntry{An overview of gap}
+%% \Vignettekeywords{human genetics, linkage analysis, association analysis}
+%% \VignettePackage{gap}
+
 \documentclass[11pt,a4paper]{article}
 \usepackage{Sweave}
 \usepackage{url}
@@ -6,10 +10,6 @@
 \usepackage{graphicx}
 \usepackage[authoryear,round]{natbib}
 \bibliographystyle{plainnat}
-
-%% \VignetteIndexEntry{An overview of gap}
-%% \Vignettekeywords{human genetics, linkage analysis, association analysis}
-%% \VignettePackage{gap}
 
 % \newcommand{\keywords}[1]{\addvspace{\baselineskip}\noindent{{\bf Keywords.} #1}}
 
@@ -59,6 +59,7 @@ The following list shows the data and functions currently available.
 
 \begin{tabular}{ll}
 \\
+AE3               &      AE model using nuclear family trios\\
 BFDP              &      Bayesian false-discovery probability\\
 FPRP              &      False-positive report probability\\
 PD                &      A study of Parkinson's disease and APOE, LRRK2, SNCA makers \\
@@ -103,12 +104,14 @@ lukas             &      An example pedigree\\
 \end{tabular}
 
 \begin{tabular}{ll}
+l51               &      An example pedigree data\\
 makeped           &      A function to prepare pedigrees in post-MAKEPED format\\
 mao               &      A study of Parkinson's disease and MAO gene\\
 masize            &      Sample size calculation for mediation analysis\\
 metap             &      Meta-analysis of p values\\
 metareg           &      Fixed and random effects model for meta-analysis\\
-mhtplot           &      Manhattan plot of p values\\
+mhtplot           &      Manhattan plot\\
+mhtplot2          &      Manhattan plot with annotations\\
 mia               &      multiple imputation analysis for hap\\
 mtdt              &      Transmission/disequilibrium test of a multiallelic marker\\
 mtdt2             &      Transmission/disequilibrium test of a multiallelic marker\\

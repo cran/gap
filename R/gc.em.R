@@ -50,7 +50,7 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
   hapid<-hapas$hapid
   one<-rep(1,nrow*2)
   hapdat<-cbind(hapdat,one)
-  attach(hapdat)
+  with(hapdat,{
   tmp<-by(hapdat,one,unique)
   haplotype<-as.matrix(tmp[[1]])
   tmp<-order(haplotype[,nloci+1])
@@ -80,9 +80,9 @@ gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500,
   }
   htrtable<-htrtable/2
   dimnames(htrtable)<-list(NULL,as.character(uhap))
-  detach(hapdat)
   list(lnlike=lnlike,lr=lr,
        hap.prob=hap.prob,hap.prob.noLD=hap.prob.noLD,indx.subj=indx.subj,
        post=post,hap1code=hap1,hap2code=hap2,haplotype=grec2g(haplotype,nloci,tmp0),
        nreps=nreps,converge=converge,niter=niter,uhap=uhap,htrtable=htrtable)
+  })
 }

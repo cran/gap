@@ -10,6 +10,7 @@ annotation is obtained separately.}
 \format{A data frame}
 \source{Dr Tuomas Kilpelainen at the MRC Epidemiology Unit}
 \references{
-None
-}
+Kilpelainen1 TO, et al. (2011) Genetic variation near IRS1 associates with reduced adiposity 
+and an impaired metabolic profile. Nature Genetics 43:753-760
+} 
 \keyword{datasets}

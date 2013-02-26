@@ -1,0 +1,121 @@
+\name{l51}
+\docType{data}
+\alias{l51}
+\title{An example pedigree data}
+\description{
+The data contains data on 51 individuals in a pedigree. Below it is used for comparing results from various packages.
+}
+\usage{data(l51)}
+\format{A data frame}
+\source{Morgan v3.}
+\references{
+Morgan v3. \url{http://www.stat.washington.edu/thompson/Genepi/MORGAN/Morgan.shtml}
+} 
+\examples{\dontrun{
+library(kinship2)
+library(regress)
+library(coxme)
+library(pls)
+library(POET)
+library(pedigreemm)
+N <- dim(l51)[1]
+ped51 <- within(l51, {
+     hist(qt)
+     pid <- "51"
+     w <- quantile(qt,probs=0.75,na.rm=TRUE)
+     r <- rnorm(N)
+     bt=ifelse(qt<=w,0,1)
+     }
+)
+ped <- with(ped51,kinship2::pedigree(id,fid,mid,sex,aff=bt))
+plot(ped)
+kmat <- with(ped51,kinship(id, fid, mid))
+k2 <- as.matrix(2*kmat)
+I <- diag(N)
+dimnames(I) <- dimnames(k2)
+k3 <- k2+I
+
+regress(qt ~ 1, ~I, data=ped51)
+regress(qt ~ 1, ~k2, data=ped51)
+regress(qt ~ 1, ~k2+I, data=ped51)
+regress(qt ~ 1, ~k3, data=ped51)
+
+lmekin(qt ~ 1 + (1|id), data=ped51)
+lmekin(qt ~ 1 + (1|id), data=ped51, varlist=list(k2))
+lmekin(qt ~ 1 + (1|id), data=ped51, varlist=list(k2,I))
+lmekin(qt ~ 1 + (1|id), data=ped51, varlist=list(k3))
+
+coxme(Surv(qt,bt)~1+(1|id),data=ped51)
+coxme(Surv(qt,bt)~1+(1|id),data=ped51,varlist=list(k2))
+coxme(Surv(qt,bt)~1+(1|id),data=ped51,varlist=list(k3))
+ped <- with(ped51,pedigreemm::pedigree(fid,mid,id))
+U <- relfactor(ped)
+A <- as.matrix(t(U) %*% U)
+sum(A-k2)
+F <- inbreeding(ped)
+pedigreemm(bt~(1|id),data=ped51, family="binomial"(link="logit"),
+           pedigree=list(id=ped))
+pedigreemm(bt~(1|id),data=ped51, family="binomial"(link="logit"),
+           REML=FALSE, pedigree=list(id=ped))
+
+with(ped51,summary(qt))
+m0 <- lm(qt ~ 1, data=ped51)
+summary(m0)
+m1 <- lm(qt ~ r, data=ped51)
+summary(m1)
+svd <- svd(k2)
+rawdata <- function(){
+  pca <- prcomp(k2)
+  screeplot(pca,25)
+  pred <- predict(pca)
+  l1 <- lm(qt~1+pred[,1:6],data=ped51)
+  summary(l1)
+  l2 <- lm(qt~1+pred[,1:35],data=ped51)
+  summary(l2)
+  
+  p0 <- pcr(qt ~ pred, 25, data=ped51, validation="CV")
+  summary(p0)
+  coef(p0)
+  coefplot(p0)
+  p1 <- pcr(qt ~ k2, 35, data=ped51, validation="CV")
+  summary(p1)
+  coef(p0)
+  coefplot(p1)
+  scores(p1)
+  
+  poet <- POET(k2)
+  pred <- k2%*%poet$loadings
+  t0 <- lm(qt~pred,data=ped51)
+  summary(t0)
+  poet <- POET(k2,4)
+  pred <- k2%*%poet$loadings
+  t1 <- lm(qt~pred,data=ped51)
+  summary(t1)
+}
+
+# GCTA
+
+k2l <- matrix(0,N*(N+1)/2,4)
+p <- matrix(0,N,4)
+k <- 1
+for(i in 1:N)
+{
+  p[i,] <- with(ped51[i,],c(i,i,qt,bt))
+  for(j in 1:i) 
+  {
+    k2l[k,] <- c(i,j,51,k2[i,j])
+    k <- k+1
+  }
+}
+write(t(p),file="51.txt",4,sep="\t")
+write(t(p[,-(3:4)]),file="51.grm.id",2,sep="\t")
+write(t(k2l),file="51.grm",4,sep="\t")
+
+# gzip -f 51.grm
+# gcta64 --grm 51 --pca 51 --out 51
+# gcta64 --reml --grm 51 --pheno 51.txt --out 51_qt
+# gcta64 --reml --grm 51 --pheno 51.txt --mpheno 2 --prevalence 0.25 --out 51_bt_25
+# gcta64 --reml --grm 51 --pheno 51.txt --mpheno 2 --out 51_bt
+}
+}
+\keyword{datasets}

@@ -1,10 +1,10 @@
 \name{mhtplot}
 \alias{mhtplot}
-\title{Manhattan plot of p values}
+\title{Manhattan plot}
 \usage{mhtplot(data, control=mht.control(), hcontrol=hmht.control(), ...)}
 \description{
-To generate Manhattan plot of genomewide significance (p values). It could also be
-used for any random variable that is uniformly distributed. By default, a log10-transformation is applied.
+To generate Manhattan plot, e.g., of genomewide significance (p values) and
+a random variable that is uniformly distributed. By default, a log10-transformation is applied.
 Note that with real chromosomal positions, it is also appropriate to plot and some but not all chromosomes.
 
 It is possible to specify options such as xlab and ylim when the plot is requested for data in other context.

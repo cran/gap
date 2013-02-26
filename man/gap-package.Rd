@@ -18,15 +18,17 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.1-6\cr
+Version: \tab 1.1-8\cr
 Depends: \tab R(>= 2.1.0)\cr
-Suggests: \tab BradleyTerry2, rms, Hmisc, MASS, grid, haplo.stats, magic, pedigree, survival\cr
+Suggests: \tab BradleyTerry2, coxme, rms, MASS, NCBI2R, grid, haplo.stats, \cr
+        \tab kinship2, magic, nlme, pedigree, pedigreemm, regress, survival\cr
 License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/~jinghua.zhao\cr
 }
 
 Index:
 \tabular{ll}{
+AE3               \tab  AE model using nuclear family trios\cr
 BFDP              \tab  Bayesian false-discovery probability \cr
 FPRP              \tab  False-positive report probability \cr
 PD                \tab  A study of Parkinson's disease and APOE, LRRK2, SNCA makers \cr
@@ -68,13 +70,15 @@ klem              \tab  Haplotype frequency estimation based on a genotype table
 LD22              \tab  LD statistics for two diallelic markers \cr
 LDkl              \tab  LD statistics for two multiallelic markers \cr
 lukas             \tab  An example pedigree \cr
+l51               \tab  An example pedigree data \cr
 makeped           \tab  A function to prepare pedigrees in post-MAKEPED format \cr
 masize            \tab  Sample size calculation for mediation analysis \cr
 mao               \tab  A study of Parkinson's disease and MAO gene \cr
 metap             \tab  Meta-analysis of p values \cr
 metareg           \tab  Fixed and random effects model for meta-analysis \cr
 mhtdata           \tab  An example data for Manhattan plot \cr
-mhtplot           \tab  Manhattan plot of p values \cr
+mhtplot           \tab  Manhattan plot \cr
+mhtplot2          \tab  Manhattan plot with annotations \cr
 mia               \tab  multiple imputation analysis for hap \cr
 mtdt              \tab  Transmission/disequilibrium test of a multiallelic marker \cr
 mtdt2             \tab  Transmission/disequilibrium test of a multiallelic marker \cr

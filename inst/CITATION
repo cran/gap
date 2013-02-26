@@ -1,0 +1,17 @@
+citHeader("To cite package 'gap' in publications use:")
+
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+
+citEntry(entry="Manual",
+         title = "gap: Genetic Analysis Package",
+         author = personList(as.person("Jing Hua Zhao")),
+         year = year,
+         note = vers,
+
+         textVersion =
+         paste("Jing Hua Zhao (",
+               year,
+               "). gap: Genetic Analysis Package. ",
+               vers, ".", sep=""))
+
