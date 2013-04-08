@@ -51,7 +51,7 @@ All output will be written in pofile
 
 \examples{
 cwd <- getwd()
-cs.dir <- file.path(.path.package("gap"),"tests")
+cs.dir <- file.path(path.package("gap"),"tests")
 setwd(cs.dir)
 dir()
 makeped("ped7.pre","ped7.ped",0,1,"ped7.lop")

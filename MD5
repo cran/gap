@@ -1,5 +1,5 @@
-c10fa263f5c776a37d39d48f8a450b1e *ChangeLog
-66a3884bf0ce0cfa2d47e6bad09b12a7 *DESCRIPTION
+5b274388c0fc185dff03d9b2d7525823 *ChangeLog
+4e581de691aabdb6e222b7d63206e02f *DESCRIPTION
 32d01eb3eb2c499aa70489c3f9ce0faa *NAMESPACE
 673ea57dcaf6e14881123554d63e86be *R/2ld.R
 d21eda46b245d57b955a9622221e8dca *R/AE3.R
@@ -90,11 +90,11 @@ c0decabe69400c89481566496a58c2e3 *inst/doc/figures/ESplot.png
 ce1d41fad27f3a12021792f702461be1 *inst/doc/figures/asplot.png
 7d6d54051b9e1d70b29f4a3c0b5c6c49 *inst/doc/figures/lukas.png
 f65c525483a7ae492a8017216a83db48 *inst/doc/figures/mhtplot.png
-36e2db0e317a132759ac95190caa9647 *inst/doc/figures/qqunif.png
+35cfae32331db8147ed2e6b3b11130fd *inst/doc/figures/qqunif.png
 32caa7e7ed20d6a3641de27509cfcae1 *inst/doc/gap.Rnw
 42c17627be987d505e7c8e0e381ccdca *inst/doc/gap.bib
 0b09c8c3f650854f6b22b9c6ae3d63c2 *inst/doc/gap.enl
-cce7a889059c94b967d830898d39a69c *inst/doc/gap.pdf
+ec5d05305bdc79e1a69389074d6c3b8b *inst/doc/gap.pdf
 0904051ca40cef0ce1224747a001041c *inst/doc/haplo.stats/PD.R
 9faef0f7eed1cd82742c35582615db49 *inst/doc/jss07.pdf
 44406fd9f3e3c0bf6ed4af3b865beca8 *inst/doc/klem/SH2B1.R
@@ -132,7 +132,7 @@ c66efe207ffca722165fcae3c75af963 *man/CDKN.Rd
 0f973fa3c6de9cf6bee5cdce43cbc0de *man/ESplot.Rd
 dbb3b5798e32b917f9dcb745f8f012fa *man/FPRP.Rd
 84ff7980802a4024eebbd25c8880fb87 *man/LD22.Rd
-ec8572050fb68dc19dcfb33cfa03c016 *man/LDkl.Rd
+33b0d7a6245f683861b3672c3d848601 *man/LDkl.Rd
 764e133b3d08b86fcdfeb15cea3cce02 *man/PD.Rd
 381b8534f13c43313ef7cc1e080970dd *man/SNP.Rd
 ac2af4a0eb0d4b825413a5f5bfcc3f4d *man/ab.Rd
@@ -144,7 +144,7 @@ b64ca997fb02e8471b15d7c58a6d9231 *man/bt.Rd
 c300e8ebfd7c489dd0982c400ddbe252 *man/ccsize.Rd
 af12e56cf9966f5227b613edbd2adfa8 *man/cf.Rd
 ea78a82ed6e08feb99bb957004ddd212 *man/chow.test.Rd
-0b6ade61e2ce181a0c1770a7b123d57b *man/comp.score.Rd
+49e5bd542dd6d8dceb38f420fc2c3716 *man/comp.score.Rd
 b3731004f928a64cea0d6e4f72a46b23 *man/crohn.Rd
 fa0a6ec7466f866984ffd2b8dd78fcef *man/fa.Rd
 efd86cfcb2c083bf9ea024ecd6dc731d *man/fbsize.Rd
@@ -155,7 +155,7 @@ efd86cfcb2c083bf9ea024ecd6dc731d *man/fbsize.Rd
 770cb18876c3a7f373b00b13100cda43 *man/gcontrol.Rd
 3a7917bfb1362fb9b97a0a79ed6aa885 *man/gcontrol2.Rd
 50236d958320e9fe30e650ed28c62e7f *man/gcp.Rd
-5bb644d19d8b04de3d2e317ec723af52 *man/genecounting.Rd
+0ebe286d2e24357c4aadd9eb7ef8bc01 *man/genecounting.Rd
 c8b00ada02c478c0dee6a48d3c06dfed *man/gif.Rd
 a8245804d13ebce189ebd6f90695158b *man/h2.Rd
 272b695f6e90cf3df7117569cc0df48a *man/hap.Rd
@@ -168,10 +168,10 @@ a8245804d13ebce189ebd6f90695158b *man/h2.Rd
 7734329efdc7dd4b1d998babd45b2d18 *man/hwe.cc.Rd
 fb9793148e21875d7e794afb34782d04 *man/hwe.hardy.Rd
 7185557fe2cbb493f8c0f7d7eec38d1a *man/kin.morgan.Rd
-b5e921d8d6cc14093c334d6a1bd4a399 *man/klem.Rd
-0c818cd64ca23a99940440b4a0aba9f4 *man/l51.Rd
+bf32863b72aac0462cd33260c8b3aa26 *man/klem.Rd
+80f4546f904bec009d43e4228fbfd9b2 *man/l51.Rd
 023ff843b919e7034ed5ed4b343ec738 *man/lukas.Rd
-4528a8ed3b9189e3af259a76ab3a96f9 *man/makeped.Rd
+f3f7d81a6d93d4430b65ae15565d603b *man/makeped.Rd
 98331005b714b77aadb6f3206c83c905 *man/mao.Rd
 57f5c2d742183820d7c91c5697e72cbb *man/masize.Rd
 0643095ad0dd2cffd1d1e1596db47185 *man/metap.Rd
@@ -179,7 +179,7 @@ de53483641353be417e80d35778259f5 *man/metareg.Rd
 b1340a6d90a7b364650d38f7f701cb52 *man/mfblong.Rd
 726695a059ec76fd97e2d134c562931c *man/mhtdata.Rd
 834206ba6eace3972270ee06a1c8c290 *man/mhtplot.Rd
-5e4f3d09c338708d212df63b48a2138d *man/mhtplot2.Rd
+e3797a9191858e43411a1e7c73f0b84b *man/mhtplot2.Rd
 f9fe528f10ead61f8479570d5590ba79 *man/mia.Rd
 17c4e5d7b40c84935a91350cbbadbd80 *man/mtdt.Rd
 c185e250df9fe1883f5753c3f9026c44 *man/mtdt2.Rd
@@ -188,7 +188,7 @@ ca2e4d579cabcabeb484cd3f60bde48d *man/mvmeta.Rd
 72802dddb4c17e9d8f3f9a3055b3286f *man/nep499.Rd
 dcd5992c43a3b90bab848e0f11a37b0b *man/pbsize.Rd
 5e12f54354bccd0f95947a8461a0ebe9 *man/pbsize2.Rd
-bb00ba0b1ea39e177ffe149d0af4e723 *man/pedtodot.Rd
+7bba8ef4e80173bcbae8d27bf1b9aa1d *man/pedtodot.Rd
 49cd31281ce672ab9338e29d57776da7 *man/pfc.Rd
 9e93920b35509c56b512f4b3f78ade17 *man/pfc.sim.Rd
 f34b3b3a310080d38b4b3d6f9b8bf000 *man/pgc.Rd

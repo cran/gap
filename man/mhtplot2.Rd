@@ -56,8 +56,8 @@ mdata <- within(hr1420,{
   colour[c2] <- 73
   colour[c3] <- 552
 })
+mdata <- mdata[,c("CHR","POS","P","gene","colour")]
 ops <- mht.control(colors=rep(c("lightgray","gray"),11),yline=1.5,xline=2,srt=0)
-hcolor <- with(mdata,colour[!is.na(colour)])
 hops <- hmht.control(data=subset(mdata,!is.na(gene)))
 v <- "Verdana"
 ifelse(Sys.info()['sysname']=="Windows", windowsFonts(ffamily=windowsFont(v)), ffamily <- v)

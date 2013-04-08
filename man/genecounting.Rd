@@ -83,7 +83,7 @@ aldh2.gc$l1
 # Chromosome X data
 # assuming allelic data have been extracted in columns 3-13
 # and column 3 is sex
-filespec <- file.path(.path.package("gap"),"tests/mao.dat")
+filespec <- system.file("tests/mao.dat")
 mao2 <- read.table(filespec)
 dat <- mao2[,3:13]
 loci <- c(12,9,6,5,3)

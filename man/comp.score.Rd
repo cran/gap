@@ -61,7 +61,7 @@ selected pedigrees. Biometrics 61:465-473
 # possible to automatically call GENEHUNTER using R function "system".
 
 cwd <- getwd()
-cs.dir <- file.path(.path.package("gap"),"doc","comp.score")
+cs.dir <- file.path(path.package("gap"),"doc/comp.score")
 setwd(cs.dir)
 dir()
 # system("gh < gh.inp")

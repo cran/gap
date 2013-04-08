@@ -1,5 +1,10 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1-9
+08-04-2013	Replace .file.path(.package.path) with system.file
+27-02-2013	Add SOLAR code for l51.Rd
+		Reorder columns in mdata as in mhtplot2.Rd so that gene annotations are produced
+
 Version 1.1-8
 26-02-2013	Remove attach/detach in gc.em.R filter through --as-cran with installation of qpdf
 

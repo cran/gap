@@ -1,6 +1,6 @@
 Package: gap
-Version: 1.1-8
-Date: 2013-2-26
+Version: 1.1-9
+Date: 2013-4-8
 Title: Genetic analysis package
 Author: Jing Hua Zhao and colleagues with inputs from Kurt Hornik and
         Brian Ripley
@@ -21,6 +21,6 @@ Description: It is designed as an integrated package for genetic data
 License: GPL (>= 2)
 URL: http://www.mrc-epid.cam.ac.uk/~jinghua.zhao
 Repository: CRAN
-Date/Publication: 2013-02-26 16:37:50
-Packaged: 2013-02-26 13:30:01 UTC; jhz22
+Date/Publication: 2013-04-08 12:31:16
+Packaged: 2013-04-08 09:43:46 UTC; jhz22
 NeedsCompilation: yes

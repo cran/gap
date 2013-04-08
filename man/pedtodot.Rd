@@ -173,7 +173,7 @@ file.show("gaw14.dot")
 pedtodot(ped,sink=FALSE,page="B5",url="http://www.mrc-epid.cam.ac.uk/~jinghua.zhao/r-progs.htm")
 
 # An example from Richard Mott and in the demo
-filespec <- file.path(.path.package("gap"),"tests/ped.1.3.pre")
+filespec <- system.file("tests/ped.1.3.pre")
 pre <- read.table(filespec,as.is=TRUE)
 pre
 pedtodot(pre,dir="forward")

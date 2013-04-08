@@ -116,6 +116,24 @@ write(t(k2l),file="51.grm",4,sep="\t")
 # gcta64 --reml --grm 51 --pheno 51.txt --out 51_qt
 # gcta64 --reml --grm 51 --pheno 51.txt --mpheno 2 --prevalence 0.25 --out 51_bt_25
 # gcta64 --reml --grm 51 --pheno 51.txt --mpheno 2 --out 51_bt
+
+# SOLAR
+
+solar_ped <- ped51[,c("id","fid","mid","sex")]
+write.table(solar_ped,file="51.ped",col.names=c("id","fa","mo","sex"),
+          quote=FALSE, row.names=FALSE,sep=",",na="")
+solar_pheno <- ped51[,c("id","qt","bt")]
+write.table(solar_pheno,file="51.phen",col.names=c("id","qt","bt"),
+          quote=FALSE, row.names=FALSE,sep=",",na="")
+
+# load pedigree 51.ped
+# load phenotypes 51.phen
+# model new
+# trait qt
+# polygenic -screen
+# trait qt
+# covariate sex
+# polygenic -screen -fix sex
 }
 }
 \keyword{datasets}
