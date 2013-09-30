@@ -31,6 +31,8 @@
 \alias{getb1star}
 \alias{getPTE}
 \alias{grec2g}
+\alias{h2GE}
+\alias{h2l}
 \alias{hap.control}
 \alias{hap.score.glm}
 \alias{hap.score.podds}
@@ -47,11 +49,13 @@
 \alias{plem2m}
 \alias{revhap}
 \alias{revhap.i}
+\alias{ReadGRMBin}
 \alias{se.exp}
 \alias{se.invlogit}
 \alias{solve_skol}
 \alias{toETDT}
 \alias{ungcode}
+\alias{VR}
 \alias{x2}
 \alias{z}
 \title{Internal functions for gap}
@@ -59,8 +63,12 @@
 a2g(a1,a2)
 g2a(g)
 g2a.c(g)
+ReadGRMBin(prefix, AllN=FALSE, size=4)
+h2GE(V,VCOV)
+h2l(K=0.05,P=0.5,h2,se)
 KCC(model,GRR,p1,K)
 revhap(loci,hapid)
+VR(v1,vv1,v2,vv2,c12)
 }
 \description{
 These are internal functions.
@@ -85,6 +93,12 @@ gc.control() is used by gc.em().
 gcode is as a2g.
 
 grec2g is undocumented.
+
+ReadGRMBin is a function to read GCTA grm.bin file, modified from GCTA documentation
+
+h2GE is a utility function for heritability involving gene-environment interaction
+
+h2l is a utility function for converting observed heritability to its counterpart under liability threshold model
 
 hap.control() is used by hap.em().
 
@@ -113,6 +127,8 @@ solve.skol is a function used by tscc.
 toETDT a function used to experiment with ETDT.
 
 ungcode recovers alleles from genotype(s).
+
+VR is a utility function for calculating variance of a ratio
 
 x2 is a simple chi-squared test of two proportions.
 

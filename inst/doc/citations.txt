@@ -12,7 +12,7 @@ Hettinger JA
 The role of dopamine-related genes in autism spectrum disorders: evidence for specific genes and risk for ASD in families with affected males
 https://qspace.library.queensu.ca/bitstream/1974/1725/1/Hettinger_Joseph_A_200903_PhD.pdf, 2009
 
-J Varadéa, JR Lamas, M Fernández-Arqueroa, JA Jover, E G. de la Conchaa, A Martíneza, B Fernández-Gutierrez, E Urcelay
+J Varad?, JR Lamas, M Fern?dez-Arqueroa, JA Jover, E G. de la Conchaa, A Mart?eza, B Fern?dez-Gutierrez, E Urcelay
 No role of NOS2A susceptibility polymorphisms in rheumatoid arthritis
 Nitric Oxide, 2009
 
@@ -88,7 +88,7 @@ Kejin Zhang, Jianjun Gao, Caiyan An, Xiaocai Gao, Zijian Zheng, Ruilin Li, Shaop
 An association study between cathechol-O-methyltransferase gene and mental retardation in the Chinese Han population
 Neuroscience Letters, Volume 419, Issue 1, 23 May 2007, Pages 83-87
 
-María Florencia Gosso. Common genetic variants underlying cognitive ability. PhD Thesis, Vrije Universiteit 2007
+Mar? Florencia Gosso. Common genetic variants underlying cognitive ability. PhD Thesis, Vrije Universiteit 2007
 
 S. Selch, A. Strobel, J. Haderlein, J. Meyer, C. Jacob, A. Schmitt, K. Lesch, A. Reif
 MLC1 Polymorphisms Are Specifically Associated with Periodic Catatonia, a Subgroup of Chronic Schizophrenia.
@@ -106,7 +106,7 @@ Guindalini, Camila; Collier, David; Laranjeira, Ronaldo; Barrett, Tom B.; Kelsoe
 Association analysis of GRK3 gene promoter variants in cocaine abuse.
 Psychiatric Genetics. 17(4):239-242, August 2007.
 
-Xavier Muñoz, Víctor Obach, Begoña Hurtado, Pablo García de Frutos, Ángel Chamorro, Núria Sala
+Xavier Mu?z, V?tor Obach, Bego? Hurtado, Pablo Garc? de Frutos, ?ngel Chamorro, N?ia Sala
 Association of specific haplotypes of GAS6 gene with stroke
 Thromb Haemost 2007; 98
 
@@ -130,7 +130,7 @@ LIU Li-Ying, JIN Chun-Lian, CAO Dong-Hua, ZHAO Ning, LIN Chang-Kun, SUN Kai-Lai
 Analysis of association between COL9A1 gene and idiopathic con-genital talipes equinovarus
 HEREDITAS (Beijing) 2007 29(4): 427.-432
 
-Julie Robitaille, Alain Houde, Simone Lemieux, Louis Pérusse,  Daniel Gaudet,  Marie-Claude Vohl
+Julie Robitaille, Alain Houde, Simone Lemieux, Louis P?usse,  Daniel Gaudet,  Marie-Claude Vohl
 Variants within the muscle and liver isoforms of the carnitine palmitoyltransferase I (CPT1) gene interact with fat intake to modulate indices of obesity in French-Canadians
 J Mol Med (2007) 85:129-137
 
@@ -138,7 +138,7 @@ Mohammad R. Abdollahi, Rohan M. Lewis, Tom R. Gaunt, Debbie V.E. Cumming, Santia
 Quantitated Transcript Haplotypes (QTH) of AGTR1, Reduced Abundance of mRNA Haplotypes Containing 1166C (rs5186:A4C), and Relevance to Metabolic Syndrome Traits
 Hum Mutation 28(4):365-373
 
-AC Choquette, L Bouchard, A Houde, C Bouchard, L Pérusse, M-C Vohl (2007) 
+AC Choquette, L Bouchard, A Houde, C Bouchard, L P?usse, M-C Vohl (2007) 
 Associations between USF1 gene variants and cardiovascular risk factors in the Quebec Family Study 
 Clinical Genetics 71 (3), 245.253. 
 
@@ -162,7 +162,7 @@ B. M. H. Lai, C. L. Cheung,  K. D. K. Luk, A. W. C. Kung
 Estrogen receptor alpha CA dinucleotide repeat polymorphism is associated with rate of bone loss in perimenopausal women and bone mineral density and risk of osteoporotic fractures in postmenopausal women
 Osteoporos Int 2007
 
-M. Carmen Martín, Alfonso Martinez, J. Luis Mendoza, Carlos Taxonera, Manuel Díaz-Rubio, Miguel Fernández-Arquero, Emilio G. de la Concha, Elena Urcelay
+M. Carmen Mart?, Alfonso Martinez, J. Luis Mendoza, Carlos Taxonera, Manuel D?z-Rubio, Miguel Fern?dez-Arquero, Emilio G. de la Concha, Elena Urcelay
 Influence of the inducible nitric oxide synthase gene (NOS2A) on inflammatory bowel disease susceptibility
 Immunogenetics (2007) 59:833-837
 
@@ -194,7 +194,7 @@ Jiachun Lu, Qingyi Wei, Melissa L. Bondy, Donghui Li, Abenaa Brewster, Sanjay Sh
 Polymorphisms and haplotypes of the NBS1 gene are associated with risk of sporadic breast cancer in non-Hispanic white women 55 years
 Carcinogenesis.2006; 27: 2209-2216
 
-Andreas Reif, Alexander Strobel, Christian P. Jacob, Sabine Herterich, Christine M. Freitag, Theresia Töpner, Rainald Mössner, Sabrina Fritzen, Angelika Schmitt,  Klaus-Peter Lesch 
+Andreas Reif, Alexander Strobel, Christian P. Jacob, Sabine Herterich, Christine M. Freitag, Theresia T?ner, Rainald M?sner, Sabrina Fritzen, Angelika Schmitt,  Klaus-Peter Lesch 
 A NOS-III haplotype that includes functional polymorphisms is associated with bipolar disorder
 The International Journal of Neuropsychopharmacology (2006), 9: 13-20 
 
@@ -266,7 +266,7 @@ DA Chistiakov, A Chernisheva, KV Savost'anov, RI Turakulov, TL Kuraeva, II Dedov
 The TAF5L gene on chromosome 1q42 is associated with type 1 diabetes in Russian affected patients.
 Autoimmunity 38:283-293, 2006
 
-J Strauss, C L Barr, C J George, B Devlin, Á Vetró, E Kiss, I Baji, N King, S Shaikh, M Lanktree, M Kovacs, J L Kennedy, the International Consortium for Childhood-Onset Mood Disorders
+J Strauss, C L Barr, C J George, B Devlin, ? Vetr? E Kiss, I Baji, N King, S Shaikh, M Lanktree, M Kovacs, J L Kennedy, the International Consortium for Childhood-Onset Mood Disorders
 Brain-derived neurotrophic factor variants are associated with childhood-onset mood disorder: confirmation in a Hungarian sample
 Molecular Psychiatry (2005) 10, 861-867
 
@@ -279,7 +279,7 @@ Xinmin Liu, Wei Qin, Guang He, Yifeng Yang, Qi Chen, Jian Zhou, Dawei Li, Niufan
 A family-based association study of the MOG gene with schizophrenia in the Chinese population 
 Schizophrenia Research  Volume 73, Issues 2-3, 1 March 2005, Pages 275-280 
 
-D. Clark, M. Arranz, I. Mata, J. Lopéz-Ilundain, F. Pérez-Nievas, R. Kerwin
+D. Clark, M. Arranz, I. Mata, J. Lop?-Ilundain, F. P?ez-Nievas, R. Kerwin
 Polymorphisms in the Promoter Region of the Alpha1A-Adrenoceptor Gene Are Associated with Schizophrenia/Schizoaffective Disorder in a Spanish Isolate Population. 
 Biological Psychiatry, Volume 58, Issue 6, Pages 435-439, 2005
 
@@ -303,7 +303,7 @@ L Tajouri, M Ovcaric, R Curtain, R Lea, M Johnson, P Csurhes, MP Pender, LR Grif
 ALLELIC VARIATION IN THE VITAMIN D RECEPTOR GENE IS ASSOCIATED WITH MULTIPLE SCLEROSIS IN AN AUSTRALIAN POPULATION
 http://www.direct-ms.org/pdf/VitDMS/TajVitDgenesMS.pdf
 
-M Pirskanen, M Hiltunen, A Mannermaa, S Helisalmi, M Lehtovirta, T Hänninen, H Soininen
+M Pirskanen, M Hiltunen, A Mannermaa, S Helisalmi, M Lehtovirta, T H?ninen, H Soininen
 Estrogen receptor beta gene variants are associated with increased risk of Alzheimer's disease in women
 European Journal of Human Genetics (2005) 13, 1000-1006
 
@@ -319,8 +319,8 @@ Zhu, H; Wang, X; Dong, Y; Treiber, FA; Snieder, H
 Influence of the eNOS gene on development of blood pressure and left ventricular mass: Longitudinal findings in multiethnic youth. 
 Pharmacogenetics & Genomics. 15(9):669-675, September 2005.
 
-Y Bosse, L Bouchard, J-P Despre´s, C Bouchard, L Pe´russe, M-C Vohl
-Haplotypes in the Phospholipid Transfer Protein Gene are Associated with Obesity-Related Phenotypes: The Québec Family Study
+Y Bosse, L Bouchard, J-P Despre?s, C Bouchard, L Pe?russe, M-C Vohl
+Haplotypes in the Phospholipid Transfer Protein Gene are Associated with Obesity-Related Phenotypes: The Qu?ec Family Study
 International Journal of Obesity 29, 1338-1345, 2005
 
 Z Zhang, Y Xu, J Zhou, X Wang, L Wang, X Hu, J Guo, Q Wei, H Shen
@@ -391,7 +391,7 @@ X Xu, J Knight, K Brookes, J Mill, P Sham, I Craig, E Taylor, P Asherson
 DNA pooling analysis of 21 norepinephrine transporter gene SNPs with attention deficit hyperactivity disorder: No evidence for association 
 Am J Med Genet B: Neuropsychiatric Genet 134B: 115-118, 2005
 
-S. Vepsäläinen , E. Castren, S. Helisalmi, S. Iivonen, A. Mannermaa, M. Lehtovirta, T. Hänninen, H. Soininen, M. Hiltunen
+S. Veps??nen , E. Castren, S. Helisalmi, S. Iivonen, A. Mannermaa, M. Lehtovirta, T. H?ninen, H. Soininen, M. Hiltunen
 Genetic analysis of BDNF and TrkB gene polymorphisms in Alzheimers disease
 J Neurol 252: 423-428, 2005
 
@@ -407,7 +407,7 @@ N Bhaduri, S Sinha, A Chattopadhyay, PK Gangopadhyay, M Singh, Kn Mukhopadhyay
 Analysis of Polymorphisms in the Dopamine Beta Hydroxylase Gene: Association with Attention Deficit Hyperactivity Disorder in Indian Children 
 Indian Pediatrics 42:123-129, 2005
 
-M-T Berthier, A Houde, M Côté, A-M Paradis, P Mauriège, J Bergeron, D Gaudet, J-P Després, M-C Vohl
+M-T Berthier, A Houde, M C?? A-M Paradis, P Mauri?e, J Bergeron, D Gaudet, J-P Despr?, M-C Vohl
 Impact of adiponectin gene polymorphisms on plasma lipoprotein and adiponectin concentrations of viscerally obese men 
 Journal of Lipid Research, 46:237-244, 2005
 
@@ -419,7 +419,7 @@ D. Ge, J. Huang, J. He, B. Li, X. Duan, R. Chen, D. Gu
 2-Adrenergic Receptor Gene Variations Associated with Stage-2 Hypertension in Northern Han Chinese 
 Ann Hum Genet 69:36-44, 2005 
 
-UH Frey, H Alakus, J Wohlschlaeger, KJ Schmitz, G Winde, HG van Calker, K-H Jöckel, W Siffert, KW Schmid
+UH Frey, H Alakus, J Wohlschlaeger, KJ Schmitz, G Winde, HG van Calker, K-H J?kel, W Siffert, KW Schmid
 GNAS1 T393C Polymorphism and Survival in Patients with Sporadic Colorectal Cancer 
 Clinical Cancer Research Vol. 11, 5071-5077, July 15, 2005
 
@@ -435,8 +435,8 @@ W Yan, S Chen, J Huang, Y Shen, B Qiang, D Gu
 Polymorphisms in PLIN and Hypertension Combined with Obesity and Lipid Profiles in Han Chinese 
 Obesity Research 12:1733-1737, 2004
 
-A. Julià, D. Gallardo, F. Vidal, C. Tomàs, P. Barcelóy, y S. Marsal
-AUSENCIA DE ASOCIACIÓN ENTRE EL LOCUS DE LA HORMONA LIBERADORA DE CORTICOTROPINA Y LA ARTRITIS REUMATOIDE
+A. Juli? D. Gallardo, F. Vidal, C. Tom?, P. Barcel?, y S. Marsal
+AUSENCIA DE ASOCIACI? ENTRE EL LOCUS DE LA HORMONA LIBERADORA DE CORTICOTROPINA Y LA ARTRITIS REUMATOIDE
 Rev Esp Reumatol 31(5):228-358, 2004 (http://www.ser.es/ArchivosDESCARGABLES/poster1_2004.pdf)
 
 Gu D, Ge D, He J, Li B, Chen J, Liu D, Chen J, Chen R
@@ -461,7 +461,7 @@ Du, Lisheng CA; Bakish, David; Ravindran, Arun; Hrdina, Pavel D
 MAO-A gene polymorphisms are associated with major depression and sleep disturbance in males. 
 Neuroreport 15(13):2097-2101, 2004.
 
-JH Adams, KG Wigg, N King, I Burcescu , Á Vetró, E Kiss, I Baji, CJ George, JL Kennedy, M Kovacs, CL Barr, The International Consortium for Childhood-Onset Mood Disorders 
+JH Adams, KG Wigg, N King, I Burcescu , ? Vetr? E Kiss, I Baji, CJ George, JL Kennedy, M Kovacs, CL Barr, The International Consortium for Childhood-Onset Mood Disorders 
 Association study of neurotrophic tyrosine kinase receptor type 2 (NTRK2) and childhood-onset mood disorders 
 Am J Med Genet Part B: Neuropsychiatr Genet 132B,:90-95, 2004
 
@@ -477,19 +477,19 @@ L Bian, JD Yang, TW Guo, Y Sun, SW Duan, WY Chen, YX Pan, GY Feng, L He
 Insulin-degrading enzyme and Alzheimer disease: A genetic association study in the Han Chinese 
 NEUROLOGY 63:241-245, 2004
 
-F Fumeron, R Aubert, A Siddiq, D Betoulle, F Péan, S Hadjadj, J Tichet, E Wilpart, M-C Chesnier, B Balkau, P Froguel, M Marre1 for the Epidemiologic Data on the Insulin Resistance Syndrome (DESIR) Study Group
+F Fumeron, R Aubert, A Siddiq, D Betoulle, F P?n, S Hadjadj, J Tichet, E Wilpart, M-C Chesnier, B Balkau, P Froguel, M Marre1 for the Epidemiologic Data on the Insulin Resistance Syndrome (DESIR) Study Group
 Adiponectin Gene Polymorphisms and Adiponectin Levels Are Independently Associated With the Development of Hyperglycemia During a 3-Year Period: The Epidemiologic Data on the Insulin Resistance Syndrome Prospective Study 
 Diabetes 53:1150-1157, 2004
 
-S Helisalmi, M Hiltunen, S Vepsäläinen, S Iivonen, A Mannermaa, M Lehtovirta, A M Koivisto, I Alafuzoff, H Soininen
-Polymorphisms in neprilysin gene affect the risk of Alzheimer’s disease in Finnish patients
+S Helisalmi, M Hiltunen, S Veps??nen, S Iivonen, A Mannermaa, M Lehtovirta, A M Koivisto, I Alafuzoff, H Soininen
+Polymorphisms in neprilysin gene affect the risk of Alzheimer?s disease in Finnish patients
 J Neurol Neurosurg Psychiatry 75: 1746-1748, 2004
 
 RA Allotey, V Mohan, MF McDermott, R Deepa, G Premalatha, Z Hassan, PG Cassell, BV North, M Vaxillaire, CA Mein, DC Swan, E O'Grady, A Ramachandran, C Snehalatha, PJ Sinnot, SK Hemmatpour, P Froguel, GA Hitman
 The EIF2AK3 gene region and type I diabetes in subjects from South India
 Genes and Immunity 1-5, 2004
 
-HF Gu, A Abulaiti, C-G Östenson, K Humphreys, C Wahlestedt, AJ Brookes, Suad Efendic 
+HF Gu, A Abulaiti, C-G ?tenson, K Humphreys, C Wahlestedt, AJ Brookes, Suad Efendic 
 Single Nucleotide Polymorphisms in the Proximal Promoter Region of the Adiponectin (APM1) Gene Are Associated With Type 2 Diabetes in Swedish Caucasians 
 Diabetes 53:S31-S35, 2004
 
@@ -529,7 +529,7 @@ T Li, C Chen, X Hu, D Ball, S Lin, W Chen, PC Sham, E Loh, RM Murray, DA Collier
 Association analysis of the DRD4 and COMT genes in methamphetamine abuse
 American Journal of Medical Genetics Part B: Neuropsychiatric Genetics 129B:120-124, 2004
 
-S Iivonen, E Corder, M Lehtovirta, S Helisalmi, A Mannermaa, S Vepsäläinen, T Hänninen, H Soininen, M Hiltunen
+S Iivonen, E Corder, M Lehtovirta, S Helisalmi, A Mannermaa, S Veps??nen, T H?ninen, H Soininen, M Hiltunen
 Polymorphisms in the CYP19 gene confer increased risk for Alzheimer disease
 Neurology 62:1170-1176, 2004
 
@@ -545,11 +545,11 @@ J Mill, S Curran, S Richards, E Taylor, P Asherson
 Polymorphisms in the Dopamine D5 Receptor (DRD5) Gene and ADHD
 Am J Med Genet Part B (Neuropsychiatric Genet) 125B:38-42, 2004
 
-A Hassan, K Gormley, M O’Sullivan, J Knight, P Sham, P Vallance, J Bamford, H Markus 
+A Hassan, K Gormley, M O?Sullivan, J Knight, P Sham, P Vallance, J Bamford, H Markus 
 Endothelial Nitric Oxide Gene Haplotypes and Risk of Cerebral Small-Vessel Disease
 Stroke. 35:654-659, 2004
 
-SM Fullerton, AV Buchanan, VA Sonpar, SL Taylor, JD Smith, CS Carlson, V Salomaa, JH Stengård, E Boerwinkle, AG Clark, DA Nickerson, KM Weiss
+SM Fullerton, AV Buchanan, VA Sonpar, SL Taylor, JD Smith, CS Carlson, V Salomaa, JH Steng?d, E Boerwinkle, AG Clark, DA Nickerson, KM Weiss
 The effects of scale: variation in the APOA1/C3/A4/A5 gene cluster
 Hum Genet 115: 36-56, 2004
 
@@ -573,7 +573,7 @@ Lerman C, Wileyto EP, Patterson F, Rukstalis M, Audrain-McGovern J, Restine S, S
 The functional mu opioid receptor (OPRM1) Asn40Asp variant predicts short-term response to nicotine replacement therapy in a clinical trial
 The Pharmacogenomics J 4(3): 184-192 2004
 
-Hague S, Peuralinna T, Eerola J, Hellstr”m O, Tienari PJ, Singleton AB
+Hague S, Peuralinna T, Eerola J, Hellstr?m O, Tienari PJ, Singleton AB
 Confirmation of the protective effect of iNOS in an independent cohort of Parkinson disease 
 NEUROLOGY 62:635-636 2004
 
@@ -581,11 +581,11 @@ H Wang, WS Chu, T Lu, SJ Hasstedt, PA Kern, SC Elbein
 Uncoupling protein-2 polymorphisms in type 2 diabetes, obesity, and insulin secretion
 Am J Physiol Endocrinol Metab 286: E1-E7, 2004
 
-M-T Berthier, A Houde, A-M Paradis, P Couture, D Gaudet, J-P Després, M-C Voh
+M-T Berthier, A Houde, A-M Paradis, P Couture, D Gaudet, J-P Despr?, M-C Voh
 Molecular screening of the microsomal triglyceride transfer protein: association between polymorphisms and both abdominal obesity and plasma apolipoprotein B concentration
 Journal of Human Genetics 49(12):684-690, 2004  
 
-G Sjøholt, RP Ebstein, RT Lie, JØ Berle, J Mallet, JF Deleuze, DF Levinson, C Laurent, M Mujahed, I Bannoura, I Murad, A Molven, VM Steen
+G Sj?olt, RP Ebstein, RT Lie, J?Berle, J Mallet, JF Deleuze, DF Levinson, C Laurent, M Mujahed, I Bannoura, I Murad, A Molven, VM Steen
 Examination of IMPA1 and IMPA2 genes in manic-depressive patients: association between IMPA2 promoter polymorphisms and bipolar disorder 
 Mol Psychiatry 9(6):621-629, 2004
 
@@ -601,7 +601,7 @@ T. Tarumi, DV Kravtsov, JH Moore, SM Williams, D Gailani
 Common single nucleotide polymorphisms in the promoter region of the human factor XI gene 
 Journal of Thrombosis and Haemostasis 1:1854-1855, 2003
 
-C Garenc, L Perusse, YC Chagnon,† T Rankinen, J Gagnon, IB Borecki, AS Leon, JS Skinner, JH Wilmore, DC Rao, C Bouchard
+C Garenc, L Perusse, YC Chagnon,? T Rankinen, J Gagnon, IB Borecki, AS Leon, JS Skinner, JH Wilmore, DC Rao, C Bouchard
 2-adrenergic receptor gene variants on adiposity: the HERITAGE family study
 Obesity Research 11:612-618, 2003
 
@@ -645,7 +645,7 @@ Tang JX, Zhou J, Fan JB, et al.
 Family-based association study of DTNBP1 in 6p22.3 and schizophrenia
 MOL PSYCHIATR 8 (8): 717-718 2003
 
-J Eerola, D Hernandez, J Launes, O Hellström, S Hague, C Gulick, J Johnson, T Peuralinna, J Hardy, PJ Tienari, AB Singleton
+J Eerola, D Hernandez, J Launes, O Hellstr?, S Hague, C Gulick, J Johnson, T Peuralinna, J Hardy, PJ Tienari, AB Singleton
 Assessment of a DJ-1 (PARK7) polymorphism in Finnish PD
 Neurology 14:1000-1002, 2003
 
@@ -661,9 +661,9 @@ Donaldson IJ, Shefta J, Hill AVS, et al.
 Malaria is not responsible for the selection of TCR beta-subunit variable gene haplotypes in The Gambia
 IMMUNOGENETICS 53 (10-11): 894-899 FEB 2002 
 
-PL Roddam, S Rollinson, M O’Driscoll, PA Jeggo, A Jack, GJ Morgan
+PL Roddam, S Rollinson, M O?Driscoll, PA Jeggo, A Jack, GJ Morgan
 Genetic variants of NHEJ DNA ligase IV can affect the risk of developing multiple myeloma, a tumour characterised by aberrant class switch recombination
-J Med Genet 39:900–905, 2002
+J Med Genet 39:900?905, 2002
 
 A Strobel, KP Lesch, K Hohenberger, S Jatzke, HO Gutzeit, K Anacher, B Broche
 No association between dopamine D4 receptor gene exon III and -512C/T polymorphism and novelty seeking
@@ -712,8 +712,8 @@ Correlation between haplotype of apolipoprotein B gene and natural longevity per
 Sci China Ser C-Life Sci,  February 2007,  vol. 50,  no. 1,  80-87
 
 Aliki Karakesisoglou (2007)
-Vergleich von Alkoholabhängigen mit und ohne Vorgeschichte von Suizidversuchen anhand von klinischen und neurobiologischen Parametern
-zum Erwerb des Doktorgrades der Zahnheilkunde an der Medizinischen Fakultät der Ludwig-Maximilians-Universität zu München
+Vergleich von Alkoholabh?gigen mit und ohne Vorgeschichte von Suizidversuchen anhand von klinischen und neurobiologischen Parametern
+zum Erwerb des Doktorgrades der Zahnheilkunde an der Medizinischen Fakult? der Ludwig-Maximilians-Universit? zu M?chen
 http://edoc.ub.uni-muenchen.de/archive/00006640/01/Karakesisoglou_Aliki.pdf
 
 Yen-Li Lo, Jyh-Cherng Yu, Shou-Tung Chen, Giu-Cheng Hsu, Yi-Chien Mau, Show-Lin Yang, Pei-Ei Wu, Chen-Yang Shen
@@ -736,7 +736,7 @@ Rui Yu, Xian-Ning Zhang, Xiao-Xiao Huang, Shi-Ping Ding, Ji-Cheng Li
 Association analysis of COMT polymorphisms and schizophrenia in a Chinese Han population: A case-control study 
 American Journal of Medical Genetics Part B: Neuropsychiatric Genetics 144B:570 - 573, 2007
 
-Julie Robitaille, Alain Houde, Simone Lemieux, Louis Pérusse,  Daniel Gaudet,  Marie-Claude Vohl
+Julie Robitaille, Alain Houde, Simone Lemieux, Louis P?usse,  Daniel Gaudet,  Marie-Claude Vohl
 Variants within the muscle and liver isoforms of the carnitine palmitoyltransferase I (CPT1) gene interact with fat intake to modulate indices of obesity in French-Canadians
 J Mol Med (2007) 85:129.137
 
@@ -752,7 +752,7 @@ Yu-Ching Chou, Mei-Hsuan Wu, Jyh-Cherng Yu, Meei-Shyuan Lee, Tsan Yang, Hsiu-Lan
 Genetic polymorphisms of the methylenetetrahydrofolate reductase gene, plasma folate levels, and breast cancer susceptibility: A case-control study in Taiwan
 Carcinogenesis 27:2295-2300, 2006
 
-Juergen Loeffler, Michael Steffens, Eva-Maria Arlt, Mohammad-Reza Toliat, Markus Mezger, Anita Suk, Thomas F. Wienker, Holger Hebart, Peter Nürnberg, Michael Boeckh, Per Ljungman, Rudolf Trenschel, and Hermann Einsele
+Juergen Loeffler, Michael Steffens, Eva-Maria Arlt, Mohammad-Reza Toliat, Markus Mezger, Anita Suk, Thomas F. Wienker, Holger Hebart, Peter N?nberg, Michael Boeckh, Per Ljungman, Rudolf Trenschel, and Hermann Einsele
 Polymorphisms in the Genes Encoding Chemokine Receptor 5, Interleukin-10, and Monocyte Chemoattractant Protein 1 Contribute to Cytomegalovirus Reactivation and Disease after Allogeneic Stem Cell Transplantation 
 Journal of Clinical Microbiology, May 2006, p. 1847-1850, Vol. 44, No. 5
 
@@ -760,7 +760,7 @@ Agirbasli, Deniz; Agirbasli, Mehmet; Williams, Scott M.; Phillips, John A. III
 Interaction among 5,10 methylenetetrahydrofolate reductase, plasminogen activator inhibitor and endothelial nitric oxide synthase gene polymorphisms predicts the severity of coronary artery disease in Turkish patients. Pathophysiology and Natural History 
 Coronary Artery Disease. 17(5):413-417, August 2006.
 
-Juergen Loeffler, Michael Steffens, Eva-Maria Arlt, Mohammad-Reza Toliat, Markus Mezger, Anita Suk, Thomas F. Wienker, Holger Hebart, Peter Nürnberg, Michael Boeckh, Per Ljungman, Rudolf Trenschel, Hermann Einsele 
+Juergen Loeffler, Michael Steffens, Eva-Maria Arlt, Mohammad-Reza Toliat, Markus Mezger, Anita Suk, Thomas F. Wienker, Holger Hebart, Peter N?nberg, Michael Boeckh, Per Ljungman, Rudolf Trenschel, Hermann Einsele 
 Polymorphisms in the Genes Encoding Chemokine Receptor 5, Interleukin-10, and Monocyte Chemoattractant Protein 1 Contribute to Cytomegalovirus Reactivation and Disease after Allogeneic Stem Cell Transplantation
 Microbiologic and clinical journal 44, 2006
 
@@ -789,7 +789,7 @@ Positive association between POU1F1 and mental retardation in young females in t
 Human Molecular Genetics 2006 15(7):1237-1243
 
 Ann W Morgan, Jennifer H Barrett, Bridget Griffiths, Deepak Subramanian, Jim I Robinson, Viki H Keyte, Manir Ali, Elizabeth A Jones, Robert W Old, Frederique Ponchel, Arthur W Boylston, R Deva Situnayake, Alexander F Markham, Paul Emery, John D Isaacs
-Analysis of Fcã receptor haplotypes in rheumatoid arthritis: FCGR3A remains a major susceptibility gene at this locus, with an additional contribution from FCGR3B
+Analysis of Fc?receptor haplotypes in rheumatoid arthritis: FCGR3A remains a major susceptibility gene at this locus, with an additional contribution from FCGR3B
 Arthritis Research & Therapy 8:R5, 2006
 
 G.-T. Ho1, N. Soranzo, E.R. Nimmo, A. Tenesa, D.B. Goldstein, J. Satsangi 
@@ -814,16 +814,16 @@ Xinzhi Zhao, Ruqi Tang, Zeping Xiao, Yongyong Shi, Guoying Feng, Niufan Gu, Jian
 An investigation of the dihydropyrimidinase-like 2 (DPYSL2) gene in schizophrenia: genetic association study and expression analysis
 The International Journal of Neuropsychopharmacology 2005
 
-Y Bosse, L Bouchard, J-P Despre´s, C Bouchard, L Pe´russe, M-C Vohl
-Haplotypes in the Phospholipid Transfer Protein Gene are Associated with Obesity-Related Phenotypes: The Québec Family Study
+Y Bosse, L Bouchard, J-P Despre?s, C Bouchard, L Pe?russe, M-C Vohl
+Haplotypes in the Phospholipid Transfer Protein Gene are Associated with Obesity-Related Phenotypes: The Qu?ec Family Study
 International Journal of Obesity 29, 1338-1345, 2005
 
 S Mackie, JI Robinson, JH Barrett, CA Lawson, S Martin, L Haroon-Rashid, D Cooper, SJ Bowman, CT Pease, PG Conaghan, M Green, M Quinn, JD Isaacs, P Emery, AW Morgan
-Association of FCGR3A and FCGR3B haplotypes with rheumatoid arthritis and primary Sjögren's syndrome
+Association of FCGR3A and FCGR3B haplotypes with rheumatoid arthritis and primary Sj?ren's syndrome
 Arthritis Research & Therapy 2005, 7(Suppl 1):P121 
 
 No Association Between Schizophrenia and Polymorphisms in COMT in Two Large Samples
-HJ Williams, B Glaser, NM Williams, N Norton, S Zammit, S Macgregor, GK Kirov, MJ Owen, MC O’Donovan
+HJ Williams, B Glaser, NM Williams, N Norton, S Zammit, S Macgregor, GK Kirov, MJ Owen, MC O?Donovan
 Am J Psychiatry.2005; 162: 1736-1738.
 
 G Koller, RR Engel, UW Preuss, A Karakesisoglou, P Zill, B Bondy, M Soyka 
@@ -850,7 +850,7 @@ Nakatani K, Noma K, Nishoka J, Kasai Y, Morioka K, Katsuki A, Hori Y, Yano Y, Su
 Adiponectin gene variation associates with the increasing risk of type 2 diabetes in non-diabetic Japanese subjects.
 Int J Mol Med 15:173-177, 2005
 
-F Vasseur, N Helbecque, S Lobbens, V Vasseur-Delannoy, C Dina, K Clément, P Boutin, T Kadowaki, PE Scherer, P Froguel
+F Vasseur, N Helbecque, S Lobbens, V Vasseur-Delannoy, C Dina, K Cl?ent, P Boutin, T Kadowaki, PE Scherer, P Froguel
 Hypoadiponectinaemia and high risk of type 2 diabetes are associated with adiponectin-encoding (ACDC) gene promoter variants in morbid obesity: evidence for a role of ACDC in diabesity
 Diabetologia 48:892-899, 2005
 
@@ -883,7 +883,7 @@ Strong Evidence That KIAA0319 on Chromosome 6p Is a Susceptibility Gene for Deve
 Am. J. Hum. Genet., 76:581-591, 2005
 
 JA Karasneh, AH Hajeer, A Silman, J Worthington, WER Ollier, A Gul1 
-Polymorphisms in the endothelial nitric oxide synthase gene are associated with Behçet's disease 
+Polymorphisms in the endothelial nitric oxide synthase gene are associated with Beh?t's disease 
 Rheumatology 44(5):614-617, 2005
 
 W Wen, Q Cai, X-O Shu, J-R Cheng, F Parl, L Pierce, Y-T Gao, W Zheng
@@ -891,7 +891,7 @@ Cytochrome P450 1B1 and Catechol-O-Methyltransferase Genetic Polymorphisms and B
 Cancer Epidemiol Biomarkers Prev 14:329-335, 2005
 
 H K Chang, W C Jang, S B Park, S M Han, Y H Nam, S S Lee, J U Kim, H S Lee
-Association between interleukin 6 gene polymorphisms and Behçet’s disease in Korean people 
+Association between interleukin 6 gene polymorphisms and Beh?t?s disease in Korean people 
 Annals of the Rheumatic Diseases 64:339-340, 2005
 
 K. Maekawa, Y. Saito S. Ozawa, S. Adachi-Akahane, M. Kawamoto, K. Komamura, W. Shimizu, K. Ueno, S. Kamakura, N. Kamatani, M. Kitakaze, J. Sawada 
@@ -952,7 +952,7 @@ Haplotypic analyses of the aldosterone synthase gene CYP11B2 associated with sta
 Clin Genet 66:409-416, 2004
 
 AM Brown, D Gordon, H Lee, M Caudy, V Haroutunian, JP Blass
-Substantial Linkage Disequilibrium Across the Dihydrolipoyl Succinyltransferase Gene Region Without Alzheimer’s Disease Association
+Substantial Linkage Disequilibrium Across the Dihydrolipoyl Succinyltransferase Gene Region Without Alzheimer?s Disease Association
 Neurochemical Res 29:629-635, 2004
 
 W-S LO, C-F LAU S-K NG, K-L TONG, G-Y FENG, L HE, M HARAN, N UCHIMURA, Y ETOH, S-Y TSANG, H H XUE
@@ -963,8 +963,8 @@ Saeed M, Khan AN, Siddiqui S, Saboohi K, Ali SO, Frossard PM.
 Association of ACE gene haplotype with essential hypertension.
 J Hum Hypertens. 18(12):913-4, 2004
 
-Y Bossé. L Bouchard, J-P Després, C Bouchard, L Pérusse, M-C Vohl
-Haplotypes in the Phospholipid Transfer Protein Gene are Associated with Obesity-Related Phenotypes: The Québec Family Study
+Y Boss? L Bouchard, J-P Despr?, C Bouchard, L P?usse, M-C Vohl
+Haplotypes in the Phospholipid Transfer Protein Gene are Associated with Obesity-Related Phenotypes: The Qu?ec Family Study
 Genetic susceptibility to the metabolic syndrome, http://www.theses.ulaval.ca/2004/22151/22151.html
 
 M Carless.
@@ -972,7 +972,7 @@ Molecular analysis of non-melanoma skin cancer
 Chapter 2, PhD thesis, Griffith University, Queensland, 2004
 http://www4.gu.edu.au:8080/adt-root/uploads/approved/adt-QGU20041101.123114/public/
 
-M-T Berthier, A Houde, A-M Paradis, P Couture, D Gaudet, J-P Després, M-C Voh
+M-T Berthier, A Houde, A-M Paradis, P Couture, D Gaudet, J-P Despr?, M-C Voh
 Molecular screening of the microsomal triglyceride transfer protein: association between polymorphisms and both abdominal obesity and plasma apolipoprotein B concentration
 Journal of Human Genetics 49(12):684-690, 2004  
 
@@ -993,7 +993,7 @@ Identification of SNP haplotypes in CDKN2A
 Genet Epidemiol 27:266, 2004
 
 CM Onnie, SA Fisher, M Mirza, A Forbes, J Mansfield, J Sanderson, CM Lewis, CG Mathew
-FINE MAPPING OF THE 5Q31 RISK HAPLOTYPE IN CROHN’S DISEASE
+FINE MAPPING OF THE 5Q31 RISK HAPLOTYPE IN CROHN?S DISEASE
 http://gut.bmjjournals.com/cgi/content/full/53/suppl_3/a1
 GUT 53:141, 2004
 
@@ -1043,9 +1043,9 @@ R Donn, Z Alourfi, E Zeggini, R Lamb, F Jury, M Lunt, the British Paediatric Rhe
 A functional promoter haplotype of macrophage migration inhibitory factor is linked and associated with juvenile idiopathic arthritis 
 Arthritis and Rheumatism 50:1604-1610, 2004
 
-S Wedrén, L Lovmar, K Humphreys, C Magnusson, H Melhus, A-C Syvänen, A Kindmark, U Landegren, ML Fermér, F Stiger, I Persson, J Baron, E Weiderpass
+S Wedr?, L Lovmar, K Humphreys, C Magnusson, H Melhus, A-C Syv?en, A Kindmark, U Landegren, ML Ferm?, F Stiger, I Persson, J Baron, E Weiderpass
 Oestrogen receptor a gene haplotype and postmenopausal breast cancer risk: a case control study
-Breast Cancer Res 6(4): R437–R449, 2004
+Breast Cancer Res 6(4): R437?R449, 2004
 
 J Parkinson, C Charon, BS Baker, AV Powles, S Rogers, A Caird, D Smedley, S Halford, L Fry, MI McCarthy
 Variation at the IRF2 Gene and Susceptibility to Psoriasis in Chromosome 4q-Linked Families
@@ -1053,13 +1053,13 @@ Journal of Investigative Dermatology, 122:640-643, 2004
 
 M Ribases, M Gratacos, F Fernandez-Aranda, L Bellodi, C Boni, M Anderluh, MC Cavallini, E Cellini, D Di Bella, S Erzegovesi, C Foulon, M Gabrovsek, P Gorwood, J Hebebrand, A Hinney, J Holliday, X Hu, A Karwautz, A Kipman, R Kome, B Nacmias, H Remschmidt, V Ricca, S Sorbi, G Wagner, J Treasure, DA Collier, X Estivill
 Association of BDNF with anorexia, bulimia and age of onset of weight loss in six European populations
-Human Molecular Genetics 13:1205–1212, 2004
+Human Molecular Genetics 13:1205?1212, 2004
 
 The EIF2AK3 gene region and type I diabetes in subjects from South India
 RA Allotey, V Mohan, MF McDermott, R Deepa, G Premalatha, Z Hassan, PG Cassell, BV North, M Vaxillaire, CA Mein, DC Swan, E O'Grady, A Ramachandran, C Snehalatha, PJ Sinnot, SK Hemmatpour, P Froguel, GA Hitman
 Genes and Immunity 1-5, 2004
 
-HF Gu, A Abulaiti, C-G Östenson, K Humphreys, C Wahlestedt, AJ Brookes, Suad Efendic
+HF Gu, A Abulaiti, C-G ?tenson, K Humphreys, C Wahlestedt, AJ Brookes, Suad Efendic
 Single Nucleotide Polymorphisms in the Proximal Promoter Region of the Adiponectin (APM1) Gene Are Associated With Type 2 Diabetes in Swedish Caucasians 
 Diabetes 53:S31-S35, 2004
 
@@ -1071,7 +1071,7 @@ PJ Norman, MA Cook, BS Carey, CVF Carrington, DH Verity, K Hameed, DD Ramdath, D
 SNP haplotypes and allele frequencies show evidence for disruptive and balancing selection in the human leukocyte receptor complex
 Immunogenetics 56(4):225-237, July 2004 
 
-I Mata, MJ Arranz, A Patiño, T Lai, M Beperet, L Sierrasesumaga, D Clark, F Perez-Nievas, L Richards, F Ortuño, P Sham, RW Kerwin
+I Mata, MJ Arranz, A Pati?, T Lai, M Beperet, L Sierrasesumaga, D Clark, F Perez-Nievas, L Richards, F Ortu?, P Sham, RW Kerwin
 Serotonergic polymorphisms and psychotic disorders in populations from North Spain
 American Journal of Medical Genetics Part B: Neuropsychiatric Genetics 126B: 88-94, 2004
 
@@ -1083,7 +1083,7 @@ W-S Lo, C-F Lau, Z Xuan, C-F Chan, G-Y Feng, L He, Z-C Cao, H Liu, Q-M Luan, H
 Xue Association of SNPs and haplotypes in GABAA receptor 2 gene with schizophrenia
 Molecular Psychiatry 9: 603-608, 2004
 
-S Lévesque, J-M Moutquin, C Lindsay, M-C Roy, F Rousseau 
+S L?esque, J-M Moutquin, C Lindsay, M-C Roy, F Rousseau 
 Implication of an AGT Haplotype in a Multigene Association Study With Pregnancy Hypertension 
 Hypertension. 43:71-78, 2004
 
@@ -1164,7 +1164,7 @@ MA Levenstien, Y Yang, J Ott
 Statistical significance for hierarchical clustering in genetic association and microarray expression studies
 BMC Bioinformatics 4:62, 2003
 
-A Lazar, D Gründemann, R Berkels, D Taubert, T Zimmermann, E Schömig 
+A Lazar, D Gr?demann, R Berkels, D Taubert, T Zimmermann, E Sch?ig 
 Genetic variability of the extraneuronal monoamine transporter EMT (SLC22A3)
 J Hum Genet 48:226-230, 2003
 
@@ -1181,7 +1181,7 @@ Macrophage migration inhibitory factor (MIF) gene polymorphism is associated wit
 Genes & Immunity 4(7): 487-491, 2003
 
 M Sancandi, P Griseri, B Pesce, G Patrone, F Puppo, M Lerone, G Martucciello, G Romeo, R Ravazzolo, M Devoto, I Ceccherini
-Single nucleotide polymorphic alleles in the 59 region of the RET proto-oncogene define a risk haplotype in Hirschsprung’s disease
+Single nucleotide polymorphic alleles in the 59 region of the RET proto-oncogene define a risk haplotype in Hirschsprung?s disease
 J Med Genet 40:714-718, 2003
 
 Aruna Bansal, Peter R. Boyd, Ralph McGinnis.
@@ -1247,11 +1247,11 @@ Genotype and haplotype analysis of paraoxonase genes (pon1 & 2) and ischemic str
 http://www.archive.eurostroke.org/Geneva/Geneva%20oral%20genetics.asp
 
 Rafael F. de Cid Ibeas
-Contribució a l.estudi genètic de les malalties complexes: Asma i Psoriasi a la població espanyola
-Departament de Biologia Cel·lular i Anatomia Patològica, Facultat de Medicina, Universitat de Barcelona 2002
+Contribuci?a l.estudi gen?ic de les malalties complexes: Asma i Psoriasi a la poblaci?espanyola
+Departament de Biologia Cel?lular i Anatomia Patol?ica, Facultat de Medicina, Universitat de Barcelona 2002
 http://www.tdx.cesca.es/TESIS_UB/AVAILABLE/TDX-0718103-082851//TESISRAFAELDECID.pdf
 
-J Loughlin, Z Mustafa, B Dowling, L Southam, L Marcelline, SS Räinä, L Ala-Kokko, K Chapman 
+J Loughlin, Z Mustafa, B Dowling, L Southam, L Marcelline, SS R?n? L Ala-Kokko, K Chapman 
 Finer linkage mapping of a primary hip osteoarthritis susceptibility locus on chromosome 6
 Eur J Hum Genet 9:562-568, 2002
 
@@ -1360,8 +1360,8 @@ Role of Transforming Growth Factor-Beta 1 Haplotype in Lupus Nephritis
 http://www.renal.org/Abstracts/Apr04abstracts.pdf
 
 Rafael F. de Cid Ibeas
-Contribució a l.estudi genètic de les malalties complexes: Asma i Psoriasi a la població espanyola
-Departament de Biologia Cel·lular i Anatomia Patològica, Facultat de Medicina, Universitat de Barcelona 2002
+Contribuci?a l.estudi gen?ic de les malalties complexes: Asma i Psoriasi a la poblaci?espanyola
+Departament de Biologia Cel?lular i Anatomia Patol?ica, Facultat de Medicina, Universitat de Barcelona 2002
 http://www.tdx.cesca.es/TESIS_UB/AVAILABLE/TDX-0718103-082851//TESISRAFAELDECID.pdf
 
 Chioza B, Osei-Lah A, Nashef L, et al.
@@ -1544,7 +1544,7 @@ Fallin D, Cohen A, Essioux L, et al.
 Genetic analysis of case/control data using estimated haplotype frequencies: Application to APOE locus variation and Alzheimer's disease
 GENOME RES 11 (1): 143-151 JAN 2001
 
-DISSERTATION zur Erlangung des Doktorgrades, der Humanbiologie (Dr. biol. hum.), der Medizinischen Fakultät, der Universität Ulm
+DISSERTATION zur Erlangung des Doktorgrades, der Humanbiologie (Dr. biol. hum.), der Medizinischen Fakult?, der Universit? Ulm
 Molekulargenetische Untersuchungen zur Geschlechtsdeterminierung bei Patienten mit Swyer-Syndrom und im Tiermodell Ellobius lutescens
 http://vts.uni-ulm.de/cgi/get.exe?PartID=1070
 
@@ -1553,7 +1553,7 @@ fastEH+/fastEHPLUS
 
 Sibylle Maas
 Die Rolle von IL-13 und IL-4 bei der Entstehung des Asthma bronchiale im Kindesalter.
-Erlangung des Medizinischen Doktorgrades der Medizinischen Fakultät der Albert-Ludwigs-Universität Freiburg i.Br. 2007
+Erlangung des Medizinischen Doktorgrades der Medizinischen Fakult? der Albert-Ludwigs-Universit? Freiburg i.Br. 2007
 http://deposit.ddb.de/cgi-bin/dokserv?idn=983270392&dok_var=d1&dok_ext=pdf&filename=983270392.pdf
 
 Janine Scholefield, Jacquie Greenberg
@@ -1592,7 +1592,7 @@ Paresh R. Shah;  Azlina Ahmad-Annuar;  Kourosh R. Ahmadi;  Carsten Russ;  Peter 
 No association of DYNC1H1 with sporadic ALS in a case-control study of a northern European derived population: A tagging SNP approach 
 Amyotrophic Lateral Sclerosis, Volume 7 (1):46 - 56, 2006
 
-Rainald Mössner, Christine M. Freitag, Lise Gutknecht, Andreas Reif, Ralf Tauber, Petra Franke, Jürgen Fritze, Gerd Wagner, Gregor Peikert, Berit Wenda, Philipp Sand, Marcella Rietschel, Henk Garritsen, Christian Jacob, K. Peter Lesch, Jürgen Deckert
+Rainald M?sner, Christine M. Freitag, Lise Gutknecht, Andreas Reif, Ralf Tauber, Petra Franke, J?gen Fritze, Gerd Wagner, Gregor Peikert, Berit Wenda, Philipp Sand, Marcella Rietschel, Henk Garritsen, Christian Jacob, K. Peter Lesch, J?gen Deckert
 The novel brain-specific tryptophan hydroxylase-2 gene in panic disorder
 J Psychopharmacol 20: 547-552, 2006
 
@@ -1623,7 +1623,7 @@ Sibylle Bierbaum, Renate Nickel, Anja Koch, Susanne Lau, Klaus A. Deichmann, Ulr
 Polymorphisms and Haplotypes of Acid Mammalian Chitinase Are Associated with Bronchial Asthma
 Am J Respir Crit Care Med Vol 172. pp 1505.1509, 2005 
 
-R Mössner, A Weichselbaum, M Marziniak, CM Freitag,  K-P Lesch, C Sommer, J Meyer
+R M?sner, A Weichselbaum, M Marziniak, CM Freitag,  K-P Lesch, C Sommer, J Meyer
 A Highly Polymorphic Poly-Glutamine Stretch in the Potassium Channel KCNN3 in Migraine
 Headache: The Journal of Head and Face Pain 45:132-136, 2005
 
@@ -1655,7 +1655,7 @@ K.W. Carter et al.
 JLIN - Java Linkage Disequilibrium Plotter (http://www.genepi.com.au/projects/jlin)
 http://www.scienceboard.net/resources/prodreviews.asp?cat=22&product=493
 
-G Lewis, DA Savage, CC Patterson, AP Maxwell, Renal Research Group, Queen’s University Belfast
+G Lewis, DA Savage, CC Patterson, AP Maxwell, Renal Research Group, Queen?s University Belfast
 GENETIC VARIATION IN NPHS2, THE GENE ENCODING THE SLIT DIAPHRAGM COMPONENT PODOCIN, AND NEPHROPATHY IN TYPE 1 DIABETES
 The National Kidney Research Fund, http://www.nkrf.org.uk/pdfs/research/AbstractBookFellowsDay2005.pdf
 
@@ -1671,7 +1671,7 @@ WJ Broom, MJ Parton, CA Vance, C Russ, PM Andersen, V Hansen, PN Leigh, JF Powel
 No association of the SOD1 locus and disease susceptibility or phenotype in sporadic...
 Neurology.2004; 63: 2419-2422.
 
-A Julià, D Gallardo, F Vidal, C Tomàs, P Barceló, M Vilardell, S Marsal
+A Juli? D Gallardo, F Vidal, C Tom?, P Barcel? M Vilardell, S Marsal
 Lack of association between the corticotropin-releasing hormone locus and rheumatoid arthritis
 Arthritis & Rheumatism 50: 2706-2708, 2004
 
@@ -1695,7 +1695,7 @@ T Li, C Chen, X Hu, D Ball, S Lin, W Chen, PC Sham, E Loh, RM Murray, DA Collier
 Association analysis of the DRD4 and COMT genes in methamphetamine abuse
 American Journal of Medical Genetics Part B: Neuropsychiatric Genetics 129B:120-124, 2004
 
-A Hassan, K Gormley, M O’Sullivan, J Knight, P Sham, P Vallance, J Bamford, H Markus 
+A Hassan, K Gormley, M O?Sullivan, J Knight, P Sham, P Vallance, J Bamford, H Markus 
 Endothelial Nitric Oxide Gene Haplotypes and Risk of Cerebral Small-Vessel Disease
 Stroke. 35:654-659, 2004
 
@@ -1762,7 +1762,7 @@ Vinay Puri, Andrew McQuillin, Susmita Datta, Khalid Choudhury, Jonathan Pimm, Sr
 Confirmation of the genetic association between the U2AF homology motif (UHM) kinase 1 (UHMK1) gene and schizophrenia on chromosome 1q23.3
 European Journal of Human Genetics 2008
 
-P.A. Sáiza, M.P. García-Portillaa, C. Arangob, B. Moralesc, S. Martínez-Barrondoa, C. Alvarezd, G. San Narcisod, E. Carreñod, V. Alvarezc, E. Cotoc, J. Bobes
+P.A. S?za, M.P. Garc?-Portillaa, C. Arangob, B. Moralesc, S. Mart?ez-Barrondoa, C. Alvarezd, G. San Narcisod, E. Carre?d, V. Alvarezc, E. Cotoc, J. Bobes
 Association between Heroin Dependence and 5-HT2A Receptor Gene Polymorphisms
 Eur Addict Res 2008;14:47-52
 
@@ -1778,9 +1778,9 @@ A McQuillin, NJ Bass, K Choudhury, V Puri, M Kosmin, J Lawrence, D Curtis, HMD G
 Caseâ€“controstudies show that a non-conservative amino-acid change from a glutamine to arginine in the P2RX7 purinergic receptor protein is associated with both bipolar- and unipolar-affective disorders
 Mol Psychiatr 2008
 
-Andreas Lazar, Susanne Walitza, Alexander Jetter, Manfred Gerlach, Andreas Warnke, Beate Herpertz-Dahlmann, Dirk GruÂ¨ndeman1,Gundula Grimberg,Eberhard Schulz, Helmut Remschmidt, Christoph Wewetzer, Edgar Scho¨mi
+Andreas Lazar, Susanne Walitza, Alexander Jetter, Manfred Gerlach, Andreas Warnke, Beate Herpertz-Dahlmann, Dirk GruÂ¨ndeman1,Gundula Grimberg,Eberhard Schulz, Helmut Remschmidt, Christoph Wewetzer, Edgar Scho?mi
 Novel mutations of the extraneuronal monoamine transporter gene in children and adolescents with obsessiveâ€“compulsi disorder
-International Journal of Neuropsychopharmacology (2008), 11, 35-48€“
+International Journal of Neuropsychopharmacology (2008), 11, 35-48??
 
 Susmita R Datta, Andrew McQuillin, Vinay Puri, Khalid Choudhury, Srinivasa Thirumalai, Jacob Lawrence, Jonathan Pimm, Nicholas Bass, Graham Lamb, Helen Moorey, Jenny Morgan, Bhaskar Punukollu, Gomathinayagam Kandasami, Simon Kirwin, Akeem Sule, Digby Quested, David Curtis, Hugh MD Gurling
 Failure to confirm allelic and haplotypic association between markers at the chromosome 6p22.3 dystrobrevin-binding protein 1 (DTNBP1) locus and schizophrenia
@@ -1798,7 +1798,7 @@ Kevin R. Viel, Deepa K. Machiah, Diane M. Warren, Manana Khachidze, Alfonso Buil
 A sequence variation scan of the coagulation factor (F)VIII structural gene and associations with plasma FVIII activity (FVIII:C) levels
 Blood 2007
 
-Pilar A Sáiz, Maria P García-Portilla, Begoña Paredes, Celso Arango, Blanca Morales, Victoria Alvarez, Eliecer Coto E, Teresa Bascarán, Manuel Bousoño, Julio Bobes
+Pilar A S?z, Maria P Garc?-Portilla, Bego? Paredes, Celso Arango, Blanca Morales, Victoria Alvarez, Eliecer Coto E, Teresa Bascar?, Manuel Bouso?, Julio Bobes
 Lack of association between endothelial nitric oxide synthase (NOS3) gene polymorphisms and suicide attempts
 Behavioral and Brain Functions 2007, 3:32
 
@@ -1842,7 +1842,7 @@ Gurling HM, Critchley H, Datta SR, McQuillin A, Blaveri E, Thirumalai S, Pimm J,
 Genetic association and brain morphology studies and the chromosome 8p22 pericentriolar material 1 (PCM1) gene in susceptibility to schizophrenia.
 Arch Gen Psychiatry. 2006 Aug;63(8):844-54. Erratum in: Arch Gen Psychiatry. 2007 Nov;64(11):1258. 
 
-A Reif, S Herterich, A Strobel, A-C Ehlis, D Saur, CP Jacob, T Wienker, T To¨pner, S Fritzen, U Walter, A Schmitt, AJ Fallgatter, K-P Lesch
+A Reif, S Herterich, A Strobel, A-C Ehlis, D Saur, CP Jacob, T Wienker, T To?pner, S Fritzen, U Walter, A Schmitt, AJ Fallgatter, K-P Lesch
 A neuronal nitric oxide synthase (NOS-I) haplotype associated with schizophrenia modifies prefrontal cortex function
 Molecular Psychiatry (2006) 11, 286-300
 
@@ -1854,7 +1854,7 @@ Vinay Puri, Andrew McQuillin, Srinivasa Thirumalai, Jacob Lawrence, Robert Krasu
 Failure to Confirm Allelic Association Between Markers at the CAPON Gene Locus and Schizophrenia in a British Sample
 Biological Psychiatry 59: 195-197, 2006 
 
-Rainald Mössner, Christine M. Freitag, Lise Gutknecht, Andreas Reif, Ralf Tauber, Petra Franke, Jürgen Fritze, Gerd Wagner, Gregor Peikert, Berit Wenda, Philipp Sand, Marcella Rietschel, Henk Garritsen, Christian Jacob, K. Peter Lesch and Jürgen Deckert
+Rainald M?sner, Christine M. Freitag, Lise Gutknecht, Andreas Reif, Ralf Tauber, Petra Franke, J?gen Fritze, Gerd Wagner, Gregor Peikert, Berit Wenda, Philipp Sand, Marcella Rietschel, Henk Garritsen, Christian Jacob, K. Peter Lesch and J?gen Deckert
 The novel brain-specific tryptophan hydroxylase-2 gene in panic disorder
 J Psychopharmacol 20(4):547-552, 2006
 
@@ -1867,7 +1867,7 @@ Resistin gene polymorphisms and progression of glycaemia in southern Chinese: a 
 Clinical Endocrinology 66:211-217, 2007
 
 Sun Shuying
-Haplotype Inference Using a Hidden Markov Model with E±cient Markov Chain Sampling
+Haplotype Inference Using a Hidden Markov Model with E?cient Markov Chain Sampling
 PhD Thesis, University of Toronton 2007
 
 Chen-Hao Li, Hsiao-Mei Liao, Tsai-Wei Hung,  Chia-Hsiang Chen
@@ -1890,7 +1890,7 @@ A. W. K. Tso, P. C. Sham, N. M. S. Wat, A. Xu, B. M. Y. Cheung, R. Rong, C. H. Y
 Polymorphisms of the gene encoding adiponectin and glycaemic outcome of Chinese subjects with impaired glucose tolerance: a 5-year follow-up study
 Diabetologia Volume 49, Number 8, 1806-1815 / August, 2006
 
-D. Clark, M. Arranz, I. Mata, J. Lopéz-Ilundain, F. Pérez-Nievas, R. Kerwin
+D. Clark, M. Arranz, I. Mata, J. Lop?-Ilundain, F. P?ez-Nievas, R. Kerwin
 Polymorphisms in the Promoter Region of the Alpha1A-Adrenoceptor Gene Are Associated with Schizophrenia/Schizoaffective Disorder in a Spanish Isolate Population. 
 Biological Psychiatry, Volume 58, Issue 6, Pages 435-439, 2005
 
@@ -1898,7 +1898,7 @@ Gillian Hamilton
 Unravelling the genetic components of late-onset Alzheimer.s disease
 PhD, KCL Institute of Psychiatry 2005
 
-Rainald Mössner, Christine M. Freitag, Lise Gutknecht, Andreas Reif, Ralf Tauber, Petra Franke, Jürgen Fritze, Gerd Wagner, Gregor Peikert, Berit Wenda, Philipp Sand, Marcella Rietschel, Henk Garritsen, Christian Jacob, K. Peter Lesch, Jürgen Deckert
+Rainald M?sner, Christine M. Freitag, Lise Gutknecht, Andreas Reif, Ralf Tauber, Petra Franke, J?gen Fritze, Gerd Wagner, Gregor Peikert, Berit Wenda, Philipp Sand, Marcella Rietschel, Henk Garritsen, Christian Jacob, K. Peter Lesch, J?gen Deckert
 The novel brain-specific tryptophan hydroxylase-2 gene in panic disorder
 J Psychopharmacol 20: 547-552, 2006
 
@@ -1914,15 +1914,15 @@ Li C, Wu W, Liu J, Qian L,  Li A, Yang K, Wei Q, Zhou J, Zhang Z
 Functional polymorphisms in the promoter regions of the FAS and FAS ligand genes and risk of bladder cancer in south China: a case-control analysis. 
 Pharmacogenetics & Genomics. 16(4):245-251, April 2006.
 
-J Corral, R González-Conejero, JM Soria, JR González-Porras, E Pérez-Ceballos, R Lecumberri, V Roldán, JC Souto, A Miñano, D Hernández-Espinosa, I Alberca, J Fontcuberta, V Vicente 
+J Corral, R Gonz?ez-Conejero, JM Soria, JR Gonz?ez-Porras, E P?ez-Ceballos, R Lecumberri, V Rold?, JC Souto, A Mi?no, D Hern?dez-Espinosa, I Alberca, J Fontcuberta, V Vicente 
 A nonsense polymorphism in the protein Z-dependent protease inhibitor increases the risk for venous thrombosis 
 Blood, 1 July 2006, Vol. 108, No. 1, pp. 177-183.
 
-C Paisa´n-Ru.´z, E W Evans, S Jain, G Xiromerisiou, J R Gibbs, J Eerola, V Gourbali, O Hellstro¨m,J Duckworth, A Papadimitriou, P J Tienari, G M Hadjigeorgiou, A B Singleton
+C Paisa?n-Ru.?z, E W Evans, S Jain, G Xiromerisiou, J R Gibbs, J Eerola, V Gourbali, O Hellstro?m,J Duckworth, A Papadimitriou, P J Tienari, G M Hadjigeorgiou, A B Singleton
 Testing association between LRRK2 and Parkinson.s disease and investigating linkage disequilibrium
 J Med Genet 2006;43:e9
 
-TIA Sørensen, P Boutin, MA Taylor, LH Larsen, C Verdich,  L Petersen, C Holst, SM Echwald, C Dina, S Toubro, M Petersen, J Polak, KC Clement, JA Martinez, D Langin, J-M Oppert, V Stich, I Macdonald, P Arner, WHM Saris, O Pedersen, A Astrup, P Frogue, The NUGENOB Consortium
+TIA S?ensen, P Boutin, MA Taylor, LH Larsen, C Verdich,  L Petersen, C Holst, SM Echwald, C Dina, S Toubro, M Petersen, J Polak, KC Clement, JA Martinez, D Langin, J-M Oppert, V Stich, I Macdonald, P Arner, WHM Saris, O Pedersen, A Astrup, P Frogue, The NUGENOB Consortium
 Genetic Polymorphisms and Weight Loss in Obesity: A Randomised Trial of Hypo-Energetic High- versus Low-Fat Diets
 PLoS Clin Trial 2006; e12
 
@@ -1946,8 +1946,8 @@ David Curtis, Pak C. Sham
 Estimated haplotype counts from case-control samples cannot be treated as observed counts
 Am J Hum Genet 2006
 
-C Paisán-Ruíz, EW Evans, S Jain, G Xiromerisiou, JR Gibbs, J Eerola, V Gourbali, O Hellström, J Duckworth, A Papadimitriou, PJ Tienari, GM Hadjigeorgiou, AB Singleton
-Testing association between LRRK2 and Parkinson’s disease and investigating linkage disequilibrium 
+C Pais?-Ru?, EW Evans, S Jain, G Xiromerisiou, JR Gibbs, J Eerola, V Gourbali, O Hellstr?, J Duckworth, A Papadimitriou, PJ Tienari, GM Hadjigeorgiou, AB Singleton
+Testing association between LRRK2 and Parkinson?s disease and investigating linkage disequilibrium 
 Journal of Medical Genetics 2006;43:e09
 
 Tsai S-J, Hong C-J, Liu H-C, Liu T-Y, Liou Y-J:
@@ -1984,7 +1984,7 @@ A. Reif, A. Strobel, C.P. Jacob, S. Fritzen, A. Schmitt, P. Gass, and K.-P. Lesc
 Converging lines of evidence argue for a role of endothelial nitric oxide synthase (NOS-III) in affective disorders
 http://www.ecnp.nl/Workshops/Workshop/2005Nice/postersweb/Reif_P4_01.pdf
 
-F Vasseur, N Helbecque, S Lobbens, V Vasseur-Delannoy, C Dina, K Clément, P Boutin, T Kadowaki, PE Scherer, P Froguel
+F Vasseur, N Helbecque, S Lobbens, V Vasseur-Delannoy, C Dina, K Cl?ent, P Boutin, T Kadowaki, PE Scherer, P Froguel
 Hypoadiponectinaemia and high risk of type 2 diabetes are associated with adiponectin-encoding (ACDC) gene promoter variants in morbid obesity: evidence for a role of ACDC in diabesity
 Diabetologia 48:892-899, 2005
 
@@ -2098,14 +2098,14 @@ K. Yamada, Y. Iwayama-Shigeno, Y. Yoshida, T. Toyota, M. Itokawa, E. Hattori, H.
 Family-based association study of schizophrenia with 444 markers and analysis of a new susceptibility locus mapped to 11q13.3 
 American Journal of Medical Genetics Part B: Neuropsychiatric Genetics 127B:11 - 19, 2004
 
-J. Suazo, J.L. Santos, H. Carreño, L. Jara, and R. Blanco1
+J. Suazo, J.L. Santos, H. Carre?, L. Jara, and R. Blanco1
 Linkage Disequilibrium between MSX1 and Non-syndromic Cleft Lip/Palate in the Chilean Population
 J Dent Res 83(10):782-785, 2004
 
-Rafael Blanco C, José Suazo S, José Luis Santos M1, Hernán Carreño Z, Mónica Paredes A, Lilian Jara S, Felipe Eltit G
-Evaluación de la asociación entre marcadores de microsatélite en 6p22-25 y fisura labiopalatina no sindrómica utilizando el diseño de tríos caso-progenitores en la población chilena
+Rafael Blanco C, Jos?Suazo S, Jos?Luis Santos M1, Hern? Carre? Z, M?ica Paredes A, Lilian Jara S, Felipe Eltit G
+Evaluaci? de la asociaci? entre marcadores de microsat?ite en 6p22-25 y fisura labiopalatina no sindr?ica utilizando el dise? de tr?s caso-progenitores en la poblaci? chilena
 (Evidence for association between microsatellite markers located on 6p22-25 and nonsyndromic cleft lip palate using the case-parents trio design in the Chilean population)
-Rev Méd Chile 2003; 131: 765-772, 2003
+Rev M? Chile 2003; 131: 765-772, 2003
 
 BV North, D Curtis, PC Sham 
 A Note on the Calculation of Empirical P Values from Monte Carlo Procedures 
@@ -2146,7 +2146,7 @@ Galvan A, Skorpen F, Klepstad P, Knudsen AK, Fladvad T, Falvella FS, Pigni A, Br
 
 Sole X, Gonzalez JR, Moreno V.
 Analysis of Population-Based Genetic Association Studies Applied to Cancer Susceptibility and Prognosis. 
-In Pham T (ed). Computational Biology: Issues and Applications in Oncology. Springer 2009.
+In Pham T (ed). Computational Biology: Issues and Applications in Oncology. Springer 2009
 
 Christine F Skibola, Alexandra Nieters, Paige M Bracci, John D Curry, Luz Agana, Danica R. Skibola, Alan Hubbard, Nikolaus Becker, Martyn T Smith and Elizabeth A. Holly
 A functional TNFRSF5 gene variant is associated with risk of lymphoma
@@ -2164,11 +2164,11 @@ Trikalinos, Thomas A.; Salanti, Georgia; Khoury, Muin J. 5; Ioannidis, John P. A
 Impact of Violations and Deviations in Hardy-Weinberg Equilibrium on Postulated Gene-Disease Associations.
 American Journal of Epidemiology. 163(4):300-309, 2006
 
-Louise Strandberg, Mattias Lorentzon, Åsa Hellqvist, Staffan Nilsson, Ville Wallenius, Claes Ohlsson, John-Olov Jansson
+Louise Strandberg, Mattias Lorentzon, ?a Hellqvist, Staffan Nilsson, Ville Wallenius, Claes Ohlsson, John-Olov Jansson
 Interleukin-1 System Gene Polymorphisms Are Associated with Fat Mass in Young Men
 The Journal of Clinical Endocrinology & Metabolism 91(7):2749-2754, 2006
 
-Corinna Zogel, Raymonda Varon, Karin Buiting, Stefan Bo¨hringer, Stephanie Grob, Bernhard Horsthemke
+Corinna Zogel, Raymonda Varon, Karin Buiting, Stefan Bo?hringer, Stephanie Grob, Bernhard Horsthemke
 Identification of cis- and trans-acting factors possibly modifying the risk of epimutations on chromosome 15
 European Journal of Human Genetics (2006) 14, 752.758
 
@@ -2180,7 +2180,7 @@ Eriksson AL, Lorentzon M, Mellstrom D, Vandenput L, Swanson C, Andersson N, Hamm
 SHBG Gene Promoter Polymorphisms in Men Are Associated with Serum Sex Hormone-Binding Globulin, Androgen and Androgen Metabolite Levels, and Hip Bone Mineral Density
 J Clin Endocrinol Metab. 2006; 91: 5029-5037 
 
-Javier Corral, Rocio Gonza´lez-Conejero, Jose Manuel Soria, Jose Ramo´n Gonza´ lez-Porras, Elena Pe´rez-Ceballos, Ramo´n Lecumberri, Vanessa Rolda´n, Juan Carlos Souto, Antonia Min.ano, David Herna´ndez-Espinosa, Ignacio Alberca, Jordi Fontcuberta, Vicente Vicente
+Javier Corral, Rocio Gonza?lez-Conejero, Jose Manuel Soria, Jose Ramo?n Gonza? lez-Porras, Elena Pe?rez-Ceballos, Ramo?n Lecumberri, Vanessa Rolda?n, Juan Carlos Souto, Antonia Min.ano, David Herna?ndez-Espinosa, Ignacio Alberca, Jordi Fontcuberta, Vicente Vicente
 Anonsense polymorphism in the protein Z.dependent protease inhibitor increases the risk for venous thrombosis
 Blood 108: 177-183, 2006
 
@@ -2205,6 +2205,70 @@ Chen J, Peters U, Foster C, Chatterjee N.
 A haplotype-based test of association using data from cohort and nested case-control epidemiologic studies
 Hum Hered 56:18-29, 2004
 
-M.D. Lundorf, H.N. Buttenschøn, L. Foldager, D.H.R. Blackwood, W.J. Muir, V. Murray, A.J. Pelosi, T.A. Kruse,5 H. Ewald, O. Mors
+M.D. Lundorf, H.N. Buttensch?, L. Foldager, D.H.R. Blackwood, W.J. Muir, V. Murray, A.J. Pelosi, T.A. Kruse,5 H. Ewald, O. Mors
 Mutational Screening and Association Study of Glutamate Decarboxylase 1 as a Candidate Susceptibility Gene for Bipolar Affective Disorder and Schizophrenia
 American Journal of Medical Genetics Part B (Neuropsychiatric Genetics) 135B:94-101 (2004)
+
+Gu X, Feng C, Ma L, Song C, Wang Y, Da Y, Li H, Chen K, Ye S, Ge C, Hu X, Li N.
+Genome-wide association study of body weight in chicken F2 resource population.
+PLoS One. 2011;6(7):e21872. doi: 10.1371/journal.pone.0021872. Epub 2011 Jul 14.
+
+Wang S, Dvorkin D, Da Y.
+SNPEVG: a graphical tool for GWAS graphing with mouse clicks
+BMC Bioinformatics 2012, 13:319
+
+Cole JB, Wiggans GR, Ma L, Sonstegard TS, Lawlor TJ Jr, Crooker BA, Van Tassell CP, Yang J, Wang S, Matukumalli LK, Da Y.
+Genome-wide association analysis of thirty one production, health, reproduction and body conformation traits in contemporary U.S. Holstein cows
+BMC Genomics 2011, 12 :408
+
+Yu Y, Tsai HJ, Liu X, Mestan K, Zhang S, Pearson C, Ortiz K, Xu X, Zuckerman B, Wang X.
+The joint association between F5 gene polymorphisms and maternal smoking during pregnancy on preterm delivery.
+Hum Genet. 2009 Jan;124(6):659-68
+
+Benjamin AM, Suchindran S, Pearce K, Rowell J, Lien LF, Guyton JR, McCarthy JJ.
+Gene by sex interaction for measures of obesity in the framingham heart study.
+J Obes. 2011;2011:329038
+
+El-Hage W, Phillips ML, Radua J, Gohier B, Zelaya FO, Collier DA, Surguladze SA.
+Genetic modulation of neural response during working memory in healthy individuals: interaction of glucocorticoid receptor and dopaminergic genes.
+Mol Psychiatry. 2013 Feb;18(2):174-82
+
+Root TL, Szatkiewicz JP, Jonassaint CR, Thornton LM, Pinheiro AP, Strober M, Bloss C, Berrettini W, Schork NJ, Kaye WH, Bergen AW, Magistretti P, Brandt H, Crawford S, Crow S, Fichter MM, Goldman D, Halmi KA, Johnson C, Kaplan AS, Keel PK, Klump KL, La Via M, Mitchell JE, Rotondo A, Treasure J, Woodside DB, Bulik CM.
+Association of candidate genes with phenotypic traits relevant to anorexia nervosa.
+Eur Eat Disord Rev. 2011 Nov;19(6):487-93
+
+Jonassaint CR, Szatkiewicz JP, Bulik CM, Thornton LM, Bloss C, Berrettini WH, Kaye WH, Bergen AW, Magistretti P, Strober M, Keel PK, Brandt H, Crawford S, Crow S, Fichter MM, Goldman D, Halmi KA, Johnson C, Kaplan AS, Klump KL, La Via M, Mitchell JE, Rotondo A, Treasure J, Woodside DB.
+Absence of association between specific common variants of the obesity-related FTO gene and psychological and behavioral eating disorder phenotypes.
+Am J Med Genet B Neuropsychiatr Genet. 2011 Jun;156B(4):454-61
+
+Wang J, Shete S.
+Testing Departure from Hardyâ€“Weinberg Proportions
+Methods in Molecular Biology Volume 850, 2012, pp 77-102
+
+Lin WY, Lee WC.
+Improving power of genome-wide association studies with weighted false discovery rate control and prioritized subset analysis.
+PLoS One. 2012;7(4):e33716
+
+Ma L, Wiggans GR, Wang S, Sonstegard TS, Yang J, Crooker BA, Cole JB, Van Tassell CP, Lawlor TJ, Da Y.
+Effect of sample stratification on dairy GWAS results.
+BMC Genomics. 2012 Oct 6;13:536
+
+Wu D, Wang M, Wang X, Yin N, Song T, Li H, Zhang F, Zhang Y, Ye Z, Yu J, Wang DM, Zhao Z.
+Maternal transmission effect of a PDGF-C SNP on nonsyndromic cleft lip with or without palate from a Chinese population.
+PLoS One. 2012;7(9):e46477
+
+Bolton JL, Stewart MC, Wilson JF, Anderson N, Price JF.
+Improvement in Prediction of Coronary Heart Disease Risk over Conventional Risk Factors Using SNPs Identified in Genome-Wide Association Studies.
+PLoS One. 2013;8(2):e57310
+
+Wu D, Liu RR, Zhao GP, Zheng MQ, Zhang L, Hu YD. Wen J.
+Genome-wide study of genes affecting body weight in chicken.
+Acta Veterinaria et Zootechnica Sinica 2012; 43(12):1887-896
+
+KilpelÃ¤inen TO, et al. 
+Genetic variation near IRS1 associates with reduced adiposity and an impaired metabolic profile
+Nat Genet 2011;43(8):753-866
+
+den Hoed M, et al. 
+Heart rate-associated loci and their effects on cardiac conduction and rhythm disorders
+Nat Genet

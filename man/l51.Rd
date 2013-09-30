@@ -63,10 +63,10 @@ m0 <- lm(qt ~ 1, data=ped51)
 summary(m0)
 m1 <- lm(qt ~ r, data=ped51)
 summary(m1)
-svd <- svd(k2)
 rawdata <- function(){
   pca <- prcomp(k2)
   screeplot(pca,25)
+  biplot(pca)
   pred <- predict(pca)
   l1 <- lm(qt~1+pred[,1:6],data=ped51)
   summary(l1)
@@ -82,7 +82,6 @@ rawdata <- function(){
   coef(p0)
   coefplot(p1)
   scores(p1)
-  
   poet <- POET(k2)
   pred <- k2%*%poet$loadings
   t0 <- lm(qt~pred,data=ped51)
@@ -134,6 +133,88 @@ write.table(solar_pheno,file="51.phen",col.names=c("id","qt","bt"),
 # trait qt
 # covariate sex
 # polygenic -screen -fix sex
+
+# The following is from experiments with GCTA on heritability estimates
+# involving a binary trait
+# 13-9-2013 MRC-Epid JHZ
+
+VG <- 0.017974; VVG <- 0.003988^2
+VGE <- 0.002451; VVGE <- 0.005247^2
+Ve <- 0.198894; VVe <- 0.005764^2
+
+cVGVGE <- -7.93348e-06
+cVGVe <- -5.54006e-06
+cVGEVe <- -1.95297e-05
+
+Vp <- VG + VGE + Ve
+s <- VVG + VVGE + VVe
+s12 <- 2*cVGVGE
+s13 <- 2*cVGVe
+s23 <- 2*cVGEVe
+VVp <- s + s12 + s13 + s23
+cVpVG <- VVG + cVGVGE + cVGVe
+cVpVGE <- cVGVGE + VVGE + cVGEVe
+
+Vp
+sqrt(VVp)
+VG/Vp
+sqrt(VR(VG, VVG, Vp, VVp, cVpVG))
+VGE/Vp
+sqrt(VR(VGE,VVGE,Vp,VVp, cVpVGE))
+
+K <- 0.05
+x <- qnorm(1-K)
+z <- dnorm(x)
+1/sqrt(2*pi)*exp(-x^2/2)
+P <- 0.496404
+fK <- (K*(1-K)/z)^2
+fP <- P*(1-P)
+f <- fK/fP
+ho <- 0.274553
+vo <- 0.067531
+f*ho
+f*vo
+hl <- 0.232958
+vl <- 0.057300
+r1 <- hl/ho
+r2 <- vl/vo
+r1==r2
+z2 <- K^2*(1-K)^2/(f*fP)
+x2 <- -log(2*pi*z2)
+sqrt(x2)
+
+V <- c(0.017974, 0.002451, 0.198894)
+VCOV <- matrix(0,3,3)
+diag(VCOV) <- c(0.003988, 0.005247, 0.005764)^2
+VCOV[2,1] <- -7.93348e-06
+VCOV[3,1] <- -5.54006e-06
+VCOV[3,2] <- -1.95297e-05
+z <- h2GE(V,VCOV)
+
+h2 <- 0.274553
+se <- 0.067531
+P <- 0.496404
+z <- h2l(P=P,h2=h2,se=se)
+
+hl <- 0.232958
+vl <- 0.057300
+
+R <- 50
+kk <- h2all <- seall <- rep(0,R)
+for(i in 1:R)
+{
+  kk[i] <- 0.4*i/R
+  z <- h2l(kk[i],P=P,h2=h2,se=se)
+  h2all[i] <- z$h2l
+  seall[i] <- z$se
+}
+
+tiff("f.tiff",width=0.03937*189,height=0.03937*189/1.5,units="in",res=1200,compress="lzw")
+plot(kk,h2all,type="l",ylab="Adjusted heritability",xlab="Prevalence")
+lines(kk,h2all-seall,lty="dashed")
+lines(kk,h2all+seall,lty="dashed")
+title("Adjusted heritability for observed value of .23 and cases% = 0.495")
+dev.off()
 }
 }
 \keyword{datasets}

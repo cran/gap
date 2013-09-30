@@ -70,7 +70,8 @@ for(i in 1:12) {
   g <- models[i,1]
   p <- models[i,2]
   z <- fbsize(g,p)
-  cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,file=outfile,append=TRUE,sep="\t")
+  cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,file=outfile,
+      append=TRUE,sep="\t")
   cat("\n",file=outfile,append=TRUE)
 }
 table1 <- read.table(outfile,header=TRUE,sep="\t")

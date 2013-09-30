@@ -64,7 +64,8 @@ T <- 0.2
 
 pi0 <- c(0.25,0.1,0.01,0.001,0.0001,0.00001)
 
-# Step 3 - Enter values of odds ratios (OR) that are most likely, assuming that there is a non-null association
+# Step 3 - Enter values of odds ratios (OR) that are most likely, assuming that
+#          there is a non-null association
 
 ORlist <- c(1.2,1.5,2.0)
 

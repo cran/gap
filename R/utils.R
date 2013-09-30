@@ -239,3 +239,78 @@ micombine <- function (est, std.err, confidence = 0.95)
         lower = low, upper = up, r = rem, fminf = fminf)
     result
 }
+
+VR <- function(v1,vv1,v2,vv2,c12)
+{
+  nv <- v2^2*vv1 + v1^2*vv2 - 2*v1*v2*c12
+  dv <- v2^4
+  nv/dv
+}
+
+h2GE <- function(V,VCOV)
+{
+  VG <- V[1]
+  VGE <- V[2]
+  Ve <- V[3]
+  Vp <- VG + VGE + Ve
+  VVG <- VCOV[1,1]
+  VVGE <- VCOV[2,2]
+  VVe <- VCOV[3,3]
+  cVGVGE <- VCOV[2,1]
+  cVGVe <- VCOV[3,1]
+  cVGEVe <- VCOV[3,2]
+  s <- VVG + VVGE + VVe
+  s12 <- 2*cVGVGE
+  s13 <- 2*cVGVe
+  s23 <- 2*cVGEVe
+  VVp <- s + s12 + s13 + s23
+  cVpVG <- VVG + cVGVGE + cVGVe
+  cVpVGE <- cVGVGE + VVGE + cVGEVe
+  sqrt(VVp)
+  h2G <- VG/Vp
+  Varh2G <- VR(VG, VVG, Vp, VVp, cVpVG)
+  h2GE <- VGE/Vp
+  Varh2GE <- VR(VGE,VVGE,Vp,VVp, cVpVGE)
+  cat("Vp=",Vp,"SE=",sqrt(VVp),"\n")
+  cat("h2G=",h2G,"SE=",sqrt(Varh2G),"\n")
+  cat("h2GE=",h2GE,"SE=",sqrt(Varh2GE),"\n")
+  list(Vp=Vp,VVp=VVp,h2G=h2G,Varh2G=Varh2G,h2GE=h2GE,Varh2GE=Varh2GE)
+}
+
+h2l <- function(K=0.05,P=0.5,h2,se)
+{
+  x <- qnorm(1-K)
+  z <- dnorm(x)
+  1/sqrt(2*pi)*exp(-x^2/2)
+  fK <- (K*(1-K)/z)^2
+  fP <- P*(1-P)
+  f <- fK/fP
+  h2l <- f*h2
+  sel <- f*se
+  z2 <- K^2*(1-K)^2/(f*fP)
+  x2 <- -log(2*pi*z2)
+  cat("h2=",h2,"SE=",se,"\n")
+  cat("h2l=",h2l,"SE=",sel,"\n")
+  list(h2=h2,se=se,h2l=h2l,sel=sel,z=sqrt(x2))
+}
+
+# R script to read the GRM binary file
+
+ReadGRMBin <- function(prefix, AllN=FALSE, size=4)
+{
+  sum_i <- function(i) return(sum(1:i))
+  BinFileName <- paste(prefix,".grm.bin",sep="")
+  NFileName <- paste(prefix,".grm.N.bin",sep="")
+  IDFileName <- paste(prefix,".grm.id",sep="")
+  id <- read.table(IDFileName)
+  n <- dim(id)[1]
+  BinFile <- file(BinFileName, "rb");
+  grm <- readBin(BinFile, n=n*(n+1)/2, what=numeric(0), size=size)
+  close(BinFile)
+  NFile <- file(NFileName, "rb");
+  if(AllN) N <- readBin(NFile, n=n*(n+1)/2, what=numeric(0), size=size)
+  else N <- readBin(NFile, n=1, what=numeric(0), size=size)
+  close(NFile)
+  i <- sapply(1:n, sum_i)
+  return(list(diag=grm[i], off=grm[i], id=id, N=N))
+}

@@ -10,6 +10,7 @@ hmht.control <- function(data=NULL, colors=NULL, yoffset=0.25, cex=1.5, boxed=FA
 mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
   require(grid)
   data2 <- data[!apply(is.na(data),1,any),]
+  n2 <- dim(data2[1])
   chr <- data2[,1]
   pos <- newpos <- data2[,2]
   p <- data2[,3]
@@ -122,11 +123,11 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
         }
      }
   }
-  if(!is.null(cutoffs)) abline(h=cutoffs)
+  if(!is.null(cutoffs)) segments(0,cutoffs,n2+gap*n.chr,cutoffs) # abline(h=cutoffs)
   if ("ylab"%in%names(args)) mtext(args$ylab,2,line=yline,las=0) else
      mtext(ifelse(logscale,paste("-log",base,"(Observed value)",sep=""),"Observed value"),2,line=yline,las=0)
   if ("xlab"%in%names(args)) xlabel <- args$xlab else
       xlabel <- ifelse(is.null(names(chr)),"Chromosome",names(chr))
   mtext(xlabel,1,line=xline,las=0) }
 
-#25-11-2010 MRC-Epid JHZ
+#3-9-2013 MRC-Epid JHZ

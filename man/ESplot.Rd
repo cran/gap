@@ -22,7 +22,8 @@ errors for a range of models.
 \dontrun{
 # 7-4-2008 MRC-Epid JHZ
 options(stringsAsFactors=FALSE)
-testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted","Heavily adjusted","Other"),
+testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted",
+                      "Heavily adjusted","Other"),
 OR = c(4.5,3.5,2.5,1.5,1),
 SElogOR = c(0.2,0.1,0.5,0.5,0.2))
 ESplot(testdata,v=1)

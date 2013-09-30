@@ -1,6 +1,15 @@
 Version history of R genetic analysis package (R/gap)
 
+Version 1.1.10
+30-09-2013	Create vignettes subdirectory for associate files from inst/doc
+		Remove url from DESCRIPTION
+		Add functions during experiments with GCTA
+		Add chicken example to vignette
+		Wrap lines longer than 100 characters
+
 Version 1.1-9
+03-08-2013	Revise example in mhtplot in reply to query from Titan [mailto:lone9@qq.com] 
+		Further revision on cutoffs to mhtplot
 08-04-2013	Replace .file.path(.package.path) with system.file
 27-02-2013	Add SOLAR code for l51.Rd
 		Reorder columns in mdata as in mhtplot2.Rd so that gene annotations are produced
