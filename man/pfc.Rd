@@ -34,9 +34,9 @@ Yu C, Zelterman D (2002) Statistical inference for familial disease clusters. Bi
 
 \examples{
 \dontrun{
-# IPF among 203 siblings of 100 COPD patients from Liang KY, SL Zeger, B Qaquish (1992)
-# Multivariate regression analyses for categorical data (with discussion). J Roy Stat Soc
-# B 54:3-40
+# IPF among 203 siblings of 100 COPD patients from Liang KY, SL Zeger,
+# Qaquish B. Multivariate regression analyses for categorical data
+# (with discussion). J Roy Stat Soc B 1992, 54:3-40
 
 # the degrees of freedom is 15
 famtest<-c(

@@ -1,0 +1,36 @@
+#
+# a simple make script to convert C source into executable
+#
+#  gcc
+#CC      = gcc
+#CFLAGS  = -O4 -g -lm
+#  cc
+CC      = cc
+## DEC Alpha
+CFLAGS = -lm -std1
+
+EH_C  = eh.c
+EHP_C = ehplus.c
+PM_C  = pm.c
+PMP_C = pmplus.c
+FEHP_C = fehp.c
+
+all:	eh ehplus pm pmplus fehp
+
+eh:	
+	$(CC) $(EH_C) $(CFLAGS) -o eh
+
+ehplus:	
+	$(CC) $(EHP_C) $(CFLAGS) -o ehplus
+
+pm:	
+	$(CC) $(PM_C) $(CFLAGS) -o pm
+
+pmplus:	
+	$(CC) $(PMP_C) $(CFLAGS) -o pmplus
+
+fehp:
+	$(CC) $(FEHP_C) $(CFLAGS) -o fehp
+
+clean:
+	rm -f *.o eh ehplus pm pmplus fehp

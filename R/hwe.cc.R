@@ -177,7 +177,7 @@ DevH0recessive.est <- function(case,ctl,k0,initial) {
 
    fitout<-nlm(DevH0recessive,initial,case=case,control=ctl,k=k0,hessian=TRUE)
 
-         hessinv<-ginv(fitout$hessian)     # generalized inverse of Hessian
+         hessinv<-MASS::ginv(fitout$hessian)     # generalized inverse of Hessian
 
 #### beta fixed at 1
           beta <- 1 
@@ -277,7 +277,7 @@ DevHaGrecessive.est <- function(case,ctl,k0,initial) {
 
    fitout<-nlm(DevHaGrecessive,initial,case=case,control=ctl,k=k0,hessian=TRUE)
 
-         hessinv<-ginv(fitout$hessian)     # generalized inverse of Hessian
+         hessinv<-MASS::ginv(fitout$hessian)     # generalized inverse of Hessian
 
 #### beta fixed at 1
           beta <- 1 
@@ -395,7 +395,7 @@ DevH0dominant.est <- function(case,ctl,k0,initial) {
 
    fitout<-nlm(DevH0dominant,initial,case=case,control=ctl,k=k0,hessian=TRUE)
 
-         hessinv<-ginv(fitout$hessian)     # generalized inverse of Hessian
+         hessinv<-MASS::ginv(fitout$hessian)     # generalized inverse of Hessian
 
 ### p
           p <- invlogit(fitout$estimate[1])
@@ -496,7 +496,7 @@ DevHaGdominant.est <- function(case,ctl,k0,initial) {
 
    fitout<-nlm(DevHaGdominant,initial,case=case,control=ctl,k=k0,hessian=TRUE)
 
-         hessinv<-ginv(fitout$hessian)     # generalized inverse of Hessian
+         hessinv<-MASS::ginv(fitout$hessian)     # generalized inverse of Hessian
 
 ### p0
           p0 <- invlogit(fitout$estimate[1])

@@ -1,0 +1,37 @@
+VERSION = 0.2.1
+CMP = cl -c
+LD = cl
+RANDOM_SEED = srand
+
+all: hap mia
+
+hap: hap.obj hapfun.obj cline.obj 
+	$(LD) hap.obj hapfun.obj cline.obj
+
+hap.obj : hap.c hap.h cline.h 
+	$(CMP) -DSEED=$(RANDOM_SEED) hap.c
+
+hapfun.obj : hapfun.c  hap.h
+	$(CMP) hapfun.c
+
+mia: mia.obj cline.obj
+	$(LD) mia.obj cline.obj
+
+mia.obj: mia.c
+	$(CMP) mia.c
+
+cline.obj : cline.c cline.h
+	$(CMP) cline.c
+
+clean :
+	rm -f *.obj *~ hap-$(VERSION).tar.gz hap-$(VERSION).zip
+
+distribution:
+	mkdir hap-$(VERSION)
+	cp *.c *.h *.txt test.dat Makefile* 4snps.* hap-$(VERSION)/
+	rm -f hap-$(VERSION).tar.gz hap-$(VERSION).zip
+	tar cvf hap-$(VERSION).tar hap-$(VERSION)/*
+	gzip hap-$(VERSION).tar
+	zip -ll hap-$(VERSION).zip hap-$(VERSION)/*
+	rm -f hap-$(VERSION)/*
+	rmdir hap-$(VERSION)

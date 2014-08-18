@@ -24,7 +24,7 @@ qqfun <- function(x, distribution="norm", ylab=deparse(substitute(x)),
     }
     if (line=="robust") {
         if (!require("MASS")) stop("MASS package not available")
-        coef <- coefficients(rlm(ord.x~z))
+        coef <- coefficients(MASS::rlm(ord.x~z))
         a <- coef[1]
         b <- coef[2]
         abline(a,b,col=palette()[2])

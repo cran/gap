@@ -110,12 +110,12 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
              col.chr[l1:l2] <- hcolors[j]
              if (hboxed)
              {
-                tg <- textGrob(hchrs[k])
-                rg <- rectGrob(x=CM[chr][l1],y=max(y[l1:l2])+hyoffs,
-                               width=1.1*grobWidth(tg),height=1.3*grobHeight(tg),
-                               gp=gpar(col="black",lwd=2.5))
-                boxedText <- gTree(children=gList(tg,rg))
-                grid.draw(boxedText)
+                tg <- grid::textGrob(hchrs[k])
+                rg <- grid::rectGrob(x=CM[chr][l1],y=max(y[l1:l2])+hyoffs,
+                               width=1.1*grid::grobWidth(tg),height=1.3*grid::grobHeight(tg),
+                               gp=grid::gpar(col="black",lwd=2.5))
+                boxedText <- grid::gTree(children=grid::gList(tg,rg))
+                grid::grid.draw(boxedText)
              } else text(CM[chr][l1],max(y[l1:l2]+hyoffs),hchrs[k],cex=hcex)
              points(CM[l+(l1:l2)],y[l1:l2],col=col.chr[l1:l2],cex=pcex,...)
              j <- j+1

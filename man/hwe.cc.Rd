@@ -46,7 +46,8 @@ for case-control studies. Genetic Epidemiology 33:275-280, 2009
 \examples{
 \dontrun{
 
-### Saba Sile, email of Jan 26, 2007, data always in order of GG AG AA, p=Pr(G), q=1-p=Pr(A)
+### Saba Sile, email of Jan 26, 2007, data always in order of GG AG AA, p=Pr(G),
+### q=1-p=Pr(A)
 case=c(155,27,4)
 ctrl=c(408,55,15)
 k0=.2
@@ -54,7 +55,8 @@ initial1=c(1.0,0.94,0.0904)
 initial2=c(logit(1-0.0904),log(0.94))
 hwe.cc("recessive",case,ctrl,k0, initial1, initial2)
 
-### John Phillips III, TGFb1 data codon 10: TT CT CC, CC is abnormal and increasing TGFb1 activity
+### John Phillips III, TGFb1 data codon 10: TT CT CC, CC is abnormal and increasing
+### TGFb1 activity
 case=c(29,78,13)
 ctrl=c(17,28,6)
 k0 <- 1e-5

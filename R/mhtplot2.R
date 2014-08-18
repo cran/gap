@@ -124,13 +124,13 @@ mhtplot2 <- function (data, control = mht.control(), hcontrol = hmht.control(),
                   col.index <- as.integer(colnames(namecol)[gmat[rownames(gmat)==hchrs[k]]])
                   col.label <- colors()[col.index]
                   if (hboxed) {
-                    tg <- textGrob(hchrs[k])
-                    rg <- rectGrob(x = CM[chr][l1], y = max(y[l1:l2]) + 
-                      hyoffs, width = 1.1 * grobWidth(tg), height = 1.3 * 
-                      grobHeight(tg), gp = gpar(col = "black", 
+                    tg <- grid::textGrob(hchrs[k])
+                    rg <- grid::rectGrob(x = CM[chr][l1], y = max(y[l1:l2]) + 
+                      hyoffs, width = 1.1 * grid::grobWidth(tg), height = 1.3 * 
+                      grid::grobHeight(tg), gp = grid::gpar(col = "black", 
                       lwd = 2.5))
-                    boxedText <- gTree(children = gList(tg, rg))
-                    grid.draw(boxedText)
+                    boxedText <- grid::gTree(children = grid::gList(tg, rg))
+                    grid::grid.draw(boxedText)
                   }
                   else text(CM[chr][l1], max(y[l1:l2] + hyoffs), hchrs[k],
                        col=col.label, cex = hcex, font=3, ...)

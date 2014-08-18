@@ -1,0 +1,134 @@
+                             Documentation of HAP
+
+
+                                 December 10, 2003
+
+
+HAP is a program which extends SNPHAP to multiallelic markers (hence SNP is
+dropped).  This is achieved via an additional command-line option -an to
+indicate numbers of marker alleles while other options remain unchanged.
+Therefore it takes full advantage of both the EM and IP algorithms in SNPHAP.
+
+A utility program called MIA has also been written to collect haplotype
+frequencies from individual HAP imputations.
+
+
+1. Format of input file
+
+It is possible to use input file in three different formats, which are
+described briefly below.
+
+1.1 First the program works as default for SNPs data. File in this format has
+the following structure,
+
+line 1, a list of names for all markers
+line 2- the actual genotypes of all markers
+
+1.2 An extra option [-an] is needed for microsatellite markers, which requires
+their numbers of alleles being read.  File in this format has the following
+structure,
+
+line 1, a list of names for all markers
+line 2, a list of integers representing numbers of alleles at all markers
+line 3- the actual genotypes of all markers
+
+1.3 It is possible to use both [-l#] (number of markers) and [-an] options
+jointly, so that files similar to that of GENECOUNTING can be handled.  File in
+this format has the following structure,
+
+line 1, a list of integers representing numbers of alleles at all markers
+line 2- the actual genotypes of all markers
+
+
+2. How to run the program
+
+An example file for each format above has been prepared.  Commands for running
+the program are then as follows.
+
+2.1 the first format:
+
+hap 4snps.dat
+
+2.2 the second format:
+
+hap 4snps.an -an
+
+2.3 the third format:
+
+hap -l4 -an 4snps.4an
+
+Note that for Windows users you will need to enter DOS prompt first. A DOS
+prompt can always be obtained via Running "command" at the start menu. You
+also need to change to the directory where hap is stored, e.g.
+
+Start -> Run -> command -> OK
+cd c:\hap
+
+to run HAP from c:\hap directory.
+
+
+3. How to use MIA
+
+MIA accepts output files from running HAP with options -mi and -ss.
+
+Syntax: mia [options] input-file-root [output-file]
+
+where [options] are
+
+  -so    tally haplotypes by subject order
+
+  -ns    do not sort by individual ID
+
+  -mi #  specifies the number of imputatios used in HAP
+
+  -as    if all markers are SNPs; which makes haplotype labels more compact
+
+  -sas   to generate SAS data step statements
+
+  input-file-root
+
+         HAP output filename (without extension) using -mi and -ss options
+
+  [output-file] (by default mia.out) holds haplotype frequencies
+
+
+Examples:
+
+hap 4snps.dat h s -mi5 -ss
+mia h h.out -mi5
+mia s s.out -mi5 -so -ns
+
+HAP produces imputed haplotype frequencies in files h.001~h.005, haplotype
+assignment in files s.001~s.005, while MIA collects haplotype frquencies from
+h.001~h.005 into h.out and s.001~s.001 into s.out.
+
+
+4. How to cite
+
+Zhao JH 2LD, GENECONTING and HAP: computer programs for linkage disequilibrium
+analysis. Bioinformatics.
+
+
+5. Additional information
+
+A brief description of both EM and IP algorithms is contained in SNPHAP
+documentation, available from http://www-gene.cimr.cam.ac.uk/clayton
+
+GENECOUNTING is a program which handles unrelated individuals with missing
+genotypes and available from the website below.
+
+http://www.iop.kcl.ac.uk/IoP/Departments/PsychMed/GEpiBSt/whoswho/jinghua.stm
+
+Please contact me with your suggestions or problems at the following address:
+
+
+Jing hua Zhao
+
+Department of Epidemiology and Public Health
+University College London
+1-19 Torrington Place
+London WC1E 6BT
+
+Tel: +44 (0)20 76795627
+
+e-mail: j.zhao@public-health.ucl.ac.uk, jzhao@hgmp.mrc.ac.uk

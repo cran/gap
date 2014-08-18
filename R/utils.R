@@ -247,7 +247,26 @@ VR <- function(v1,vv1,v2,vv2,c12)
   nv/dv
 }
 
-h2GE <- function(V,VCOV)
+h2G <- function(V,VCOV,verbose=TRUE)
+{
+  VG <- V[1]
+  Ve <- V[2]
+  Vp <- VG + Ve
+  VVG <- VCOV[1,1]
+  VVe <- VCOV[2,2]
+  cVGVe <- VCOV[2,1]
+  h2G <- VG / Vp
+  VVp <- VVG + VVe + 2 * cVGVe
+  cVpVG <- VVG + cVGVe
+  Varh2G <- VR(VG,VVG,Vp,VVp,cVpVG)
+  if (verbose) {
+     cat("Vp =",Vp,"SE =",sqrt(VVp),"\n")
+     cat("h2G =",h2G,"SE =",sqrt(Varh2G),"\n")
+  }
+  invisible(list(Vp=Vp,VVp=VVp,h2G=h2G,Varh2G=Varh2G))
+}
+
+h2GE <- function(V,VCOV,verbose=TRUE)
 {
   VG <- V[1]
   VGE <- V[2]
@@ -266,18 +285,18 @@ h2GE <- function(V,VCOV)
   VVp <- s + s12 + s13 + s23
   cVpVG <- VVG + cVGVGE + cVGVe
   cVpVGE <- cVGVGE + VVGE + cVGEVe
-  sqrt(VVp)
-  h2G <- VG/Vp
+  h2G <- VG / Vp
   Varh2G <- VR(VG, VVG, Vp, VVp, cVpVG)
-  h2GE <- VGE/Vp
+  h2GE <- VGE / Vp
   Varh2GE <- VR(VGE,VVGE,Vp,VVp, cVpVGE)
-  cat("Vp=",Vp,"SE=",sqrt(VVp),"\n")
-  cat("h2G=",h2G,"SE=",sqrt(Varh2G),"\n")
-  cat("h2GE=",h2GE,"SE=",sqrt(Varh2GE),"\n")
-  list(Vp=Vp,VVp=VVp,h2G=h2G,Varh2G=Varh2G,h2GE=h2GE,Varh2GE=Varh2GE)
+  if (verbose) {
+     cat("Vp =",Vp,"SE =",sqrt(VVp),"\n")
+     cat("h2G =",h2G,"SE =",sqrt(Varh2G),"h2GE =",h2GE,"SE =",sqrt(Varh2GE),"\n")
+  }
+  invisible(list(Vp=Vp,VVp=VVp,h2G=h2G,Varh2G=Varh2G,h2GE=h2GE,Varh2GE=Varh2GE))
 }
 
-h2l <- function(K=0.05,P=0.5,h2,se)
+h2l <- function(K=0.05,P=0.5,h2,se,verbose=TRUE)
 {
   x <- qnorm(1-K)
   z <- dnorm(x)
@@ -289,16 +308,17 @@ h2l <- function(K=0.05,P=0.5,h2,se)
   sel <- f*se
   z2 <- K^2*(1-K)^2/(f*fP)
   x2 <- -log(2*pi*z2)
-  cat("h2=",h2,"SE=",se,"\n")
-  cat("h2l=",h2l,"SE=",sel,"\n")
-  list(h2=h2,se=se,h2l=h2l,sel=sel,z=sqrt(x2))
+  if (verbose) {
+     cat("K = ", K, "P = ", P, "\n")
+     cat("h2 =",h2,"SE =",se,"h2l =",h2l,"SE =",sel,"\n")
+  }
+  invisible(list(h2=h2,se=se,h2l=h2l,sel=sel,z=sqrt(x2)))
 }
 
 # R script to read the GRM binary file
 
 ReadGRMBin <- function(prefix, AllN=FALSE, size=4)
 {
-  sum_i <- function(i) return(sum(1:i))
   BinFileName <- paste(prefix,".grm.bin",sep="")
   NFileName <- paste(prefix,".grm.N.bin",sep="")
   IDFileName <- paste(prefix,".grm.id",sep="")
@@ -311,6 +331,128 @@ ReadGRMBin <- function(prefix, AllN=FALSE, size=4)
   if(AllN) N <- readBin(NFile, n=n*(n+1)/2, what=numeric(0), size=size)
   else N <- readBin(NFile, n=1, what=numeric(0), size=size)
   close(NFile)
-  i <- sapply(1:n, sum_i)
-  return(list(diag=grm[i], off=grm[i], id=id, N=N))
+  i <- sapply(1:n, function(i) i*(i+1)/2)
+  GRM <- matrix(NA,n,n)
+  GRM[upper.tri(GRM,diag=TRUE)] <- grm
+  GRM[lower.tri(GRM)] <- t(GRM)[lower.tri(GRM)]
+  invisible(list(grm=grm, id=id, N=N, GRM=GRM))
+}
+
+WriteGRMBin <- function(prefix, grm, N, id, size=4)
+{
+  BinFileName <- paste(prefix,".grm.bin",sep="")
+  NFileName <- paste(prefix,".grm.N.bin",sep="")
+  IDFileName <- paste(prefix,".grm.id",sep="")
+  grm.bin <- file(BinFileName, "wb")
+  writeBin(grm,grm.bin,size=size)
+  close(grm.bin)
+  grm.N.bin <- file(NFileName, "wb")
+  writeBin(N,grm.N.bin,size=size)
+  close(grm.N.bin)
+  write.table(id,IDFileName,col.names=FALSE,quote=FALSE,row.names=FALSE,sep="\t")
+}
+
+ReadGRM <- function(prefix=51)
+{
+  idfile <- paste(prefix,".grm.id",sep="")
+  id <- read.delim(idfile,header=FALSE,sep="\t")
+  N <- dim(id)[1]
+  L <- N * (N + 1) /2
+  grmfile <- paste(prefix,".grm.gz",sep="")
+  gz <- gzfile(grmfile)
+  grm_lines <- readLines(gz)
+  close(gz)
+  GRM_list <- sapply(grm_lines,strsplit,"\t")
+  M <- as.integer(lapply(GRM_list,"[[",3))
+  grm <- as.numeric(lapply(GRM_list,"[[",4))
+  GRM <- matrix(NA,N,N)
+  GRM[upper.tri(GRM,diag=TRUE)] <- grm
+  GRM[lower.tri(GRM)] <- t(GRM)[lower.tri(GRM)]
+  invisible(list(GRM=GRM,N=M,id=id,grm=grm))
+}
+
+WriteGRM <- function(prefix=51,id,N,GRM)
+{
+  M <- N
+  N <- dim(GRM)[1]
+  k2l <- matrix(NA,N*(N+1)/2,4)
+  L <- 1
+  for(i in 1:N)
+  {
+    for(j in 1:i)
+    {
+      k2l[L,] <- c(i,j,M[L],GRM[i,j])
+      L <- L + 1
+    }
+  }
+  idfile <- paste(prefix,".grm.id",sep="")
+  write(t(id),file=idfile,2,sep="\t")
+  grmfile <- paste(prefix,".grm.gz",sep="")
+  gz <- gzfile(grmfile,"w")
+  write.table(k2l,file=gz,col.names=FALSE,row.names=FALSE,quote=FALSE,sep="\t")
+  close(gz)
+}
+
+ReadGRMPLINK <- function(prefix,diag=1)
+{
+  f <- paste(prefix,".genome",sep="")
+  g <- read.table(f,header=TRUE,as.is=TRUE)
+  L <- dim(g)[1]
+  N <- (1+sqrt(1+8*L))/2
+  pi_hat <- g["PI_HAT"]
+  PIHAT <- matrix(NA,N,N)
+  diag(PIHAT) <- diag
+  PIHAT[lower.tri(PIHAT)] <- pi_hat[,1]
+  PIHAT[upper.tri(PIHAT)] <- t(PIHAT)[upper.tri(PIHAT)]
+  idplink <- function (N)
+  {
+    id <- function(N, diag=TRUE)
+    {
+      irep <- function(i) rep(i,i)
+      iter <- function(i) 1:i
+      i <- unlist(lapply(1:N,irep))
+      j <- unlist(lapply(lapply(1:N,iter),cbind))
+      ij <- cbind(i,j)
+      if (diag) ij
+      else subset(ij,ij[,1]!=ij[,2])
+    }
+    ij <- id(N, diag=FALSE)
+    ij[order(ij[,2]),2:1]
+  }
+  fid1 <- g[1,"FID1"]
+  iid1 <- g[1,"IID1"]
+  fid <- c(fid1,g[1:(N-1),"FID2"])
+  iid <- c(iid1,g[1:(N-1),"IID2"])
+  ji <- idplink(N)
+  idn <- 1:N
+  ii <- cbind(i=idn,j=idn)
+  ij <- rbind(ji,ii)
+  idx <- ij[order(ij[,2]),2:1]
+  invisible(list(pihat=PIHAT[lower.tri(PIHAT,diag=TRUE)],PIHAT=PIHAT,id=cbind(fid,iid),idx=idx))
+}
+
+WriteGRMSAS <- function(grmlist,outfile="gwas")
+{
+  require(foreign)
+  with(grmlist,
+  {
+    parm <- 1
+    colnames(GRM) <- row <- paste("COL",1:dim(id)[1],sep="")
+    names(id) <- c("idn","id")
+    write.dta(data.frame(id,parm,row,GRM),paste(outfile,".dta",sep=""))
+  })
+}
+
+ReadGRMPCA <- function(prefix)
+{
+  values <- scan(paste(prefix,".eigenval",sep=""))
+  vectors <- read.table(paste(prefix,".eigenvec",sep=""))
+  N <- dim(vectors)[1]
+  id <- vectors[,1:2]
+  vectors <- as.matrix(vectors[,-(1:2)])
+  s <- (values>0)
+  posGRM <- vectors[,s]%*%diag(values[s])%*%t(vectors[,s])
+  s <- (values<0)
+  negGRM <- vectors[,s]%*%diag(values[s])%*%t(vectors[,s])
+  invisible(list(N=N,posGRM=posGRM,negGRM=negGRM,id=id))
 }

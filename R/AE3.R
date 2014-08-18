@@ -2,7 +2,7 @@ AE3 <- function(model, random, data, seed=1234, n.sim=50000, verbose=TRUE)
 {
 require(MASS)
 require(nlme)
-res <- lme(model, random = random, data = data, method = "ML")
+res <- nlme::lme(model, random = random, data = data, method = "ML")
 lns2 <- attr(res$apVar, "Pars")[1]
 lns1 <- attr(res$apVar, "Pars")[2]
 var22 <- res$apVar[1, 1]
@@ -26,7 +26,7 @@ h2.lower <- 1/(exp(2*diff.upper) + 1)
 set.seed(seed)
 mu = c(lns1, lns2)
 Sigma = matrix(c(var11, cov21, cov21, var22), ncol = 2)
-samp <- exp(2*mvrnorm(n.sim, mu, Sigma, empirical = TRUE))
+samp <- exp(2*MASS::mvrnorm(n.sim, mu, Sigma, empirical = TRUE))
 samp.h2 <- samp[,2]/(samp[,1] + samp[,2])
 CI <- quantile(samp.h2, c(0.025, 0.975))
 CL <- matrix(c(lcl95.no,ucl95.no, lcl95.qnorm,ucl95.qnorm, h2.lower,h2.upper, CI[1],CI[2]),ncol=2,byrow=TRUE)

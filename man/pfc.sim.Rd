@@ -32,9 +32,9 @@ Meth 30:2293-2305
 
 \examples{
 \dontrun{
-# Li FP, Fraumeni JF Jr, Mulvihill JJ, Blattner WA, Dreyfus MG, Tucker MA, Miller RW
-# A cancer family syndrome in twenty-four kindreds.
-# Cancer Res. 1988 Sep 15;48(18):5358-62. 
+# Li FP, Fraumeni JF Jr, Mulvihill JJ, Blattner WA, Dreyfus MG, Tucker MA,
+# Miller RW. A cancer family syndrome in twenty-four kindreds.
+# Cancer Res 1988, 48(18):5358-62. 
 
 # family_size  #_of_affected frequency
 

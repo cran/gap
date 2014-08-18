@@ -1,7 +1,8 @@
 \name{asplot}
 \alias{asplot}
 \title{Regional association plot}
-\usage{asplot(locus, map, genes, flanking=1e3, best.pval=NULL, sf=c(4,4), logpmax=10, pch=21)}
+\usage{asplot(locus, map, genes, flanking=1e3, best.pval=NULL, sf=c(4,4),
+              logpmax=10, pch=21)}
 \description{
 This function obtains regional association plot for a particular locus, based on
 the information about recombinatino rates, linkage disequilibria between the

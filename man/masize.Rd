@@ -193,11 +193,14 @@ masize("linear1",opts,gamma=0.1)
 # CpBm
 opts <- list(p=0.25, b2=log(0.5), rho=0.5, sdx2=0.5)
 masize("logistic1",opts)
-opts <- list(p=0.25, b1=log(1.5), sdx1=1, b2=log(0.5), f2=0.5, rho=0.5, ns=10000, seed=1234)
+opts <- list(p=0.25, b1=log(1.5), sdx1=1, b2=log(0.5), f2=0.5, rho=0.5, ns=10000,
+             seed=1234)
 masize("logistic4",opts)
-opts <- list(p=0.25, b1=log(1.5), sdx1=1, b2=log(0.5), f2=0.5, rho=0.5, ns=10000, seed=1234)
+opts <- list(p=0.25, b1=log(1.5), sdx1=1, b2=log(0.5), f2=0.5, rho=0.5, ns=10000,
+             seed=1234)
 masize("logistic4",opts)
-opts <- list(p=0.25, b1=log(1.5), sdx1=4.5, b2=log(0.5), f2=0.5, rho=0.5, ns=50000, seed=1234)
+opts <- list(p=0.25, b1=log(1.5), sdx1=4.5, b2=log(0.5), f2=0.5, rho=0.5, ns=50000,
+             seed=1234)
 masize("logistic4",opts)
 
 ## Poisson model

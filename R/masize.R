@@ -347,7 +347,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
         X <- matrix(rnorm(2*ns), ns, 2) %*% chol(S)
         time <- rexp(ns, rate = exp(X%*%as.matrix(c(b1, b2))))
         event <- ifelse(rank(time)<=round(ns*f), 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.ccs"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -370,7 +370,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
                    cbind(rep(1, n1), rnorm(n1, mean=mu1, sd=sdx2.1)))
         time <- rexp(ns, rate = exp(X%*%as.matrix(c(b1, b2))))
         event <- ifelse(rank(time)<=round(ns*f), 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.bcs"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -393,7 +393,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
                    cbind(rnorm(n1, mean=mu1, sd=sdx1.2), rep(1, n1)))
         time <- rexp(ns, rate = exp(X%*%as.matrix(c(b1, b2))))
         event <- ifelse(rank(time)<=round(ns*f), 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.cbs"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -418,7 +418,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
                    cbind(rep(1, n11), rep(1, n11)))
         time <- rexp(ns, rate = exp(X%*%as.matrix(c(b1, b2))))
         event <- ifelse(rank(time)<=round(ns*f), 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.bbs"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -444,7 +444,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
         }
         time <- apply(cbind(te, tc), 1, min)
         event <- ifelse(rank(time)<=round(ns*(f+fc)) & te<tc, 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.ccs2"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -475,7 +475,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
         }
         time <- apply(cbind(te, tc), 1, min)
         event <- ifelse(rank(time)<=round(ns*(f+fc)) & te<tc, 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.bcs2"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -506,7 +506,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
         }
         time <- apply(cbind(te, tc), 1, min)
         event <- ifelse(rank(time)<=round(ns*(f+fc)) & te<tc, 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.cbs2"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f
@@ -539,7 +539,7 @@ masize <- function(model,opts, alpha=0.025, gamma=0.2)
         }
         time <- apply(cbind(te, tc), 1, min)
         event <- ifelse(rank(time)<=round(ns*(f+fc)) & te<tc, 1, 0)
-        v2a1 <- coxph(Surv(time, event)~X)$var[2, 2]*ns*f
+        v2a1 <- survival::coxph(Surv(time, event)~X)$var[2, 2]*ns*f
         desc <- "cox.bbs2"
         d <- (qnorm(alpha)+qnorm(gamma))^2*v2a1/b2^2
         n <- d/f

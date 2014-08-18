@@ -1,5 +1,5 @@
 pedtodot <- function(pedfile,makeped=FALSE,sink=TRUE,page="B5",
-            url="http://www.mrc-epid.cam.ac.uk/~jinghua.zhao/r-progs.htm",height=0.5,width=0.75,rotate=0,dir="none")
+            url="http://www.mrc-epid.cam.ac.uk",height=0.5,width=0.75,rotate=0,dir="none")
 {
   if (makeped) ped <- pedfile[,-c(5,6,7,9)]
   else ped <- pedfile

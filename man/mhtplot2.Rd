@@ -44,6 +44,11 @@ labels are now in the middle rather than at the beginning of their bands in the 
 The plot is shown on or saved to the appropriate device.
 }
 
+\section{References}{
+den Hoed M, et al. (2013). Heart rate-associated loci and their effects on cardiac conduction and rhythm disorders.
+Nat Genet 45:621-631
+}
+
 \examples{
 \dontrun{
 # The following example uses only chromosomes 14 and 20 of the Nat Genet paper.
@@ -60,14 +65,26 @@ mdata <- mdata[,c("CHR","POS","P","gene","colour")]
 ops <- mht.control(colors=rep(c("lightgray","gray"),11),yline=1.5,xline=2,srt=0)
 hops <- hmht.control(data=subset(mdata,!is.na(gene)))
 v <- "Verdana"
-ifelse(Sys.info()['sysname']=="Windows", windowsFonts(ffamily=windowsFont(v)), ffamily <- v)
-tiff("mh.tiff",width=.03937*189,height=.03937*189/2,units="in",res=1200,compress="lzw")
+ifelse(Sys.info()['sysname']=="Windows", windowsFonts(ffamily=windowsFont(v)),
+       ffamily <- v)
+tiff("mh.tiff", width=.03937*189, height=.03937*189/2, units="in", res=1200,
+     compress="lzw")
 par(las=2, xpd=TRUE, cex.axis=1.8, cex=0.4)
 mhtplot2(with(mdata,cbind(CHR,POS,P,colour)),ops,hops,pch=19,
          ylab=expression(paste(plain("-"),log[10],plain("p-value"),sep=" ")),
          family="ffamily")
 axis(2,pos=2,at=seq(0,25,5),family="ffamily",cex=0.5,cex.axis=1.1)
 dev.off()
+
+# To exemplify the use of chr, pos and p without gene annotation
+# in response to query from Vallejo, Roger <Roger.Vallejo@ARS.USDA.GOV>
+opar <- par()
+par(cex=0.4)
+ops <- mht.control(colors=rep(c("lightgray","lightblue"),11),srt=0,yline=2.5,xline=2)
+mhtplot2(data.frame(mhtdata[,c("chr","pos","p")],gene=NA,color=NA),ops,xlab="",ylab="",srt=0)
+axis(2,at=1:16)
+title("data in mhtplot used by mhtplot2")                 
+par(opar)
 }
 }
 \author{Jing Hua Zhao}

@@ -80,7 +80,8 @@ selogOR <- abs(logOR-log(ORhi))/1.96
 p <- ifelse(logOR>0,2*(1-pnorm(logOR/selogOR)),2*pnorm(logOR/selogOR))
 p
 q <- qnorm(1-p/2)
-POWER <- ifelse(log(ORlist)>0,1-pnorm(q-log(ORlist)/selogOR),pnorm(-q-log(ORlist)/selogOR))
+POWER <- ifelse(log(ORlist)>0,1-pnorm(q-log(ORlist)/selogOR),
+                pnorm(-q-log(ORlist)/selogOR))
 POWER
 FPRPex <- t(p*(1-pi0)/(p*(1-pi0)+POWER\%o\%pi0))
 row.names(FPRPex) <- pi0

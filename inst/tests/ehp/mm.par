@@ -1,0 +1,6 @@
+6  0  0  5  << nloci, case/control, labelpermutation(1=permuted),npermute
+2 2 2 2 2 11 << alleles
+0 0          << is genotype output genotypes (0=no, 1=yes)
+1 1 0 0 0 0  << marker selection status (0=unselected, 1=selected)
+1 0 0 0 0 0  << marker permutation status (0=not permuted, 1=permuted)
+0.001 0.05 0.2 0.8 << disease model for case-control design

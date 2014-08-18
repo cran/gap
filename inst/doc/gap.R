@@ -1,7 +1,7 @@
 ### R code from vignette source 'gap.Rnw'
 
 ###################################################
-### code chunk number 1: gap.Rnw:200-236
+### code chunk number 1: gap.Rnw:225-263
 ###################################################
 library(gap)
 models <- matrix(c(
@@ -18,12 +18,14 @@ models <- matrix(c(
          1.5, 0.50,
          1.5, 0.80), ncol=2, byrow=TRUE)
 outfile <- "fbsize.txt"
-cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",file=outfile,sep="\t")
+cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",
+    file=outfile,sep="\t")
 for(i in 1:12) {
     g <- models[i,1]
     p <- models[i,2]
     z <- fbsize(g,p)
-    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,file=outfile,append=TRUE,sep="\t")
+    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,
+        file=outfile,append=TRUE,sep="\t")
     cat("\n",file=outfile,append=TRUE)
 }
 table1 <- read.table(outfile,header=TRUE,sep="\t")
@@ -42,7 +44,7 @@ table1
 
 
 ###################################################
-### code chunk number 2: gap.Rnw:241-269
+### code chunk number 2: gap.Rnw:268-296
 ###################################################
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
@@ -75,7 +77,7 @@ table5
 
 
 ###################################################
-### code chunk number 3: gap.Rnw:274-319
+### code chunk number 3: gap.Rnw:301-346
 ###################################################
 library(gap)
 # ARIC study
@@ -125,19 +127,19 @@ unlink(outfile)
 
 
 ###################################################
-### code chunk number 4: gap.Rnw:330-337
+### code chunk number 4: gap.Rnw:357-364
 ###################################################
 # pedigree diagram
 data(lukas,package="gap")
 library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
-png("figures/lukas.png",1280,960)
+pdf("figures/lukas.pdf",height=14,width=15)
 plot(ped)
 dev.off()
 
 
 ###################################################
-### code chunk number 5: gap.Rnw:347-373
+### code chunk number 5: gap.Rnw:374-400
 ###################################################
 # unordered individuals
 library(gap)
@@ -168,10 +170,10 @@ sum(abs(z))
 
 
 ###################################################
-### code chunk number 6: gap.Rnw:384-392
+### code chunk number 6: gap.Rnw:411-419
 ###################################################
 library(gap)
-png("figures/qqunif.png")
+pdf("figures/qqunif.pdf",height=10,width=10)
 u_obs <- runif(1000)
 r <- qqunif(u_obs,pch=21,bg="blue",bty="n")
 u_exp <- r$y
@@ -181,10 +183,31 @@ dev.off()
 
 
 ###################################################
-### code chunk number 7: gap.Rnw:398-414
+### code chunk number 7: gap.Rnw:427-443
 ###################################################
 library(gap)
-png("figures/mhtplot.png")
+load("4w.rda")
+ord <- with(d,order(chr,pos))
+d <- d[ord,]
+pdf("figures/4w.pdf",height=9,width=10)
+oldpar <- par()
+par(cex=0.6)
+colors <- c(rep(c("blue","red"),15),"red")
+mhtplot(d,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
+axis(2,cex.axis=2)
+suggestiveline <- -log10(3.60036E-05)
+genomewideline <- -log10(1.8E-06)
+abline(h=suggestiveline, col="blue")
+abline(h=genomewideline, col="green")
+abline(h=0)
+dev.off()
+
+
+###################################################
+### code chunk number 8: gap.Rnw:449-465
+###################################################
+library(gap)
+png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
 data <- with(mhtdata,cbind(chr,pos,p))
 glist <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3","PPP1R3B",
            "RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
@@ -202,43 +225,23 @@ dev.off()
 
 
 ###################################################
-### code chunk number 8: gap.Rnw:421-437
+### code chunk number 9: gap.Rnw:476-481
 ###################################################
 library(gap)
-load("4w.rda")
-ord <- with(d,order(chr,pos))
-d <- d[ord,]
-png("figures/4w.png")
-oldpar <- par()
-par(cex=0.6)
-colors <- c(rep(c("blue","red"),15),"red")
-mhtplot(d,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
-axis(2,cex.axis=2)
-suggestiveline <- -log10(3.60036E-05)
-genomewideline <- -log10(1.8E-06)
-abline(h=suggestiveline, col="blue")
-abline(h=genomewideline, col="green")
-abline(h=0)
-dev.off()
-
-
-###################################################
-### code chunk number 9: gap.Rnw:443-448
-###################################################
-library(gap)
-png("figures/asplot.png")
+pdf("figures/asplot.pdf",height=14,width=14)
 asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
 title("CDKN2A/CDKN2B Region")
 dev.off()
 
 
 ###################################################
-### code chunk number 10: gap.Rnw:457-466
+### code chunk number 10: gap.Rnw:491-501
 ###################################################
 library(gap)
-png("figures/ESplot.png")
+pdf("figures/ESplot.pdf",height=10,width=10)
 options(stringsAsFactors=FALSE)
-testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted","Heavily adjusted","Other"),
+testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted",
+                       "Heavily adjusted","Other"),
 OR = c(4.5,3.5,2.5,1.5,1),
 SElogOR = c(0.2,0.1,0.5,0.5,0.2))
 ESplot(testdata,v=1)

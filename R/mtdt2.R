@@ -4,13 +4,13 @@ mtdt2 <- function(x,verbose=TRUE,n.sim=NULL,...)
   dims <- dim(x)[1]
   colnames(x) <- paste(1:dims,sep="")
   rownames(x) <- paste(1:dims,sep="")
-  c2b <- as.data.frame(countsToBinomial(x))
+  c2b <- as.data.frame(BradleyTerry2::countsToBinomial(x))
   names(c2b) <- c("allele1","allele2","transmitted","nontransmitted")
   allele1 <- with(c2b, allele1)
   allele2 <- with(c2b, allele2)
   transmitted <- with(c2b, transmitted)
   nontransmitted <- with(c2b, nontransmitted)
-  btx <- BTm(cbind(transmitted,nontransmitted), allele1, allele2, ~ allele, id="allele", data=c2b, ...)
+  btx <- BradleyTerry2::BTm(cbind(transmitted,nontransmitted), allele1, allele2, ~ allele, id="allele", data=c2b, ...)
   t1 <- btx$null.deviance
   t2 <- btx$deviance
   t3 <- t1-t2
@@ -33,7 +33,7 @@ mtdt2 <- function(x,verbose=TRUE,n.sim=NULL,...)
        for(j in 1:transmissionlen) transmittedn[j] <- rbinom(1,transmissions[j],0.5)
        nontransmittedn <- transmissions-transmittedn
        c2bn <- data.frame(c2b,transmittedn,nontransmittedn)
-       btn <- BTm(cbind(transmittedn,nontransmittedn), allele1, allele2, ~ allele, id="allele", data=c2bn, ...)
+       btn <- BradleyTerry2::BTm(cbind(transmittedn,nontransmittedn), allele1, allele2, ~ allele, id="allele", data=c2bn, ...)
        t1 <- btn$null.deviance
        t2 <- btn$deviance
        t3 <- t1-t2

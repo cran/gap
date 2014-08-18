@@ -1,10 +1,27 @@
-Version history of R genetic analysis package (R/gap)
+Version history of the R genetic analysis package (R/gap)
+
+Version 1.1-12
+18-08-2014	Revise packageStartupMessage and NAMESPACE
+		Use scope operator for external function calls as suggested by Prof Ripley
+		Add Repository to DESCRIPTION according to R CMD check --as-cran
+
+Version 1.1-11
+18-08-2014	Use Unit URL, suggest mets and add INDEX, use of packageStartupMessage
+		Add WriteGRMSAS and SAS code for l51
+		Add ReadGRM/WriteGRM/ReadGRMPCA/ReadGRMPLINK/h2G/h2GE/VR and revise .Rd files
+		Revise demo/gap.R and kin.morgan.c in accordance with recent changes
+		Move doc/ to tests/ as in kinship to make room for vignettes
+		Replace gets() by fgets() in makeped.c as suggested by Fedora 19
+		Add source codes of associate R functions for cross-checking, e.g., 2ld
+		(first full release of GENECOUNTING source code)
+		Enhance the resolutions of figures in gap.Rnw by mixing pdf/png formats
+		Add rnews.Rnw, pedtodot.Rnw, jss.Rnw and h2.Rnw as additional vignettes
 
 Version 1.1.10
 30-09-2013	Create vignettes subdirectory for associate files from inst/doc
 		Remove url from DESCRIPTION
 		Add functions during experiments with GCTA
-		Add chicken example to vignette
+		Add chicken GWAS example from Titan <lone9@qq.com> to vignette
 		Wrap lines longer than 100 characters
 
 Version 1.1-9

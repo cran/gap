@@ -499,7 +499,7 @@ void readped()
         sequence += nuperson;
         nuperson = 0;
         lineperson = 1; /* added by xie*/
-        for(i=0;i<=maxind;i++) lineind[i][0]='\0';
+        for(i=0;i<maxind;i++) lineind[i][0]='\0';
         strcpy(thisped_s,newped_s);
         strcpy(curped_s,newped_s);
         nuped++;
@@ -614,7 +614,7 @@ void save_loops(count)
     loop_file[0] = '\0';
     Rprintf("\nEnter filename -> ");
     while ( loop_file[0] == '\0' ) {
-      gets(loop_file);
+      fgets(loop_file,max_filespec,stdin);
     }
     if ( (loopf = fopen(loop_file,"w")) == NULL) {
       REprintf("\nERROR: Cannot open file %s\n",loop_file);
@@ -797,7 +797,7 @@ void file_loops(char **loopfile)
   loop_file[0] = '\0';
   Rprintf("\nEnter filename -> ");
   while ( loop_file[0] == '\0' ) {
-    gets(loop_file);
+    fgets(loop_file,max_filespec,stdin);
   }
   if ( (loopf = fopen(loop_file,"r")) == NULL) {
    error("\nERROR: Cannot open file %s\n",loop_file);
@@ -1052,7 +1052,7 @@ void save_probands(count)
     proband_file[0] = '\0';
     Rprintf("\nEnter filename -> ");
     while ( proband_file[0] == '\0' ) {
-      gets(proband_file);
+      fgets(proband_file,max_filespec,stdin);
     }
     if ( (prof = fopen(proband_file,"w")) == NULL) {
       REprintf("\nERROR: Cannot open file %s\n",proband_file);
@@ -1162,7 +1162,7 @@ void file_probands(char **probandfile)
   proband_file[0] = '\0';
   Rprintf("\nEnter filename -> ");
   while ( proband_file[0] == '\0' ) {
-       gets(proband_file);
+       fgets(proband_file,max_filespec,stdin);
   }
   if ( (prof = fopen(proband_file,"r")) == NULL) {
       error("\nERROR: Cannot open file %s\n",proband_file);
@@ -1722,11 +1722,11 @@ main(argc,argv)
   else{                                 /* FILES ARE NOT ON COMMAND LINE */
     while ( pifile[0] == '\0' ) {
       Rprintf("Pedigree file -> ");
-      gets(pifile);
+      fgets(pifile,max_filespec,stdin);
     }
     while ( pofile[0] == '\0') {
       Rprintf("Output file   -> ");
-      gets(pofile);
+      fgets(pofile,max_filespec,stdin);
     }
   }
 
@@ -1737,7 +1737,7 @@ main(argc,argv)
   else {
     while ( pofile[0] == '\0') {
       Rprintf("Output file   -> ");
-      gets(pofile);
+      fgets(pofile,max_filespec,stdin);
     }
   }
   /* If the third argument is 'n', then ask no questions -> there  */
@@ -1815,5 +1815,6 @@ void makeped(char **pifile, char **pofile, int *autoselect,
 
 #endif
 
-/*Adapted from makeped.c on 18-10-2003*/
-/*file_loops Change u_byte to s_byte pedigree_s on 16-8-2004*/
+/* Adapted from makeped.c on 18-10-2003 */
+/* file_loops Change u_byte to s_byte pedigree_s on 16-8-2004 */
+/* Change gets to fgets in relation to console input on 2-12-2013 */

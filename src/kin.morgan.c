@@ -65,21 +65,21 @@ for (j=1;j<=*pedsize;j++)
 for (i=1;i<=*pedsize;i++)
 {
     t2=&ind[i];
-    Rprintf("%5d ",t2->self);
+/*    Rprintf("%5d ",t2->self); */
 }
-Rprintf("\n");
+/* Rprintf("\n"); */
 k=0;
 for (i=1;i<=*pedsize;i++)
 {
     t1=&ind[i];
-    Rprintf("%5d ",t1->self);
+/*    Rprintf("%5d ",t1->self); */
     for (j=1;j<=i;j++)
     {
         kin[k]=kinship(&(ind[i]),&(ind[j]));
-        Rprintf(" %f",kin[k]);
+/*        Rprintf(" %f",kin[k]); */
         k++;
     }
-    Rprintf("\n");
+/*    Rprintf("\n"); */
 }
 
 for (i=0;i<=*pedsize;i++) nullify(&ind[i]);

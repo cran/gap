@@ -74,7 +74,8 @@ for(GRR in c(1.3,1.35,1.40)) {
       else s <- c(0.1,0.05,0.01)
       for(pi.markers in s)
       {
-        x <- tscc("multiplicative",GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)
+        x <- tscc("multiplicative",GRR,p1,n1,n2,M,alpha.genome,
+                  pi.samples,pi.markers,K)
         l <- c(pi.samples,pi.markers,GRR,x$C,x$power)
         l <- sprintf("\%.2f \%.2f \%.2f, \%.2f \%.2f \%.2f \%.2f, \%.2f \%.2f \%.2f \%.2f",
                      l[1],l[2],l[3],l[4],l[5],l[6],l[7],l[8],l[9],l[10],l[11])

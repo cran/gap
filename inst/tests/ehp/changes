@@ -1,0 +1,62 @@
+Version 1.1
+
+30-03-2001
+
+1. change line 436 of pm.c and 462 of pmplus.c from
+
+      if(sel[j]&&p_t.gtype[j]==0) ++k;
+to
+
+      if(sel[j]&&(a1==0||a2==0)) ++k;
+
+This will treat partial genotype in a locus to be missing, e.g., "10 0" as
+"0 0".
+
+2. increase maxloci from 5 to 15 in eh.c, 6 to 16 in ehplus.c
+
+
+15-11-2001
+
+ehplus.c:
+change maxloci to 20
+change maxhap to 1048576
+change multilike,probpcell,multiadd,multigen from int to void
+add if(wf) to fclose(wf);
+
+pmplus.c:
+add if(ehp) to fclose(ehp);
+
+Compile pmplus.c and ehplus.c (-F9000000) using MS VC++ 6.0
+
+
+16-11-2001
+
+Suppress eh.dat, case.dat, control.dat when using pmplus.exe
+
+19-04-2002
+
+Change maxhap to 48576
+
+
+Version 1.2
+
+15-04-2002
+
+Hook up fastEH+ code for pmplus.exe
+
+19-04-2002
+(thanks to Dick Howard of UNC Epidemiology Department)
+
+Place ehplus.c in Unix format
+Change CC in Makefile.sun from cc to gcc
+Problems with eh.dat/case.dat/control.dat are now fixed
+
+
+Version 2.0
+
+11-01-2004
+
+Linux (RedHat and Debian) compliant
+
+Reorganise I/O operations in eh.c, ehplus.c, fehp.c
+Change static int definitions (multilike,etc) into void

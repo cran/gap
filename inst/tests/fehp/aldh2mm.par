@@ -1,0 +1,18 @@
+8  0  0  10000        << This line has been changed
+8 8 13 14 2 2 13 10
+0 0
+0 0 1 1 0 1 1 0
+0 0 1 1 0 0 0 0       << This line has been changed
+0.001 0.05 0.2 0.8
+
+The data file contains the following marker loci
+
+D12S2070   > 450 000
+D12S839    > 450 000
+D12S821    ~ 400 000
+D12S1344      83 853
+EXON12         0
+EXON1         37 335
+D12S2263      38 927
+D12S1341   > 450 000
+

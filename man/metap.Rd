@@ -23,8 +23,8 @@ of p values and weighted by sample sizes from individual studies.
 }
 \examples{
 \dontrun{
-s <- data.frame(p1=0.1^rep(8:2,each=7,times=1),n1=rep(32000,49),p2=0.1^rep(8:2,each=1,times=7),
-                n2=rep(8000,49))
+s <- data.frame(p1=0.1^rep(8:2,each=7,times=1),n1=rep(32000,49),
+                p2=0.1^rep(8:2,each=1,times=7),n2=rep(8000,49))
 cbind(s,metap(s,2))
 
 # Speliotes, Elizabeth K., M.D. [ESPELIOTES@PARTNERS.ORG]

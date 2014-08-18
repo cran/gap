@@ -7,8 +7,8 @@ phenotypes are observed among unrelated subjects. For now, only autosomal loci a
 which this function is based is greatly acknowledged.
 }
 \usage{
-hap.score(y, geno, trait.type="gaussian", offset=NA, x.adj=NA, skip.haplo=0.005, 
-          locus.label=NA, miss.val=0, n.sim=0, 
+hap.score(y, geno, trait.type="gaussian", offset=NA, x.adj=NA,
+          skip.haplo=0.005, locus.label=NA, miss.val=0, n.sim=0, 
           method="gc", id=NA, handle.miss=0, mloci=NA, sexid=NA)
 }
 

@@ -15,17 +15,17 @@ mvmeta <- function(b,V)
       dx <- diag(ifelse(dz,1,NA))
       X <- rbind(X,dx[dz,])
       Vi[upper.tri(Vi,diag=TRUE)] <- V[i,]
-      if (i==1) Psi <- adiag(Vi[dz,dz])
-      else Psi <- adiag(Psi,Vi[dz,dz])
+      if (i==1) Psi <- magic::adiag(Vi[dz,dz])
+      else Psi <- magic::adiag(Psi,Vi[dz,dz])
    }
    dl <- length(d)
    for (i in 1:dl) Psi[i:dl,i] <- Psi[i,i:dl]
 #  Psi <- replace(Psi,is.na(Psi),0)
-   library(MASS)
-   cpd <- t(X) %*% ginv(Psi) %*% X
-   beta <- ginv(cpd) %*% t(X) %*% ginv(Psi) %*% d
-   cov.beta <- ginv(cpd)
-   X2 <- t(d) %*% ginv(Psi) %*% d - t(beta) %*% cpd %*% beta
+   require(MASS)
+   cpd <- t(X) %*% MASS::ginv(Psi) %*% X
+   beta <- MASS::ginv(cpd) %*% t(X) %*% MASS::ginv(Psi) %*% d
+   cov.beta <- MASS::ginv(cpd)
+   X2 <- t(d) %*% MASS::ginv(Psi) %*% d - t(beta) %*% cpd %*% beta
    df <- length(d)-n2
    p <- 1-pchisq(X2,df)
 

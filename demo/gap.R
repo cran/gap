@@ -34,7 +34,7 @@ summary(ex.gc)
 #
 # This is an example extracted from HTR program by Dr D Zaykin
 #
-filespec <- file.path(.path.package("gap"),"tests/htr.R")
+filespec <- file.path(path.package("gap"),"tests/ehp/htr.R")
 source(filespec)
 htr.test2<-htr(y,x)
 htr.test2
@@ -42,26 +42,26 @@ htr.test2<-htr(y,x,n.sim=10)
 htr.test2
 
 #
-# Generate .dot file
+# Generate .dot file on the screen
 #
 cat(
-"1 a x x m y",
-"1 b x x f y",
-"1 c a b m n",
-"1 d a b m n",
-"1 e a b f y",sep="\n", file="1.ped")
-ped <- read.table("1.ped", as.is=T)
+"0 a x x m y",
+"0 b x x f y",
+"0 c a b m n",
+"0 d a b m n",
+"0 e a b f y",sep="\n", file="0.ped")
+ped <- read.table("0.ped", as.is=T)
 pedtodot(ped,sink=F)
-unlink("1.ped")
+unlink("0.ped")
 
 #
-# To produce a pedigree diagram
+# To produce a pedigree diagram as a .dot file
 #
-filespec <- file.path(.path.package("gap"),"tests/ped.1.3.pre")
+filespec <- file.path(path.package("gap"),"tests/kinship/ped.1.3.pre")
 pre <- read.table(filespec,as.is=TRUE)
 pre
 pedtodot(pre,dir="forward")
-
+# system("dotty 1.dot &")
 #
 # Q-Q Plot for 1000 U(0,1) r.v., marking those <= 1e-5
 #
@@ -88,5 +88,7 @@ title("A simulated example according to EPIC-Norfolk QCed SNPs")
 #
 # To produce a regional association plot
 #
-data(CDKN)
-asplot("rs10811661", "CDKN2A/CDKN2B region", "9", CDKNlocus, 9, 5.4e-8, 23, CDKNmap, CDKNgenes)
+
+asplot(CDKNlocus, CDKNmap, CDKNgenes)
+title("CDKN2A/CDKN2B Region")
+asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))

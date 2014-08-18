@@ -59,26 +59,12 @@ The following list shows the data and functions currently available.
 
 \begin{tabular}{ll}
 \\
+* ANALYSIS *\\
+\\
 AE3               &      AE model using nuclear family trios\\
-BFDP              &      Bayesian false-discovery probability\\
-FPRP              &      False-positive report probability\\
-PD                &      A study of Parkinson's disease and APOE, LRRK2, SNCA makers \\
-SNP               &      Functions for single nucleotide polymorphisms (SNPs)\\
-ab                &      Test/Power calculation for mediating effect\\
-aldh2             &      ALDH2 markers and alcoholism\\
-apoeapoc          &      APOE/APOC1 markers and schizophrenia\\
-asplot            &      Regional association plot\\
 bt                &      Bradley-Terry model for contingency table\\
-b2r               &      Obtain correlation coefficients and their variance-covariances\\
 ccsize            &      Power and sample size for case-cohort design\\
-chow.test         &      Chow's test for heterogeneity in two regressions\\
-cf                &      Cystic Fibrosis data\\
-comp.score        &      score statistics for testing genetic linkage of quantitative trait\\
-crohn             &      Crohn's disease data\\
-ESplot            &      Effect-size plot\\
-fa                &      Friedreich ataxia data\\
 fbsize            &      Sample size for family-based linkage and association design\\
-fsnps             &      A case-control data involving four SNPs with missing genotype\\
 gc.em             &      Gene counting for haplotype analysis\\
 gcontrol          &      genomic control\\
 gcontrol2         &      genomic control based on p values\\
@@ -88,52 +74,88 @@ gif               &      Kinship coefficient and genetic index of familiality\\
 hap               &      Haplotype reconstruction\\
 hap.em            &      Gene counting for haplotype analysis\\
 hap.score         &      Score statistics for association of traits with haplotypes\\
-hla               &      HLA markers and schizophrenia\\
 htr               &      Haplotype trend regression\\
-h2                &      Heritability estimation according to twin correlations\\
 hwe               &      Hardy-Weinberg equilibrium test for a multiallelic marker\\
 hwe.cc            &      A likelihood ratio test of population Hardy-Weinberg equilibrium \\
-                  &      for case-control studies\\
 hwe.hardy         &      Hardy-Weinberg equilibrium test using MCMC\\
 kin.morgan        &      kinship matrix for simple pedigree\\
-klem              &      Haplotype frequency estimation based on a genotype table\\
-                  &      of two multiallelic markers\\
 LD22              &      LD statistics for two diallelic markers\\
 LDkl              &      LD statistics for two multiallelic markers\\
-lukas             &      An example pedigree\\
-\end{tabular}
-
-\begin{tabular}{ll}
-l51               &      An example pedigree data\\
-makeped           &      A function to prepare pedigrees in post-MAKEPED format\\
-mao               &      A study of Parkinson's disease and MAO gene\\
 masize            &      Sample size calculation for mediation analysis\\
-metap             &      Meta-analysis of p values\\
-metareg           &      Fixed and random effects model for meta-analysis\\
-mhtplot           &      Manhattan plot\\
-mhtplot2          &      Manhattan plot with annotations\\
 mia               &      multiple imputation analysis for hap\\
 mtdt              &      Transmission/disequilibrium test of a multiallelic marker\\
 mtdt2             &      Transmission/disequilibrium test of a multiallelic marker\\
                   &      by Bradley-Terry model\\
-muvar             &      Means and variances under 1- and 2- locus (diallelic) QTL model\\
 mvmeta            &      Multivariate meta-analysis based on generalized least squares\\
-nep499            &      A study of Alzheimer's disease with eight SNPs and APOE\\
 pbsize            &      Power for population-based association design\\
 pbsize2           &      Power for case-control association design\\
-pedtodot          &      Converting pedigree(s) to dot file(s)\\
 pfc               &      Probability of familial clustering of disease\\
 pfc.sim           &      Probability of familial clustering of disease\\
 pgc               &      Preparing weight for GENECOUNTING\\
-plot.hap.score    &      Plot haplotype frequencies versus haplotype score statistics\\
 print.hap.score   &      Print a hap.score object\\
-qqfun             &      Quantile-comparison plots\\
-qqunif            &      Q-Q plot for uniformly distributed random variable\\
-read.ms.output    &      A utility function to read ms output\\
 s2k               &      Statistics for 2 by K table\\
 tscc              &      Power calculation for two-stage case-control design\\
+\end{tabular}
+
+\begin{tabular}{ll}
+\\
+* GRAPHICS *\\
+\\
+asplot            &      Regional association plot\\
+ESplot            &      Effect-size plot\\
+mhtplot           &      Manhattan plot\\
+mhtplot2          &      Manhattan plot with annotations\\
+pedtodot          &      Converting pedigree(s) to dot file(s)\\
+plot.hap.score    &      Plot haplotype frequencies versus haplotype score statistics\\
+qqfun             &      Quantile-comparison plots\\
+qqunif            &      Q-Q plot for uniformly distributed random variable\\
+\end{tabular}
+
+\begin{tabular}{ll}
+\\
+* DATASETS *\\
+\\
+PD                &      A study of Parkinson's disease and APOE, LRRK2, SNCA makers \\
+aldh2             &      ALDH2 markers and alcoholism\\
+apoeapoc          &      APOE/APOC1 markers and schizophrenia\\
+cf                &      Cystic Fibrosis data\\
+crohn             &      Crohn's disease data\\
+fa                &      Friedreich ataxia data\\
+fsnps             &      A case-control data involving four SNPs with missing genotype\\
+hla               &      HLA markers and schizophrenia\\
+l51               &      An example pedigree data\\
+lukas             &      An example pedigree\\
+mao               &      A study of Parkinson's disease and MAO gene\\
+nep499            &      A study of Alzheimer's disease with eight SNPs and APOE\\
+\end{tabular}
+
+\begin{tabular}{ll}
+\\
+* UTILITIES *\\
+\\
+SNP               &      Functions for single nucleotide polymorphisms (SNPs)\\
+BFDP              &      Bayesian false-discovery probability\\
+FPRP              &      False-positive report probability\\
+ab                &      Test/Power calculation for mediating effect\\
+b2r               &      Obtain correlation coefficients and their variance-covariances\\
+chow.test         &      Chow's test for heterogeneity in two regressions\\
+comp.score        &      score statistics for testing genetic linkage of quantitative trait\\
+h2                &      Heritability estimation according to twin correlations\\
+                  &      for case-control studies\\
+klem              &      Haplotype frequency estimation based on a genotype table\\
+                  &      of two multiallelic markers\\
+makeped           &      A function to prepare pedigrees in post-MAKEPED format\\
+metap             &      Meta-analysis of p values\\
+metareg           &      Fixed and random effects model for meta-analysis\\
+muvar             &      Means and variances under 1- and 2- locus (diallelic) QTL model\\
+read.ms.output    &      A utility function to read ms output\\
 twinan90          &      Classic twin models\\
 whscore           &      Whittemore-Halpern scores for allele-sharing\\
+GRM functions     &      ReadGRM, ReadGRMBin, ReadGRMPLINK, ReadGRMPCA, WriteGRM, WriteGRMBin, WriteGRMSAS\\
+                  &      handle genomic relationship matrix involving other software\\
+heritability functions & h2G, VR, h2GC, h2l give point estimates as with their variances\\
+                       & for continuous traits and binary traits under liability threshold model and\\
+                       & case-control sampling\\
 \\
 \end{tabular}
 
@@ -178,6 +200,9 @@ source('http://openmx.psyc.virginia.edu/getOpenMx.R')
 \end{Scode}
 \end{Schunk}
 
+For these models it is actually simpler to use facilities as in package {\bf mets}, which I
+now suggest.
+
 \section{Demos}
 
 You can also try several simple examples via \textit{demo}:
@@ -213,12 +238,14 @@ models <- matrix(c(
          1.5, 0.50,
          1.5, 0.80), ncol=2, byrow=TRUE)
 outfile <- "fbsize.txt"
-cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",file=outfile,sep="\t")
+cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",
+    file=outfile,sep="\t")
 for(i in 1:12) {
     g <- models[i,1]
     p <- models[i,2]
     z <- fbsize(g,p)
-    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,file=outfile,append=TRUE,sep="\t")
+    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,
+        file=outfile,append=TRUE,sep="\t")
     cat("\n",file=outfile,append=TRUE)
 }
 table1 <- read.table(outfile,header=TRUE,sep="\t")
@@ -332,14 +359,14 @@ kinship matrix.
 data(lukas,package="gap")
 library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
-png("figures/lukas.png",1280,960)
+pdf("figures/lukas.pdf",height=14,width=15)
 plot(ped)
 dev.off()
 @
 
 The pedigree diagram is as follows,
 
-\includegraphics[height=14cm,width=15cm]{figures/lukas.png}
+\includegraphics[height=14cm,width=15cm]{figures/lukas.pdf}
 
 \subsubsection*{Kinship calculation}
 We then turn to the kinship calculation.
@@ -383,7 +410,7 @@ I now include some figures from the documentation that may be of interest.\\
 The following code is used to obtain a Q-Q plot via {\em qqunif} function,
 <<echo=TRUE>>=
 library(gap)
-png("figures/qqunif.png")
+pdf("figures/qqunif.pdf",height=10,width=10)
 u_obs <- runif(1000)
 r <- qqunif(u_obs,pch=21,bg="blue",bty="n")
 u_exp <- r$y
@@ -392,12 +419,36 @@ points(r$x[hits],u_exp[hits],pch=21,bg="green")
 dev.off()
 @
 
-\includegraphics[height=10cm,width=10cm]{figures/qqunif.png}
+\includegraphics[height=10cm,width=10cm]{figures/qqunif.pdf}
 
-The code below obtains a Manhattan plot via the {\em mhtplot} function,
+Based on a chicken genome scan data, the code below generates a Manhattan plot, demonstrating
+the use of gaps to separate chromosomes.
+
 <<echo=TRUE>>=
 library(gap)
-png("figures/mhtplot.png")
+load("4w.rda")
+ord <- with(d,order(chr,pos))
+d <- d[ord,]
+pdf("figures/4w.pdf",height=9,width=10)
+oldpar <- par()
+par(cex=0.6)
+colors <- c(rep(c("blue","red"),15),"red")
+mhtplot(d,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
+axis(2,cex.axis=2)
+suggestiveline <- -log10(3.60036E-05)
+genomewideline <- -log10(1.8E-06)
+abline(h=suggestiveline, col="blue")
+abline(h=genomewideline, col="green")
+abline(h=0)
+dev.off()
+@
+
+\includegraphics[scale=0.25,width=\linewidth]{figures/4w.pdf}
+
+The code below obtains a Manhattan plot with gene annotation,
+<<echo=TRUE>>=
+library(gap)
+png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
 data <- with(mhtdata,cbind(chr,pos,p))
 glist <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3","PPP1R3B",
            "RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
@@ -414,51 +465,35 @@ title("Manhattan plot with genes highlighted",cex.main=1.8)
 dev.off()
 @
 
-\includegraphics[height=14cm,width=15cm]{figures/mhtplot.png}
+\includegraphics[height=10cm,width=16cm]{figures/mhtplot.png}
 
-Based on data on chicken genome scan, the code below illustrates the use of gaps to separate chromosomes.
-
-<<echo=TRUE>>=
-library(gap)
-load("4w.rda")
-ord <- with(d,order(chr,pos))
-d <- d[ord,]
-png("figures/4w.png")
-oldpar <- par()
-par(cex=0.6)
-colors <- c(rep(c("blue","red"),15),"red")
-mhtplot(d,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
-axis(2,cex.axis=2)
-suggestiveline <- -log10(3.60036E-05)
-genomewideline <- -log10(1.8E-06)
-abline(h=suggestiveline, col="blue")
-abline(h=genomewideline, col="green")
-abline(h=0)
-dev.off()
-@
-
-\includegraphics[height=16cm,width=18cm]{figures/4w.png}
+All these look familiar, so revised form of the function called {\bf mhtplot2} was
+created for additional fatures such as centering the chromosome ticks, allowing for 
+more sophisticated coloring schemes, using prespecified fonts, etc. Please refer to
+the function's documentation example.
 
 The code below obtains a regional association plot with the {\em asplot} function,
 <<echo=TRUE>>=
 library(gap)
-png("figures/asplot.png")
+pdf("figures/asplot.pdf",height=14,width=14)
 asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
 title("CDKN2A/CDKN2B Region")
 dev.off()
 @
 
-\includegraphics[height=14cm,width=14cm]{figures/asplot.png}
+\includegraphics[height=14cm,width=14cm]{figures/asplot.pdf}
+
+The function predates the currently popular {\bf locuszoom} software but leaves
+the option open for generating such plots on the fly and locally.
 
 \subsubsection*{Effect size plot}
-The purpose of this function is simply for illustration.
-
-The code below obtains an effect size plot via the {ESplot} function,
+The code below obtains an effect size plot via the {ESplot} function.
 <<echo=TRUE>>=
 library(gap)
-png("figures/ESplot.png")
+pdf("figures/ESplot.pdf",height=10,width=10)
 options(stringsAsFactors=FALSE)
-testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted","Heavily adjusted","Other"),
+testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted",
+                       "Heavily adjusted","Other"),
 OR = c(4.5,3.5,2.5,1.5,1),
 SElogOR = c(0.2,0.1,0.5,0.5,0.2))
 ESplot(testdata,v=1)
@@ -466,7 +501,7 @@ title("This is a fictitious plot")
 dev.off()
 @
 
-\includegraphics[height=10cm,width=10cm]{figures/ESplot.png}
+\includegraphics[height=10cm,width=10cm]{figures/ESplot.pdf}
 
 Note that all these can serve as templates to customize features of your own.\\
 
@@ -486,4 +521,4 @@ The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gho
 \bibliography{gap}
 \end{document}
 
-% Date last modified: 3 May 2011
+% Date last modified: 29-7-2014

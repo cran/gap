@@ -53,10 +53,13 @@ print(round(m,2))
 
 library(genetics)
 m <- c("multiplicative","recessive","dominant","partialrecessive")
-for(i in 1:4) print(power.casectrl(p=0.1, N=50, gamma=1.1, kp=.1, alpha=5e-2, minh=m[i]))
-power.casectrl(p=0.1, N=c(25,50,100,200,500), gamma=1.1, kp=.1, alpha=5e-2, minh='r')
+for(i in 1:4) print(power.casectrl(p=0.1, N=50, gamma=1.1, kp=.1, alpha=5e-2,
+    minh=m[i]))
+power.casectrl(p=0.1, N=c(25,50,100,200,500), gamma=1.1, kp=.1, alpha=5e-2,
+    minh='r')
 f <- function(p)
-  power.casectrl(p=p, N=seq(100,1000,by=100), gamma=1.1, kp=.1, alpha=5e-2, minh='recessive')
+  power.casectrl(p=p, N=seq(100,1000,by=100), gamma=1.1, kp=.1, alpha=5e-2,
+    minh='recessive')
 m <- sapply( X=seq(0.1,0.9, by=0.1), f)
 colnames(m) <- seq(0.1,0.9, by=0.1)
 rownames(m) <- seq(100,1000,by=100)

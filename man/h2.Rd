@@ -65,10 +65,14 @@ selVars <- c('bmi1','bmi2')
 library(mvtnorm)
 n.sim <- 500
 cat ("\nThe first study\n\n")
-mzm <- as.data.frame(rmvnorm(195, c(22.75,22.75), matrix(2.66^2*c(1, 0.67, 0.67, 1), 2)))
-dzm <- as.data.frame(rmvnorm(130, c(23.44,23.44), matrix(2.75^2*c(1, 0.32, 0.32, 1), 2)))
-mzw <- as.data.frame(rmvnorm(384, c(21.44,21.44), matrix(3.08^2*c(1, 0.72, 0.72, 1), 2)))
-dzw <- as.data.frame(rmvnorm(243, c(21.72,21.72), matrix(3.12^2*c(1, 0.33, 0.33, 1), 2)))
+mzm <- as.data.frame(rmvnorm(195, c(22.75,22.75),
+                     matrix(2.66^2*c(1, 0.67, 0.67, 1), 2)))
+dzm <- as.data.frame(rmvnorm(130, c(23.44,23.44),
+                     matrix(2.75^2*c(1, 0.32, 0.32, 1), 2)))
+mzw <- as.data.frame(rmvnorm(384, c(21.44,21.44),
+                     matrix(3.08^2*c(1, 0.72, 0.72, 1), 2)))
+dzw <- as.data.frame(rmvnorm(243, c(21.72,21.72),
+                     matrix(3.12^2*c(1, 0.33, 0.33, 1), 2)))
 names(mzm) <- names(dzm) <- names(mzw) <- names(dzw) <- c("bmi1","bmi2")
 ACE_CI(mzm,dzm,n.sim,selV=selVars,verbose=FALSE)
 ACE_CI(mzw,dzw,n.sim,selV=selVars,verbose=FALSE)

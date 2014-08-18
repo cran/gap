@@ -65,7 +65,8 @@ models <- matrix(c(
     1.5, 0.50,
     1.5, 0.80), ncol=2, byrow=TRUE)
 outfile <- "fbsize.txt"
-cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",file=outfile,sep="\t")
+cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",
+    file=outfile,sep="\t")
 for(i in 1:12) {
   g <- models[i,1]
   p <- models[i,2]
@@ -86,8 +87,8 @@ g <- 4.5
 p <- 0.15
 cat("\nAlzheimer's:\n\n")
 fbsize(g,p)
-# note to replicate the Table we need set alpha=9.961139e-05,4.910638e-08 and beta=0.2004542.
-# or reset the quantiles in fbsize.R
+# note to replicate the Table we need set alpha=9.961139e-05,4.910638e-08 and
+# beta=0.2004542 or reset the quantiles in fbsize.R
 }
 \author{Jing Hua Zhao}
 \note{extracted from rm.c}

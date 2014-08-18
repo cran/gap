@@ -98,7 +98,7 @@ hap.score<-function(y, geno, trait.type="gaussian",
    if(trait.int ==4) {
       if(adjusted){
          library("rms")
-         reg.out <- lrm(y ~ x.adj)
+         reg.out <- rms::lrm(y ~ x.adj)
          K <- max(y)
          n.xadj <- ncol(x.adj)
          alpha <- reg.out$coef[1:(K-1)]
@@ -115,7 +115,7 @@ hap.score<-function(y, geno, trait.type="gaussian",
       u.score <- tmp$u.score
       v.score <- tmp$v.score
     }
-   tmp<-Ginv(v.score)
+   tmp <- haplo.stats::Ginv(v.score)
    df <- tmp$rank
    g.inv <- tmp$Ginv
    score.global <- u.score%*% g.inv %*%u.score
@@ -161,7 +161,7 @@ hap.score<-function(y, geno, trait.type="gaussian",
           }
          u.score <- tmp$u.score
          v.score <- tmp$v.score
-         tmp <- Ginv(v.score)
+         tmp <- haplo.stats::Ginv(v.score)
          g.inv <- tmp$Ginv  
          score.global.sim <- u.score %*% g.inv %*% u.score
          score.haplo.sim  <- (u.score / sqrt(diag(v.score)))^2

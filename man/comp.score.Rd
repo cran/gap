@@ -1,7 +1,8 @@
 \name{comp.score}
 \alias{comp.score}
 \title{score statistics for testing genetic linkage of quantitative trait}
-\usage{comp.score(ibddata="ibd_dist.out",phenotype="pheno.dat",mean=0,var=1,h2=0.3)}
+\usage{comp.score(ibddata="ibd_dist.out", phenotype="pheno.dat", mean=0,
+                  var=1, h2=0.3)}
 \description{
 The function empirically estimate the variance of the score functions.
 The variance-covariance matrix consists of two parts: the additive
@@ -56,12 +57,13 @@ selected pedigrees. Biometrics 61:465-473
 }
 
 \examples{
-# An example based on GENEHUNTER version 2.1, with quantitative trait data in file "pheno.dat" 
-# generated from the  standard normal distribution. The following exmaple shows that it is 
-# possible to automatically call GENEHUNTER using R function "system".
+# An example based on GENEHUNTER version 2.1, with quantitative trait data in file
+# "pheno.dat" generated from the  standard normal distribution. The following
+# exmaple shows that it is possible to automatically call GENEHUNTER using R
+# function "system".
 
 cwd <- getwd()
-cs.dir <- file.path(path.package("gap"),"doc/comp.score")
+cs.dir <- file.path(path.package("gap"),"tests/comp.score")
 setwd(cs.dir)
 dir()
 # system("gh < gh.inp")

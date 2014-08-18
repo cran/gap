@@ -31,6 +31,7 @@
 \alias{getb1star}
 \alias{getPTE}
 \alias{grec2g}
+\alias{h2G}
 \alias{h2GE}
 \alias{h2l}
 \alias{hap.control}
@@ -49,13 +50,19 @@
 \alias{plem2m}
 \alias{revhap}
 \alias{revhap.i}
+\alias{ReadGRM}
 \alias{ReadGRMBin}
+\alias{ReadGRMPLINK}
+\alias{ReadGRMPCA}
 \alias{se.exp}
 \alias{se.invlogit}
 \alias{solve_skol}
 \alias{toETDT}
 \alias{ungcode}
 \alias{VR}
+\alias{WriteGRM}
+\alias{WriteGRMBin}
+\alias{WriteGRMSAS}
 \alias{x2}
 \alias{z}
 \title{Internal functions for gap}
@@ -63,12 +70,19 @@
 a2g(a1,a2)
 g2a(g)
 g2a.c(g)
-ReadGRMBin(prefix, AllN=FALSE, size=4)
-h2GE(V,VCOV)
-h2l(K=0.05,P=0.5,h2,se)
+h2G(V,VCOV,verbose=TRUE)
+h2GE(V,VCOV,verbose=TRUE)
+h2l(K=0.05,P=0.5,h2,se,verbose=TRUE)
 KCC(model,GRR,p1,K)
+ReadGRM(prefix=51)
+ReadGRMBin(prefix, AllN=FALSE, size=4)
+ReadGRMPLINK(prefix, diag=1)
+ReadGRMPCA(prefix)
 revhap(loci,hapid)
 VR(v1,vv1,v2,vv2,c12)
+WriteGRM(prefix=51,id,N,GRM)
+WriteGRMBin(prefix, grm, N, id, size=4)
+WriteGRMSAS(grmlist, outfile="gwas")
 }
 \description{
 These are internal functions.
@@ -94,7 +108,7 @@ gcode is as a2g.
 
 grec2g is undocumented.
 
-ReadGRMBin is a function to read GCTA grm.bin file, modified from GCTA documentation
+h2G is a utility function for heritability
 
 h2GE is a utility function for heritability involving gene-environment interaction
 
@@ -118,6 +132,14 @@ micombine is used to combine imputation results.
 
 plem2m is also experimental for PLEM format.
 
+ReadGRM is a function to read GCTA grm.gz and grm.id file
+
+ReadGRMPLINK is a function to read PLINK PI_HAT as a genomic relationship matrix
+
+ReadGRMPCA is a function to read .eigenval and .eigenvec files from gcta --pca
+
+ReadGRMBin is a function to read GCTA grm.bin files, modified from GCTA documentation
+
 revhap recovers the allele indices for a given haplotype ID in a multiallelic system.
 
 revhap.i is similar to revhap.
@@ -129,6 +151,12 @@ toETDT a function used to experiment with ETDT.
 ungcode recovers alleles from genotype(s).
 
 VR is a utility function for calculating variance of a ratio
+
+WriteGRM is a utility function to write GCTA grm.gz and grm.id files
+
+WriteGRMBin is a utility function to write GCTA grm.bin files
+
+WriteGRMSAS is a utility function to write a GRM object to SAS PROCs MIXED/GLIMMIX ldata
 
 x2 is a simple chi-squared test of two proportions.
 

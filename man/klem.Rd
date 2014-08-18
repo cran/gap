@@ -36,7 +36,7 @@ The returned value is a list containing:
 z <- klem(obs=1:9)
 # an example with imputed genotypes at SH2B1
 cwd <- getwd()
-cs.dir <- file.path(path.package("gap"),"doc/klem")
+cs.dir <- file.path(path.package("gap"),"tests/klem")
 setwd(cs.dir)
 dir()
 source("SH2B1.R",echo=TRUE)
