@@ -1,8 +1,11 @@
-#19-8-2009 MRC-Epid JHZ
-
 mvmeta <- function(b,V)
 {
-   library(magic)
+   for(p in c("magic","MASS")) {
+      if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+         if (!require(p, quietly = TRUE, character.only=TRUE))
+         warning(paste("mvmeta needs package `", p, "' to be fully functional; please install", sep=""))
+      }
+   }
    n1 <- dim(b)[1]
    n2 <- dim(b)[2]
    d <- as.vector(t(b))
@@ -21,7 +24,6 @@ mvmeta <- function(b,V)
    dl <- length(d)
    for (i in 1:dl) Psi[i:dl,i] <- Psi[i,i:dl]
 #  Psi <- replace(Psi,is.na(Psi),0)
-   require(MASS)
    cpd <- t(X) %*% MASS::ginv(Psi) %*% X
    beta <- MASS::ginv(cpd) %*% t(X) %*% MASS::ginv(Psi) %*% d
    cov.beta <- MASS::ginv(cpd)

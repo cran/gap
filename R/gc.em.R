@@ -1,13 +1,16 @@
-# 7-11-2008 MRC-Epid JHZ
-
-gc.em<-function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, 
-       handle.miss=0, miss.val=0, control=gc.control())
+gc.em <- function(data, locus.label=NA, converge.eps=0.000001, maxiter=500, 
+         handle.miss=0, miss.val=0, control=gc.control())
 {
   if (control$xdata) {
      sex <- data[,1]
      data <- data[,-1]
   }
-  library(haplo.stats)
+  for(p in c("haplo.stats")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!require(p, quietly = TRUE, character.only=TRUE))
+        warning(paste("gc.em needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
   tmp0<-geno.recode(data,miss.val=miss.val)
   geno<-tmp0$grec
   geno[is.na(geno)]<-0

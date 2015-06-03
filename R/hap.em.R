@@ -1,6 +1,11 @@
-hap.em<-function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.val=0)
+hap.em <- function(id,data,locus.label=NA,converge.eps=0.000001,maxiter=500,miss.val=0)
 {
-  library(haplo.stats)
+  for(p in c("haplo.stats")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!require(p, quietly = TRUE, character.only=TRUE))  
+        warning(paste("hap.em needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
   tmp0 <- geno.recode(data,miss.val=miss.val)
   geno <- as.matrix(tmp0$grec)
   geno[is.na(geno)] <- 0

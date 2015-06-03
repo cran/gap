@@ -4,6 +4,7 @@
 \addtolength{\textwidth}{1in}
 \addtolength{\oddsidemargin}{-.5in}
 \setlength{\evensidemargin}{\oddsidemargin}
+\usepackage[utf8]{inputenx} \input{ix-utf8enc.dfu}
 \usepackage[authoryear,round]{natbib}
 \bibliographystyle{plainnat}
 
@@ -28,15 +29,17 @@ studies. It is difficult to tease out influence of the common environment for bo
 There has been a lot of interest recently in use of genomic relationship matrices (GRMs) regardless their 
 famiilial background so unrelated individuals can also be used (\cite{yang10}). The GRM associated with a 
 polygenic component in a random effects or mixed model mirrors the role of a relationship matrix based on family 
-structures. A dedicated computer program called GCTA is available (\cite{yang11}). Work has been done to show the 
-utility of GRM in linkage studies (\cite{day-williams11}) and heritability estimation (\cite{Klimentidis13}).
+structures. A dedicated computer program called GCTA (genome-wide complex trait analysis) is available
+(\cite{yang11}). Work has been done to show the utility of GRM in linkage studies (\cite{day-williams11})
+and heritability estimation (\cite{Klimentidis13}).
 
 Here we use a very simple family to illustrate heritability estimation. As GRMs typically involve large 
 quantity of genomic data, we will use the relationship matrix derived from the family structure as if it 
 was a GRM. We then provide examples to read/write GRMs either in text or binary format as required by GCTA. 
 A version showing estimated GRM in the computer program PLINK is also provided.
 
-\section{Data}
+\section{A toy example}
+\subsection{Data}
 The data is on a single family from the computer program Morgan.
 
 <<>>=
@@ -52,7 +55,7 @@ and the pedigree diagram is as follows,
 
 \includegraphics[height=12cm,width=12cm]{figures/l51.pdf}
 
-\section{Model}
+\subsection{Model}
 We can obtain a linear mixed model for the quantitative trait (qt) in \texttt{l51} above.
 <<eval=TRUE>>=
 library(gap)
@@ -63,8 +66,7 @@ r <- regress(qt ~ 1, ~k2, data=l51)
 r$sigma
 r$sigma.cov
 @
-
-\noindent The function \texttt{kin.morgan} is readily used for the well-ordered pedigree. The relationship 
+The function \texttt{kin.morgan} is readily used for the well-ordered pedigree. The relationship 
 matrix is supplied to \texttt{regress} function for parameter estimation. We can also generate a binary
 trait (bt) and run through the regression model similarly,
 <<>>==
@@ -77,7 +79,7 @@ d$sigma
 d$sigma.cov
 @
 
-\section{Heritabilities}
+\subsection{Heritabilities}
 Once the mixed models are obtained, we can get the heritability estimates. Note that although we set a 
 population prevalence (K) to be 0.25, there were 11 cases and 40 controls from the simulation, leading
 to a case/control proportion (P) of 11/51=0.2156863.
@@ -129,32 +131,25 @@ VCOV[3,2] <- -1.95297e-05
 z <- h2GE(V,VCOV)
 @
 
-Here is an example for case-control data,
+\section{Oberved vs scaled heritabilities\label{scale}}
+
+Here we explore the relationship between observed and scaled heritability estimates based on a
+case-control analysis,
 <<>>=
 library(gap)
-h2 <- 0.274553
-se <- 0.067531
 P <- 0.496404
-
-z <- h2l(P=P,h2=h2,se=se)
-
 R <- 50
-kk <- h2all <- seall <- rep(0,R)
+kk <- h2all <- seall <- h2alls <- sealls <- rep(0,R)
 for(i in 1:R)
 {
-  kk[i] <- 0.4*i/R
+  kk[i] <- i/R
+  h2 <- 0.274553
+  se <- 0.067531
   z <- h2l(kk[i],P=P,h2=h2,se=se,verbose=FALSE)
   h2all[i] <- z$h2l
   seall[i] <- z$se
-}
-
-h2 <- 0.044
-se <- 0.061
-z <- h2l(P=P,h2=h2,se=se)
-
-h2alls <- sealls <- rep(0,R)
-for(i in 1:R)
-{
+  h2 <- 0.044
+  se <- 0.061
   z <- h2l(kk[i],P=P,h2=h2,se=se,verbose=FALSE)
   h2alls[i] <- z$h2l
   sealls[i] <- z$se 
@@ -172,15 +167,12 @@ lines(kk,h2alls+sealls,lty="dashed")
 title("(b) h2 = .044 and cases% = 50")
 dev.off()
 @
-
-Later we also examine the impact of disease prevalence, using a grid over 50 prevalences, on heritbaility 
-estimation as shown in the following figure,
+where we set disease prevalence over a grid of 50, as shown in the following figure,
 
 \includegraphics[height=13cm,width=13.5cm]{figures/h2l.pdf}
 
-This suggests a nonlinear relationship between the observed and adjusted estimtes and high prevalence puts 
-more weight on the estimator. However, the effect of prevalence and ascertainment adjustment is less 
-pronounced when the heritability is low.
+This suggests a nonlinear relationship between the observed and adjusted estimtes and as a function of 
+prevalence.
 
 \section{Exchange of GRMs between software}
 
@@ -202,8 +194,12 @@ As well as illustrating how to manipulate GRMs in two formats, we also generate 
 \texttt{51.txt}. Note the function \texttt{kin.morgan} result has an elemenet called \texttt{kin} which is 
 similar to the vector \texttt{grm} above.
 
-GRM from PLINK, i.e., the .genome file, can be read via a function called \texttt{ReadGRMPLINK}. Another
-function is called \texttt{WriteGRMSAS} can be used to output an \texttt{ldata} as required by type=LIN(1)
+GRM from PLINK, i.e., the .genome file, can be read via a function called \texttt{ReadGRMPLINK}. On reviewing
+earlier work in relation to package kinship, a simpler implementation is possible esp. with integer ID's
+with the \texttt{bdsmatrix.ibd} function in package \texttt{bdsmatrix}, therefore it is added to \texttt{gap}'s
+suggested package list.
+
+Another function is called \texttt{WriteGRMSAS} can be used to output an \texttt{ldata} as required by type=LIN(1)
 in SAS PROC MIXED and PROC GLIMMIX. As for phenotypic data, we again turn to our pedigree \texttt{l51} and
 issue commands,
 <<>>==
@@ -217,6 +213,348 @@ course with this particular example, one could use PROC INBREED to generate a re
 Morgan actually provides the relevant result for this pedigree as well. It is possible to work on kinship 
 matrix generated from SOLAR, Earlier we discussed how to do this kind of analysis using SAS 
 in~\cite{zhao12}.
+
+\section{Inference based on Markov chain Monte Carlo (MCMC)}
+
+\subsection{The toy data\label{toy}}
+
+The exmaple also prompts us to seek alternative strategies for inference. Fortunately, we have been able to
+do so with available facilities in R as detailed below,
+
+First we can take advantage of the family structure,
+
+<<>>=
+library(gap)
+library(MCMCglmm)
+prior<-list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+m <- MCMCglmm(qt~sex,random=~id,data=l51,prior=prior,burnin=10000,nitt=100000,verbose=FALSE)
+summary(m)
+pdf("figures/MCMCglmm1.pdf")
+plot(m)
+dev.off()
+@
+
+\includegraphics[page=2,height=12cm,width=12cm]{figures/MCMCglmm1.pdf}
+ 
+We next seek to use the kinship matrix directly.
+<<eval=FALSE>>=
+library(gap)
+km <- kin.morgan(l51)
+k2 <- km$kin.matrix*2
+
+N <- 51
+i <- rep(1:N,rep(N,N))
+j <- rep(1:N,N)
+
+library(Matrix)
+s <-spMatrix(N,N,i,j,as.vector(k2))
+Ginv<-solve(s)
+class(Ginv) <- "dgCMatrix"
+rownames(Ginv) <- Ginv@Dimnames[[1]] <- with(l51,id)
+
+library(MCMCglmm)
+prior<-list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+m <- MCMCglmm(qt~1, random=~id, ginverse=list(id=Ginv), data=l51, prior=prior, 
+              burnin=10000, nitt=100000, verbose=FALSE)
+summary(m)
+save(m,file="MCMCglmm.fit")
+pdf("MCMCglmm2.pdf")
+plot(m$VCV)
+dev.off()
+@
+It ran fairely fast on the Linux system and the summary statistics are as follows,
+\begin{verbatim}
+> summary(m)
+
+ Iterations = 10001:99991
+ Thinning interval  = 10
+ Sample size  = 9000 
+
+ DIC: 82.43772 
+
+ G-structure:  ~id
+
+   post.mean  l-95% CI u-95% CI eff.samp
+id    0.3811 0.0003015    1.166    620.9
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units    0.4564 0.000302    0.855    817.7
+
+ Location effects: qt ~ 1 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC  
+(Intercept)  0.469000 0.004706 1.028013     2207 0.0364 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+\end{verbatim}
+The convergence plots are shown as the following graph,
+
+\includegraphics[height=12cm,width=12cm]{figures/MCMCglmm2.pdf}
+
+In the code, we also saved the model for examination. This example actually led to addition of
+packages \texttt{Matrix} and \texttt{MCMCglmm} (\cite{hadfield10}) to \texttt{gap}'s suggested
+package list. As the procedure is fairly general, it is worthwhile and much simpler to wrap up
+as a dedicated function (\texttt{MCMCgrm}) in which case the call becomes,
+<<eval=FALSE>>=
+s <- kin.morgan(l51)
+K <- with(s,kin.matrix*2)
+prior <- list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+m <- MCMCgrm(qt~1,prior,l51,K,n.burnin=10000, n.iter=100000)
+save(m,file="l51.m")
+plot(m)
+@
+Interestingly, inside the function \texttt{solve} needs to have a scope operator, 
+i.e., \texttt{Matrix::solve}, to enable \texttt{Ginv} to be S4 object. This is a nuisance but
+not a big overhead.
+
+\subsection{A simulated data}
+
+The next example is according to~\cite{meyer89, tr04} on 282 animals from 24 populations,
+from which we obtain the restricted maximum likelihood (REML) estimates first, to be
+followed by two versions of MCMC.
+<<>>=
+meyer <- within(meyer,{
+   g1 <- ifelse(generation==1,1,0)
+   g2 <- ifelse(generation==2,1,0)
+})
+# library(kinship)
+# A <- with(meyer,kinship(animal,sire,dam))*2
+# Here we convert NAs to 0s to be compatible with kin.morgan
+meyer0 <- within(meyer,{
+   id <- animal
+   animal <- ifelse(!is.na(animal),animal,0)
+   dam <- ifelse(!is.na(dam),dam,0)
+   sire <- ifelse(!is.na(sire),sire,0)
+   g1 <- ifelse(generation==1,1,0)
+   g2 <- ifelse(generation==2,1,0)
+})
+A <- kin.morgan(meyer0)$kin.matrix*2
+
+library(regress)
+r <- regress(y~-1+g1+g2,~A,data=meyer0)
+summary(r)
+with(r,h2G(sigma,sigma.cov))
+
+library(MCMCglmm)
+m <-MCMCglmm(y~-1+g1+g2,random=animal~1,pedigree=meyer[,1:3],data=meyer,verbose=FALSE)
+summary(m)
+plot(m)
+
+prior <- list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+m2 <- MCMCgrm(y~-1+g1+g2,prior,meyer0,A,singular.ok=TRUE,verbose=FALSE)
+summary(m2)
+plot(m2)
+@
+The MCMC procedures use pedigree structures or genetic relationships, respectively.
+It is good to have narrawer confidence intervals for the variance components from
+these.
+
+
+\subsection{Using OpenBUGS and JAGS}
+
+It is handy to use \texttt{MCMCgrm} as described above, but there are two aspects which
+we would like to explore. I found it still very slow with moderate sample size. Instead
+of ploughing into the implementation could we use the simpler and familiar syntax in
+OpenBUGS and JAGS? and if that is the case we can resort to faster setup such as Stan
+(\texttt{http://mc-stan.org/}).
+
+We start with OpenBUGS and for illustrative purpose we continue to use the toy data in
+section~\ref{toy} but impute the missing data for variable \texttt{qt}.
+<<>>=
+library(gap)
+set.seed(1234567)
+ped51 <- 
+within(l51, {qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),
+             mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE));})
+l51 <- rbind(subset(ped51,fid==0),subset(ped51,fid!=0))
+data=with(l51,list(n=51,f=15,f1=16,m=2,Y=qt,X=sex,FID=fid,MID=mid,
+              sd.u.add=0.9,sd.u.err=0.9))
+inits=function()list(beta=c(0,0))
+library(R2OpenBUGS)
+bugs.data(data,data.file="data.txt")
+bugs.inits(inits,n.chains=3,digits=3)
+bugsfit <- bugs(data,
+                inits,
+                parameters.to.save=c("beta","sigma2.add","sigma2.err","h2"),
+                model.file="model.txt", 
+                n.chains=3,
+                n.burnin=1000,
+                n.iter=10000,
+                codaPkg=TRUE)
+library(coda)
+pdf("figures/bugs.pdf")
+bugsfit.coda <- read.bugs(bugsfit)
+summary(bugsfit.coda)
+plot(bugsfit.coda)
+dev.off()
+@
+where \texttt{model.txt} is taken directly from \cite{waldmann09}, which requires founders precede
+the nonfounders and that is the reason we have the statement containing two subset commands.
+\begin{verbatim}
+model
+{
+  # Loop over all individuals for inference of error precision
+  for(i in 1 : n) {
+    Y[i] ~ dnorm(mu[i], tau.err)
+  }
+  # Loop over founders for inference of additive values and precision
+  for (i in 1 : f){
+    mu[i] <- mean(beta[]) + add[i]
+    add[i] ~ dnorm(0, tau.add)
+  }
+  # Loop over descendants for inference of additive values and precision
+  for (i in f1 : n){
+    mu[i] <- beta[X[i]] + add[i]
+    par.add[i] <- (add[FID[i]] + add[MID[i]])/2.0
+    add[i] ~ dnorm(par.add[i], prec.add)
+  }
+  # Specification of prior distributions
+  for (i in 1: m){
+    beta[i] ~ dnorm(0.0, 1.0E-6)
+  }
+  tau.add <- 1 / sigma2.add
+  sigma.add ~ dunif(0, sd.u.add)
+  sigma2.add <- sigma.add * sigma.add
+  tau.err <- 1 / sigma2.err
+  sigma.err ~ dunif(0, sd.u.err)
+  sigma2.err <- sigma.err * sigma.err
+  prec.add <- 2 * tau.add
+  # Specification of functions of model parameters of inferential interest
+  h2 <- sigma2.add / (sigma2.add + sigma2.err)
+}
+\end{verbatim}
+To streamline the results, we resort to package \texttt{coda}. In the coding we also output data
+and initial values which allow for use in OpenBUGS itself.
+
+\includegraphics[page=2,height=12cm,width=12cm]{figures/bugs.pdf}
+
+\noindent where we skip figures for the fixed effects and deviance while choosing to show the variance 
+components only.
+
+As before, we would still be keen to use GRM rather than a pedigree structure. We alter the coding
+above slightly and use JAGS instead, As before, we take advantage of the facility in package
+\texttt{regress} for the familiar REML estimation.
+
+<<>>=
+library(gap)
+set.seed(1234567)
+km <- kin.morgan(l51)
+k2 <- km$kin.matrix*2
+l51 <-
+within(l51, {qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),
+             mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE))})
+N <- dim(l51)[1]
+data=with(l51,list(N=N,qt=qt,sex=sex,GI=solve(k2),u=rep(0,N)))
+library(regress)
+r <- regress(qt ~ sex, ~k2, data=data)
+r
+with(r,{
+  print(sqrt(sigma+1.96*sqrt(diag(sigma.cov))))
+  h2G(sigma,sigma.cov)
+})
+inits=function()list(b1=0,b2=0,sigma.p=0.001,sigma.r=0.001)
+modelfile=function() {
+    b1 ~ dnorm(0, 0.001)
+    b2 ~ dnorm(0, 0.001)
+    sigma.p ~ dunif(0,0.9)
+    sigma.r ~ dunif(0,0.9)
+    p <- pow(sigma.p, 2)
+    r <- pow(sigma.r, 2)
+    h2 <- p / (p + r)
+    tau <- pow(sigma.r, -2)
+    xi ~ dnorm(0,tau.xi)
+    tau.xi <- pow(0.9,-2)
+    g[1:N] ~ dmnorm(u[],GI[,]/p)   
+    for(i in 1:N) {qt[i] ~ dnorm(b1 + b2 * sex[i] + xi*g[i],tau)}
+}
+library(R2jags)
+jagsfit <- jags(data,
+                inits,
+                parameters.to.save=c("b1","b2","p","r","h2"),
+                model.file=modelfile,
+                n.chains=3,
+                n.burnin=1000,
+                n.iter=10000)
+save(jagsfit,file="jags.fit")
+print(jagsfit)
+pdf("figures/jags.pdf")
+plot(jagsfit)
+library(lattice)
+jagsfit.mcmc <- as.mcmc(jagsfit)
+traceplot(jagsfit.mcmc)
+xyplot(jagsfit.mcmc)
+densityplot(jagsfit.mcmc)
+dev.off()
+@
+
+\includegraphics[page=9,height=12cm,width=12cm]{figures/jags.pdf}
+
+We see that the results are largely comparable though it appears that the BUGS version
+deviates somewhat more from \texttt{MCMCgrm}. We are hopeful though to get the idea
+through to Stan but we omit that for now.
+
+\subsection{Uncertainty in heritability estimation}
+
+By now we have probably seen enough of MCMC for the toy data, but there is still one
+more point to give.
+
+The results shown in this section follow closely to~\cite{furlotte14}, which is quite
+similar to the implementation above but uses multivariate t distribution instead. Again
+we use the toy data from~\ref{toy}, and the \texttt{R} and JAGS code are as follows,
+We can see that it is straightforward to take the kinship and identity matrices into 
+JAGS, leading to a greatly simplified program.
+
+<<>>=
+library(gap)
+set.seed(1234567)
+ped51 <- 
+within(l51, {
+  qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE))
+})
+km <- kin.morgan(l51)
+k2 <- km$kin.matrix*2
+N <- dim(l51)[1]
+data=with(ped51,list(N=N,qt=qt,sex=sex,G=k2,I=diag(N),alpha=1,gamma=1))
+inits=function()list(b1=0,b2=0,h2=0.4)
+modelfile=function() {
+    h2 ~ dunif(0,1)
+    Omega <- inverse((h2*G[,] + (1-h2)*I[,])*gamma/alpha)
+    qt[1:N] ~ dmt(mu[],Omega[,],2*alpha)
+    mu[1:N] <- b1 + b2 * sex[]
+    b1 ~ dnorm(0, 0.001)
+    b2 ~ dnorm(0, 0.001)
+}
+library(R2jags)
+jagsfit <- jags(data,inits,parameters.to.save=c("b1","b2","h2"),
+                model.file=modelfile, n.chains=3, n.burnin=1000, n.iter=10000)
+save(jagsfit,file="h2.fit")
+print(jagsfit)
+pdf("figures/h2.pdf")
+plot(jagsfit)
+library(lattice)
+jagsfit.mcmc <- as.mcmc(jagsfit)
+traceplot(jagsfit.mcmc)
+xyplot(jagsfit.mcmc)
+densityplot(jagsfit.mcmc)
+dev.off()
+@
+with sigma and alpha both setting to be one, the $h^2$ takes the position of
+variance compoenent for polygeneic effects. We now have 
+                
+\includegraphics[page=7,height=18cm,width=12cm]{figures/h2.pdf}
+
+\noindent i.e., the distribution with respect to a single variable $h^2$. This serves as a good
+correspondence to what we have seen in section~\ref{scale}. A major difference betwee
+results from pedigree structure and kinship matrix is with respect to the distribution
+of $h^2$, due to the similarity in the two JAGS implementations their greater agreement
+is perhaps not surprising.
+
+\section{Acknowledgements}
+
+I wish to thank authors of software \texttt{Morgan}, \texttt{MCMCglmm} and \texttt{GCTA}
+which made this documentation possible.
 
 \bibliography{h2}
 

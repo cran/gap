@@ -1,7 +1,8 @@
 ### R code from vignette source 'h2.Rnw'
+### Encoding: UTF-8
 
 ###################################################
-### code chunk number 1: h2.Rnw:42-49
+### code chunk number 1: h2.Rnw:45-52
 ###################################################
 library(gap)
 head(l51,10)
@@ -13,7 +14,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 2: h2.Rnw:57-64
+### code chunk number 2: h2.Rnw:60-67
 ###################################################
 library(gap)
 k2 <- kin.morgan(l51)$kin.matrix*2
@@ -25,7 +26,7 @@ r$sigma.cov
 
 
 ###################################################
-### code chunk number 3: h2.Rnw:70-77
+### code chunk number 3: h2.Rnw:72-79
 ###################################################
 N <- dim(l51)[1]
 w <- with(l51,quantile(qt,probs=0.75,na.rm=TRUE))
@@ -37,7 +38,7 @@ d$sigma.cov
 
 
 ###################################################
-### code chunk number 4: h2.Rnw:88-101
+### code chunk number 4: h2.Rnw:90-103
 ###################################################
 library(gap)
 # qt
@@ -55,13 +56,13 @@ h2G(sigma,sigma.cov)
 
 
 ###################################################
-### code chunk number 5: h2.Rnw:108-109
+### code chunk number 5: h2.Rnw:110-111
 ###################################################
 h2l(K=0.25, P=11/51, h2=0.1549304, se=0.2904298)
 
 
 ###################################################
-### code chunk number 6: h2.Rnw:121-129
+### code chunk number 6: h2.Rnw:123-131
 ###################################################
 library(gap)
 V <- c(0.017974, 0.002451, 0.198894)
@@ -74,32 +75,22 @@ z <- h2GE(V,VCOV)
 
 
 ###################################################
-### code chunk number 7: h2.Rnw:133-173
+### code chunk number 7: h2.Rnw:138-168
 ###################################################
 library(gap)
-h2 <- 0.274553
-se <- 0.067531
 P <- 0.496404
-
-z <- h2l(P=P,h2=h2,se=se)
-
 R <- 50
-kk <- h2all <- seall <- rep(0,R)
+kk <- h2all <- seall <- h2alls <- sealls <- rep(0,R)
 for(i in 1:R)
 {
-  kk[i] <- 0.4*i/R
+  kk[i] <- i/R
+  h2 <- 0.274553
+  se <- 0.067531
   z <- h2l(kk[i],P=P,h2=h2,se=se,verbose=FALSE)
   h2all[i] <- z$h2l
   seall[i] <- z$se
-}
-
-h2 <- 0.044
-se <- 0.061
-z <- h2l(P=P,h2=h2,se=se)
-
-h2alls <- sealls <- rep(0,R)
-for(i in 1:R)
-{
+  h2 <- 0.044
+  se <- 0.061
   z <- h2l(kk[i],P=P,h2=h2,se=se,verbose=FALSE)
   h2alls[i] <- z$h2l
   sealls[i] <- z$se 
@@ -119,7 +110,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 8: h2.Rnw:188-198 (eval = FALSE)
+### code chunk number 8: h2.Rnw:180-190 (eval = FALSE)
 ###################################################
 ## p <- matrix(0,N,4)
 ## for(i in 1:N) p[i,] <- with(l51[i,],c(i,i,qt,bt))
@@ -134,9 +125,219 @@ dev.off()
 
 
 ###################################################
-### code chunk number 9: h2.Rnw:209-211
+### code chunk number 9: h2.Rnw:205-207
 ###################################################
 library(foreign)
 write.dta(l51, "l51.dta")
+
+
+###################################################
+### code chunk number 10: h2.Rnw:226-234
+###################################################
+library(gap)
+library(MCMCglmm)
+prior<-list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+m <- MCMCglmm(qt~sex,random=~id,data=l51,prior=prior,burnin=10000,nitt=100000,verbose=FALSE)
+summary(m)
+pdf("figures/MCMCglmm1.pdf")
+plot(m)
+dev.off()
+
+
+###################################################
+### code chunk number 11: h2.Rnw:240-263 (eval = FALSE)
+###################################################
+## library(gap)
+## km <- kin.morgan(l51)
+## k2 <- km$kin.matrix*2
+## 
+## N <- 51
+## i <- rep(1:N,rep(N,N))
+## j <- rep(1:N,N)
+## 
+## library(Matrix)
+## s <-spMatrix(N,N,i,j,as.vector(k2))
+## Ginv<-solve(s)
+## class(Ginv) <- "dgCMatrix"
+## rownames(Ginv) <- Ginv@Dimnames[[1]] <- with(l51,id)
+## 
+## library(MCMCglmm)
+## prior<-list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+## m <- MCMCglmm(qt~1, random=~id, ginverse=list(id=Ginv), data=l51, prior=prior, 
+##               burnin=10000, nitt=100000, verbose=FALSE)
+## summary(m)
+## save(m,file="MCMCglmm.fit")
+## pdf("MCMCglmm2.pdf")
+## plot(m$VCV)
+## dev.off()
+
+
+###################################################
+### code chunk number 12: h2.Rnw:300-306 (eval = FALSE)
+###################################################
+## s <- kin.morgan(l51)
+## K <- with(s,kin.matrix*2)
+## prior <- list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+## m <- MCMCgrm(qt~1,prior,l51,K,n.burnin=10000, n.iter=100000)
+## save(m,file="l51.m")
+## plot(m)
+
+
+###################################################
+### code chunk number 13: h2.Rnw:317-348
+###################################################
+meyer <- within(meyer,{
+   g1 <- ifelse(generation==1,1,0)
+   g2 <- ifelse(generation==2,1,0)
+})
+# library(kinship)
+# A <- with(meyer,kinship(animal,sire,dam))*2
+# Here we convert NAs to 0s to be compatible with kin.morgan
+meyer0 <- within(meyer,{
+   id <- animal
+   animal <- ifelse(!is.na(animal),animal,0)
+   dam <- ifelse(!is.na(dam),dam,0)
+   sire <- ifelse(!is.na(sire),sire,0)
+   g1 <- ifelse(generation==1,1,0)
+   g2 <- ifelse(generation==2,1,0)
+})
+A <- kin.morgan(meyer0)$kin.matrix*2
+
+library(regress)
+r <- regress(y~-1+g1+g2,~A,data=meyer0)
+summary(r)
+with(r,h2G(sigma,sigma.cov))
+
+library(MCMCglmm)
+m <-MCMCglmm(y~-1+g1+g2,random=animal~1,pedigree=meyer[,1:3],data=meyer,verbose=FALSE)
+summary(m)
+plot(m)
+
+prior <- list(R=list(V=1, nu=0.002), G=list(G1=list(V=1, nu=0.002)))
+m2 <- MCMCgrm(y~-1+g1+g2,prior,meyer0,A,singular.ok=TRUE,verbose=FALSE)
+summary(m2)
+plot(m2)
+
+
+###################################################
+### code chunk number 14: h2.Rnw:365-391
+###################################################
+library(gap)
+set.seed(1234567)
+ped51 <- 
+within(l51, {qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),
+             mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE));})
+l51 <- rbind(subset(ped51,fid==0),subset(ped51,fid!=0))
+data=with(l51,list(n=51,f=15,f1=16,m=2,Y=qt,X=sex,FID=fid,MID=mid,
+              sd.u.add=0.9,sd.u.err=0.9))
+inits=function()list(beta=c(0,0))
+library(R2OpenBUGS)
+bugs.data(data,data.file="data.txt")
+bugs.inits(inits,n.chains=3,digits=3)
+bugsfit <- bugs(data,
+                inits,
+                parameters.to.save=c("beta","sigma2.add","sigma2.err","h2"),
+                model.file="model.txt", 
+                n.chains=3,
+                n.burnin=1000,
+                n.iter=10000,
+                codaPkg=TRUE)
+library(coda)
+pdf("figures/bugs.pdf")
+bugsfit.coda <- read.bugs(bugsfit)
+summary(bugsfit.coda)
+plot(bugsfit.coda)
+dev.off()
+
+
+###################################################
+### code chunk number 15: h2.Rnw:440-489
+###################################################
+library(gap)
+set.seed(1234567)
+km <- kin.morgan(l51)
+k2 <- km$kin.matrix*2
+l51 <-
+within(l51, {qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),
+             mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE))})
+N <- dim(l51)[1]
+data=with(l51,list(N=N,qt=qt,sex=sex,GI=solve(k2),u=rep(0,N)))
+library(regress)
+r <- regress(qt ~ sex, ~k2, data=data)
+r
+with(r,{
+  print(sqrt(sigma+1.96*sqrt(diag(sigma.cov))))
+  h2G(sigma,sigma.cov)
+})
+inits=function()list(b1=0,b2=0,sigma.p=0.001,sigma.r=0.001)
+modelfile=function() {
+    b1 ~ dnorm(0, 0.001)
+    b2 ~ dnorm(0, 0.001)
+    sigma.p ~ dunif(0,0.9)
+    sigma.r ~ dunif(0,0.9)
+    p <- pow(sigma.p, 2)
+    r <- pow(sigma.r, 2)
+    h2 <- p / (p + r)
+    tau <- pow(sigma.r, -2)
+    xi ~ dnorm(0,tau.xi)
+    tau.xi <- pow(0.9,-2)
+    g[1:N] ~ dmnorm(u[],GI[,]/p)   
+    for(i in 1:N) {qt[i] ~ dnorm(b1 + b2 * sex[i] + xi*g[i],tau)}
+}
+library(R2jags)
+jagsfit <- jags(data,
+                inits,
+                parameters.to.save=c("b1","b2","p","r","h2"),
+                model.file=modelfile,
+                n.chains=3,
+                n.burnin=1000,
+                n.iter=10000)
+save(jagsfit,file="jags.fit")
+print(jagsfit)
+pdf("figures/jags.pdf")
+plot(jagsfit)
+library(lattice)
+jagsfit.mcmc <- as.mcmc(jagsfit)
+traceplot(jagsfit.mcmc)
+xyplot(jagsfit.mcmc)
+densityplot(jagsfit.mcmc)
+dev.off()
+
+
+###################################################
+### code chunk number 16: h2.Rnw:509-541
+###################################################
+library(gap)
+set.seed(1234567)
+ped51 <- 
+within(l51, {
+  qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE))
+})
+km <- kin.morgan(l51)
+k2 <- km$kin.matrix*2
+N <- dim(l51)[1]
+data=with(ped51,list(N=N,qt=qt,sex=sex,G=k2,I=diag(N),alpha=1,gamma=1))
+inits=function()list(b1=0,b2=0,h2=0.4)
+modelfile=function() {
+    h2 ~ dunif(0,1)
+    Omega <- inverse((h2*G[,] + (1-h2)*I[,])*gamma/alpha)
+    qt[1:N] ~ dmt(mu[],Omega[,],2*alpha)
+    mu[1:N] <- b1 + b2 * sex[]
+    b1 ~ dnorm(0, 0.001)
+    b2 ~ dnorm(0, 0.001)
+}
+library(R2jags)
+jagsfit <- jags(data,inits,parameters.to.save=c("b1","b2","h2"),
+                model.file=modelfile, n.chains=3, n.burnin=1000, n.iter=10000)
+save(jagsfit,file="h2.fit")
+print(jagsfit)
+pdf("figures/h2.pdf")
+plot(jagsfit)
+library(lattice)
+jagsfit.mcmc <- as.mcmc(jagsfit)
+traceplot(jagsfit.mcmc)
+xyplot(jagsfit.mcmc)
+densityplot(jagsfit.mcmc)
+dev.off()
 
 

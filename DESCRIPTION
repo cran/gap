@@ -1,14 +1,15 @@
 Package: gap
-Version: 1.1-12
-Date: 2014-8-18
-Title: Genetic analysis package
+Version: 1.1-13
+Date: 2015-6-3
+Title: Genetic Analysis Package
 Author: Jing Hua Zhao and colleagues with inputs from Kurt Hornik and
         Brian Ripley
 Maintainer: Jing Hua Zhao <jinghua.zhao@mrc-epid.cam.ac.uk>
 Depends: R (>= 2.10)
-Suggests: BradleyTerry2, coxme, rms, MASS, NCBI2R, foreign, grid,
-        haplo.stats, kinship2, magic, mets, nlme, pedigree, pedigreemm,
-        regress, survival
+Suggests: BradleyTerry2, MASS, Matrix, MCMCglmm, R2OpenBUGS, R2jags,
+        bdsmatrix, coda, coxme, foreign, grid, haplo.stats, kinship2,
+        lattice, magic, mets, nlme, pedigree, pedigreemm, regress, rms,
+        survival
 LazyData: Yes
 LazyLoad: Yes
 Description: It is designed as an integrated package for genetic data
@@ -21,7 +22,7 @@ Description: It is designed as an integrated package for genetic data
         covariates.
 License: GPL (>= 2)
 URL: http://www.mrc-epid.cam.ac.uk/people/jing-hua-zhao/
-Packaged: 2014-08-18 14:52:29 UTC; ripley
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2014-08-18 16:56:37
+Packaged: 2015-06-03 09:20:36 UTC; jhz22
+Date/Publication: 2015-06-03 14:38:10

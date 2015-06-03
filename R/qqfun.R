@@ -23,7 +23,12 @@ qqfun <- function(x, distribution="norm", ylab=deparse(substitute(x)),
         abline(a, b, col=lcol, lwd=lwd)
     }
     if (line=="robust") {
-        if (!require("MASS")) stop("MASS package not available")
+        for(p in c("MASS")) {
+           if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+              if (!require(p, quietly = TRUE, character.only=TRUE))
+              warning(paste("qqfun needs package `", p, "' to be fully functional; please install", sep=""))
+           }
+        }
         coef <- coefficients(MASS::rlm(ord.x~z))
         a <- coef[1]
         b <- coef[2]

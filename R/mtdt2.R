@@ -1,6 +1,11 @@
 mtdt2 <- function(x,verbose=TRUE,n.sim=NULL,...)
 {
-  require(BradleyTerry2)
+  for(p in c("BradleyTerry2")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!require(p, quietly = TRUE, character.only=TRUE))
+        warning(paste("mtdt2 needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
   dims <- dim(x)[1]
   colnames(x) <- paste(1:dims,sep="")
   rownames(x) <- paste(1:dims,sep="")

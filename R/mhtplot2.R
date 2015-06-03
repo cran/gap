@@ -1,7 +1,12 @@
 mhtplot2 <- function (data, control = mht.control(), hcontrol = hmht.control(), 
     ...) 
 {
-    require(grid)
+    for(p in c("grid")) {
+       if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+          if (!require(p, quietly = TRUE, character.only=TRUE))
+          warning(paste("mhtplot2 needs package `", p, "' to be fully functional; please install", sep=""))
+       }
+    }
     nonmiss <- !apply(is.na(data[,1:3]), 1, any)
     data2 <- data[nonmiss, ]
     chr <- data2[, 1]

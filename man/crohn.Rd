@@ -118,6 +118,11 @@ The positions, names and haplotype blocks reported are as follows,
 
 However it has been updated after the paper was published
 (posted on \url{http://www.broad.mit.edu/humgen/IBD5/haplodata.html})
+
+An example use of the data is with the following paper,
+Kelly M. Burkett, Celia M. T. Greenwood, BradMcNeney, Jinko Graham.
+Gene genealogies for genetic association mapping, with application to Crohn's disease.
+Fron Genet 2013, 4(260) doi: 10.3389/fgene.2013.00260
 }
 \usage{data(crohn)}
 

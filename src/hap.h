@@ -46,10 +46,15 @@ double rangamma(double);
 /* Unix/PC random number functions, 08/05/2002 JH Zhao */
 
 #ifndef SEED /*srand48*/
+/*
   #define SEED srand
+*/
 #endif
 #ifndef URAN /*drand48*/
+/*
   #define URAN() rand()/(double)RAND_MAX
+*/
+  #define URAN() unif_rand()
 #endif
 
 /* JH Zhao 1/6/1999 IoP */

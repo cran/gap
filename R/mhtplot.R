@@ -8,7 +8,12 @@ hmht.control <- function(data=NULL, colors=NULL, yoffset=0.25, cex=1.5, boxed=FA
    list(data=data,colors=colors,yoffset=yoffset,cex=cex,boxed=boxed) }
 
 mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
-  require(grid)
+  for(p in c("grid")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!require(p, quietly = TRUE, character.only=TRUE))
+        warning(paste("mhtplot needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
   data2 <- data[!apply(is.na(data),1,any),]
   n2 <- dim(data2[1])
   chr <- data2[,1]

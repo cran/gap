@@ -18,10 +18,10 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.1-12\cr
+Version: \tab 1.1-13\cr
 Depends: \tab R(>= 2.1.0)\cr
-Suggests: \tab BradleyTerry2, coxme, rms, MASS, NCBI2R, grid, haplo.stats, \cr
-        \tab kinship2, magic, mets, nlme, pedigree, pedigreemm, regress, survival\cr
+Suggests: \tab BradleyTerry2, MASS, Matrix, MCMCglmm, NCBI2R, bdsmatrix, coxme, foreign, grid, \cr
+        \tab  haplo.stats, kinship2, magic, mets, nlme, pedigree, pedigreemm, regress, rms, survival \cr
 License: \tab GPL (>=2)\cr
 URL: \tab http://www.mrc-epid.cam.ac.uk/people/jing-hua-zhao\cr
 }
@@ -52,6 +52,7 @@ kin.morgan        \tab      kinship matrix for simple pedigree\cr
 LD22              \tab      LD statistics for two diallelic markers\cr
 LDkl              \tab      LD statistics for two multiallelic markers\cr
 masize            \tab      Sample size calculation for mediation analysis\cr
+MCMCgrm           \tab	    Mixed modeling with genetic relationship matrices\cr
 mia               \tab      multiple imputation analysis for hap\cr
 mtdt              \tab      Transmission/disequilibrium test of a multiallelic marker\cr
 mtdt2             \tab      Transmission/disequilibrium test of a multiallelic marker\cr
@@ -92,6 +93,7 @@ hla               \tab      HLA markers and schizophrenia\cr
 l51               \tab      An example pedigree data\cr
 lukas             \tab      An example pedigree\cr
 mao               \tab      A study of Parkinson's disease and MAO gene\cr
+meyer             \tab      A pedigree data on 282 animals deriving from two generations\cr
 nep499            \tab      A study of Alzheimer's disease with eight SNPs and APOE\cr
 
 \cr

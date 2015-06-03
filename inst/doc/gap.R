@@ -1,7 +1,59 @@
 ### R code from vignette source 'gap.Rnw'
 
 ###################################################
-### code chunk number 1: gap.Rnw:225-263
+### code chunk number 1: gap.Rnw:172-176
+###################################################
+library(gap)
+search()
+lsf.str("package:gap")
+data(package="gap")$results
+
+
+###################################################
+### code chunk number 2: gap.Rnw:263-270
+###################################################
+# pedigree diagram
+data(lukas,package="gap")
+library(kinship2)
+ped <- with(lukas,pedigree(id,father,mother,sex))
+pdf("figures/lukas.pdf",height=14,width=15)
+plot(ped)
+dev.off()
+
+
+###################################################
+### code chunk number 3: gap.Rnw:280-306
+###################################################
+# unordered individuals
+library(gap)
+gk1 <- kin.morgan(lukas)
+write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
+
+library(kinship2)
+kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
+write.table(kk1,"results/kinship_1.txt",quote=FALSE)
+
+d <- gk1$kin.matrix-kk1
+sum(abs(d))
+
+# order individuals so that parents precede their children
+library(pedigree)
+op <- orderPed(lukas)
+olukas <- lukas[order(op),]
+gk2 <- kin.morgan(olukas)
+
+write.table(olukas,"olukas.csv",quote=FALSE)
+write.table(gk2$kin.matrix,"results/gap_2.txt",quote=FALSE)
+
+kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
+write.table(kk2,"results/kinship_2.txt",quote=FALSE)
+
+z <- gk2$kin.matrix-kk2
+sum(abs(z))
+
+
+###################################################
+### code chunk number 4: gap.Rnw:314-352
 ###################################################
 library(gap)
 models <- matrix(c(
@@ -44,7 +96,7 @@ table1
 
 
 ###################################################
-### code chunk number 2: gap.Rnw:268-296
+### code chunk number 5: gap.Rnw:357-385
 ###################################################
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
@@ -77,7 +129,7 @@ table5
 
 
 ###################################################
-### code chunk number 3: gap.Rnw:301-346
+### code chunk number 6: gap.Rnw:390-435
 ###################################################
 library(gap)
 # ARIC study
@@ -127,50 +179,7 @@ unlink(outfile)
 
 
 ###################################################
-### code chunk number 4: gap.Rnw:357-364
-###################################################
-# pedigree diagram
-data(lukas,package="gap")
-library(kinship2)
-ped <- with(lukas,pedigree(id,father,mother,sex))
-pdf("figures/lukas.pdf",height=14,width=15)
-plot(ped)
-dev.off()
-
-
-###################################################
-### code chunk number 5: gap.Rnw:374-400
-###################################################
-# unordered individuals
-library(gap)
-gk1 <- kin.morgan(lukas)
-write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
-
-library(kinship2)
-kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
-write.table(kk1,"results/kinship_1.txt",quote=FALSE)
-
-d <- gk1$kin.matrix-kk1
-sum(abs(d))
-
-# order individuals so that parents precede their children
-library(pedigree)
-op <- orderPed(lukas)
-olukas <- lukas[order(op),]
-gk2 <- kin.morgan(olukas)
-
-write.table(olukas,"olukas.csv",quote=FALSE)
-write.table(gk2$kin.matrix,"results/gap_2.txt",quote=FALSE)
-
-kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
-write.table(kk2,"results/kinship_2.txt",quote=FALSE)
-
-z <- gk2$kin.matrix-kk2
-sum(abs(z))
-
-
-###################################################
-### code chunk number 6: gap.Rnw:411-419
+### code chunk number 7: gap.Rnw:443-451
 ###################################################
 library(gap)
 pdf("figures/qqunif.pdf",height=10,width=10)
@@ -183,7 +192,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 7: gap.Rnw:427-443
+### code chunk number 8: gap.Rnw:459-475
 ###################################################
 library(gap)
 load("4w.rda")
@@ -204,7 +213,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 8: gap.Rnw:449-465
+### code chunk number 9: gap.Rnw:481-497
 ###################################################
 library(gap)
 png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
@@ -225,7 +234,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 9: gap.Rnw:476-481
+### code chunk number 10: gap.Rnw:508-513
 ###################################################
 library(gap)
 pdf("figures/asplot.pdf",height=14,width=14)
@@ -235,7 +244,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 10: gap.Rnw:491-501
+### code chunk number 11: gap.Rnw:523-533
 ###################################################
 library(gap)
 pdf("figures/ESplot.pdf",height=10,width=10)

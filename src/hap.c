@@ -4,6 +4,7 @@
 #include <time.h>
 #include <string.h>
 #include <math.h>
+#include <Rmath.h>
 #include "hap.h"
 
 static int n_subjects, n_loci=0, n_phase, *alleles, all_snps=0;
@@ -76,6 +77,7 @@ int *converged,char **hapfile, char **assignfile
   int maxs = 10000;        /* Maximum subjects (doesn't matter yet) */
   double head_room = 0.5;  /* Dynamic memory headroom in Mb */
 
+  GetRNGstate();
   time(&now);
   Rprintf("\nHAP, Version %s", VERSION);
   if (now != -1) {
@@ -117,7 +119,9 @@ int *converged,char **hapfile, char **assignfile
   if (rano || rs || mimp>0) {
     if (!seed) seed = (long) now;
     Rprintf("Seed for random numbers         : %10ld\n", seed);
+/*
     SEED (seed);
+*/
   }
   if (rano) {
     order = (int *) calloc(n_loci, sizeof(int));
@@ -174,6 +178,7 @@ int *converged,char **hapfile, char **assignfile
       break;
     case 3:
       REprintf("Exiting while reading subject %d\n", n_subject);
+      PutRNGstate();
       return;
     }
   }
@@ -422,14 +427,17 @@ int *converged,char **hapfile, char **assignfile
   free(alleles);
   freeU(af);
   freeU(pq);
+  PutRNGstate();
   return;
 
  no_room:
   REprintf("Insufficient memory\n");
+  PutRNGstate();
   return;
 
  open_error:
   REprintf("Error opening output file\n");
+  PutRNGstate();
   return;
 
 }

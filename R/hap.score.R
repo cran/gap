@@ -97,7 +97,12 @@ hap.score<-function(y, geno, trait.type="gaussian",
    }
    if(trait.int ==4) {
       if(adjusted){
-         library("rms")
+         for(p in c("rms")) {
+            if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+               if (!require(p, quietly = TRUE, character.only=TRUE))
+               warning(paste("This function needs package `", p, "' to be fully functional; please install", sep=""))
+            }
+         }
          reg.out <- rms::lrm(y ~ x.adj)
          K <- max(y)
          n.xadj <- ncol(x.adj)

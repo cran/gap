@@ -23,8 +23,8 @@
 \maketitle
 
 \begin{center}
-MRC Epidemiology Unit, Cambridge, UK \\
-\url{http://www.mrc-epid.cam.ac.uk}
+MRC Epidemiology Unit, University of Cambridge, Cambridge, UK \\
+\url{http://www.mrc-epid.cam.ac.uk/people/jing-hua-zhao}
 \end{center}
 
 \tableofcontents
@@ -71,6 +71,7 @@ gcontrol2         &      genomic control based on p values\\
 gcp               &      Permutation tests using GENECOUNTING\\
 genecounting      &      Gene counting for haplotype analysis\\
 gif               &      Kinship coefficient and genetic index of familiality\\
+grmMCMC           &      Mixed modeling with genetic relationship matrices\\
 hap               &      Haplotype reconstruction\\
 hap.em            &      Gene counting for haplotype analysis\\
 hap.score         &      Score statistics for association of traits with haplotypes\\
@@ -126,6 +127,7 @@ hla               &      HLA markers and schizophrenia\\
 l51               &      An example pedigree data\\
 lukas             &      An example pedigree\\
 mao               &      A study of Parkinson's disease and MAO gene\\
+meyer             &      A pedigree data on 282 animals deriving from two generations\\
 nep499            &      A study of Alzheimer's disease with eight SNPs and APOE\\
 \end{tabular}
 
@@ -161,8 +163,20 @@ heritability functions & h2G, VR, h2GC, h2l give point estimates as with their v
 
 Assuming proper installation, you will be able to obtain the list by typing
 \texttt{library(help=gap)} or view the list within a web browser via 
-\texttt{help.start()}. A PDF version of this file can be viewed with command
-\texttt{vignette("gap",package="gap")}.\\
+\texttt{help.start()}. Assuming that you have already loaded the package via
+\texttt{library(gap)}, you can use \texttt{lsf.str("package:gap")} and 
+\texttt{data(package="gap")} to generate a list of functions and a list
+of datasets, respectvely. If this looks odd to you, you might try 
+\texttt{search()} within \texttt{R} to examine what is available in your
+environment before issuing the \texttt{lsf.str} command.\\
+<<echo=TRUE>>=
+library(gap)
+search()
+lsf.str("package:gap")
+data(package="gap")$results
+@
+
+A PDF version of this file can be viewed with command \texttt{vignette("gap",package="gap")}.\\
 
 You can cut and paste examples at end of each function's documentation.\\
 
@@ -174,7 +188,7 @@ are in \textit{haplo.em} format and used by a modified function \textit{hap.scor
 association testing.\\
 
 It is notable that multilocus data are handled differently from that in {\bf hwde} and
-elegant definitions of basic genetic data can be found in {\bf genetics} package.\\
+elegant definitions of basic genetic data can be found in the {\bf genetics} package.\\
 
 Incidentally, I found my C mixed-radixed sorting routine as in \cite{zhao03} is much
 faster than R's internal function.\\
@@ -190,9 +204,18 @@ easily and avoid repetitive work such as preparing own routines for matrix algeb
 linear models. Further advantage can be taken from packages in {\bf Bioconductor}, which
 are designed and written to deal with large number of genes.\\
 
-I have included {ms} code and .xls files to accompany {\em read.ms.output} and {\em FPRP}
-and {\em BFDP} functions as with a classic twin example for ACE model in {\bf OpenMx}. The
-package can be installed with command,
+\section{Independent programs}
+
+To facilitate comparisons and individual preferences, I have made the source codes
+available for 2LD, EHPLUS, GENECOUNTING, HAP which have enjoyed great popularity ahead
+of the genomewide association studies (GWAS) therefore are likely to be more familiar
+than their R couunterparts in \texttt{gap}. However, you need to follow their instructions
+to compile for a particular computer system.\\
+
+I have included {ms} code (which is required by \texttt{read.ms.output}) and .xls files
+to accompany {\em read.ms.output} and {\em FPRP} and {\em BFDP} functions as with a 
+classic twin example for ACE model in {\bf OpenMx}. The package is now available from
+CRAN and earlier it can be installed with command,
 
 \begin{Schunk}
 \begin{Scode}
@@ -201,7 +224,11 @@ source('http://openmx.psyc.virginia.edu/getOpenMx.R')
 \end{Schunk}
 
 For these models it is actually simpler to use facilities as in package {\bf mets}, which I
-now suggest.
+now suggest.\\
+
+A final category is \texttt{twinan90}, which is now dropped from the package function list
+due to difficulty to keep up with the requirements by the \texttt{R} environment but 
+nevertheless you will still be able to compile and use otherwise.
 
 \section{Demos}
 
@@ -216,8 +243,70 @@ demo(gap)
 
 \section{Examples}
 
-I would like to highlight {\em pbsize}, {\em fbsize} and {\em ccsize} functions used for
-power/sample calculations in a genome-wide asssociatoin study as reported in~\cite{zhao07}.\\
+I would like to highlight {\em pedtodot} {\em pbsize}, {\em fbsize} and {\em ccsize} functions
+used for pedigree drawing and power/sample calculations in a genome-wide asssociatoin study as
+reported in~\cite{zhao07}.\\
+
+\subsection{Pedigree drawing}
+I have included the original file for the {\em R News} as well as put examples in separate 
+vignettes. They can be accessed via \texttt{vignette("rnews",package="gap")} and 
+\texttt{vignette("pedtodot", package="gap")}, respectively.\\
+
+\subsection{Kinship calculation}
+Next, I will provide an example for kinship calculation using {\em kin.morgan}.
+It is recommended that individuals in a pedigree are ordered so that parents
+always precede their children. In this regard, package {\bf pedigree} can be
+used, and package {\bf kinship2} can be used to produce pedigree diagram as with
+kinship matrix.
+
+\subsubsection*{Pedigree diagram}
+<<echo=TRUE>>=
+# pedigree diagram
+data(lukas,package="gap")
+library(kinship2)
+ped <- with(lukas,pedigree(id,father,mother,sex))
+pdf("figures/lukas.pdf",height=14,width=15)
+plot(ped)
+dev.off()
+@
+
+The pedigree diagram is as follows,
+
+\includegraphics[height=14cm,width=15cm]{figures/lukas.pdf}
+
+\subsubsection*{Kinship calculation}
+We then turn to the kinship calculation.
+
+<<echo=TRUE>>=
+# unordered individuals
+library(gap)
+gk1 <- kin.morgan(lukas)
+write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
+
+library(kinship2)
+kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
+write.table(kk1,"results/kinship_1.txt",quote=FALSE)
+
+d <- gk1$kin.matrix-kk1
+sum(abs(d))
+
+# order individuals so that parents precede their children
+library(pedigree)
+op <- orderPed(lukas)
+olukas <- lukas[order(op),]
+gk2 <- kin.morgan(olukas)
+
+write.table(olukas,"olukas.csv",quote=FALSE)
+write.table(gk2$kin.matrix,"results/gap_2.txt",quote=FALSE)
+
+kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
+write.table(kk2,"results/kinship_2.txt",quote=FALSE)
+
+z <- gk2$kin.matrix-kk2
+sum(abs(z))
+@
+
+We see that in the second case, the result agrees with {\bf kinship2}.
 
 \subsection{Study design}
 \subsubsection*{Family-based design}
@@ -346,63 +435,6 @@ read.table(outfile,header=TRUE,sep="\t")
 unlink(outfile)
 @
 
-\subsection{Kinship calculation}
-Next, I will provide an example for kinship calculation using {\em kin.morgan}.
-It is recommended that individuals in a pedigree are ordered so that parents
-always precede their children. In this regard, package {\bf pedigree} can be
-used, and package {\bf kinship2} can be used to produce pedigree diagram as with
-kinship matrix.
-
-\subsubsection*{Pedigree diagram}
-<<echo=TRUE>>=
-# pedigree diagram
-data(lukas,package="gap")
-library(kinship2)
-ped <- with(lukas,pedigree(id,father,mother,sex))
-pdf("figures/lukas.pdf",height=14,width=15)
-plot(ped)
-dev.off()
-@
-
-The pedigree diagram is as follows,
-
-\includegraphics[height=14cm,width=15cm]{figures/lukas.pdf}
-
-\subsubsection*{Kinship calculation}
-We then turn to the kinship calculation.
-
-<<echo=TRUE>>=
-# unordered individuals
-library(gap)
-gk1 <- kin.morgan(lukas)
-write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
-
-library(kinship2)
-kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
-write.table(kk1,"results/kinship_1.txt",quote=FALSE)
-
-d <- gk1$kin.matrix-kk1
-sum(abs(d))
-
-# order individuals so that parents precede their children
-library(pedigree)
-op <- orderPed(lukas)
-olukas <- lukas[order(op),]
-gk2 <- kin.morgan(olukas)
-
-write.table(olukas,"olukas.csv",quote=FALSE)
-write.table(gk2$kin.matrix,"results/gap_2.txt",quote=FALSE)
-
-kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
-write.table(kk2,"results/kinship_2.txt",quote=FALSE)
-
-z <- gk2$kin.matrix-kk2
-sum(abs(z))
-@
-
-We see that in the second case, the result agrees with {\bf kinship2}.
-
-
 \subsection{Graphics examples}
 I now include some figures from the documentation that may be of interest.\\
 
@@ -505,20 +537,32 @@ dev.off()
 
 Note that all these can serve as templates to customize features of your own.\\
 
+\section{Polygenic modeling}
+
+In line with the recent surge of interest in the polygenic models, a separate
+vignette is available through \texttt{vignette("h2",package="gap")} demonstrating
+aspect of the models on heritability.
+
 \section{Known bugs}
 
 Unaware of any bug. However, better memory management is expected.
 
+\section{Summary}
+
+I believe by now the package should have given you a flavour of initiatives
+I have made so far in relation to how the project was envisaged. More importantly,
+it is clear that availability of the package will serve as a platform on which 
+future work can be accumulated and collaboration can be built.
+
 \section{Bibliographic note}
 
-The main references are ~\cite{chow60}, ~\cite{guo92}, ~\cite{wcn92}, ~\cite{gholamic94},
-~\cite{hartung08}, ~\cite{risch96}, ~\cite{spielman96}, ~\cite{risch97}, ~\cite{miller97},
-~\cite{sham97}, ~\cite{elston75},
-~\cite{sham98}, ~\cite{devlin99}, ~\cite{zhao99}, ~\cite{guo00}, ~\cite{hirotsu01}, 
-~\cite{zhao02}, ~\cite{zaykin02}, ~\cite{zhao04}, ~\cite{wacholder04}, ~\cite{wang05},
-~\cite{skol06}, ~\cite{wakefield07}.
+The main references are ~\cite{chow60, guo92, wcn92, gholamic94,
+hartung08, risch96, spielman96, risch97, miller97, sham97, elston75,
+sham98, devlin99, zhao99, guo00, hirotsu01, 
+zhao02, zaykin02, zhao04, wacholder04, wang05,
+skol06, wakefield07}.
 
 \bibliography{gap}
 \end{document}
 
-% Date last modified: 29-7-2014
+% Date last modified: 19-2-2015

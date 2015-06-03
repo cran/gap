@@ -696,6 +696,10 @@ Ann Hum Genet, 65, 395-406, 2001
 
 EH+/EHplus/EHPLUS/EH plus
 
+Zhu X, Zhang J, Fan W, Gong Y, Yan J, Yuan Z, Wu L, Cui H, Luo H, Kong Q, Tang L, Leng S, Liao Y, Fu W, Xiao Q, Li D
+MAPKAP1 rs10118570 Polymorphism Is Associated with Anti-Infection and Anti-Hepatic Fibrogenesis in Schistosomiasis Japonica.
+PLoS ONE 2014, 9(8): e105995. doi:10.1371/journal.pone.0105995
+
 Allen AS, Satten GA. Robust Estimation and Testing of Haplotype Effects in Case-Control Studies.
 Genetic Epidemiology 2008, 32:29-40
 
@@ -2186,8 +2190,7 @@ Blood 108: 177-183, 2006
 
 Monique Yvonne Boudreaux
 THE GENETICS OF INSULIN RESISTANCE: ANALYSIS OF THE PEROXISOME PROLIFERATOR-ACTIVATED RECEPTOR PATHWAY
-University of Pittsburgh 2005
-http://etd.library.pitt.edu/ETD/available/etd-04152005-090559/unrestricted/Monique_Boudreaux_ETD_Apr_23_2005_v8.pdf
+University of Pittsburgh 2005, http://etd.library.pitt.edu/ETD/available/etd-04152005-090559/unrestricted/Monique_Boudreaux_ETD_Apr_23_2005_v8.pdf
 
 Gregory R. Warnes (2005)
 Tools for statistical genetics
@@ -2224,6 +2227,10 @@ BMC Genomics 2011, 12 :408
 Yu Y, Tsai HJ, Liu X, Mestan K, Zhang S, Pearson C, Ortiz K, Xu X, Zuckerman B, Wang X.
 The joint association between F5 gene polymorphisms and maternal smoking during pregnancy on preterm delivery.
 Hum Genet. 2009 Jan;124(6):659-68
+
+Maria do Rosário Teixeira de Alva Sequeira Bragança Sambo
+SUSCEPTIBILIDADE GENÉTICA À MALÁRIA CEREBRAL EM CRIANÇAS ANGOLANAS
+UNIVERSIDADE DE LISBOA 2009, http://core.kmi.open.ac.uk/download/pdf/12426318.pdf, http://repositorio.ul.pt/handle/10451/6585
 
 Benjamin AM, Suchindran S, Pearce K, Rowell J, Lien LF, Guyton JR, McCarthy JJ.
 Gene by sex interaction for measures of obesity in the framingham heart study.
@@ -2274,3 +2281,31 @@ Heart rate-associated loci and their effects on cardiac conduction and rhythm di
 Nat Genet 2013;45:621-631
 
 Chen DG, Pease KE. Applied Meta-analysis with R. CRC Press 2013. p299
+
+Kelly M. Burkett, Celia M. T. Greenwood, BradMcNeney, Jinko Graham
+Gene genealogies for genetic association mapping, with application to Crohn’s disease
+Fron Genet 2013, 4(260) doi: 10.3389/fgene.2013.00260
+
+Jennifer L. Bolton, Marlene C. W. Stewart, James F. Wilson, Niall Anderson, Jackie F. Price
+Improvement in Prediction of Coronary Heart Disease Risk over Conventional Risk Factors Using SNPs Identified in Genome-Wide Association Studies
+PLoS One 2013, DOI: 10.1371/journal.pone.0057310
+
+Oscar Lao, Eveline Altena, Christian Becker, Silke Brauer, Thirsa Kraaijenbrink, Mannis van Oven, Peter Nürnberg, Peter de Knijff, Manfred Kayser
+Clinal distribution of human genomic diversity across the Netherlands despite archaeological evidence for genetic discontinuities in Dutch population history
+Investigative Genetics 2013, 4 :9 http://www.investigativegenetics.com/content/4/1/9
+
+Yanfa Sun, Guiping Zhao, Ranran Liu, Maiqing Zheng, Yaodong Hu, Dan Wu, Lei Zhang, Peng Li, Jie Wen
+The identification of 14 new genes for meat quality traits in chicken using a genome-wide association study
+BMC Genomics 2013, 14 :458 http://www.biomedcentral.com/1471-2164/14/458
+
+Fernando A. Poletta, Ieda M. Orioli, Eduardo E. Castilla 
+Genealogical data in population medical genetics: field guidelines
+Genet. Mol. Biol. vol.37 no.1 supl.1 Ribeirão Preto  2014, http://dx.doi.org/10.1590/S1415-47572014000200004 
+
+David Cros, Leopoldo Sánchez, Benoit Cochard, Patrick Samper, Marie Denis, Jean‑Marc Bouvet, Jesús Fernández
+Estimation of genealogical coancestry in plant species using a pedigree reconstruction algorithm and application to an oil palm breeding population
+Theor Appl Genet (2014) 127:981-994 DOI 10.1007/s00122-014-2273-3
+
+Cristina Sánchez-Mora, et al.
+Case–Control Genome-Wide Association Study of Persistent Attention-Deficit Hyperactivity Disorder Identifies FBXO33 as a Novel Susceptibility Gene for the Disorder
+Neuropsychopharmacology (2015) 40, 915-926; doi:10.1038/npp.2014.267; published online 26 November 2014

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <Rmath.h>
 
 #define  MAX_ALLELE    100
 #define  LENGTH        MAX_ALLELE * ( MAX_ALLELE + 1 ) / 2
@@ -12,8 +13,9 @@
 #define  TRANS(x)      (MIN(1.0, x))/2.0
 #define  LL(a, b)      a * ( a + 1 ) / 2  + b
 #define  L(a, b)       ( a < b ) ? b*(b + 1)/2 + a : a*(a+1)/2 + b
+/*
 #define  drand48()     rand()/(double)RAND_MAX
-
+*/
 typedef struct {int i1, i2, j1, j2, type; double cst;} Index;
 typedef struct {double p_value, se; int swch_count[3];} outcome;
 typedef struct {int group, size, step;} randomization;
@@ -43,10 +45,13 @@ void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
   outcome result={0,0,{0,0,0}};
   int i, j, k;
 
+  GetRNGstate();
   sample.group = gss[0];
   sample.size = gss[1];
   sample.step = gss[2];
+/*
   srand(*seed);
+*/
   no_allele=*alleles;
   total = 0;
   for ( i = 0; i < no_allele; ++i ) 
@@ -94,6 +99,7 @@ void hwe_hardy(int *a, int *alleles, int *seed, int *gss,
   swp[0]=result.swch_count[1]/total_step * 100;
   swp[1]=result.swch_count[2]/total_step * 100;
   swp[2]=(result.swch_count[1]+result.swch_count[2])/total_step * 100;
+  PutRNGstate();
 }
 
 double cal_probn (int *a, Index index, double ln_p_old, int *actual_switch)
@@ -141,7 +147,7 @@ double cal_probn (int *a, Index index, double ln_p_old, int *actual_switch)
       break;
     case 1:
       if ( type == 1 ) p1_ratio = p2_ratio;
-      rand_num = drand48();
+      rand_num = unif_rand();
       if ( rand_num < TRANS( p1_ratio ) ) {
            if ( type == 0 ) {
              --a[k11];
@@ -159,7 +165,7 @@ double cal_probn (int *a, Index index, double ln_p_old, int *actual_switch)
          } else ln_p_new = ln_p_old;
        break;
     default:
-      rand_num = drand48();
+      rand_num = unif_rand();
       if ( rand_num <= TRANS(p1_ratio)) {
         --a[k11];
         --a[k22];
@@ -204,12 +210,12 @@ void random_choose (int *k1, int *k2, int k)
   int temp, i, not_find;
 
   for ( i = 0; i < k; ++i ) work[i] = i;
-   *k1 = drand48() * k;
+   *k1 = unif_rand() * k;
    --k;
   for ( i = *k1; i < k; ++i ) work[i] = i + 1;
   not_find = 1;
   while ( not_find ) {
-    i = drand48() * k;
+    i = unif_rand() * k;
     *k2 = work[i];
     not_find = 0;
   }
@@ -328,7 +334,9 @@ int main(int argc, char *argv[])
 
   if ( check_file ( argc, argv, &infile, &outfile ) ) error("%d",1);
   time(&t1);
+/*
   srand(3000);
+*/
   if ( read_data ( a, &no_allele, &total, &sample, &infile ) ) error("%d",2);
   print_data ( a, no_allele, sample, &outfile );
   ln_p_observed = 0.0;
@@ -471,7 +479,7 @@ double cal_prob (int *a, Index index, double ln_p_old, int *actual_switch)
       break;
     case 1:
       if ( type == 1 ) p1_ratio = p2_ratio;
-      rand_num = drand48();
+      rand_num = unif_rand();
       if ( rand_num < TRANS( p1_ratio ) ) {
            ndo_switch ( a, index, type );
            ln_p_new = ln_p_old + log (p1_ratio);
@@ -479,7 +487,7 @@ double cal_prob (int *a, Index index, double ln_p_old, int *actual_switch)
       } else ln_p_new = ln_p_old;
       break;
     default:
-      rand_num = drand48();
+      rand_num = unif_rand();
       if ( rand_num <= TRANS(p1_ratio)) {
          ndo_switch ( a, index, 0 );
          ln_p_new = ln_p_old + log (p1_ratio);

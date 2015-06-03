@@ -1,9 +1,20 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.1-13
+03-06-2015	Revise gap.Rnw
+		Title case compliance
+		Add information on suggested packages through require()
+		Add meyer data and example code
+		Replace uniform RNG to be R's in hap and hwe.hardy
+		Update h2.Rnw adding contents on MCMCglmm, MCMCgrm, OpenBUGS and JAGS
+		Suggest bdsmatrix, Matrix, MCMCglmm, R2OpenBUGS, R2jags and drop NCBI2R
+		Update references.txt (no) and crohn.Rd
+
 Version 1.1-12
 18-08-2014	Revise packageStartupMessage and NAMESPACE
 		Use scope operator for external function calls as suggested by Prof Ripley
 		Add Repository to DESCRIPTION according to R CMD check --as-cran
+		replace "<=" with "<" at line 502 of makeped.c according to Prof Brian Ripley <ripley@stats.ox.ac.uk>
 
 Version 1.1-11
 18-08-2014	Use Unit URL, suggest mets and add INDEX, use of packageStartupMessage

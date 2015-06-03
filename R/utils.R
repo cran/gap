@@ -312,7 +312,7 @@ h2l <- function(K=0.05,P=0.5,h2,se,verbose=TRUE)
      cat("K = ", K, "P = ", P, "\n")
      cat("h2 =",h2,"SE =",se,"h2l =",h2l,"SE =",sel,"\n")
   }
-  invisible(list(h2=h2,se=se,h2l=h2l,sel=sel,z=sqrt(x2)))
+  invisible(list(h2=h2,se=se,h2l=h2l,sel=sel,cc=f,z=sqrt(x2)))
 }
 
 # R script to read the GRM binary file
@@ -433,7 +433,12 @@ ReadGRMPLINK <- function(prefix,diag=1)
 
 WriteGRMSAS <- function(grmlist,outfile="gwas")
 {
-  require(foreign)
+  for(p in c("foreign")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!require(p, quietly = TRUE, character.only=TRUE))
+        warning(paste("WriteGRMSAS needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
   with(grmlist,
   {
     parm <- 1
