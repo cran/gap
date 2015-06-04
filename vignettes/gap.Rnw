@@ -500,7 +500,7 @@ dev.off()
 \includegraphics[height=10cm,width=16cm]{figures/mhtplot.png}
 
 All these look familiar, so revised form of the function called {\bf mhtplot2} was
-created for additional fatures such as centering the chromosome ticks, allowing for 
+created for additional features such as centering the chromosome ticks, allowing for 
 more sophisticated coloring schemes, using prespecified fonts, etc. Please refer to
 the function's documentation example.
 

@@ -360,9 +360,11 @@ of ploughing into the implementation could we use the simpler and familiar synta
 OpenBUGS and JAGS? and if that is the case we can resort to faster setup such as Stan
 (\texttt{http://mc-stan.org/}).
 
-We start with OpenBUGS and for illustrative purpose we continue to use the toy data in
-section~\ref{toy} but impute the missing data for variable \texttt{qt}.
-<<>>=
+We start with OpenBUGS and for illustrative purpose with the toy data in
+section~\ref{toy} but impute the missing data for variable \texttt{qt}. Unfortunately,
+there is mixed success of OpenBUGS across systems and here we but only show the R code
+as follows,
+\begin{verbatim}
 library(gap)
 set.seed(1234567)
 ped51 <- 
@@ -389,7 +391,7 @@ bugsfit.coda <- read.bugs(bugsfit)
 summary(bugsfit.coda)
 plot(bugsfit.coda)
 dev.off()
-@
+\end{verbatim}
 where \texttt{model.txt} is taken directly from \cite{waldmann09}, which requires founders precede
 the nonfounders and that is the reason we have the statement containing two subset commands.
 \begin{verbatim}
@@ -428,10 +430,7 @@ model
 To streamline the results, we resort to package \texttt{coda}. In the coding we also output data
 and initial values which allow for use in OpenBUGS itself.
 
-\includegraphics[page=2,height=12cm,width=12cm]{figures/bugs.pdf}
-
-\noindent where we skip figures for the fixed effects and deviance while choosing to show the variance 
-components only.
+%\includegraphics[page=2,height=12cm,width=12cm]{figures/bugs.pdf}
 
 As before, we would still be keen to use GRM rather than a pedigree structure. We alter the coding
 above slightly and use JAGS instead, As before, we take advantage of the facility in package

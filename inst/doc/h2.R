@@ -220,38 +220,7 @@ plot(m2)
 
 
 ###################################################
-### code chunk number 14: h2.Rnw:365-391
-###################################################
-library(gap)
-set.seed(1234567)
-ped51 <- 
-within(l51, {qt[is.na(qt)] <- rnorm(length(qt[is.na(qt)]),
-             mean(qt,na.rm=TRUE),sd(qt,na.rm=TRUE));})
-l51 <- rbind(subset(ped51,fid==0),subset(ped51,fid!=0))
-data=with(l51,list(n=51,f=15,f1=16,m=2,Y=qt,X=sex,FID=fid,MID=mid,
-              sd.u.add=0.9,sd.u.err=0.9))
-inits=function()list(beta=c(0,0))
-library(R2OpenBUGS)
-bugs.data(data,data.file="data.txt")
-bugs.inits(inits,n.chains=3,digits=3)
-bugsfit <- bugs(data,
-                inits,
-                parameters.to.save=c("beta","sigma2.add","sigma2.err","h2"),
-                model.file="model.txt", 
-                n.chains=3,
-                n.burnin=1000,
-                n.iter=10000,
-                codaPkg=TRUE)
-library(coda)
-pdf("figures/bugs.pdf")
-bugsfit.coda <- read.bugs(bugsfit)
-summary(bugsfit.coda)
-plot(bugsfit.coda)
-dev.off()
-
-
-###################################################
-### code chunk number 15: h2.Rnw:440-489
+### code chunk number 14: h2.Rnw:439-488
 ###################################################
 library(gap)
 set.seed(1234567)
@@ -305,7 +274,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 16: h2.Rnw:509-541
+### code chunk number 15: h2.Rnw:508-540
 ###################################################
 library(gap)
 set.seed(1234567)

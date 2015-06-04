@@ -1,5 +1,9 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.1-14
+04-06-2015	Drop R2OpenBUGS and coda
+		Revise h2.Rnw
+
 Version 1.1-13
 03-06-2015	Revise gap.Rnw
 		Title case compliance
