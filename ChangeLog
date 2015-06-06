@@ -1,5 +1,12 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.1-16
+06-06-2015	Change h2.Rnw to h2.pdf generated locally as it would invoke multicore
+		computing.
+
+Version 1.1-15
+05-06-2015	Revise h2.Rnw
+
 Version 1.1-14
 04-06-2015	Drop R2OpenBUGS and coda
 		Revise h2.Rnw
