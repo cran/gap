@@ -14,7 +14,7 @@ static FILE *outfile;
 char of1name[MAX_FILENAME_LEN],of2name[MAX_FILENAME_LEN],
      tempname[MAX_FILENAME_LEN];
 
-void hap(
+void hap_c(
 int *nobs,
 char **idstr,
 char **gdata,

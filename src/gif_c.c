@@ -41,7 +41,7 @@ int             connected(), new_proband();
 vertex          *find_vertex();
 vertex_list     *proband_list;
 
-void gif(int *data, int *famsize, int *gifset, int *giflen, double *gifval)
+void gif_c(int *data, int *famsize, int *gifset, int *giflen, double *gifval)
 {
   int     id, i, j, k, n_prob;
   double  total_kinship();

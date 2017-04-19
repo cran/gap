@@ -18,7 +18,7 @@ hap<-function(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep="")
   if(length(id)!=dim(data)[1]) stop("id and data should have the same length")
   l1<-niter<-converge<-0
 
-  z<-.C("hap",nobs=as.integer(nobs),idstr=as.character(id),data=as.character(t(data)),
+  z<-.C("hap_c",nobs=as.integer(nobs),idstr=as.character(id),data=as.character(t(data)),
         nloci=as.integer(nloci),loci=as.integer(loci),names=as.character(names),
         mb=as.double(control$mb),
         pr=as.double(control$pr),

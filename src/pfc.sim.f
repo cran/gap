@@ -15,7 +15,7 @@ c     December 15, 1997
       integer maxfac,m(20),sib,aff,freq,oldsib,i,
      &  naff,nsibs,nfam,fm(20,20),j,maxsize,k
       logical trace,initial
-      double precision fac(8000),fac0(8001)
+      double precision fac(0:8000),fac0(8001)
       double precision ptail
       integer rfm(20,20),ntail,nsim,ncycle,c
       

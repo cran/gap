@@ -1069,7 +1069,7 @@ return i;
 }
 
 void
-pgc(
+pgc_c(
 int *gdata, int *handlemiss, int *nobs, int *nloci, int *alleles,
 int *wt, int *gret, int *withid, double *idsave, int *obscom
 )

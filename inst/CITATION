@@ -8,14 +8,14 @@ citEntry(entry="Manual",
          author = personList(as.person("J. H. Zhao")),
          year = year,
          note = vers,
-         url = "http://cran.r-project.org/package=gap",
+         url = "https://CRAN.R-project.org/package=gap",
 
          textVersion =
          paste("Zhao J. H.(",
                year,
                "). gap: Genetic Analysis Package. ",
                vers, ", ",
-               "http://cran.r-project.org/package=gap", sep=""))
+               "https://CRAN.R-project.org/package=gap", sep=""))
 
 citEntry(entry="Article",
          title = "gap: Genetic Analysis Package",

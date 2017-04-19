@@ -55,7 +55,7 @@ The returned value is a list containing:
 
 \section{References}{
 
-Clayton DG (2001) SNPHAP. \url{http://www-gene.cimr.cam.ac.uk/clayton/software}
+Clayton DG (2001) SNPHAP. http://www-gene.cimr.cam.ac.uk/clayton/software.
 
 Zhao JH and W Qian (2003) Association analysis of unrelated individuals
 using polymorphic genetic markers. RSS 2003, Hassalt, Belgium

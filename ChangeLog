@@ -1,5 +1,17 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.1-17
+19-04-2017	Change fac(8000) to fac(0:8000) in pfc.sim.f for error from R 3.4
+		as alerted by Rainer Johannes <Johannes.Rainer@eurac.edu>
+02-03-2017	Drop \url from hap.Rd, mia.Rd/revise url in CITATION
+		Add import statements to NAMESPACE as suggested by R CMD check --as-cran
+		Change useDynLib(gap) to useDynLib(gap, .registration = TRUE)
+		run tools::package_native_routine_registration_skeleton("gap") to /src
+13-03-2016	Replace URL with desktop service version
+05-01-2016	Add InterAct code snipets to inst/tests/h2
+10-12-2015	Extend h2GE to handle multiple GxE's
+06-06-2015	Reset width=8.5in for h2.Rnw.
+
 Version 1.1-16
 06-06-2015	Change h2.Rnw to h2.pdf generated locally as it would invoke multicore
 		computing.

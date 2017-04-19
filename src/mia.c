@@ -20,7 +20,7 @@ static int n_loci;
 
 void qsorts(long int,long int);
 
-void mia (char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *mi, int *allsnps, int *sas)
+void mia_c(char **hapfile,char **assfile, char **miafile, int *so, int *ns, int *mi, int *allsnps, int *sas)
 {
   FILE *infile,*outfile,*sasfile;
   char ofname[MAX_FILENAME_LEN];

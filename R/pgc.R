@@ -31,7 +31,7 @@ pgc <- function (data,handle.miss=1,is.genotype=0,with.id=0)
     obscom <- nobs
     data <- t(data)
     gret <- matrix(array(0,nobs*nloci2),nrow=nobs)
-    z <- .C("pgc",gdata=as.integer(data),handlemiss=as.integer(handle.miss),nobs=as.integer(nobs),nloci=as.integer(nloci),
+    z <- .C("pgc_c",gdata=as.integer(data),handlemiss=as.integer(handle.miss),nobs=as.integer(nobs),nloci=as.integer(nloci),
             alleles=as.integer(alleles), wt=as.integer(wt),gret=as.integer(gret),
             withid=as.integer(with.id),idsave=as.double(idsave),obscom=as.integer(obscom),PACKAGE="gap")
     subset <- 1:(z$obscom)

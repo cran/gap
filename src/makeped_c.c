@@ -70,8 +70,8 @@ typedef          double d_real;
         /* User defined constants */
 
 #define maxallchars  200      /* maximum chars used in phenotypic data       */
-#define maxind       4001     /* maximum number of individuals               */
-#define maxped       401      /* maximum number of pedigrees                 */
+#define maxind       8001     /* maximum number of individuals               */
+#define maxped       2401      /* maximum number of pedigrees                 */
 #define maxname      11       /* maximum number of chars in ped or person id */
 #define maxloop      4        /* The total number of loops over all pedigr.  */
                               /* cannot exceed maxped*maxloop                */
@@ -1774,7 +1774,7 @@ main(argc,argv)
 
 }
 #else 
-void makeped(char **pifile, char **pofile, int *autoselect, 
+void makeped_c(char **pifile, char **pofile, int *autoselect, 
              int *withloop, char **loopfile, 
              int *autoproband, char **probandfile)
 {

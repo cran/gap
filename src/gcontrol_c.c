@@ -688,7 +688,7 @@ int main()
 }
 #endif
 
-void gcontrol(double *kdata, int *nkdata, double *zeta, double *kappa, 
+void gcontrol_c(double *kdata, int *nkdata, double *zeta, double *kappa, 
               double *tau2, double *epsilon, int *ngib, int *burn, 
               int *idumR, double *deltot, double *x, double *A)
 {
