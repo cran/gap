@@ -5,7 +5,6 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage{Sweave}
 \usepackage{url}
-\usepackage{a4wide}
 \usepackage{amsmath,epsfig}
 \usepackage{graphicx}
 \usepackage[authoryear,round]{natbib}
@@ -206,11 +205,11 @@ are designed and written to deal with large number of genes.\\
 
 \section{Independent programs}
 
-To facilitate comparisons and individual preferences, I have made the source codes
-available for 2LD, EHPLUS, GENECOUNTING, HAP which have enjoyed great popularity ahead
-of the genomewide association studies (GWAS) therefore are likely to be more familiar
-than their R couunterparts in \texttt{gap}. However, you need to follow their instructions
-to compile for a particular computer system.\\
+To facilitate comparisons and individual preferences, The source codes for 2LD, EHPLUS, 
+GENECOUNTING, HAP, now hosted at GitHub, have enjoyed great popularity ahead of the
+genomewide association studies (GWAS) therefore are likely to be more familiar than their
+R couunterparts in \texttt{gap}. However, you need to follow their instructions to compile
+for a particular computer system.\\
 
 I have included {ms} code (which is required by \texttt{read.ms.output}) and .xls files
 to accompany {\em read.ms.output} and {\em FPRP} and {\em BFDP} functions as with a 
@@ -456,16 +455,15 @@ dev.off()
 Based on a chicken genome scan data, the code below generates a Manhattan plot, demonstrating
 the use of gaps to separate chromosomes.
 
-<<echo=TRUE>>=
+<<echo=TRUE,eval=FALSE>>=
 library(gap)
-load("4w.rda")
-ord <- with(d,order(chr,pos))
-d <- d[ord,]
-pdf("figures/4w.pdf",height=9,width=10)
+ord <- with(w4,order(chr,pos))
+w4 <- w4[ord,]
+pdf("figures/w4.pdf",height=9,width=10)
 oldpar <- par()
 par(cex=0.6)
 colors <- c(rep(c("blue","red"),15),"red")
-mhtplot(d,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
+mhtplot(w4,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
 axis(2,cex.axis=2)
 suggestiveline <- -log10(3.60036E-05)
 genomewideline <- -log10(1.8E-06)
@@ -475,10 +473,10 @@ abline(h=0)
 dev.off()
 @
 
-\includegraphics[scale=0.25,width=\linewidth]{figures/4w.pdf}
+\includegraphics[scale=0.25,width=\linewidth]{figures/w4.pdf}
 
 The code below obtains a Manhattan plot with gene annotation,
-<<echo=TRUE>>=
+<<echo=TRUE, eval=FALSE>>=
 library(gap)
 png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
 data <- with(mhtdata,cbind(chr,pos,p))
@@ -492,8 +490,8 @@ par(las=2, xpd=TRUE, cex.axis=1.8, cex=0.4)
 ops <- mht.control(colors=color,yline=1.5,xline=3)
 hops <- hmht.control(data=hdata,colors=hcolor)
 mhtplot(data,ops,hops,pch=19)
-axis(2,pos=2,at=1:16)
-title("Manhattan plot with genes highlighted",cex.main=1.8)
+axis(2,pos=2,at=1:16,cex.axis=0.5)
+title("Manhattan plot with genes highlighted",cex.main=1)
 dev.off()
 @
 
@@ -505,7 +503,7 @@ more sophisticated coloring schemes, using prespecified fonts, etc. Please refer
 the function's documentation example.
 
 The code below obtains a regional association plot with the {\em asplot} function,
-<<echo=TRUE>>=
+<<echo=TRUE,eval=FALSE>>=
 library(gap)
 pdf("figures/asplot.pdf",height=14,width=14)
 asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))

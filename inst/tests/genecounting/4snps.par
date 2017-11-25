@@ -1,7 +1,0 @@
-4 0 0 0     << number of loci, case/control label, label permutation, replicates
-2 2 2 2     << number of alleles
-0 0         << raw genotype data, suppress screen reports
-1 1 1 1     << select all markers for analysis
-0 0 0 0     << no permutation for all 4 SNPs
-0.001 0.05 0.2 0.8 << a putative disease model
-

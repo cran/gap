@@ -89,7 +89,7 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
      col.chr <- colors[i]
      if(type=="l") lines(CM[chr],y,col=col.chr,cex=pcex,...)
      else points(CM[chr],y,col=col.chr,cex=pcex,...)
-     text(ifelse(i==1,CM[1],CM[l]),y1,pos=1,offset=1.5,labels[i],srt=srt,...)
+     text(ifelse(i==1,CM[1],CM[l]),y1,pos=1,offset=1.5,labels[i],srt=srt,cex=0.5,...)
   }
   j <- 1
   for(i in 1:n.chr)
@@ -121,7 +121,7 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
                                gp=grid::gpar(col="black",lwd=2.5))
                 boxedText <- grid::gTree(children=grid::gList(tg,rg))
                 grid::grid.draw(boxedText)
-             } else text(CM[chr][l1],max(y[l1:l2]+hyoffs),hchrs[k],cex=hcex)
+             } else text(CM[chr][l1],max(y[l1:l2]+hyoffs),hchrs[k],cex=1)
              points(CM[l+(l1:l2)],y[l1:l2],col=col.chr[l1:l2],cex=pcex,...)
              j <- j+1
           }
@@ -130,9 +130,9 @@ mhtplot <- function(data, control=mht.control(), hcontrol=hmht.control(), ...) {
   }
   if(!is.null(cutoffs)) segments(0,cutoffs,n2+gap*n.chr,cutoffs) # abline(h=cutoffs)
   if ("ylab"%in%names(args)) mtext(args$ylab,2,line=yline,las=0) else
-     mtext(ifelse(logscale,paste("-log",base,"(Observed value)",sep=""),"Observed value"),2,line=yline,las=0)
+     mtext(ifelse(logscale,paste("-log",base,"(Observed value)",sep=""),"Observed value"),2,line=yline,las=0,cex=0.5)
   if ("xlab"%in%names(args)) xlabel <- args$xlab else
       xlabel <- ifelse(is.null(names(chr)),"Chromosome",names(chr))
-  mtext(xlabel,1,line=xline,las=0) }
+  mtext(xlabel,1,line=xline,las=0,cex=0.5) }
 
 #3-9-2013 MRC-Epid JHZ

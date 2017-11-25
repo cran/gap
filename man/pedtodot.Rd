@@ -4,7 +4,7 @@
 \description{
 This function converts GAS or LINKAGE formatted pedigree(s) into .dot file
 for each pedigree to be used by dot in graphviz, which is a flexible package
-for graphics freely available from \url{http://www.graphviz.org}
+for graphics freely available.
 
 Note that a single PostScript (PDF) file can be obtainaed by dot, fdp, 
 or neato.

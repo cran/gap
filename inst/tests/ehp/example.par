@@ -1,6 +1,0 @@
-2  1  0  0   << nloci, case/control, label permutation, # permutations
-2 2          << a list of marker alleles
-0 0          << allele/genotype, screen output
-1 1          << marker selection status
-0 0          << marker permutation status
-0.001 0.05 0.2 0.8 << disease model for case-control design

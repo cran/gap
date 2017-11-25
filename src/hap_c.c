@@ -1140,7 +1140,7 @@ int hap_write(FILE *outfile, int n_loci, char **names, CODE *coding,
                int numeric, int tabdel) {
   int j, k, l, nlen, len, chr, nwr;
   long i, out;
-  char  c[3], rep;
+  char  c[7], rep;
   char *id;
   double cum, max_post=0;
   HAP **h, **hs, **he, **hn;

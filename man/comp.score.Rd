@@ -57,6 +57,7 @@ selected pedigrees. Biometrics 61:465-473
 }
 
 \examples{
+\dontrun{
 # An example based on GENEHUNTER version 2.1, with quantitative trait data in file
 # "pheno.dat" generated from the  standard normal distribution. The following
 # exmaple shows that it is possible to automatically call GENEHUNTER using R
@@ -69,7 +70,7 @@ dir()
 # system("gh < gh.inp")
 cs.default <- comp.score()
 setwd(cwd)
-
+}
 }
 \author{Yingwei Peng, Kai Wang}
 \note{Adapt from score2.r}

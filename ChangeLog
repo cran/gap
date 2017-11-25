@@ -1,5 +1,16 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.1-20
+24-11-2017	Resize by removing programs available from GitHub
+		Revise gap.Rnw
+
+Version 1.1-19
+23-11-2017	Remove a4wide.sty from gap.Rnw and rnews.Rnw
+		Drop www.graphviz.org
+
+Version 1.1-18
+23-11-2017	Enlarge c[3] to c[7] from CRAN check and Prof Ripley
+
 Version 1.1-17
 19-04-2017	Change fac(8000) to fac(0:8000) in pfc.sim.f for error from R 3.4
 		as alerted by Rainer Johannes <Johannes.Rainer@eurac.edu>
