@@ -1,5 +1,8 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.1-21
+23-01-2018	Amend URL and makeped example
+
 Version 1.1-20
 24-11-2017	Resize by removing programs available from GitHub
 		Revise gap.Rnw

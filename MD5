@@ -1,5 +1,5 @@
-43c3658f70561e097c2690663a274651 *ChangeLog
-7d57f0eaa61c8b4f31a15a66892736af *DESCRIPTION
+c431ab31c77be2fb5c18fc447246f373 *ChangeLog
+5ad6a4ec26affe2d8a23019c4852387c *DESCRIPTION
 a3b2a7c9a735012be9513700d8aaff35 *INDEX
 ed4d732eb8b6ffd9fe0304e88fad01aa *NAMESPACE
 673ea57dcaf6e14881123554d63e86be *R/2ld.R
@@ -151,8 +151,8 @@ eafafa8fa89edef1f0bcaffa3acf26b0 *inst/tests/ms/ms.h
 ee8b64743432b4cdeb7ddd6c496ba831 *inst/tests/ms/rand2.c
 a8d9ded6ad8411ef1b262993eafd0a45 *inst/tests/ms/streec.c
 0ca0416e620b9183609fcfe0abd00a38 *inst/tests/ms/www
-4a15fba1f90be2b702703a7bb8f549e4 *inst/tests/no
-316887c57e285405e98ba98b1a9b21d2 *inst/tests/references.txt
+48468fe1ea2edc6fe3158addd3a508e4 *inst/tests/no
+670b194df84d207e5c00ced0651fe034 *inst/tests/references.txt
 56bcedf4fa79ef56ad3dc2ef6d272020 *inst/tests/twinan90/bwt.dat
 163d3f703bd7878b66068cf9e12a849a *inst/tests/twinan90/bwt.in
 94fe0fed2b652240825c42550b790787 *inst/tests/twinan90/mzdz.dat
@@ -206,7 +206,7 @@ fb9793148e21875d7e794afb34782d04 *man/hwe.hardy.Rd
 d9776e99221ce0af9e45e0661b3a9342 *man/klem.Rd
 dbc7151e434555371b68b10dabb90968 *man/l51.Rd
 023ff843b919e7034ed5ed4b343ec738 *man/lukas.Rd
-73d81f5c032f6c560ff2dbd3d573aacf *man/makeped.Rd
+bc15ba3943283bbfccf1b9c5c2f60414 *man/makeped.Rd
 98331005b714b77aadb6f3206c83c905 *man/mao.Rd
 3eb68e5bfc62fe1cc05c7c3df424e464 *man/masize.Rd
 a526afb58f7d6bf77a9015f99ba5395d *man/metap.Rd

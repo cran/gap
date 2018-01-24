@@ -2146,7 +2146,9 @@ ASHG 2000, No 1989
 
 R/gap
 
-Galvan A, Skorpen F, Klepstad P, Knudsen AK, Fladvad T, Falvella FS, Pigni A, Brunelli C, Caraceni A, Kaasa S, Dragani TA. Multiple Loci modulate opioid therapy response for cancer pain. Clin Cancer Res. 2011 Jul 1;17(13):4581-7. Epub 2011 May 27.
+Galvan A, Skorpen F, Klepstad P, Knudsen AK, Fladvad T, Falvella FS, Pigni A, Brunelli C, Caraceni A, Kaasa S, Dragani TA. 
+Multiple Loci modulate opioid therapy response for cancer pain.
+Clin Cancer Res. 2011 Jul 1;17(13):4581-7. Epub 2011 May 27.
 
 Sole X, Gonzalez JR, Moreno V.
 Analysis of Population-Based Genetic Association Studies Applied to Cancer Susceptibility and Prognosis. 
@@ -2314,7 +2316,15 @@ Zhang L, Li P, Liu R, Zheng H, Sun Y, Wu D, Hu Y, Wen J, Zhao G.
 The Identification of Loci for Immune Traits in Chickens Using a Genome-Wide Association Study
 PLoS One 2015 DOI: 10.1371/journal.pone.0117269
 
+Yuan Wang, Xiangdong Ding, Zhen Tan, Chao Ning, Kai Xing, Ting Yang, Yongjie Pan, Dongxiao Sun, Chuduan Wang
+Genome-Wide Association Study of Piglet Uniformity and Farrowing Interval
+Front. Genet., 28 November 2017 | https://doi.org/10.3389/fgene.2017.00194
+
 R/kinship
+
+Sitlani CM, Dupuis J, Rice KM, Sun F, Pitsillides AN, Cupples LA, Psaty BM
+Genome-wide gene-environment interactions on quantitative traits using family data.
+Eur J Hum Genet. 2016 Jul;24(7):1022-8. doi: 10.1038/ejhg.2015.253. Epub 2015 Dec 2.
 
 Sinnwell JP, Therneau TM, Schaid DJ.
 The kinship2 R Package for Pedigree Data

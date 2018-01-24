@@ -50,12 +50,14 @@ All output will be written in pofile
 }
 
 \examples{
+\dontrun{
 cwd <- getwd()
 cs.dir <- file.path(path.package("gap"),"tests","kinship")
 setwd(cs.dir)
 dir()
 makeped("ped7.pre","ped7.ped",0,1,"ped7.lop")
 setwd(cwd)
+}
 }
 \note{adapted from makeped.c by W Li and others}
 \keyword{datagen}

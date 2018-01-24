@@ -1,6 +1,6 @@
 Package: gap
-Version: 1.1-20
-Date: 2017-11-24
+Version: 1.1-21
+Date: 2018-1-23
 Title: Genetic Analysis Package
 Author: Jing Hua Zhao and colleagues with inputs from Kurt Hornik and
         Brian Ripley
@@ -20,8 +20,8 @@ Description: It is designed as an integrated package for genetic data
         markers including haplotype analysis with or without environmental
         covariates.
 License: GPL (>= 2)
-URL: http://people.ds.cam.ac.uk/jhz22/
+URL: https://jinghuazhao.github.io
 NeedsCompilation: yes
 Repository: CRAN
-Packaged: 2017-11-24 23:42:52 UTC; jhz22
-Date/Publication: 2017-11-25 16:55:13 UTC
+Packaged: 2018-01-23 23:30:14 UTC; jhz22
+Date/Publication: 2018-01-24 11:40:17 UTC
