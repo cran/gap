@@ -23,8 +23,9 @@ c     logical done
 c                  build table of log factorials w/ zero subscript
       fac(0)=zero
       do 1 j=1,maxfac
-      const=j
-   1  fac(j)=fac(j-1)+ dlog(const)
+         const=j
+         fac(j)=fac(j-1)+ dlog(const)
+   1  continue
 
 c   read frequency data, build frequency matrix table -fm-
 c     open(10,file='family.dat')
@@ -55,7 +56,7 @@ c  Probability of the observed table
       call prob(fm,1,maxsize,const,p)
       pobs=p
 c  Generate test statistics, expected values under null hypothesis
-      call test(fm,m,1,maxsize,stat,ns,naff,nsibs,.true.)
+      call test(fm,m,1,maxsize,stat,ns,naff,nsibs)
 c  Enumerate all possible tables for exact tail area
       if(toenum.ne.1) return
       call enum(nsibs,naff,nfam,m,maxsize,const,p)
@@ -69,11 +70,11 @@ c     stop 9999
 
 c===========================================================
 
-      subroutine test(fm,m,first,last,stat,ns,naff,nsibs,trace)
+      subroutine test(fm,m,first,last,stat,ns,naff,nsibs)
 
 c    Compute test statistics for the set of family 
 c       frequencies in -fm-. If -trace- then print them out
-
+c       trace was the last argument of test()
       double precision fac(0:8000),fac0(8001)
       equivalence (fac(1),fac0(2))
       common/factab/fac0
@@ -81,7 +82,7 @@ c       frequencies in -fm-. If -trace- then print them out
      & ia,ib,ic,nssave
       double precision stat(20),zero,one,two,dexp,dlog,be,
      & binp,sbe,he,she,fmij,dble,eps,chi1,chi2,dsqrt
-      logical trace
+*     logical trace
       data zero/0.0d0/, one/1.0d0/, two/2.0d0/, eps/1.0d-9/
       data nssave/5/
 
@@ -144,16 +145,16 @@ c                                    exact log-likelihood
 *     if(trace)write(6,1003)(stat(j),j=1,ns)
       return
  
- 1000 format(/t20,'Test Statistics for Family Clusters',
-     &  //,t31,'Obs''d',t42,'Expectations:',4x,
-     &    'Chi Residuals',/ 
-     &  t14,'# sibs   # aff    freq     Bin.        Hyp.',
-     &  '    Bin.    Hyp.')
- 1001 format(7x,3i9,2f11.5,2f8.2)
- 1002 format(t14,'Totals:',t26,i9,2f11.5)
- 1003 format(t14,'Deviance:',     t35,2f11.5,/,
-     &       t14,'Chi-squared:',  t35,2f11.5,/,
-     &       t14,'Log-likelihood',t35,f11.5)
+c1000 format(/t20,'Test Statistics for Family Clusters',
+c    &  //,t31,'Obs''d',t42,'Expectations:',4x,
+c    &    'Chi Residuals',/ 
+c    &  t14,'# sibs   # aff    freq     Bin.        Hyp.',
+c    &  '    Bin.    Hyp.')
+c1001 format(7x,3i9,2f11.5,2f8.2)
+c1002 format(t14,'Totals:',t26,i9,2f11.5)
+c1003 format(t14,'Deviance:',     t35,2f11.5,/,
+c    &       t14,'Chi-squared:',  t35,2f11.5,/,
+c    &       t14,'Log-likelihood',t35,f11.5)
       end
 
 c===========================================================
@@ -222,10 +223,10 @@ c        write(6,1002)p,psum,ptail,dcase
       go to 50
 
 cc 1001 format(/' ENUM:ncase: ',i14,' alloc: ',15i3)
- 1002 format(/' Prob of this table:',e16.8,  
-     &   4x, ' Cumulative prob: ',e16.8, /
-     &       ' Tail probability:  ',e16.8,
-     &   4x, ' Case number:     ',e16.8)
+cc 1002 format(/' Prob of this table:',e16.8,  
+c    &   4x, ' Cumulative prob: ',e16.8, /
+c    &       ' Tail probability:  ',e16.8,
+c    &   4x, ' Case number:     ',e16.8)
       end
 
 c  ========================================================
@@ -365,10 +366,11 @@ c                     test for valid parameter values
       if(m .GT. i*n) call rexit("442")
 c      Special cases where only one outcome is possible:
 c                                                    m=i*n
-      if(m .EQ. i*n)then
+      if(m .EQ. i*n) then
          done=.NOT. done
          do 2 j=1,i
-    2    x(j)=0
+            x(j)=0
+    2    continue
          x(ip1)=n
          return
       endif
@@ -376,16 +378,18 @@ c                                                    n=0 or 1
       if(n .LE. 1)then
          done=.NOT. done
          do 4 j=1,ip1
-    4    x(j)=0
+            x(j)=0
+    4    continue
          if(m .GT. i) call rexit("443")
          x(m+1)=n
          return
       endif
 c                                               m=0 or 1; or i=1
-      if(i .EQ. 1 .OR. m .LE. 1)then
+      if(i .EQ. 1 .OR. m .LE. 1) then
          done=.NOT. done
          do 6 j=1,ip1
-    6    x(j)=0
+            x(j)=0
+    6    continue
          x(1)=n-m
          x(2)=m
          return
@@ -396,7 +400,8 @@ c                                Initialize the general case
          j=j+1
          if(j .GT. i) call rexit("444")
          do 20 k=1,ip1
-   20    x(k)=0
+            x(k)=0
+   20    continue
 c                     two smallest possible frequencies
          x(j+1)=m-(j-1)*n
          x(j)=j*n-m
@@ -478,10 +483,11 @@ c  DONE signifies completion of the task or initialization on input.
          done=.not.done
          return
       endif
-      if(m .EQ. 0)then
+      if(m .EQ. 0) then
          done=.NOT. done
          do 10 j=1,k
-   10    n(j)=0
+            n(j)=0
+   10    continue
          return
       endif
 
@@ -493,7 +499,8 @@ c                        generate next vector in the sequence
 c                                             find cumulative sum
       sum=0
       do 200 i=j,k
-  200 sum=sum+n(i)
+         sum=sum+n(i)
+  200 continue
       if(sum .GT. m)go to 300
 c                     n(1) is what ever is left over
       n(1)=m-sum
@@ -507,7 +514,8 @@ C                                       done when we run off the end
       return
 c                        initialize on the first call to cmulte
   500 do 600 i=1,k
-  600 n(I)=0
+         n(I)=0
+  600 continue
       n(1)=m
       done=.FALSE.
       return

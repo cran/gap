@@ -13,8 +13,8 @@ c     December 15, 1997
       double precision zero,const,obsp,slf,p
 
       integer maxfac,m(20),sib,aff,freq,oldsib,i,
-     &  naff,nsibs,nfam,fm(20,20),j,maxsize,k
-      logical trace,initial
+     &  naff,nsibs,nfam,fm(20,20),j,maxsize
+      logical initial
       double precision fac(0:8000),fac0(8001)
       double precision ptail
       integer rfm(20,20),ntail,nsim,ncycle,c
@@ -26,14 +26,15 @@ c     December 15, 1997
       integer famdata(famsize,3),tailpu(ncycle)
       double precision tailpl(ncycle)
 
-      data maxfac/8000/, zero/0.000d0/, trace/.false./
+      data maxfac/8000/, zero/0.000d0/
       data fm/400*0/,rfm/400*0/
 
 c   table of log factorials w/ zero subscript
       fac0(1)=zero
       do 1 j=1, maxfac
       const=j
-  1   fac(j)=fac(j-1)+dlog(const)
+      fac(j)=fac(j-1)+dlog(const)
+  1   continue
 c      write(6,1002) (fac(j),dexp(fac(j)),j=0,6)
 
 c   read frequency data, build frequency matrix table -fm-
@@ -44,7 +45,7 @@ c      open (9, file='mcp.dat')
 cc    write(6,1004)
       oldsib=-1
       maxsize=1
-      do 20 j=1,10000000
+      do 200 j=1,10000000
         do 20 i=1,famsize
         sib=famdata(i,1)
         aff=famdata(i,2)
@@ -55,6 +56,7 @@ cc    write(6,1004)
         oldsib=sib
         if(i.eq.famsize)goto 25
  20   continue
+ 200  continue
  25   continue
 
 c   Find marginal totals from -fm- and constant part of the likelihood
@@ -68,7 +70,7 @@ c   nsibs  = # of siblings in all families
 c   naff   = # of affected sibs in all families
 c   const  = constant part of the log-likelihood
       
-      call runiout(fm,m,nsibs,naff,nfam,1,maxsize)
+*     call runiout(fm,m,nsibs,naff,nfam,1,maxsize)
       call runiprob(fm,1,maxsize,slf,const,obsp)
        
 cc     write(16,1120)nsim,ncycle
@@ -79,12 +81,12 @@ cc     write(16,1120)nsim,ncycle
        ntail=0
        do 50 i=1,nsim
        call runirandom(rfm,m,1,maxsize,nsibs,naff,initial)
-       if (trace) then
-       do 900 j=1,maxsize
+*      if (trace) then
+*      do 900 j=1,maxsize
 *      write(6,905)j,m(j),(rfm(k,j),k=1,j+1)
-900    continue
-       endif
-c       call runiout(rfm,m,nsibs,naff,nfam,1,maxsize)
+*900   continue
+*      endif
+c      call runiout(rfm,m,nsibs,naff,nfam,1,maxsize)
        call runiprob(rfm,1,maxsize,slf,const,p)
 cc     write(6,1008)p
       if (p.le.obsp) then
@@ -103,16 +105,16 @@ cc    write(6,1130)c, dble(ntail)/dble(nsim)
 c       write(6,1100)ptail,ntail,nsim,dble(ntail)/dble(nsim) 
 c       write(16,1100)ptail,ntail,nsim,dble(ntail)/dble(nsim) 
 
-  905  format(' trace:',2i3,1x,10i3)
+cc  905  format(' trace:',2i3,1x,10i3)
 cc 1000  format(' cmulte test:m,n',i4,5x,10i4)
- 1001  format(5x,3i15)
+cc 1001  format(5x,3i15)
 cc 1002  format(' Test factorials..',2f12.6)
- 1003  format(' Totals',i5)
+cc 1003  format(' Totals',i5)
 cc 1004  format(17x,'Family frequency data read in:'/
 cc     &  t18,'Sibs        Affected       Frequency  ')
 cc 1005  format(12i5)
 cc 1006  format(1x,i4,5x,20i4)
- 1007  format(' Probability of the observed table:  ',e15.7/)
+cc 1007  format(' Probability of the observed table:  ',e15.7/)
 cc 1008  format(' Probability of this random table:  ',e15.7/)
 cc 1100  format(' The M-C p-value :  ',e15.7/
 cc     &  i15, '  tables out of ', i15, '  simulations are on the tail.'/
@@ -132,9 +134,9 @@ c==========================================================================
       real uni
       integer i,j,k,index
       double precision p
-      logical trace,initial
-      data trace/.false./
-c      data rfm/400*0/
+      logical initial
+*     data trace/.false./
+c     data rfm/400*0/
 
       if (nsibs.gt.3000) 
      & call dblepr("Too many family members, change size of rvector?",
@@ -146,15 +148,15 @@ c      data rfm/400*0/
       endif 
 
 c   refresh rfm for each call
-      do 5 j=1,20
+      do 50 j=1,20
       do 5 i=1,20
       rfm(i,j)=0.0
  5    continue
-
+ 50   continue
       ones=0
       do 10 i=1,nsibs
         p=dble(naff-ones)/dble(nsibs-i+1)
-        if (uni(0).lt.p)  then 
+        if (uni(0).lt.p) then
         rvector(i)=1
         ones=ones+1
         else
@@ -180,8 +182,8 @@ c   refresh rfm for each call
 20    continue
       return
       
-1005  format(' # of affected(input): ', i5/ ' # of simulated: ', i5/)
-1000  format(' Too many family members, change size of rvector'/)    
+*1005  format(' # of affected(input): ', i5/ ' # of simulated: ', i5/)
+*1000  format(' Too many family members, change size of rvector'/)    
       end
 
 
@@ -201,11 +203,11 @@ c   const  = constant part of the log-likelihood
       implicit complex(a-z)
       integer fm(20,20),naff,nsibs,first,last,i,j,m(20),fmij,nfam
       double precision const,zero
-      logical trace
+*     logical trace
       double precision fac(8000),fac0(8001)
       equivalence (fac(1),fac0(2))
       common/factab/fac0
-      data zero/0.0000d0/, trace/.false./
+      data zero/0.0000d0/
 
 *     if(trace)write(6,1000)
       nfam=0
@@ -228,50 +230,51 @@ c   const  = constant part of the log-likelihood
 *     if(trace)call runiout(fm,m,nsibs,naff,nfam,first,last)
 *     if(trace)write(6,1000)const
       return
- 1000  format(' Build:const ',e15.5)
+c1000  format(' Build:const ',e15.5)
       end
 
 
 c------------------------------------------------------------------------
-      subroutine runiout(freq,m,nsibs,naff,nfam,first,last)
+*     subroutine runiout(freq,m,nsibs,naff,nfam,first,last)
 
 c   output a table of frequencies and check for consistency
 
-      implicit complex(a-z)
-      integer freq(20,20),m(20),nsibs,naff,nfam,i,j,first,last
-      integer csibs,cfam,caff,cm(20)
+*     implicit complex(a-z)
+*     integer freq(20,20),m(20),nsibs,naff,nfam,i,j,first,last
+*     integer csibs,cfam,caff,cm(20)
 
-      csibs=0
-      cfam=0
-      caff=0
+*     csibs=0
+*     cfam=0
+*     caff=0
 *     write(6,1001)nsibs,naff,nfam
-      do 30 j=first,last
-         cm(j)=0
+*     do 300 j=first,last
+*        cm(j)=0
 *        write(6,1006)m(j),(freq(i,j),i=1,j+1)
-         do 30 i=1,j+1
-            cfam=cfam+freq(i,j)
-            cm(j)=cm(j)+freq(i,j)
-            caff=caff+(i-1)*freq(i,j)
- 30          continue
+*        do 30 i=1,j+1
+*           cfam=cfam+freq(i,j)
+*           cm(j)=cm(j)+freq(i,j)
+*           caff=caff+(i-1)*freq(i,j)
+*30          continue
+*300  continue
 c                                check!
-      if(caff.ne.naff)go to 900
-      if(cfam.ne.nfam)go to 900
-      do 50 j=first,last
-         if(cm(j).ne.m(j))go to 900
- 50       continue
-      return
- 900  continue
+*     if(caff.ne.naff)go to 900
+*     if(cfam.ne.nfam)go to 900
+*     do 50 j=first,last
+*        if(cm(j).ne.m(j))go to 900
+*50       continue
+*     return
+*900  continue
 *     write(6,1000)
 *     write(6,1001)csibs,caff,cfam
 *     write(6,1006)(cm(j),j=first,last)
-      call rexit("8888")
+*     call rexit("8888")
 
 
- 1000  format(' OUT: error detected:')
- 1001  format(/' OUT: ',i5,' sibs',3x,i5,' affected',3x,
-     &   i5,' families')
- 1006  format(1x,'OUT:',i4,5x,20i4)
-      end
+*1000  format(' OUT: error detected:')
+*1001  format(/' OUT: ',i5,' sibs',3x,i5,' affected',3x,
+*    &   i5,' families')
+*1006  format(1x,'OUT:',i4,5x,20i4)
+*     end
 
 
 c ------------------------------------------------------------------------
@@ -282,12 +285,12 @@ c  Find the sum of log-factorials (slf) for the interior of the table
       implicit logical(a-z)
       integer fm(20,20),first,last,i,j
       double precision slf,zero,const,p,dexp,lminf
-      double precision fac(8000),fac0(8001)
-      logical trace
+      double precision fac(0:8000),fac0(8001)
+*     logical trace
       equivalence (fac(1),fac0(2))
       common/factab/fac0
 c            lminf is double precision log of smallest positive number
-      data zero/0.000d0/, trace/.false./, lminf/-708.7500d0/
+      data zero/0.000d0/, lminf/-708.7500d0/
 
 *     if(trace)write(6,1000)first,last,const
       slf=zero
@@ -303,8 +306,8 @@ c                                       i-1 = number affected
       if(const-slf.gt.lminf)p=dexp(const-slf)
 c      if(trace)write(6,1001)const,slf,p
       return
- 1000  format(' PROB: first,last,const: ',2i6,f15.5)
-cc 1001   format(' PROB: const,slf,p:  ',3e15.5)
+*1000 format(' PROB: first,last,const: ',2i6,f15.5)
+*1001 format(' PROB: const,slf,p:  ',3e15.5)
       end
 
 c------------------------------------------------------------------------
@@ -332,7 +335,8 @@ C                                  GENERATE NEXT VECTOR IN THE SEQUENCE
 C                                                  FIND CUMMULATIVE SUM
        SUM=0
        DO 200 I=J,K
- 200        SUM=SUM+N(I)
+          SUM=SUM+N(I)
+ 200   CONTINUE
        IF(SUM.GT.M)GO TO 300
 C                                         N(1) IS WHATEVER IS LEFT OVER
        N(1)=M-SUM
@@ -347,7 +351,8 @@ C                                          DONE WHEN WE RUN OFF THE END
        RETURN
 C                               INITIALIZE FOR THE FIRST CALL TO CMULTE
  500     DO 600 I=1,K
- 600          N(I)=0
+            N(I)=0
+ 600     CONTINUE
        N(1)=M
        DONE=.FALSE.
 C<---  WRITE(6,1000)(N(J),J=1,K)
@@ -435,7 +440,7 @@ C***FIRST EXECUTABLE STATEMENT  UNI
 C  FILL
       MDIG=I1MACH(8)+1
 C          BE SURE THAT MDIG AT LEAST 16...
-      IF(MDIG.LT.16)CALL XERROR('UNI--MDIG LESS THAN 16',22,1,2)
+*     IF(MDIG.LT.16)CALL XERROR('UNI--MDIG LESS THAN 16',22,1,2)
       M1= 2**(MDIG-2) + (2**(MDIG-2)-1)
       M2 = 2**(MDIG/2)
       JSEED = MIN0(IABS(JD),M1)
@@ -448,7 +453,8 @@ C          BE SURE THAT MDIG AT LEAST 16...
         JSEED = J0*K0
         J1 = MOD(JSEED/M2+J0*K1+J1*K0,M2/2)
         J0 = MOD(JSEED,M2)
-    2   M(I) = J0+M2*J1
+        M(I) = J0+M2*J1
+    2 CONTINUE
       I=5
       J=17
 C  BEGIN MAIN LOOP HERE
@@ -1190,7 +1196,7 @@ C***FIRST EXECUTABLE STATEMENT  XERABT
       call dblepr(messg,255, nmessg, 5)
 *     STOP
       END
-      SUBROUTINE XERCTL(MESSG1,NMESSG,NERR,LEVEL,KONTRL)
+*     SUBROUTINE XERCTL(MESSG1,NMESSG,NERR,LEVEL,KONTRL)
 C***BEGIN PROLOGUE  XERCTL
 C***DATE WRITTEN   790801   (YYMMDD)
 C***REVISION DATE  820801   (YYMMDD)
@@ -1233,11 +1239,11 @@ C                 HANDLING PACKAGE", SAND82-0800, SANDIA LABORATORIES,
 C                 1982.
 C***ROUTINES CALLED  (NONE)
 C***END PROLOGUE  XERCTL
-      CHARACTER*20 MESSG1
+*     CHARACTER*20 MESSG1
 C***FIRST EXECUTABLE STATEMENT  XERCTL
 *     write(*,*) nerr,level,kontrl,messg1,nmessg
-      RETURN
-      END
+*     RETURN
+*     END
       SUBROUTINE XERPRT(MESSG,NMESSG)
 C***BEGIN PROLOGUE  XERPRT
 C***DATE WRITTEN   790801   (YYMMDD)
@@ -1273,7 +1279,7 @@ C***FIRST EXECUTABLE STATEMENT  XERPRT
       call dblepr("",0,nmessg,5)
       RETURN
       END
-      SUBROUTINE XERROR(MESSG,NMESSG,NERR,LEVEL)
+*     SUBROUTINE XERROR(MESSG,NMESSG,NERR,LEVEL)
 C***BEGIN PROLOGUE  XERROR
 C***DATE WRITTEN   790801   (YYMMDD)
 C***REVISION DATE  820801   (YYMMDD)
@@ -1319,12 +1325,12 @@ C                 HANDLING PACKAGE", SAND82-0800, SANDIA LABORATORIES,
 C                 1982.
 C***ROUTINES CALLED  XERRWV
 C***END PROLOGUE  XERROR
-      CHARACTER*(*) MESSG
+*     CHARACTER*(*) MESSG
 C***FIRST EXECUTABLE STATEMENT  XERROR
-      CALL XERRWV(MESSG,NMESSG,NERR,LEVEL,0,0,0,0,0.,0.)
-      RETURN
-      END
-      SUBROUTINE XERRWV(MESSG,NMESSG,NERR,LEVEL,NI,I1,I2,NR,R1,R2)
+*     CALL XERRWV(MESSG,NMESSG,NERR,LEVEL,0,0,0,0,0.,0.)
+*     RETURN
+*     END
+*     SUBROUTINE XERRWV(MESSG,NMESSG,NERR,LEVEL,NI,I1,I2,NR,R1,R2)
 C***BEGIN PROLOGUE  XERRWV
 C***DATE WRITTEN   800319   (YYMMDD)
 C***REVISION DATE  820801   (YYMMDD)
@@ -1377,107 +1383,107 @@ C                 1982.
 C***ROUTINES CALLED  FDUMP,I1MACH,J4SAVE,XERABT,XERCTL,XERPRT,XERSAV,
 C                    XGETUA
 C***END PROLOGUE  XERRWV
-      CHARACTER*(*) MESSG
-      CHARACTER*20 LFIRST
-      CHARACTER*37 FORM
-      DIMENSION LUN(5)
+*     CHARACTER*(*) MESSG
+*     CHARACTER*20 LFIRST
+*     CHARACTER*37 FORM
+*     DIMENSION LUN(5)
 C     GET FLAGS
 C***FIRST EXECUTABLE STATEMENT  XERRWV
-      LKNTRL = J4SAVE(2,0,.FALSE.)
-      MAXMES = J4SAVE(4,0,.FALSE.)
+*     LKNTRL = J4SAVE(2,0,.FALSE.)
+*     MAXMES = J4SAVE(4,0,.FALSE.)
 C     CHECK FOR VALID INPUT
-      IF ((NMESSG.GT.0).AND.(NERR.NE.0).AND.
-     1    (LEVEL.GE.(-1)).AND.(LEVEL.LE.2)) GO TO 10
-         IF (LKNTRL.GT.0) CALL XERPRT('FATAL ERROR IN...',17)
-         CALL XERPRT('XERROR -- INVALID INPUT',23)
-         IF (LKNTRL.GT.0) CALL FDUMP
-         IF (LKNTRL.GT.0) then
-            CALL XERPRT('JOB ABORT DUE TO FATAL ERROR.',29)
-         ENDIF
-         IF (LKNTRL.GT.0) CALL XERSAV(' ',0,0,0,KDUMMY)
-         CALL XERABT('XERROR -- INVALID INPUT',23)
-         RETURN
-   10 CONTINUE
+*     IF ((NMESSG.GT.0).AND.(NERR.NE.0).AND.
+*    1    (LEVEL.GE.(-1)).AND.(LEVEL.LE.2)) GO TO 10
+*        IF (LKNTRL.GT.0) CALL XERPRT('FATAL ERROR IN...',17)
+*        CALL XERPRT('XERROR -- INVALID INPUT',23)
+*        IF (LKNTRL.GT.0) CALL FDUMP
+*        IF (LKNTRL.GT.0) then
+*           CALL XERPRT('JOB ABORT DUE TO FATAL ERROR.',29)
+*        ENDIF
+*        IF (LKNTRL.GT.0) CALL XERSAV(' ',0,0,0,KDUMMY)
+*        CALL XERABT('XERROR -- INVALID INPUT',23)
+*        RETURN
+*  10 CONTINUE
 C     RECORD MESSAGE
-      JUNK = J4SAVE(1,NERR,.TRUE.)
-      CALL XERSAV(MESSG,NMESSG,NERR,LEVEL,KOUNT)
+*     JUNK = J4SAVE(1,NERR,.TRUE.)
+*     CALL XERSAV(MESSG,NMESSG,NERR,LEVEL,KOUNT)
 C     LET USER OVERRIDE
-      LFIRST = MESSG
-      LMESSG = NMESSG
-      LERR = NERR
-      LLEVEL = LEVEL
-      CALL XERCTL(LFIRST,LMESSG,LERR,LLEVEL,LKNTRL)
+*     LFIRST = MESSG
+*     LMESSG = NMESSG
+*     LERR = NERR
+*     LLEVEL = LEVEL
+*     CALL XERCTL(LFIRST,LMESSG,LERR,LLEVEL,LKNTRL)
 C     RESET TO ORIGINAL VALUES
-      LMESSG = NMESSG
-      LERR = NERR
-      LLEVEL = LEVEL
-      LKNTRL = MAX0(-2,MIN0(2,LKNTRL))
-      MKNTRL = IABS(LKNTRL)
+*     LMESSG = NMESSG
+*     LERR = NERR
+*     LLEVEL = LEVEL
+*     LKNTRL = MAX0(-2,MIN0(2,LKNTRL))
+*     MKNTRL = IABS(LKNTRL)
 C     DECIDE WHETHER TO PRINT MESSAGE
-      IF ((LLEVEL.LT.2).AND.(LKNTRL.EQ.0)) GO TO 100
-      IF (((LLEVEL.EQ.(-1)).AND.(KOUNT.GT.MIN0(1,MAXMES)))
-     1.OR.((LLEVEL.EQ.0)   .AND.(KOUNT.GT.MAXMES))
-     2.OR.((LLEVEL.EQ.1)   .AND.(KOUNT.GT.MAXMES).AND.(MKNTRL.EQ.1))
-     3.OR.((LLEVEL.EQ.2)   .AND.(KOUNT.GT.MAX0(1,MAXMES)))) GO TO 100
-         IF (LKNTRL.LE.0) GO TO 20
-            CALL XERPRT(' ',1)
+*     IF ((LLEVEL.LT.2).AND.(LKNTRL.EQ.0)) GO TO 100
+*     IF (((LLEVEL.EQ.(-1)).AND.(KOUNT.GT.MIN0(1,MAXMES)))
+*    1.OR.((LLEVEL.EQ.0)   .AND.(KOUNT.GT.MAXMES))
+*    2.OR.((LLEVEL.EQ.1)   .AND.(KOUNT.GT.MAXMES).AND.(MKNTRL.EQ.1))
+*    3.OR.((LLEVEL.EQ.2)   .AND.(KOUNT.GT.MAX0(1,MAXMES)))) GO TO 100
+*        IF (LKNTRL.LE.0) GO TO 20
+*           CALL XERPRT(' ',1)
 C           INTRODUCTION
-            IF (LLEVEL.EQ.(-1)) CALL XERPRT
-     1('WARNING MESSAGE...THIS MESSAGE WILL ONLY BE PRINTED ONCE.',57)
-            IF (LLEVEL.EQ.0) CALL XERPRT('WARNING IN...',13)
-            IF (LLEVEL.EQ.1) CALL XERPRT
-     1      ('RECOVERABLE ERROR IN...',23)
-            IF (LLEVEL.EQ.2) CALL XERPRT('FATAL ERROR IN...',17)
-   20    CONTINUE
+*           IF (LLEVEL.EQ.(-1)) CALL XERPRT
+*    1('WARNING MESSAGE...THIS MESSAGE WILL ONLY BE PRINTED ONCE.',57)
+*           IF (LLEVEL.EQ.0) CALL XERPRT('WARNING IN...',13)
+*           IF (LLEVEL.EQ.1) CALL XERPRT
+*    1      ('RECOVERABLE ERROR IN...',23)
+*           IF (LLEVEL.EQ.2) CALL XERPRT('FATAL ERROR IN...',17)
+*  20    CONTINUE
 C        MESSAGE
-         CALL XERPRT(MESSG,LMESSG)
-         CALL XGETUA(LUN,NUNIT)
-         ISIZEI = LOG10(FLOAT(I1MACH(9))) + 1.0
-         ISIZEF = LOG10(FLOAT(I1MACH(10))**I1MACH(11)) + 1.0
-         DO 50 KUNIT=1,NUNIT
-            IUNIT = LUN(KUNIT)
-            IF (IUNIT.EQ.0) IUNIT = I1MACH(4)
-            DO 22 I=1,MIN(NI,2)
+*        CALL XERPRT(MESSG,LMESSG)
+*        CALL XGETUA(LUN,NUNIT)
+*        ISIZEI = LOG10(FLOAT(I1MACH(9))) + 1.0
+*        ISIZEF = LOG10(FLOAT(I1MACH(10))**I1MACH(11)) + 1.0
+*        DO 50 KUNIT=1,NUNIT
+*           IUNIT = LUN(KUNIT)
+*           IF (IUNIT.EQ.0) IUNIT = I1MACH(4)
+*           DO 22 I=1,MIN(NI,2)
 *              WRITE (FORM,21) I,ISIZEI
-   21          FORMAT ('(11X,21HIN ABOVE MESSAGE, I',I1,'=,I',I2,')   ')
+*  21          FORMAT ('(11X,21HIN ABOVE MESSAGE, I',I1,'=,I',I2,')   ')
 *              IF (I.EQ.1) WRITE (IUNIT,FORM) I1
 *              IF (I.EQ.2) WRITE (IUNIT,FORM) I2
-   22       CONTINUE
-            DO 24 I=1,MIN(NR,2)
+*  22       CONTINUE
+*           DO 24 I=1,MIN(NR,2)
 *              WRITE (FORM,23) I,ISIZEF+10,ISIZEF
-   23          FORMAT ('(11X,21HIN ABOVE MESSAGE, R',I1,'=,E',
-     1         I2,'.',I2,')')
+*  23          FORMAT ('(11X,21HIN ABOVE MESSAGE, R',I1,'=,E',
+*    1         I2,'.',I2,')')
 *              IF (I.EQ.1) WRITE (IUNIT,FORM) R1
 *              IF (I.EQ.2) WRITE (IUNIT,FORM) R2
-   24       CONTINUE
-            IF (LKNTRL.LE.0) GO TO 40
+*  24       CONTINUE
+*           IF (LKNTRL.LE.0) GO TO 40
 C              ERROR NUMBER
 *              WRITE (IUNIT,30) LERR
-   30          FORMAT (15H ERROR NUMBER =,I10)
-   40       CONTINUE
-   50    CONTINUE
+*  30          FORMAT (15H ERROR NUMBER =,I10)
+*  40       CONTINUE
+*  50    CONTINUE
 C        TRACE-BACK
-         IF (LKNTRL.GT.0) CALL FDUMP
-  100 CONTINUE
-      IFATAL = 0
-      IF ((LLEVEL.EQ.2).OR.((LLEVEL.EQ.1).AND.(MKNTRL.EQ.2)))
-     1IFATAL = 1
+*        IF (LKNTRL.GT.0) CALL FDUMP
+* 100 CONTINUE
+*     IFATAL = 0
+*     IF ((LLEVEL.EQ.2).OR.((LLEVEL.EQ.1).AND.(MKNTRL.EQ.2)))
+*    1IFATAL = 1
 C     QUIT HERE IF MESSAGE IS NOT FATAL
-      IF (IFATAL.LE.0) RETURN
-      IF ((LKNTRL.LE.0).OR.(KOUNT.GT.MAX0(1,MAXMES))) GO TO 120
+*     IF (IFATAL.LE.0) RETURN
+*     IF ((LKNTRL.LE.0).OR.(KOUNT.GT.MAX0(1,MAXMES))) GO TO 120
 C        PRINT REASON FOR ABORT
-         IF (LLEVEL.EQ.1) CALL XERPRT
-     1   ('JOB ABORT DUE TO UNRECOVERED ERROR.',35)
-         IF (LLEVEL.EQ.2) CALL XERPRT
-     1   ('JOB ABORT DUE TO FATAL ERROR.',29)
+*        IF (LLEVEL.EQ.1) CALL XERPRT
+*    1   ('JOB ABORT DUE TO UNRECOVERED ERROR.',35)
+*        IF (LLEVEL.EQ.2) CALL XERPRT
+*    1   ('JOB ABORT DUE TO FATAL ERROR.',29)
 C        PRINT ERROR SUMMARY
-         CALL XERSAV(' ',-1,0,0,KDUMMY)
-  120 CONTINUE
+*        CALL XERSAV(' ',-1,0,0,KDUMMY)
+* 120 CONTINUE
 C     ABORT
-      IF ((LLEVEL.EQ.2).AND.(KOUNT.GT.MAX0(1,MAXMES))) LMESSG = 0
-      CALL XERABT(MESSG,LMESSG)
-      RETURN
-      END
+*     IF ((LLEVEL.EQ.2).AND.(KOUNT.GT.MAX0(1,MAXMES))) LMESSG = 0
+*     CALL XERABT(MESSG,LMESSG)
+*     RETURN
+*     END
       SUBROUTINE XERSAV(MESSG,NMESSG,NERR,LEVEL,ICOUNT)
 C***BEGIN PROLOGUE  XERSAV
 C***DATE WRITTEN   800319   (YYMMDD)
@@ -1511,7 +1517,7 @@ C***ROUTINES CALLED  I1MACH,S88FMT,XGETUA
 C***END PROLOGUE  XERSAV
       INTEGER LUN(5)
       CHARACTER*(*) MESSG
-      CHARACTER*20 MESTAB(10),MES
+      CHARACTER(LEN=20) MESTAB(10),MES
       DIMENSION NERTAB(10),LEVTAB(10),KOUNT(10)
       SAVE MESTAB,NERTAB,LEVTAB,KOUNT,KOUNTX
 C     NEXT TWO DATA STATEMENTS ARE NECESSARY TO PROVIDE A BLANK
@@ -1531,25 +1537,26 @@ C        PRINT TO EACH UNIT
             IF (IUNIT.EQ.0) IUNIT = I1MACH(4)
 C           PRINT TABLE HEADER
 *           WRITE (IUNIT,10)
-   10       FORMAT (32H0          ERROR MESSAGE SUMMARY/
-     1      51H MESSAGE START             NERR     LEVEL     COUNT)
+*  10       FORMAT (32H0          ERROR MESSAGE SUMMARY/
+*    1      51H MESSAGE START             NERR     LEVEL     COUNT)
 C           PRINT BODY OF TABLE
             DO 20 I=1,10
                IF (KOUNT(I).EQ.0) GO TO 30
 *              WRITE (IUNIT,15) MESTAB(I),NERTAB(I),LEVTAB(I),KOUNT(I)
-   15          FORMAT (1X,A20,3I10)
+*  15          FORMAT (1X,A20,3I10)
    20       CONTINUE
    30       CONTINUE
 C           PRINT NUMBER OF OTHER ERRORS
 *           IF (KOUNTX.NE.0) WRITE (IUNIT,40) KOUNTX
-   40       FORMAT (41H0OTHER ERRORS NOT INDIVIDUALLY TABULATED=,I10)
+*  40       FORMAT (41H0OTHER ERRORS NOT INDIVIDUALLY TABULATED=,I10)
 *           WRITE (IUNIT,50)
-   50       FORMAT (1X)
+*  50       FORMAT (1X)
    60    CONTINUE
          IF (NMESSG.LT.0) RETURN
 C        CLEAR THE ERROR TABLES
          DO 70 I=1,10
-   70       KOUNT(I) = 0
+            KOUNT(I) = 0
+   70    CONTINUE
          KOUNTX = 0
          RETURN
    80 CONTINUE

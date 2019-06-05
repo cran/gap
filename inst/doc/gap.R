@@ -1,7 +1,7 @@
 ### R code from vignette source 'gap.Rnw'
 
 ###################################################
-### code chunk number 1: gap.Rnw:171-175
+### code chunk number 1: gap.Rnw:153-157
 ###################################################
 library(gap)
 search()
@@ -10,10 +10,10 @@ data(package="gap")$results
 
 
 ###################################################
-### code chunk number 2: gap.Rnw:256-263
+### code chunk number 2: gap.Rnw:238-245
 ###################################################
 # pedigree diagram
-data(lukas,package="gap")
+data(lukas,package="gap.datasets")
 library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
 pdf("figures/lukas.pdf",height=14,width=15)
@@ -22,7 +22,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 3: gap.Rnw:273-299
+### code chunk number 3: gap.Rnw:255-281
 ###################################################
 # unordered individuals
 library(gap)
@@ -53,7 +53,7 @@ sum(abs(z))
 
 
 ###################################################
-### code chunk number 4: gap.Rnw:307-345
+### code chunk number 4: gap.Rnw:289-327
 ###################################################
 library(gap)
 models <- matrix(c(
@@ -96,7 +96,7 @@ table1
 
 
 ###################################################
-### code chunk number 5: gap.Rnw:350-378
+### code chunk number 5: gap.Rnw:332-360
 ###################################################
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
@@ -129,7 +129,7 @@ table5
 
 
 ###################################################
-### code chunk number 6: gap.Rnw:383-428
+### code chunk number 6: gap.Rnw:365-410
 ###################################################
 library(gap)
 # ARIC study
@@ -179,7 +179,7 @@ unlink(outfile)
 
 
 ###################################################
-### code chunk number 7: gap.Rnw:436-444
+### code chunk number 7: gap.Rnw:418-427
 ###################################################
 library(gap)
 pdf("figures/qqunif.pdf",height=10,width=10)
@@ -188,11 +188,12 @@ r <- qqunif(u_obs,pch=21,bg="blue",bty="n")
 u_exp <- r$y
 hits <- u_exp >= 2.30103
 points(r$x[hits],u_exp[hits],pch=21,bg="green")
+legend("topleft",sprintf("GC.lambda=%.4f",gc.lambda(u_obs)))
 dev.off()
 
 
 ###################################################
-### code chunk number 8: gap.Rnw:452-467 (eval = FALSE)
+### code chunk number 8: gap.Rnw:435-450 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## ord <- with(w4,order(chr,pos))
@@ -212,7 +213,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 9: gap.Rnw:473-489 (eval = FALSE)
+### code chunk number 9: gap.Rnw:456-472 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
@@ -233,9 +234,20 @@ dev.off()
 
 
 ###################################################
-### code chunk number 10: gap.Rnw:500-505 (eval = FALSE)
+### code chunk number 10: gap.Rnw:484-489 (eval = FALSE)
 ###################################################
 ## library(gap)
+## library(gap.datasets)
+## png("figures/circos-mhtplot.pdf")
+## circos.mhtplot()
+## dev.off()
+
+
+###################################################
+### code chunk number 11: gap.Rnw:495-501 (eval = FALSE)
+###################################################
+## library(gap)
+## library(gap.datasets)
 ## pdf("figures/asplot.pdf",height=14,width=14)
 ## asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
 ## title("CDKN2A/CDKN2B Region")
@@ -243,7 +255,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 11: gap.Rnw:515-525
+### code chunk number 12: gap.Rnw:511-521
 ###################################################
 library(gap)
 pdf("figures/ESplot.pdf",height=10,width=10)

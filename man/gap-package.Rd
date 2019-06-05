@@ -18,12 +18,12 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.1-22\cr
+Version: \tab 1.1-23\cr
 Depends: \tab R(>= 2.1.0)\cr
 Suggests: \tab BradleyTerry2, MASS, Matrix, MCMCglmm, NCBI2R, bdsmatrix, coxme, foreign, grid, \cr
         \tab  haplo.stats, kinship2, magic, mets, nlme, pedigree, pedigreemm, regress, rms, survival \cr
 License: \tab GPL (>=2)\cr
-URL: \tab http://www.mrc-epid.cam.ac.uk/people/jing-hua-zhao\cr
+URL: \tab https://jinghuazhao.github.io/\cr
 }
 
 Index:
@@ -39,18 +39,23 @@ gc.em             \tab      Gene counting for haplotype analysis\cr
 gcontrol          \tab      genomic control\cr
 gcontrol2         \tab      genomic control based on p values\cr
 gcp               \tab      Permutation tests using GENECOUNTING\cr
+gc.lambda         \tab      Estimation of the genomic control inflation statistic (lambda)\cr
 genecounting      \tab      Gene counting for haplotype analysis\cr
 gif               \tab      Kinship coefficient and genetic index of familiality\cr
 hap               \tab      Haplotype reconstruction\cr
 hap.em            \tab      Gene counting for haplotype analysis\cr
 hap.score         \tab      Score statistics for association of traits with haplotypes\cr
 htr               \tab      Haplotype trend regression\cr
+h2.jags           \tab      Heritability estimation based on genomic relationship matrix using JAGS\cr
 hwe               \tab      Hardy-Weinberg equilibrium test for a multiallelic marker\cr
 hwe.cc            \tab      A likelihood ratio test of population Hardy-Weinberg equilibrium \cr
 hwe.hardy         \tab      Hardy-Weinberg equilibrium test using MCMC\cr
+hwe.jags          \tab      Hardy-Weinberg equlibrium test for a multiallelic marker using JAGS\cr
+invnormal         \tab      inverse Normal transformation\cr
 kin.morgan        \tab      kinship matrix for simple pedigree\cr
 LD22              \tab      LD statistics for two diallelic markers\cr
 LDkl              \tab      LD statistics for two multiallelic markers\cr
+log10p            \tab      log10(p) for a standard normal deviate\cr
 masize            \tab      Sample size calculation for mediation analysis\cr
 MCMCgrm           \tab	    Mixed modeling with genetic relationship matrices\cr
 mia               \tab      multiple imputation analysis for hap\cr
@@ -65,6 +70,7 @@ pfc.sim           \tab      Probability of familial clustering of disease\cr
 pgc               \tab      Preparing weight for GENECOUNTING\cr
 print.hap.score   \tab      Print a hap.score object\cr
 s2k               \tab      Statistics for 2 by K table\cr
+sentinels         \tab      Sentinel identification from GWAS summary statistics\cr
 tscc              \tab      Power calculation for two-stage case-control design\cr
 
 \cr
@@ -72,29 +78,19 @@ tscc              \tab      Power calculation for two-stage case-control design\
 \cr
 asplot            \tab      Regional association plot\cr
 ESplot            \tab      Effect-size plot\cr
+circos.cis.vs.trans.plot \tab circos plot of cis/trans classification\cr
+circos.cnvplot    \tab      circos plot of CNVs\cr
+circos.mhtplot 	  \tab      circos Manhattan plot with gene annotation\cr
+cnvplot           \tab      genomewide plot of CNVs\cr
+METAL_forestplot  \tab      forest plot as R/meta's forest for METAL outputs\cr
 mhtplot           \tab      Manhattan plot\cr
 mhtplot2          \tab      Manhattan plot with annotations\cr
+mhtplot.trunc     \tab      truncated Manhattan plot\cr
+miamiplot         \tab      Miami plot (Experimental)\cr
 pedtodot          \tab      Converting pedigree(s) to dot file(s)\cr
 plot.hap.score    \tab      Plot haplotype frequencies versus haplotype score statistics\cr
 qqfun             \tab      Quantile-comparison plots\cr
 qqunif            \tab      Q-Q plot for uniformly distributed random variable\cr
-
-\cr
-* DATASETS *\cr
-\cr
-PD                \tab      A study of Parkinson's disease and APOE, LRRK2, SNCA makers \cr
-aldh2             \tab      ALDH2 markers and alcoholism\cr
-apoeapoc          \tab      APOE/APOC1 markers and schizophrenia\cr
-cf                \tab      Cystic Fibrosis data\cr
-crohn             \tab      Crohn's disease data\cr
-fa                \tab      Friedreich ataxia data\cr
-fsnps             \tab      A case-control data involving four SNPs with missing genotype\cr
-hla               \tab      HLA markers and schizophrenia\cr
-l51               \tab      An example pedigree data\cr
-lukas             \tab      An example pedigree\cr
-mao               \tab      A study of Parkinson's disease and MAO gene\cr
-meyer             \tab      A pedigree data on 282 animals deriving from two generations\cr
-nep499            \tab      A study of Alzheimer's disease with eight SNPs and APOE\cr
 
 \cr
 * UTITLITIES *\cr
@@ -105,6 +101,7 @@ FPRP              \tab      False-positive report probability\cr
 ab                \tab      Test/Power calculation for mediating effect\cr
 b2r               \tab      Obtain correlation coefficients and their variance-covariances\cr
 chow.test         \tab      Chow's test for heterogeneity in two regressions\cr
+cis.vs.trans.classification \tab a cis/trans classifier\cr
 comp.score        \tab      score statistics for testing genetic linkage of quantitative trait\cr
 h2                \tab      Heritability estimation according to twin correlations\cr
                   \tab      for case-control studies\cr
@@ -115,7 +112,6 @@ metap             \tab      Meta-analysis of p values\cr
 metareg           \tab      Fixed and random effects model for meta-analysis\cr
 muvar             \tab      Means and variances under 1- and 2- locus (diallelic) QTL model\cr
 read.ms.output    \tab      A utility function to read ms output\cr
-twinan90          \tab      Classic twin models\cr
 whscore           \tab      Whittemore-Halpern scores for allele-sharing\cr
 GRM functions     \tab      ReadGRM, ReadGRMBin, ReadGRMPLINK, ReadGRMPCA, WriteGRM, WriteGRMBin, WriteGRMSAS\cr
                   \tab      handle genomic relationship matrix involving other software\cr
@@ -134,7 +130,7 @@ near future.
 Author: Jing Hua Zhao in collaboration with other colleagues, and with
         help from Kurt Hornik and Brian Ripley of the R core development team
 
-Maintainer: Jing Hua Zhao <jinghua.zhao@mrc-epid.cam.ac.uk>
+Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
 }
 \references{
 Zhao JH, gap: genetic analysis package. Journal of Statistical Software 2007, 23(8):1-18

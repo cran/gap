@@ -11,8 +11,7 @@ static int n_subjects, n_loci=0, n_phase, *alleles, all_snps=0;
 long n_warn = 0;
 double **af,**pq;
 static FILE *outfile;
-char of1name[MAX_FILENAME_LEN],of2name[MAX_FILENAME_LEN],
-     tempname[MAX_FILENAME_LEN];
+char of1name[FILENAME_LEN],of2name[FILENAME_LEN],tempname[MAX_FILENAME_LEN];
 
 void hap_c(
 int *nobs,
@@ -377,7 +376,7 @@ int *converged,char **hapfile, char **assignfile
       sample_prior(n_hap, ho_list, df); /* P step */
     }
     if (of1name[0]) {
-      sprintf(tempname,"%s.%03d", of1name, j);
+      snprintf(tempname,sizeof(of1name)+sizeof(j),"%.14s%03d", of1name, j);
       outfile = fopen(tempname, "w");
       hap_posterior(n_hap, so_list, min_posterior, &logl, 0);
       if(!ss) {
@@ -389,7 +388,7 @@ int *converged,char **hapfile, char **assignfile
       fclose(outfile);
     }
     if (of2name[0]) {
-      sprintf(tempname,"%s.%03d", of2name, j);
+      snprintf(tempname,sizeof(of2name)+sizeof(j),"%.14s%03d", of2name, j);
       outfile = fopen(tempname, "w");
       hap_write(outfile, n_loci, names, coding, order, n_hap, so_list, 1, 0.0, num, ss);
       fclose(outfile);
@@ -398,11 +397,11 @@ int *converged,char **hapfile, char **assignfile
   if (!quiet) Rprintf("\n");
   if (mimp>0 && of1name[0]) {
     Rprintf("\nSamples from posterior distribution of haplotype frequencies ");
-    Rprintf("written to \n\tfiles %s.001 ... %s.%03d\n", of1name, of1name,
+    Rprintf("written to \n\tfiles %s.1 ... %s.%d\n", of1name, of1name,
            mimp);
   }
   if (mimp>0 && of2name[0]) {
-    Rprintf("Multiply imputed datasets written to files %s.001 ... %s.%03d\n",
+    Rprintf("Multiply imputed datasets written to files %s.1 ... %s.%d\n",
            of2name, of2name, mimp);
   }
 
@@ -949,17 +948,17 @@ void hap_posterior_restart(long n_hap, HAP** so_list) {
 
 void sample_posterior(long n_hap, HAP **so_list) {
   HAP **hs, **he, **hn, **h, **h2;
-  long small;
+  /* long small; */
   char *id;
   double subtotal, gp;
-  int any;
+  /* int any; */
   hs = so_list;
   he = so_list + n_hap;
-  small = 0;
+  /* small = 0; */
   while (hs < he) {
     h = hs;
     subtotal = 0.0;
-    any = 0;
+    /* any = 0; */
     do {
       id = (*h)->id;
       h2 = h+1;

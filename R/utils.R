@@ -489,7 +489,7 @@ WriteGRMSAS <- function(grmlist,outfile="gwas")
 {
   for(p in c("foreign")) {
      if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
-        if (!require(p, quietly = TRUE, character.only=TRUE))
+        if (!requireNamespace(p, quietly = TRUE))
         warning(paste("WriteGRMSAS needs package `", p, "' to be fully functional; please install", sep=""))
      }
   }
@@ -514,4 +514,343 @@ ReadGRMPCA <- function(prefix)
   s <- (values<0)
   negGRM <- vectors[,s]%*%diag(values[s])%*%t(vectors[,s])
   invisible(list(N=N,posGRM=posGRM,negGRM=negGRM,id=id))
+}
+
+# GLGC-GIANT code for inverse normal transformation on x with missing data 
+
+invnormal <- function(x)
+  qnorm((rank(x,na.last="keep")-0.5)/sum(!is.na(x))) 
+
+# log10(p) for a standard normal deviate z based on log()
+
+log10p <- function(z)
+  log(2, base=10)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)/log(10)
+
+# gc.lambda and miamiplot functions hosted at CEU by Daniel R Barnes
+# A simplified version is as follows,
+# obs <- median(chisq)
+# exp <- qchisq(0.5, 1) # 0.4549364
+# lambda <- obs/exp
+# see also estlambda from GenABEL and qq.chisq from snpStats
+
+gc.lambda <- function(p) {
+  p <- p[!is.na(p)]
+  n <- length(p)
+
+  obs <- qchisq(p,1,lower.tail=FALSE)
+  exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+
+  lambda <- median(obs)/median(exp)
+  return(lambda)
+}
+
+miamiplot <- function (x, chr = "CHR", bp = "BP", p = "P", pr = "PR", snp = "SNP", 
+    col = c("midnightblue", "chartreuse4"), col2 = c("royalblue1", 
+        "seagreen1"), ymax = NULL, highlight = NULL, highlight.add = NULL, 
+    pch = 19, cex = 0.75, cex.lab = 1, xlab = "Chromosome", ylab = "-log10(P) [y>0]; log10(P) [y<0]", 
+    lcols = c("red", "black"), lwds = c(5, 2), ltys = c(1, 2), 
+    main = "", ...) 
+{
+    P = index = NULL
+    PR = index = NULL
+    if (!(chr %in% names(x))) 
+        stop(paste("Column", chr, "not found!"))
+    if (!(bp %in% names(x))) 
+        stop(paste("Column", bp, "not found!"))
+    if (!(p %in% names(x))) 
+        stop(paste("Column", p, "not found!"))
+    if (!(pr %in% names(x))) 
+        stop(paste("Column", pr, "not found!"))
+    if (!(snp %in% names(x))) 
+        if (!is.numeric(x[[chr]])) 
+            stop(paste(chr, "column should be numeric. Do you have 'X', 'Y', 'MT', etc? If so change to numbers and try again."))
+    if (!is.numeric(x[[bp]])) 
+        stop(paste(bp, "column should be numeric."))
+    if (!is.numeric(x[[p]])) 
+        stop(paste(p, "column should be numeric."))
+    if (!is.numeric(x[[pr]])) 
+        stop(paste(pr, "column should be numeric."))
+    d = data.frame(CHR = x[[chr]], BP = x[[bp]], P = x[[p]], 
+        PR = x[[pr]])
+    if (!is.null(x[[snp]])) 
+        d = transform(d, SNP = x[[snp]])
+    d = subset(d[order(d$CHR, d$BP), ], (P > 0 & P <= 1 & is.numeric(P) & 
+        PR > 0 & PR <= 1 & is.numeric(PR)))
+    d$logp = -log10(d$P)
+    d$logpr = log10(d$PR)
+    d$pos = NA
+    ymax = ceiling(max(d$logp) + 2)
+    ymin = floor(min(d$logpr) - 2)
+    d$index = NA
+    ind = 0
+    for (i in unique(d$CHR)) {
+        ind = ind + 1
+        d[d$CHR == i, ]$index = ind
+    }
+    nchr = length(unique(d$CHR))
+    if (nchr == 1) {
+        d$pos = d$BP
+        ticks = floor(length(d$pos))/2 + 1
+        xlabel = paste("Chromosome", unique(d$CHR), "position")
+        labs = ticks
+    }
+    else {
+        lastbase = 0
+        ticks = NULL
+        for (i in unique(d$index)) {
+            if (i == 1) {
+                d[d$index == i, ]$pos = d[d$index == i, ]$BP
+            }
+            else {
+                lastbase = lastbase + tail(subset(d, index == 
+                  i - 1)$BP, 1)
+                d[d$index == i, ]$pos = d[d$index == i, ]$BP + 
+                  lastbase
+            }
+            ticks = c(ticks, d[d$index == i, ]$pos[floor(length(d[d$index == 
+                i, ]$pos)/2) + 1])
+        }
+        xlabel = "Chromosome"
+        labs = unique(d$CHR)
+    }
+    xmax = ceiling(max(d$pos) * 1.03)
+    xmin = floor(max(d$pos) * -0.03)
+    plot(NULL, xaxt = "n", bty = "n", xaxs = "i", yaxs = "i", 
+        xlim = c(xmin, xmax), ylim = c(ymin, ymax), main = main, 
+        xlab = xlab, ylab = ylab, las = 1, pch = pch, cex.lab = cex.lab, 
+        ...)
+    if (nchr == 1) {
+        axis(1, ...)
+    }
+    else {
+        axis(1, at = ticks, labels = labs, ...)
+    }
+    col = rep(col, max(d$CHR))
+    col2 = rep(col2, max(d$CHR))
+    if (nchr == 1) {
+        with(d, points(pos, logpr, cex = cex, pch = pch, ...))
+        with(d, points(pos, logp, cex = cex, pch = pch, ...))
+    }
+    else {
+        icol = 1
+        for (i in unique(d$index)) {
+            with(d[d$index == unique(d$index)[i], ], points(pos, 
+                logpr, col = col2[icol], cex = cex, pch = pch, 
+                ...))
+            with(d[d$index == unique(d$index)[i], ], points(pos, 
+                logp, col = col[icol], cex = cex, pch = pch, 
+                ...))
+            icol = icol + 1
+        }
+    }
+    abline(h = -log10(5e-08), col = lcols[2], lwd = lwds[2], 
+        lty = ltys[2])
+    abline(h = log10(5e-08), col = lcols[2], lwd = lwds[2], lty = ltys[2])
+    abline(h = 0, col = lcols[1], lwd = lwds[1], lty = ltys[1])
+    if (!is.null(highlight)) {
+        if (any(!(highlight %in% d$SNP))) 
+            warning("You're trying to highlight SNPs that don't exist in your results.")
+        d.highlight = d[which(d$SNP %in% highlight), ]
+        with(d.highlight, points(pos, logp, col = "red3", cex = cex, 
+            pch = pch, ...))
+        with(d.highlight, points(pos, logpr, col = "red3", cex = cex, 
+            pch = pch, ...))
+    }
+    if (!is.null(highlight.add)) {
+        print("yessssssssssssssssss")
+        if (any(!(highlight.add %in% d$SNP))) 
+            warning("You're trying to highlight SNPs that don't exist in your results.")
+        d.highlight.add = d[which(d$SNP %in% highlight.add), 
+            ]
+        with(d.highlight.add, points(pos, logp, col = "darkgreen", 
+            cex = cex, pch = pch, ...))
+        with(d.highlight.add, points(pos, logpr, col = "darkgreen", 
+            cex = cex, pch = pch, ...))
+    }
+}
+
+cis.vs.trans.classification <- function(hits, panel, id, radius=1e6)
+# cis.vs.trans.classification(hits=jma.cojo, panel=inf1, id="uniprot")
+{
+  p.start <- p.end <- Chr <- p.chr <- bp <- dist.inds <- same.inds <- NA
+
+# "Thu Nov  8 12:13:07 2018"
+
+# author jp549@cam.ac.uk
+
+# identify cis vs trans hits
+
+# rule: a cis acting variant lies within the region
+# from 1MB upstream of the start position to 1MB downstream of the end position 
+# of the gene that encodes the protein being tested in the GWAS
+
+# All signals that are outside this window will be defined as trans
+
+# add a prefix 'p.' so we know these cols refer to the protein being GWAS'd
+
+  colnames(panel) <- paste0("p.", colnames(panel))
+
+# map on to the hits file, using UniProtID as the common reference
+
+  hits_panel <- merge(x=hits, y=panel, by.x=id, by.y=paste0('p.',id), all.x=TRUE)
+
+# classify into cis and trans
+
+# set cis as -1MB upstream to +1MB downstream
+
+  N <- nrow(hits_panel)
+  hits_panel <- within(hits_panel,
+  { 
+    cis.start <- p.start - radius
+    if (any(cis.start < 0 )) cis.start[which(cis.start<0)] <- 0
+    cis.end <- p.end + radius
+
+# any variant on a different chromosome to the gene encoding the target protein is not cis
+
+    dist.inds <<- which(Chr != p.chr)
+    cis <- rep(NA, N)
+    if (length(dist.inds)>0)  cis[dist.inds] <- FALSE
+
+# for ones on the same chr, we can't be sure without looking at position
+
+    same.inds <<- which(Chr == p.chr)
+
+# see if variant lies in the cis region
+
+    if (length(same.inds)>0) cis[same.inds] <- bp[same.inds] > cis.start[same.inds] & bp[same.inds] < cis.end[same.inds]
+    cis.trans <- rep(NA, N)
+    cis.trans[cis==TRUE] <- "cis"
+    cis.trans[cis==FALSE] <- "trans"
+  })
+
+# split by protein
+
+  list.by.prot <- split(hits_panel, f=with(hits_panel,p.gene))
+
+# get the breakdown of cis vs trans per protein
+# sapply(list.by.prot, function(x) table(with(x, cis.trans)))
+
+  x <- with(hits_panel,table(p.gene, cis.trans))
+  s <- sum(x)
+  total <- apply(x,2,sum)
+  xx <- rbind(x,total)
+  total <- apply(xx,1,sum)
+  x <- cbind(xx,total)
+  invisible(list(data=hits_panel,table=x,total=s))
+}
+
+cnvplot <- function(data)
+# cnvplot(cnv)
+{
+  d <- within(data,{chr<-replace(chr,chr=="X",23); chr<-replace(chr,chr=="Y",24)})
+  pos <- vector("numeric")
+  n <- length(table(with(data,chr)))
+  for (x in 1:n) pos[x] <- with(subset(d,chr==paste(x)),{max(end)})
+  CM <- cumsum(pos)
+  par(xaxt = "n", yaxt = "n")
+  xy <- xy.coords(c(0,CM), seq(1,90,by=90/(1+n)))
+  plot(xy$x, xy$y, type = "n", ann = FALSE, axes = FALSE)
+  colors <- rep(c("red","blue"),n)
+  par(xaxt = "s", yaxt = "s", xpd = TRUE)
+  xy <- function(x) if (x<23) x else if (x==23) "X" else if (x==24) "Y";
+  for (x in 1:n) with(subset(d,chr==paste(x)), {
+      l <- ifelse(x==1,0,CM[x-1])
+      segments(l+start,freq,l+end,freq,lwd="3",col=colors[x])
+      text(ifelse(x == 1, CM[x]/2, (CM[x] + CM[x-1])/2), 0, pos = 1, offset = 0.5, xy(x), cex=0.4)
+  })
+  segments(0,0,CM[x],0)
+  axis(2,line=-0.5)
+  title(xlab="Chromosome",ylab="Frequency",line=2)
+}
+
+circos.cnvplot <- function(data)
+# circos.cnvplot(cnv)
+{
+  for(p in c("circlize")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!requireNamespace(p, quietly = TRUE))
+        warning(paste("circos.cnvplot needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
+  cnv <- within(data,{chr=paste0("chr",chr)})
+  requireNamespace("circlize")
+  circlize::circos.par(start.degree = 50, track.height = 0.3, cell.padding = c(0, 0, 0, 0))
+  circlize::circos.initializeWithIdeogram(species="hg19", track.height = 0.05, ideogram.height = 0.06)
+  circlize::circos.genomicTrackPlotRegion(cnv, ylim = c(0, 50), panel.fun = function(region,value,...) {
+                      color <- as.numeric(gsub("chr","",circlize::get.current.chromosome()))
+                      with(cbind(region,value),circlize::circos.segments(start,freq,end,freq,col=color,lwd=1))
+  })
+  circlize::circos.clear()
+}
+
+circos.cis.vs.trans.plot <- function(hits, panel, id, radius=1e6)
+# circos.cis.vs.trans.plot(hits="INF1.clumped", panel=inf1, id="uniprot")
+{
+  bp <- NA
+  for(p in c("circlize")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!requireNamespace(p, quietly = TRUE))
+        warning(paste("circos.cis.vs.trans.plot needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
+  requireNamespace("circlize")
+  clumped <- read.table(hits,as.is=TRUE,header=TRUE)
+  hits <- merge(clumped[c("CHR","BP","SNP","prot")],panel[c("prot","uniprot")],by="prot")
+  names(hits) <- c("prot","Chr","bp","SNP","uniprot")
+  cvt <- cis.vs.trans.classification(hits,panel,id,radius)
+  with(cvt,summary(data))
+  circlize::circos.par(start.degree = 90, track.height = 0.1, cell.padding = c(0, 0, 0, 0))
+  circlize::circos.initializeWithIdeogram(species="hg19", track.height = 0.05, ideogram.height = 0.06)
+  ann <- panel[c("chr","start","end","gene")]
+  ann <- within(ann, {chr=paste0("chr",chr);start=start-radius;end <- end+radius})
+  ann[with(ann,start<0),"start"] <- 0
+  circlize::circos.genomicLabels(ann,labels.column = 4, side="inside")
+  b1 <- with(cvt,data)[c("Chr","bp")]
+  b1 <- within(b1,{Chr=paste0("chr",Chr);start=bp-1})
+  names(b1) <- c("chr","end","start")
+  b2 <- with(cvt,data)[c("p.chr","cis.start","cis.end","p.gene","p.prot")]
+  b2 <- within(b2,{p.chr=paste0("chr",p.chr)})
+  names(b2) <- c("chr","start","end","gene","prot")
+  colors <- rep(NA,nrow(with(cvt,data)))
+  colors[with(cvt,data)["cis.trans"]=="cis"] <- 12
+  colors[with(cvt,data)["cis.trans"]=="trans"] <- 10
+  circlize::circos.genomicLink(b1, b2, col = colors, border = colors, directional=1, lwd = 1.6)
+  circlize::circos.clear()
+}
+
+circos.mhtplot <- function(data, glist)
+# g <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3","PPP1R3B","RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
+# circos.mhtplot(mhtdata,g)
+{
+  pos <- gene <- NULL
+  for(p in c("circlize")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!requireNamespace(p, quietly = TRUE))
+        warning(paste("circos.mhtplot needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
+  requireNamespace("circlize")
+  d <- within(data, {
+    chr <- paste0("chr",chr)
+    start <- pos - 1
+    end <- pos
+  })[c("chr","start","end","p","gene")]
+  hd <-	subset(data, gene %in% glist)[c("chr","start","end","gene")]
+  hd <-	within(hd, {chr	<- paste0("chr",chr)})
+  ann <- data.frame()
+  for (g in glist)
+  {
+     m <- subset(hd, gene==g)
+     n <- round(nrow(m) / 2 + 0.5)
+     ann <- rbind(ann,m[n,])
+  }
+  circlize::circos.par(start.degree = 90, track.height = 0.4, cell.padding = c(0, 0, 0, 0))
+  circlize::circos.initializeWithIdeogram(species = "hg18", track.height = 0.05, ideogram.height = 0.06)
+  circlize::circos.genomicTrackPlotRegion(d[c("chr","start","end","p")], ylim = c(0, 15), 
+         panel.fun = function(region, value, ...) {
+           color <- as.numeric(gsub("chr", "", circlize::get.current.chromosome()))
+           with(cbind(region, value), circlize::circos.genomicPoints(region, -log10(value), cex=0.3, col = color))
+  })
+  circlize::circos.genomicLabels(ann, labels.column = 4, side = "inside")
+  circlize::circos.clear()
 }

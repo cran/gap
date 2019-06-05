@@ -1,9 +1,58 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.2.1
+05-06-2019	Eventual foreign language check with export definitions followed by R-devel CMD INSTALL
+		This is noted at the GitHub Computational-Statistics repository (INSTALL.md)
+
+Version 1.2
+04-06-2019	Add sentinels function, further revision over C/Fortran code
+31-05-2019	Split examples into gap.examples
+
+Version 1.1-27
+30-05-2019	Fix hap_c.c and also pgc.h, pgc_c.c through Ripley's options to R CMD check --install-args="",
+		which are more restrictive than R-devel CMD check --as-cran and also CRAN check itself.
+
+Version 1.1-26
+30-05-2019	Change size of tempname in hap_c.c
+
+Version 1.1-25
+29-05-2019	Replace sprintf with snprintf in hap_c.c
+
+Version 1.1-24
+29-05-2019	Suggest reshape and revise C/Fortran codes (from CRAN check)
+
+Version 1.1-23
+27-05-2019	Suggest calibrate and rmeta, revise require() and pfc.f/pfc.sim.f with do/continue
+25-05-2019	Suggest qqman, plotrix while adding mhtplot.trunc
+23-05-2019	Suggest dplyr, forestplot, meta and add METAL_forestplot
+10-05-2019	Add return total signals from cis.vs.trans.classification
+08-05-2019	Add column and row totals for cis.vs.trans.classification
+02-05-2019	Change circos.cis.vs.trans.plot so the chords are directional and two-coloured
+22-01-2019	Revise cnvplot to handle Y chromosome
+20-12-2018	Add circos.mhtplot, revise cnvplot and employ gc.lambda in qqunif.Rd
+19-12-2018	Refine cis.vs.trans.plot and inf1.rda
+18-12-2018	Add cnv/cnvplot/circos.cnvplot and therefore suggests circlize due to query from Zheng Ye
+		Carry on with addition of circos.cis.vs.trans.plot
+		Revise contact e-mail address in gap-package.Rd
+		Add required(gap.datasets) to mhtplot.Rd
+22-11-2018	Note https://ftp.hapmap.org/hapmap for asplot
+20-11-2018	Add cis.vs.trans.classification as with jma.cojo.rda and inf1.rda
+03-10-2018	Add log10p as in the SCALLOP/INF project
+01-10-2018	Add gc.lambda and miamiplot as in CEU and invnormal as in GLGC-GIANT analysis plan
+24-09-2018	Reset maxalleles to be 1000 in 2ld.c as requested by sjmack from GitHub
+05-08-2018	Add ABO example contrasting HWE/HWD for hwe.jags.Rd
+30-07-2018	Redirect URL/BugReports to GitHub
+25-07-2018	Add h2.jags
+24-07-2018	Add hwe.jags
+17-07-2018	Revise asplot.Rd/gap.Rnw after query from Dhanaprakash Jambulingam <dhanaprakash.jambulingam@utu.fi>
+		Remove URL in crohn.Rd as it is unavailable
+		Change hap_c.c for complaints over %03d
+13-07-2018	Remove twinan90 from INDEX|man/gap-package.Rd
+08-06-2018	Minor changes
+
 Version 1.1-22
-06-06-2018	Replce email address
-		TIdy up inst/tests
-		R-devel CMD check --as-cran
+06-06-2018	Replace email address
+		Tidy up inst/tests
 
 Version 1.1-21
 23-01-2018	Amend URL and makeped example

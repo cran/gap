@@ -6,9 +6,9 @@
 enum boolean{false,true};
 #define _swap_(a,b) __swap__(a,b)
 void __swap__(int *a,int *b) {int t;t=*a;*a=*b;*b=t;}
-struct individaul
+struct individual
 {
-  char id[10];
+  char id[20];
   int affection;
   int locus[MAX_LOC][2];
   int gtype[MAX_LOC];

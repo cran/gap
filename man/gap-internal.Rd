@@ -1,4 +1,28 @@
 \name{gap-internal}
+\alias{CDKN}
+\alias{PD}
+\alias{OPG}
+\alias{OPGall}
+\alias{OPGrsid}
+\alias{OPGtbl}
+\alias{aldh2}
+\alias{apoeapoc}
+\alias{cf}
+\alias{cnv}
+\alias{crohn}
+\alias{fa}
+\alias{fsnps}
+\alias{hla}
+\alias{hr1420}
+\alias{inf1}
+\alias{jma.cojo}
+\alias{l51}
+\alias{lukas}
+\alias{mao}
+\alias{meyer}
+\alias{mfblong}
+\alias{mhtdata}
+\alias{nep499}
 \alias{PARn}
 \alias{HapDesign}
 \alias{HapFreqSE}
@@ -6,6 +30,11 @@
 \alias{geno.recode}
 \alias{a2g}
 \alias{ci}
+\alias{circos.cnvplot}
+\alias{circos.cis.vs.trans.plot}
+\alias{circos.mhtplot}
+\alias{cis.vs.trans.classification}
+\alias{cnvplot}
 \alias{Cox.est}
 \alias{Cox.T}
 \alias{cov.invlogit}
@@ -26,6 +55,7 @@
 \alias{g2a}
 \alias{g2a.c}
 \alias{gc.control}
+\alias{gc.lambda}
 \alias{gcode}
 \alias{geno.p}
 \alias{getb1star}
@@ -40,12 +70,15 @@
 \alias{hmht.control}
 \alias{hw}
 \alias{invlogit}
+\alias{invnormal}
+\alias{log10p}
 \alias{is.miss}
 \alias{KCC}
 \alias{k}
 \alias{logit}
 \alias{m2plem}
 \alias{mht.control}
+\alias{miamiplot}
 \alias{micombine}
 \alias{plem2m}
 \alias{revhap}
@@ -68,6 +101,7 @@
 \title{Internal functions for gap}
 \usage{
 a2g(a1,a2)
+cis.vs.trans.classification(hits,panel,id,radius=1e6)
 g2a(g)
 g2a.c(g)
 h2G(V,VCOV,verbose=TRUE)
@@ -98,11 +132,23 @@ included as courtesy of Prof Andrea Foulkes from the useR!2008 tutorial.
 
 a2g gives allele-to-genotype conversion.
 
+circos.cnvplot produces circos plot of CNVs
+
+circos.cis.vs.trans.plot gives circos plot of cis/trans classification
+
+circos.mhtplot generates circos Manhattan plot with gene annotation
+
+cis.vs.trans.classification classifies hits, usually SNPs with associate id and (b)ase-(p)air position, to be cis or trans according to a panel which contains id, chr, start, end, gene variables.
+
+cnvplot is a cutomised function to plot CNVs genomewide
+
 g2a returns two alleles according to a genotype identifier.
 
 g2a.c is the C version of g2c.
 
-gc.control() is used by gc.em().
+gc.control is used by gc.em().
+
+gc.lambda estimates the genomic control inflation statistic (lambda)
 
 gcode is as a2g.
 
@@ -114,9 +160,13 @@ h2GE is a utility function for heritability involving gene-environment interacti
 
 h2l is a utility function for converting observed heritability to its counterpart under liability threshold model
 
-hap.control() is used by hap.em().
+hap.control is used by hap.em().
 
 hap.score.glm, hap.score.podds are used by hap.score().
+
+invlogit, inverse logit transformation.
+
+invnormal, inverse normal transformation.
 
 is.miss is undocumented.
 
@@ -126,7 +176,11 @@ and pbsize2.
 
 k obtains 1st and 2nd order culumants for correlation coefficient.
 
+log10p is log10(p) for a standard normal deviate
+
 m2plem is an experimental function for PLEM format.
+
+miamiplot is for Miami plot.
 
 micombine is used to combine imputation results.
 
@@ -173,6 +227,23 @@ z is a normal z-test of two proportions used by tscc.
   \item{K}{Prevalence of disease in the population}
   \item{loci}{A vector of number of alleles at all loci}
   \item{hapid}{Haplotype identifier}
+}
+\examples{
+\dontrun{
+#
+cnvplot(cnv)
+circos.cnvplot(cnv)
+#
+cvt <- cis.vs.trans.classification(hits=jma.cojo, panel=inf1, id="uniprot")
+cvt
+#
+circos.cis.vs.trans.plot(hits="INF1.clumped", panel=inf1, id="uniprot")
+#
+require(gap.datasets)
+g <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3",
+       "PPP1R3B","RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
+circos.mhtplot(mhtdata,g)
+}
 }
 \details{These functions are not so frequently called by users}
 \keyword{internal}

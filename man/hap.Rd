@@ -70,12 +70,11 @@ disequilibrium analysis. Bioinformatics 20: 1325-1326
 
 \examples{
 \dontrun{
+require(gap.datasets)
 # 4 SNP example, to generate hap.out and assign.out alone
 data(fsnps)
 hap(id=fsnps[,1],data=fsnps[,3:10],nloci=4)
 dir()
-file.show("hap.out")
-file.show("assign.out")
 
 # to generate results of imputations
 control <- hap.control(ss=1,mi=5,hapfile="h",assignfile="a")

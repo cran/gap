@@ -1,6 +1,7 @@
 #define VERSION "0.2.1"
 #define MAX_LINE_LEN 1024
 #define MAX_ID_LEN 64
+#define FILENAME_LEN 100
 #define MAX_FILENAME_LEN 128
 
 typedef struct {
