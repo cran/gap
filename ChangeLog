@@ -1,5 +1,24 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.2.2
+01-02-2020	Fix problem with inv_chr_pos_a1_a2(prefix=), return values from mhtplot2d
+		Recompile R-devel with `CPPFLAGS="-D_FORTIFY_SOURCE=2 -fPIC" ./configure --enable-R-shlib'
+		as informed by Kurt Hornik <Kurt.Hornik@R-project.org>
+		and then add ignore.h for `R CMD check --as-cran`
+17-12-2019	Add chr_pos_a1_a2()/inv_chr_pos_a1_a2()
+11-12-2019	Add snptest_sample() to output in SNPTEST sample file format
+05-11-2019	Add makeRLEplot() from Caprion pilot data and function setup by Jimmy Peters
+13-10-2019	Revise METAL_forestplot() adding dplyr_rsid() due to queries from Cismaru, Anca <anca.cismaru@extern.insel.ch>
+07-10-2019	Add mhtplot2d() for 2D Manhattan plot
+02-09-2019	Fix numerical issues and log_p= option for cs()
+24-08-2019	Reverse compatibility with R 3.3.1 by changing family to family_ in pfc.f
+14-08-2019	Fix bug in sentinels subsetting, i.e., pos --> u[[pos]]
+25-06-2019	Add cs and suggest matrixStats
+18-06-2019	Add logp and variance explained for sentinels.Rd
+12-06-2019	Add z = option to mhtplot.trunc to handle P value = 0
+		Change sentinels.R for names other than "Chrom", "End", "MarkerName", "Effect", "StdErr"
+06-06-2019	Revise sentinels.R, gap-package.Rd and both use OPGtbl
+
 Version 1.2.1
 05-06-2019	Eventual foreign language check with export definitions followed by R-devel CMD INSTALL
 		This is noted at the GitHub Computational-Statistics repository (INSTALL.md)
@@ -9,7 +28,7 @@ Version 1.2
 31-05-2019	Split examples into gap.examples
 
 Version 1.1-27
-30-05-2019	Fix hap_c.c and also pgc.h, pgc_c.c through Ripley's options to R CMD check --install-args="",
+30-05-2019	Fix hap_c.c and also pgc.h, pgc_c.c through Ripley's options to R CMD check --configure-args="",
 		which are more restrictive than R-devel CMD check --as-cran and also CRAN check itself.
 
 Version 1.1-26

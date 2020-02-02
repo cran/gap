@@ -18,12 +18,15 @@ analysis with or without environmental covariates.
 \details{
 \tabular{ll}{
 Package: \tab gap\cr
-Version: \tab 1.1-23\cr
+Version: \tab 1.2.2\cr
 Depends: \tab R(>= 2.1.0)\cr
-Suggests: \tab BradleyTerry2, MASS, Matrix, MCMCglmm, NCBI2R, bdsmatrix, coxme, foreign, grid, \cr
-        \tab  haplo.stats, kinship2, magic, mets, nlme, pedigree, pedigreemm, regress, rms, survival \cr
+Suggests: \tab BradleyTerry2, MASS, Matrix, MCMCglmm, R2jags, bdsmatrix, \cr
+          \tab calibrate, circlize, coda, coxme, dplyr, foreign, forestplot, \cr
+          \tab gap.datasets, grid, haplo.stats, kinship2, lattice, \cr
+          \tab magic, matrixStats, meta, mets, nlme, pedigree, pedigreemm, plotrix, \cr
+          \tab qqman, regress, reshape, rmeta, rms, survival \cr
 License: \tab GPL (>=2)\cr
-URL: \tab https://jinghuazhao.github.io/\cr
+URL: \tab https://jinghuazhao.github.io/R\cr
 }
 
 Index:
@@ -34,6 +37,7 @@ Index:
 AE3               \tab      AE model using nuclear family trios\cr
 bt                \tab      Bradley-Terry model for contingency table\cr
 ccsize            \tab      Power and sample size for case-cohort design\cr
+cs                \tab      Credibel set\cr
 fbsize            \tab      Sample size for family-based linkage and association design\cr
 gc.em             \tab      Gene counting for haplotype analysis\cr
 gcontrol          \tab      genomic control\cr
@@ -55,7 +59,10 @@ invnormal         \tab      inverse Normal transformation\cr
 kin.morgan        \tab      kinship matrix for simple pedigree\cr
 LD22              \tab      LD statistics for two diallelic markers\cr
 LDkl              \tab      LD statistics for two multiallelic markers\cr
+lambda1000        \tab      A standardized estimate of the genomic inflation scaling to a study of\cr
+                  \tab      1,000 cases and 1,000 controls\cr
 log10p            \tab      log10(p) for a standard normal deviate\cr
+logp              \tab      log(p) for a normal deviate\cr
 masize            \tab      Sample size calculation for mediation analysis\cr
 MCMCgrm           \tab	    Mixed modeling with genetic relationship matrices\cr
 mia               \tab      multiple imputation analysis for hap\cr
@@ -82,9 +89,11 @@ circos.cis.vs.trans.plot \tab circos plot of cis/trans classification\cr
 circos.cnvplot    \tab      circos plot of CNVs\cr
 circos.mhtplot 	  \tab      circos Manhattan plot with gene annotation\cr
 cnvplot           \tab      genomewide plot of CNVs\cr
+makeRLEplot       \tab      make relative log expression plot\cr
 METAL_forestplot  \tab      forest plot as R/meta's forest for METAL outputs\cr
 mhtplot           \tab      Manhattan plot\cr
 mhtplot2          \tab      Manhattan plot with annotations\cr
+mhtplot2d         \tab      2D Manhattan plot\cr
 mhtplot.trunc     \tab      truncated Manhattan plot\cr
 miamiplot         \tab      Miami plot (Experimental)\cr
 pedtodot          \tab      Converting pedigree(s) to dot file(s)\cr
@@ -101,6 +110,7 @@ FPRP              \tab      False-positive report probability\cr
 ab                \tab      Test/Power calculation for mediating effect\cr
 b2r               \tab      Obtain correlation coefficients and their variance-covariances\cr
 chow.test         \tab      Chow's test for heterogeneity in two regressions\cr
+chr_pos_a1_a2     \tab      Form SNPID from chromosome, posistion and alleles\cr
 cis.vs.trans.classification \tab a cis/trans classifier\cr
 comp.score        \tab      score statistics for testing genetic linkage of quantitative trait\cr
 h2                \tab      Heritability estimation according to twin correlations\cr
@@ -112,6 +122,7 @@ metap             \tab      Meta-analysis of p values\cr
 metareg           \tab      Fixed and random effects model for meta-analysis\cr
 muvar             \tab      Means and variances under 1- and 2- locus (diallelic) QTL model\cr
 read.ms.output    \tab      A utility function to read ms output\cr
+snptest_sample    \tab      A utility to generate SNPTEST sample file\cr
 whscore           \tab      Whittemore-Halpern scores for allele-sharing\cr
 GRM functions     \tab      ReadGRM, ReadGRMBin, ReadGRMPLINK, ReadGRMPCA, WriteGRM, WriteGRMBin, WriteGRMSAS\cr
                   \tab      handle genomic relationship matrix involving other software\cr

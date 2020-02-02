@@ -1,32 +1,34 @@
+dplyr_rsid <- function(df,rsid)
+{
+  MarkerName <- NA
+  d <- dplyr::nest_join(df,rsid)
+  dy <- d["y"]
+  m <- within(d, {
+#   rsid <- ifelse(length(lapply(dy,"[[",1)) == 1, unlist(d[["y"]]), unlist(lapply(lapply(dy,"[[",1),"[",1)))
+    rsid <- unlist(d[["y"]])
+    isna <- is.na(rsid)
+    rsid[isna] <- MarkerName[isna]
+  })
+}
+
 METAL_forestplot <- function(tbl,all,rsid,pdf="INF1.fp.pdf",package="meta",...)
 {
   prot <- MarkerName <- NA
   requireNamespace("dplyr")
-  d <- dplyr::nest_join(tbl,rsid)
-  dy <- d["y"]
-  m <- within(d,{rsid <- unlist(lapply(lapply(dy,"[[",1),"[",1))})
-  isna <- with(m, is.na(rsid))
-  t <- within(m, {rsid[isna] <- MarkerName[isna]})
-  d <- dplyr::nest_join(all,rsid)
-  dy <- d["y"]
-  m <- within(d,{rsid <- unlist(lapply(lapply(dy,"[[",1),"[",1))})
-  isna <- with(m, is.na(rsid))
-  a <- within(m, {rsid[isna] <- MarkerName[isna]})
+  t <- dplyr_rsid(tbl,rsid)
+  a <- dplyr_rsid(all,rsid)
   pdf(pdf,...)
   for(i in 1:nrow(tbl))
   {
      p <- tbl[i,"prot"]
      m <- tbl[i,"MarkerName"]
-     d <- gsub("[?]","",tbl[i,"Direction"])
-     s <- unlist(strsplit(d,""))
-     f <- as.numeric(paste0(s,1))
      A1 <- toupper(tbl[i,"Allele1"])
      A2 <- toupper(tbl[i,"Allele2"])
      print(paste0(i,"-",p,":",m))
      with(subset(all,prot==p & MarkerName==m), {
+       print(subset(all,prot==p & MarkerName==m))
        e <- toupper(EFFECT_ALLELE)
        r <- toupper(REFERENCE_ALLELE)
-       a1 <- a2 <- vector('character',length(e))
        a1 <- e
        a2 <- r
        c <- rep(1,length(e))
@@ -44,6 +46,7 @@ METAL_forestplot <- function(tbl,all,rsid,pdf="INF1.fp.pdf",package="meta",...)
          meta::forest(mg,colgap.forest.left = "1cm")
          requireNamespace("grid")
          grid::grid.text(title,0.5,0.9)
+         with(mg,cat("prot =", p, "MarkerName =", m, "Q =", Q, "df =", df.Q, "p =", pval.Q, "I2 =", I2, "lower.I2 =", lower.I2, "upper.I2 =", upper.I2, "\n"))
        }
        else if(package=="forestplot")
        {

@@ -1,7 +1,7 @@
 ### R code from vignette source 'gap.Rnw'
 
 ###################################################
-### code chunk number 1: gap.Rnw:153-157
+### code chunk number 1: gap.Rnw:183-187
 ###################################################
 library(gap)
 search()
@@ -10,7 +10,7 @@ data(package="gap")$results
 
 
 ###################################################
-### code chunk number 2: gap.Rnw:238-245
+### code chunk number 2: gap.Rnw:268-275
 ###################################################
 # pedigree diagram
 data(lukas,package="gap.datasets")
@@ -22,7 +22,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 3: gap.Rnw:255-281
+### code chunk number 3: gap.Rnw:285-311
 ###################################################
 # unordered individuals
 library(gap)
@@ -53,7 +53,7 @@ sum(abs(z))
 
 
 ###################################################
-### code chunk number 4: gap.Rnw:289-327
+### code chunk number 4: gap.Rnw:319-357
 ###################################################
 library(gap)
 models <- matrix(c(
@@ -96,7 +96,7 @@ table1
 
 
 ###################################################
-### code chunk number 5: gap.Rnw:332-360
+### code chunk number 5: gap.Rnw:362-390
 ###################################################
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
@@ -129,7 +129,7 @@ table5
 
 
 ###################################################
-### code chunk number 6: gap.Rnw:365-410
+### code chunk number 6: gap.Rnw:395-440
 ###################################################
 library(gap)
 # ARIC study
@@ -179,7 +179,7 @@ unlink(outfile)
 
 
 ###################################################
-### code chunk number 7: gap.Rnw:418-427
+### code chunk number 7: gap.Rnw:448-457
 ###################################################
 library(gap)
 pdf("figures/qqunif.pdf",height=10,width=10)
@@ -193,7 +193,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 8: gap.Rnw:435-450 (eval = FALSE)
+### code chunk number 8: gap.Rnw:465-480 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## ord <- with(w4,order(chr,pos))
@@ -213,7 +213,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 9: gap.Rnw:456-472 (eval = FALSE)
+### code chunk number 9: gap.Rnw:486-502 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
@@ -234,7 +234,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 10: gap.Rnw:484-489 (eval = FALSE)
+### code chunk number 10: gap.Rnw:514-519 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## library(gap.datasets)
@@ -244,7 +244,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 11: gap.Rnw:495-501 (eval = FALSE)
+### code chunk number 11: gap.Rnw:525-531 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## library(gap.datasets)
@@ -255,7 +255,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 12: gap.Rnw:511-521
+### code chunk number 12: gap.Rnw:541-551
 ###################################################
 library(gap)
 pdf("figures/ESplot.pdf",height=10,width=10)
