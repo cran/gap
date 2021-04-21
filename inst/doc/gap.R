@@ -1,19 +1,11 @@
 ### R code from vignette source 'gap.Rnw'
 
 ###################################################
-### code chunk number 1: gap.Rnw:183-187
+### code chunk number 1: gap.Rnw:262-270
 ###################################################
 library(gap)
-search()
-lsf.str("package:gap")
-data(package="gap")$results
-
-
-###################################################
-### code chunk number 2: gap.Rnw:268-275
-###################################################
 # pedigree diagram
-data(lukas,package="gap.datasets")
+data(lukas)
 library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
 pdf("figures/lukas.pdf",height=14,width=15)
@@ -22,7 +14,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 3: gap.Rnw:285-311
+### code chunk number 2: gap.Rnw:280-306
 ###################################################
 # unordered individuals
 library(gap)
@@ -53,7 +45,7 @@ sum(abs(z))
 
 
 ###################################################
-### code chunk number 4: gap.Rnw:319-357
+### code chunk number 3: gap.Rnw:314-352
 ###################################################
 library(gap)
 models <- matrix(c(
@@ -96,7 +88,7 @@ table1
 
 
 ###################################################
-### code chunk number 5: gap.Rnw:362-390
+### code chunk number 4: gap.Rnw:357-385
 ###################################################
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
@@ -129,7 +121,7 @@ table5
 
 
 ###################################################
-### code chunk number 6: gap.Rnw:395-440
+### code chunk number 5: gap.Rnw:390-437
 ###################################################
 library(gap)
 # ARIC study
@@ -147,7 +139,8 @@ for(i in 1:3)
   q <- s_nb[i]/n
   power <- ccsize(n,q,pD,p1,alpha,log(theta[i]))
   ssize <- ccsize(n,q,pD,p1,alpha,log(theta[i]),beta1)
-  cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",signif(power,3),"\t",ssize,"\n",
+  cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",
+      signif(power,3),"\t",ssize,"\n",
       file=outfile,append=TRUE)
 }
 read.table(outfile,header=TRUE,sep="\t")
@@ -169,7 +162,8 @@ for(pD in s_pD)
       for(hr in s_hr)
       {
          ssize <- ccsize(n,q,pD,p1,alpha,log(hr),power)
-         if (ssize>0) cat(n,"\t",pD,"\t",p1,"\t",hr,"\t",alpha,"\t",ssize,"\n",
+         if (ssize>0) cat(n,"\t",pD,"\t",p1,"\t",hr,"\t",alpha,"\t",
+                          ssize,"\n",
                           file=outfile,append=TRUE)
       }
    }
@@ -179,7 +173,7 @@ unlink(outfile)
 
 
 ###################################################
-### code chunk number 7: gap.Rnw:448-457
+### code chunk number 6: gap.Rnw:445-454
 ###################################################
 library(gap)
 pdf("figures/qqunif.pdf",height=10,width=10)
@@ -193,7 +187,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 8: gap.Rnw:465-480 (eval = FALSE)
+### code chunk number 7: gap.Rnw:462-477 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## ord <- with(w4,order(chr,pos))
@@ -213,7 +207,7 @@ dev.off()
 
 
 ###################################################
-### code chunk number 9: gap.Rnw:486-502 (eval = FALSE)
+### code chunk number 8: gap.Rnw:483-499 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
@@ -234,17 +228,27 @@ dev.off()
 
 
 ###################################################
-### code chunk number 10: gap.Rnw:514-519 (eval = FALSE)
+### code chunk number 9: gap.Rnw:511-516 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## library(gap.datasets)
-## png("figures/circos-mhtplot.pdf")
+## pdf("figures/circos-mhtplot.pdf")
 ## circos.mhtplot()
 ## dev.off()
 
 
 ###################################################
-### code chunk number 11: gap.Rnw:525-531 (eval = FALSE)
+### code chunk number 10: gap.Rnw:522-527 (eval = FALSE)
+###################################################
+## library(gap.datasets)
+## mhtdata <- within(mhtdata,{pr=p})
+## png("figures/miamiplot.png")
+## miamiplot(mhtdata,chr="chr",bp="pos",p="p",pr="pr",snp="rsn")
+## dev.off()
+
+
+###################################################
+### code chunk number 11: gap.Rnw:533-539 (eval = FALSE)
 ###################################################
 ## library(gap)
 ## library(gap.datasets)
@@ -255,17 +259,35 @@ dev.off()
 
 
 ###################################################
-### code chunk number 12: gap.Rnw:541-551
+### code chunk number 12: gap.Rnw:549-559
 ###################################################
 library(gap)
-pdf("figures/ESplot.pdf",height=10,width=10)
 options(stringsAsFactors=FALSE)
-testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted",
+testdata <- data.frame(models=c("Basic model","Adjusted",
+                       "Moderately adjusted",
                        "Heavily adjusted","Other"),
 OR = c(4.5,3.5,2.5,1.5,1),
 SElogOR = c(0.2,0.1,0.5,0.5,0.2))
 ESplot(testdata,v=1)
 title("This is a fictitious plot")
 dev.off()
+
+
+###################################################
+### code chunk number 13: gap.Rnw:576-580
+###################################################
+library(cowplot)
+library(ggplot2)
+library(gap)
+r <- gsmr(mr, "LIF.R", c("CAD","FEV1"))
+
+
+###################################################
+### code chunk number 14: gap.Rnw:604-608
+###################################################
+library(gap)
+search()
+lsf.str("package:gap")
+data(package="gap")$results
 
 

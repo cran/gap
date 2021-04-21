@@ -22,12 +22,19 @@ errors for a range of models.
 \dontrun{
 # 7-4-2008 MRC-Epid JHZ
 options(stringsAsFactors=FALSE)
-testdata <- data.frame(models=c("Basic model","Adjusted","Moderately adjusted",
-                      "Heavily adjusted","Other"),
-OR = c(4.5,3.5,2.5,1.5,1),
-SElogOR = c(0.2,0.1,0.5,0.5,0.2))
+testdata <- data.frame(
+              models=c("Basic model","Adjusted","Moderately adjusted","Heavily adjusted","Other"),
+               logOR=log(c(4.5,3.5,2.5,1.5,1)),
+             SElogOR=c(0.2,0.1,0.2,0.3,0.2)
+            )
 ESplot(testdata,v=1)
-title("This is a fictitious plot")
+title("A fictitious plot")
+# Outcomes A2, B2, C2 in three columns
+# par(mfrow=c(1,3))
+# ESplot(snp_effects[c("snpid","A2_b2","A2_se2")], lty=2, xlim=c(0.7,1.4))
+# snp_effects["snpid"] <- ""
+# ESplot(snp_effects[c("snpid","B2_b2","B2_se2")], lty=2, xlim=c(0.7,1.4))
+# ESplot(snp_effects[c("snpid","C2_b2","C2_se2")], lty=2, xlim=c(0.7,1.4))
 #
 # Quantitative trait, as appropriate for linear regression
 # testdata <- data.frame(modelid, beta, se(beta))

@@ -779,7 +779,8 @@ circos.cnvplot <- function(data)
         warning(paste("circos.cnvplot needs package `", p, "' to be fully functional; please install", sep=""))
      }
   }
-  cnv <- within(data,{chr=paste0("chr",chr)})
+  start <- end <- NA
+  cnv <- within(subset(data,start<=end),{chr=paste0("chr",chr)})
   requireNamespace("circlize")
   circlize::circos.par(start.degree = 50, track.height = 0.3, cell.padding = c(0, 0, 0, 0))
   circlize::circos.initializeWithIdeogram(species="hg19", track.height = 0.05, ideogram.height = 0.06)
@@ -819,8 +820,8 @@ circos.cis.vs.trans.plot <- function(hits, panel, id, radius=1e6)
   b2 <- within(b2,{p.chr=paste0("chr",p.chr)})
   names(b2) <- c("chr","start","end","gene","prot")
   colors <- rep(NA,nrow(with(cvt,data)))
-  colors[with(cvt,data)["cis.trans"]=="cis"] <- 12
-  colors[with(cvt,data)["cis.trans"]=="trans"] <- 10
+  colors[with(cvt,data)["cis.trans"]=="cis"] <- 10
+  colors[with(cvt,data)["cis.trans"]=="trans"] <- 12
   circlize::circos.genomicLink(b1, b2, col = colors, border = colors, directional=1, lwd = 1.6)
   circlize::circos.clear()
 }
@@ -862,26 +863,22 @@ circos.mhtplot <- function(data, glist)
   circlize::circos.clear()
 }
 
-# credible set
-
 cs <- function(tbl, b="Effect", se="StdErr", log_p=NULL, cutoff=0.95)
+# credible set based on METAL sumstats
 {
-  z1 <- function(z) max(abs(z), na.rm = TRUE)
   requireNamespace("matrixStats")
-  u <- tbl
-  tbl <- within(u, {
-    if (is.null(log_p)) z <- u[[b]]/u[[se]]
-    else z <- qnorm(u[[log_p]], log.p=TRUE)
-    m <- z1(z)
-    z2 <- z * z / 2
-    d <- matrixStats::logSumExp(z2)
-    log_ppa <- z2 - d
-    ppa <- exp(log_ppa)
-    cat("denominator = ", d, ", scaling factor = exp(",m, "^2/2)\n",sep="")
-  })
-  ord <- with(tbl, order(-ppa))
-  tbl <- within(tbl[ord,], {cppa <- cumsum(ppa)})
-  tbl[which(with(tbl,cppa) >= cutoff)[1],]
+  tbl <- within(tbl, {
+           if (is.null(log_p)) z <- tbl[[b]]/tbl[[se]]
+           else z <- qnorm(tbl[[log_p]], log.p=TRUE)
+           z2 <- z * z / 2
+           d <- matrixStats::logSumExp(z2)
+           log_ppa <- z2 - d
+           ppa <- exp(log_ppa)
+        })
+  ord <- with(tbl, order(ppa,decreasing = TRUE))
+  tbl_ord <- within(tbl[ord,], {cppa <- cumsum(ppa)})
+  last <- which(with(tbl_ord,cppa) >= cutoff)[1]
+  tbl[ord[1:last],]
 }
 
 xy <- function(x) if (x<23) x else if (x==23) "X" else if (x==24) "Y"
@@ -895,33 +892,36 @@ hg19 <- c(249250621,243199373,198022430,191154276,180915260,171115067,159138663,
 hg18 <- c(247249719,242951149,199501827,191273063,180857866,170899992,158821424,146274826,140273252,135374737,134452384,132349534,
           114142980,106368585,100338915,88827254,78774742,76117153,63811651,62435964,46944323,49691432,154913754,57772954)
 
-grid2d <- function(chrlen=hg19, cex=0.6)
+grid2d <- function(chrlen=hg19, plot=TRUE, cex=0.6)
 {
   CM <- cumsum(chrlen)
   n <- length(chrlen)
-  par(xaxt = "n", yaxt = "n")
   xy <- xy.coords(c(0,CM), c(0,CM))
-  plot(xy$x, xy$y, type = "n", ann = FALSE, axes = FALSE)
-  par(xaxt = "s", yaxt = "s", xpd = TRUE)
-  for (x in 1:n) {
-      segments(CM[x],0,CM[x],CM[n],col="black")
-      segments(0,CM[x],CM[n],CM[x],col="black")
-      text(ifelse(x == 1, CM[x]/2, (CM[x] + CM[x-1])/2), 0, pos = 1, offset = 0.5, xy(x), cex=cex)
-      text(0, ifelse(x == 1, CM[x]/2, (CM[x] + CM[x-1])/2), pos = 2, offset = 0.5, xy(x), cex=cex)
+  if (plot)
+  {
+    par(xaxt = "n", yaxt = "n")
+    plot(xy$x, xy$y, type = "n", ann = FALSE, axes = FALSE)
+    par(xaxt = "s", yaxt = "s", xpd = TRUE)
+    for (x in 1:n) {
+        segments(CM[x],0,CM[x],CM[n],col="black")
+        segments(0,CM[x],CM[n],CM[x],col="black")
+        text(ifelse(x == 1, CM[x]/2, (CM[x] + CM[x-1])/2), 0, pos = 1, offset = 0.5, xy(x), cex=cex)
+        text(0, ifelse(x == 1, CM[x]/2, (CM[x] + CM[x-1])/2), pos = 2, offset = 0.5, xy(x), cex=cex)
+    }
+    segments(0,0,CM[n],0)
+    segments(0,0,0,CM[n])
+    title(xlab="pQTL position",ylab="protein position",line=2)
   }
-  segments(0,0,CM[n],0)
-  segments(0,0,0,CM[n])
-  title(xlab="pQTL position",ylab="protein position",line=2)
   return(list(n=n, CM=c(0,CM)))
 }
 
-mhtplot2d <- function(data, cex=0.6)
+mhtplot2d <- function(data, plot=TRUE, cex=0.6)
 # mhtplot2d(read.table("INF1.merge.cis.vs.trans",as.is=TRUE,header=TRUE))
 {
-  r <- grid2d()
+  r <- grid2d(plot=plot)
   n <- with(r, n)
   CM <- with(r, CM)
-  d <- data[c("Chr","bp","p.chr","p.start","p.end","log10p","cis")]
+  d <- data[c("SNP","Chr","bp","p.chr","p.start","p.end","p.target.short","p.gene","log10p","cis")]
   chr1 <- d[["Chr"]]
   chr1[chr1=="X"] <- 23
   chr1[chr1=="Y"] <- 24
@@ -929,10 +929,14 @@ mhtplot2d <- function(data, cex=0.6)
   chr2 <- d[["p.chr"]]
   chr2[chr2=="X"] <- 23
   chr2[chr2=="Y"] <- 24
-  pos2 <- CM[chr2] + (d[["p.start"]] + d[["p.end"]])/2
-  points(pos1,pos2,cex=cex,col=ifelse(d[["cis"]],"red","blue"),pch=19)
-  legend("top",legend=c("cis","trans"),box.lty=0,cex=cex,col=c("red","blue"),horiz=TRUE,inset=c(0,1),xpd=TRUE,pch=19)
-  return(data.frame(x=pos1,y=pos2,z=with(d,log10p),col=ifelse(d[["cis"]],"red","blue")))
+  mid <- (d[["p.start"]] + d[["p.end"]])/2
+  pos2 <- CM[chr2] + mid
+  if (plot) {
+     points(pos1,pos2,cex=cex,col=ifelse(d[["cis"]],"red","blue"),pch=19)
+     legend("top",legend=c("cis","trans"),box.lty=0,cex=cex,col=c("red","blue"),horiz=TRUE,inset=c(0,1),xpd=TRUE,pch=19)
+  }
+  return(data.frame(id=d[["SNP"]],chr1=chr1,pos1=d[["bp"]],chr2=chr2,pos2=mid,x=pos1,y=pos2,
+         target=d[["p.target.short"]],gene=d[["p.gene"]],log10p=with(d,log10p),col=ifelse(d[["cis"]],"blue","red")))
 }
 
 snptest_sample <- function(data,sample_file="snptest.sample",ID_1="ID_1",ID_2="ID_2",missing="missing",C=NULL,D=NULL,P=NULL)
@@ -951,12 +955,13 @@ chr_pos_a1_a2 <- function(chr,pos,a1,a2,prefix="chr",seps=c(":","_","_"),upperca
 {
   chr <- paste0(prefix,chr)
   chrpos <- paste(chr,pos,sep=seps[1])
-  a1a2 <- vector("character",length(pos))
-  index <- (a1 < a2)
-  a1a2[index] <- paste(a1,a2,sep=seps[3])[index]
-  a1a2[!index] <- paste(a2,a1,sep=seps[3])[!index]
-  a1a2 <- ifelse(uppercase,toupper(a1a2),tolower(a1a2))
-  return (paste(chrpos,a1a2,sep=seps[2]))
+  a1a2 <- paste(a1,a2,sep=seps[3])
+  a2a1 <- paste(a2,a1,sep=seps[3])
+  swap <- (a1 > a2)
+  a1a2[swap] <- a2a1[swap]
+  a1a2.lower <- tolower(a1a2)
+  a1a2.upper <- toupper(a1a2)
+  if(uppercase) paste(chrpos,a1a2.upper,sep=seps[2]) else paste(chrpos,a1a2.lower,sep=seps[2])
 }
 
 inv_chr_pos_a1_a2 <- function(chr_pos_a1_a2,prefix="chr",seps=c(":","_","_"))
@@ -993,4 +998,231 @@ inv_chr_pos_a1_a2 <- function(chr_pos_a1_a2,prefix="chr",seps=c(":","_","_"))
   s <- data.frame(chr=unlist(chr),pos=unlist(pos),a1=unlist(a1),a2=unlist(a2))
   names(s) <- c("chr","pos","a1","a2")
   return(s)
+}
+
+mhtplot3d <- function(xyz="INF1.merge.cis.vs.trans",
+                      cols=c("id","chr1","pos1","chr2","pos2","gene","target","log10p","x","y","col"),
+                      xy.scale=c(1.3e8,1.3e8),marker.size=4,log10p.max=400,
+                      prefix=c("Sentinel","CHR","POS","CHR","POS","Gene","Target","-log10(p)"),
+                      postfix="\u003c/br>",
+                      json.file="d3.json",pretty=TRUE)
+{
+  for(p in c("jsonlite", "plotly")) {
+     if (length(grep(paste("^package:", p, "$", sep=""), search())) == 0) {
+        if (!requireNamespace(p, quietly = TRUE))
+        warning(paste("mhtplot3d needs package `", p, "' to be fully functional; please install", sep=""))
+     }
+  }
+  src <- list(
+    x = list(
+      layout = list(
+        margin = list(b = 40, l = 60, t = 25, r = 10),
+        scene = list(
+          xaxis = list(title = "pQTL position",
+                       tickmode = "array", 
+                       autotick = FALSE, 
+                       tick0 = 1, 
+                       dtick = 1, 
+                       ticklen = 0, 
+                       tickwidth = 0, 
+                       tickfont = list(size = 10),
+                       tickvals = as.list(1:24),
+                       ticktext = as.list(c(1:22,"X","Y"))
+          ),
+          yaxis = list(title = "Protein position",
+                       tickmode = "array",
+                       autotick = FALSE,
+                       tick0 = 1,
+                       dtick = 1,
+                       ticklen = 0,
+                       tickwidth = 0,
+                       tickfont = list (size = 10),
+                       tickvals = as.list(1:24),
+                       ticktext = as.list(c(1:22,"X","Y"))
+          ),
+          zaxis = list(title = "-log10(p)", tickfont = list(size = 10)),
+          camera = list(eye=list(x = -1.3, y = -1.2, z = 1.1)),
+          aspectmode = "manual",
+          aspectratio = list(x = 0.9, y = 1, z = 0.6)
+        ),
+        legend = list(x = 10, y = 0.5),
+        xaxis = list(domain=list(0,1)),
+        yaxis = list(domain=list(0,1)),
+        title = "Scatterplot of sentinels",
+        showlegend = TRUE
+      ),
+      source = "A",
+      config = list(
+        modeBarButtonsToAdd = list(name = "Collaborate"),
+        modeBarButtonsToRemove = list("sendDataToCloud")
+      ),
+      data <- list(),
+      base_url = "https://plot.ly"
+    ),
+    evals = list(),
+    jsHooks = list()
+  )
+  d <- read.table(xyz,as.is=TRUE,header=TRUE)
+  r <- mhtplot2d(d, plot=FALSE)
+  cuts <- with(r, abs(log10p) > log10p.max)
+  r <- within(r,{x=x/xy.scale[1]; y=y/xy.scale[2]; log10p[!cuts] <- abs(log10p[!cuts]); log10p[cuts] <- log10p.max})
+  fixes <- function(col,d) paste(paste(prefix[col],d[,col],sep=":"),postfix)
+  cistrans <- function(br,name,color)
+  {
+    t <- subset(r[cols],col==br)
+    cuts <- with(t, abs(log10p) == log10p.max)
+    n.cuts <- with(t,length(log10p[cuts]))
+    s <- rep('circle',nrow(t))
+    s[cuts] <- 'diamond'
+    list(x=t$x, y=t$y, z=t$log10p,
+         text=as.list(apply(sapply(c(1:8),fixes,t),1,paste,collapse=" ")),
+         type="scatter3d",
+         mode="markers", 
+         name=name,
+         marker=list(color=color,symbol=s,size=marker.size))
+  }
+  cis <- cistrans("blue","cis","rgba(191,56,42,1)")
+  trans <- cistrans("red","trans","rgba(12,75,142,1)")
+  src$x$data <- list(cis,trans)
+  if(!is.null(json.file))
+  {
+    json <- jsonlite::toJSON(src,auto_unbox=TRUE,pretty=pretty)
+    sink(json.file)
+    print(json)
+    sink()
+  }
+  p <- plotly::plot_ly()
+  p <- with(src$x$data[[1]],plotly::add_trace(p, x=x, y=y, z=z, marker=marker, mode=mode, name=name, text=text, type=type))
+  p <- with(src$x$data[[2]],plotly::add_trace(p, x=x, y=y, z=z, marker=marker, mode=mode, name=name, text=text, type=type))
+  p <- with(src$x$layout, plotly::layout(p, scene=scene, xaxis=xaxis, yaxis=yaxis, margin=margin, title=title, showlegend=showlegend))
+}
+
+# https://plot.ly/r/reference/#scatter3d
+# sed -i 's|<\\/br>|\\u003c/br>|g' d3.json
+# plotly::toRGB( c('#BF382A', '#0C4B8E')) ==> "rgba(191,56,42,1)" "rgba(12,75,142,1)"
+
+pvalue <- function (z, decimals = 2)
+{
+    lp <- -log10p(z)
+    exponent <- ceiling(lp)
+    base <- 10^-(lp - exponent)
+    paste0(round(base, decimals), "e", -exponent)
+}
+
+log10pvalue <- function(p=NULL,base=NULL,exponent=NULL)
+{
+  if(!is.null(p))
+  {
+    p <- format(p,scientific=TRUE)
+    p2 <- strsplit(p,"e")
+    base <- as.numeric(lapply(p2,"[",1))
+    exponent <- as.numeric(lapply(p2,"[",2))
+  } else if(is.null(base) | is.null(exponent)) stop("base and exponent should both be specified")
+  log10(base)+exponent
+}
+
+# Adapted from code by Felix Day 16/9/2015
+# with reference from Bowden J, et al. (2015). 44(2):512-525.
+weighted.median <- function(x, w)
+{
+   x.order <- x[order(x)]
+   w.order <- w[order(x)]
+   ws <- cumsum(w.order)-0.5*w.order
+   ws <- ws / sum(w.order)
+   below <- max(which(ws < 0.5))
+   x.order[below] + (x.order[below+1]-x.order[below]) * (0.5-ws[below]) / (ws[below+1]-ws[below])
+}
+
+mr.boot = function(bXG, sebXG, bYG, sebYG, w, n.boot=1000, method="median")
+{
+   boot <- vector('numeric')
+   for(i in 1:n.boot)
+   {
+       bXG.boot <- rnorm(length(bXG), mean = bXG, sd = sebXG)
+       bYG.boot <- rnorm(length(bYG), mean = bYG, sd = sebYG)
+       if(method=="Egger")
+       {
+         bYG.boot = bYG.boot*sign(bXG.boot)
+         bXG.boot = abs(bXG.boot)
+         boot[i] = coef(summary(lm(bYG.boot~bXG.boot,weights=sebYG^-2)))[2,1]
+       } else {
+         bIV.boot <- bYG.boot / bXG.boot
+         boot[i] <- weighted.median(bIV.boot, w)
+      }
+   }
+   sd(boot)
+}
+
+gsmr <- function(data, X, Y, alpha=0.05, other_plots=FALSE)
+{
+   c <- qnorm(alpha/2,lower.tail=FALSE)
+   nxy <- vector("list", length(X)*length(Y))
+   k <- 1
+   ES_plot <- vector('list')
+   for(i in Y)
+   {
+       dat <- subset(data.frame(SNP = data[["SNP"]],
+                                bzx = eval(parse(text = paste0("data$b.", X))), SEzx = eval(parse(text = paste0("data$SE.", X))),
+                                bzy = eval(parse(text = paste0("data$b.", i))), SEzy = eval(parse(text = paste0("data$SE.", i)))),
+                    !is.na(bzx+SEzx+bzy+SEzy))
+       SNP <- dat[["SNP"]]
+       bzx <- dat[["bzx"]]; SEzx <- dat[["SEzx"]]
+       bzy <- dat[["bzy"]]; SEzy <- dat[["SEzy"]]
+       nxy[k] <- paste0(X, ".", i)
+       m1 <- lm(bzy~bzx-1, weights=SEzy^-2); summary.m1 <- summary(m1); coef.summary.m1 <- coef(summary.m1)
+       m <- lm(bzy~bzx, weights=SEzy^-2); summary.m <- summary(m); coef.summary.m <- coef(summary.m)
+       bIVW <- coef.summary.m1[1,1]
+       sebIVW <- coef.summary.m1[1,2] / min(with(summary.m1, sigma), 1)
+       bEGGER <- coef.summary.m[2,1]
+       sebEGGER <- coef.summary.m[2,2] / min(with(summary.m, sigma), 1)
+       intEGGER <- coef.summary.m[1,1]
+       seintEGGER <- coef.summary.m[1,2]
+       bIV <- bzy / bzx
+       weights <- (SEzy / bzx)^-2
+       bIVW <- sum(bzy*bzx*SEzy^-2) / sum(bzx^2 * SEzy^-2)
+       bWM <- weighted.median(bIV, weights)
+       sebWM <- mr.boot(bzx, SEzx, bzy, SEzy, weights)
+       penalty <- pchisq(weights*(bIV-bIVW)^2, df=1, lower.tail=FALSE)
+       penalty.weights <- weights*pmin(1, penalty * 20)
+       bPWM <- weighted.median(bIV, penalty.weights)
+       sebPWM <- mr.boot(bzx, SEzx, bzy, SEzy, penalty.weights)
+       res <- metafor::rma(bIV, 1/sqrt(weights), method="FE")
+       CochQ <- res$QE
+       CochQp <- res$QEp
+       graph_title <- paste("SNP effect on", i)
+       x_title <- paste("Effect on", X)
+       y_title <- paste("Effect on", i)
+       if(other_plots)
+       {
+         metafor::funnel(res, main=paste(graph_title), xlab=y_title)
+         abline(v=0, lty="dashed", col="red")
+         metafor::forest(res, main=paste(graph_title), addfit=FALSE, slab=SNP, xlab=y_title)
+       }
+       bzxLCL <- bzx-c*SEzx; bzxUCL <- bzx+c*SEzx
+       bzyLCL <- bzy-c*SEzy; bzyUCL <- bzy+c*SEzy
+       ES_plot[[i]] <- ggplot2::ggplot(data.frame(bzx, SEzx, bzy, SEzy, bzxLCL, bzxUCL, bzyLCL, bzyUCL),
+                                ggplot2::aes(x=bzx, y=bzy)) +
+                                ggplot2::geom_point() +
+                                ggplot2::theme_bw() +
+                                ggplot2::geom_errorbar(ggplot2::aes(ymin=bzyLCL, ymax=bzyUCL)) +
+                                ggplot2::geom_errorbarh(ggplot2::aes(xmin=bzxLCL, xmax=bzxUCL)) +
+                                ggplot2::geom_abline(intercept=0, slope=0, size=1) +
+                                ggplot2::geom_abline(intercept=0, slope=bIVW, size=1, colour="red", show.legend=TRUE) +
+                                ggplot2::geom_abline(intercept=0, slope=bEGGER, size=1, colour="blue", show.legend=TRUE) +
+                                ggplot2::geom_abline(intercept=0, slope=bWM, size=1, colour="green", show.legend=TRUE) +
+                                ggplot2::geom_abline(intercept=0, slope=bPWM, size=1, colour="orange", show.legend=TRUE) +
+                                ggplot2::geom_vline(xintercept=0, size=1) +
+                                cowplot::theme_half_open(12) +
+                                ggplot2::theme(plot.margin = ggplot2::margin(6, 4, 6, 4)) +
+                                ggplot2::ggtitle(graph_title) +
+                                ggplot2::xlab(x_title) +
+                                ggplot2::ylab(y_title)
+       plot(ES_plot[[i]])
+       ColOut <- parse(text = paste0(X, ".", i))
+       assign(paste(ColOut),c(paste(ColOut),bIVW,sebIVW,CochQ,CochQp,bEGGER,sebEGGER,intEGGER,seintEGGER,bWM,sebWM,bPWM,sebPWM))
+       k <- k+1
+  }
+  r <- c("IV","bIVW","sebIVW","CochQ","CochQp","bEGGER","sebEGGER","intEGGER","seintEGGER","bWM","sebWM","bPWM","sebPWM")
+  for (p in nxy) r <- rbind(r, eval(parse(text = paste(p))))
+  invisible(list(r=r,plots=ES_plot))
 }

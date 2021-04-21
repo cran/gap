@@ -1,38 +1,45 @@
 \name{mhtplot.trunc}
 \alias{mhtplot.trunc}
 \title{Truncated Manhattan plot}
-\usage{mhtplot.trunc(x, chr = "CHR", bp = "BP", p = "P", snp = "SNP", z = NULL,
+
+\usage{mhtplot.trunc(x, chr = "CHR", bp = "BP", p = NULL, log10p = NULL, z = NULL, snp = "SNP",
                     col = c("gray10", "gray60"),
                     chrlabs = NULL, suggestiveline = -log10(1e-05),
-                    genomewideline = -log10(5e-08), highlight = NULL, logp = TRUE,
-                    annotatePval = NULL, annotateTop = TRUE, cex.mtext=0.6, cex.text=0.8,
-                    mtext.line=2, cex.y= 1, y.ax.space=5, y.brk1, y.brk2, ...)}
+                    genomewideline = -log10(5e-08), highlight = NULL,
+                    annotatelog10P = NULL, annotateTop = FALSE,
+                    cex.mtext=1.5, cex.text=0.7,
+                    mtext.line = 2, cex.y = 1, y.ax.space = 5, y.brk1, y.brk2,
+                    delta=0.05,
+                    ...)}
 \description{
 To generate truncated Manhattan plot, e.g., of genomewide significance (P values) or a
-random variable that is uniformly distributed.
+random variable that is uniformly distributed. The rationale of this function is to
+extend mhtplot() to handle extremely small p values as often seen from a protein GWAS; for
+R will break down when p <= 1e-324.
 }
 \arguments{
 \item{x}{A data.frame}
 \item{chr}{Chromosome}
 \item{bp}{Position}
-\item{p}{P value}
-\item{snp}{SNP}
-\item{z}{Z-score, i.e., BETA/SE with extremely small P}
+\item{p}{p values, e.g., "1.23e-600"}
+\item{log10p}{log10(p)}
+\item{z}{z statistic, i.e., BETA/SE}
+\item{snp}{SNP. Pending on the setup it could either of variant or gene ID(s)}
 \item{col}{Colours}
-\item{chrlabs}{Chromosome labels}
+\item{chrlabs}{Chromosome labels, 1,2,...22,23,24,25}
 \item{suggestiveline}{Suggestive line}
 \item{genomewideline}{Genomewide line}
-\item{highlight}{Highlight}
-\item{logp}{log(P)}
-\item{annotatePval}{Annotate P}
+\item{highlight}{A list of SNPs to be highlighted}
+\item{annotatelog10P}{Threshold of -log10(P) to annotate}
 \item{annotateTop}{Annotate top}
-\item{cex.mtext}{axis label size}
-\item{cex.text}{SNP label font}
+\item{cex.mtext}{axis label extension factor}
+\item{cex.text}{SNP label extension factor}
 \item{mtext.line}{position of the y lab}
 \item{cex.y}{y axis numbers}
-\item{y.ax.space}{y.ax.space}
-\item{y.brk1}{y.brk1}
-\item{y.brk2}{y.brk2}
+\item{y.ax.space}{interval of ticks of the y axis}
+\item{y.brk1}{lower -log10(P) break point}
+\item{y.brk2}{upper -log10(P) break point}
+\item{delta}{a value to enable column(s) of red points}
 \item{...}{other options}
 }
 
@@ -46,26 +53,34 @@ The plot is shown on or saved to the appropriate device.
 
 \examples{
 \dontrun{
-#
+options(width=120)
 require(gap.datasets)
-mhtplot.trunc(mhtdata,chr = "chr", bp = "pos", p = "p", snp = "rsn", y.brk1=10, y.brk2=12)
+mhtdata <- within(mhtdata, {z=qnorm(p/2, lower.tail=FALSE)})
+mhtplot.trunc(mhtdata, chr = "chr", bp = "pos", z = "z", snp = "rsn", 
+              y.brk1=10, y.brk2=12, mtext.line=2.5)
+
 # https://portals.broadinstitute.org/collaboration/
 # giant/images/0/0f/Meta-analysis_Locke_et_al+UKBiobank_2018.txt.gz
-gz <- gzfile("Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz")
+gz <- gzfile("work/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz")
 BMI <- within(read.delim(gz,as.is=TRUE), {Z <- BETA/SE})
+print(subset(BMI[c("CHR","POS","SNP","P")],CHR!=16 & P<=1e-150))
 library(Rmpfr)
-within(subset(BMI, P==0), {P <- format(2*pnorm(mpfr(abs(BETA/SE),100),lower.tail=FALSE))})
+print(within(subset(BMI, P==0, select=c(CHR,POS,SNP,Z)), 
+             {P <- format(2*pnorm(mpfr(abs(Z),100),lower.tail=FALSE));
+              Pvalue <- pvalue(Z); log10P <- -log10p(Z)}))
 png("BMI.png", res=300, units="in", width=9, height=6)
 par(oma=c(0,0,0,0), mar=c(5,6.5,1,1))
-mhtplot.trunc(BMI, chr="CHR", bp="POS", p="P", snp="SNP", z = "Z",
-              suggestiveline=FALSE, genomewideline=-log10(1e-8), logp = TRUE,
-              cex.mtext=0.6, cex.text=0.7,
-              mtext.line=4, y.brk1=200, y.brk2=280, cex.axis=0.6, cex.y=0.6, cex=0.5,
+mhtplot.trunc(BMI, chr="CHR", bp="POS", z="Z", snp="SNP",
+              suggestiveline=FALSE, genomewideline=-log10(1e-8),
+              cex.mtext=1.2, cex.text=1.2,
+              annotatelog10P=156, annotateTop = FALSE,
+              highlight=c("rs13021737","rs17817449","rs6567160"),
+              mtext.line=3, y.brk1=200, y.brk2=280, cex.axis=1.2, cex.y=1.2, cex=0.5,
               y.ax.space=20,
               col = c("blue4", "skyblue")
 )
 dev.off()
 }
 }
-\author{James Peters}
+\author{James Peters, Jing Hua Zhao}
 \keyword{hplot}

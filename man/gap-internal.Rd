@@ -13,6 +13,7 @@
 \alias{cs}
 \alias{fa}
 \alias{fsnps}
+\alias{mr}
 \alias{hla}
 \alias{hr1420}
 \alias{inf1}
@@ -25,8 +26,10 @@
 \alias{mfblong}
 \alias{mhtdata}
 \alias{mhtplot2d}
+\alias{mhtplot3d}
 \alias{nep499}
 \alias{PARn}
+\alias{pvalue}
 \alias{HapDesign}
 \alias{HapFreqSE}
 \alias{allele.recode}
@@ -65,6 +68,7 @@
 \alias{getb1star}
 \alias{getPTE}
 \alias{grec2g}
+\alias{gsmr}
 \alias{h2G}
 \alias{h2GE}
 \alias{h2l}
@@ -77,6 +81,7 @@
 \alias{invlogit}
 \alias{invnormal}
 \alias{log10p}
+\alias{log10pvalue}
 \alias{logp}
 \alias{is.miss}
 \alias{KCC}
@@ -87,6 +92,7 @@
 \alias{mht.control}
 \alias{miamiplot}
 \alias{micombine}
+\alias{mr.boot}
 \alias{plem2m}
 \alias{revhap}
 \alias{revhap.i}
@@ -101,6 +107,7 @@
 \alias{toETDT}
 \alias{ungcode}
 \alias{VR}
+\alias{weighted.median}
 \alias{WriteGRM}
 \alias{WriteGRMBin}
 \alias{WriteGRMSAS}
@@ -118,6 +125,12 @@ h2GE(V,VCOV,verbose=TRUE)
 h2l(K=0.05,P=0.5,h2,se,verbose=TRUE)
 inv_chr_pos_a1_a2(chr_pos_a1_a2,prefix="chr",seps=c(":","_","_"))
 KCC(model,GRR,p1,K)
+mhtplot3d(xyz="INF1.merge.cis.vs.trans",
+          cols=c("id","chr1","pos1","chr2","pos2","gene","target","log10p","x","y","col"),
+          xy.scale=c(1.3e8,1.3e8),marker.size=4,log10p.max=400,
+          prefix=c("Sentinel","CHR","POS","CHR","POS","Gene","Target","-log10(p)"),
+          postfix="\u003c/br>",
+          json.file="d3.json",pretty=TRUE)
 ReadGRM(prefix=51)
 ReadGRMBin(prefix, AllN=FALSE, size=4)
 ReadGRMPLINK(prefix, diag=1)
@@ -132,15 +145,6 @@ WriteGRMSAS(grmlist, outfile="gwas")
 }
 \description{
 These are internal functions.
-
-PARn calculates population attributable risk (PAR) for a list of frequencies and relative risks (RRs).
-
-HapDesign and HapFreqSE both accept a \code{\link[haplo.stats]{haplo.em}} object to derieve a design/dosage
-matrix and standard error of haplotype frequency estimates. The former is appropriate for haplotype trend 
-regression (HTR), e.g., within the generalized linear model (GLM) framework to be equivllant to a formal 
-approach as implemented in the package haplo.stats and hap.score. However, they are expected to be compatible 
-with objects from gc.em() \code{\link[gap]{gc.em}} and \code{\link[gap]{hap.em}}. The two functions are 
-included as courtesy of Prof Andrea Foulkes from the useR!2008 tutorial.
 
 a2g gives allele-to-genotype conversion.
 
@@ -170,6 +174,8 @@ gcode is as a2g.
 
 grec2g is undocumented.
 
+gsmr is a function for Mendelian randomization analysis.
+
 h2G is a utility function for heritability
 
 h2GE is a utility function for heritability involving gene-environment interaction
@@ -177,6 +183,13 @@ h2GE is a utility function for heritability involving gene-environment interacti
 h2l is a utility function for converting observed heritability to its counterpart under liability threshold model
 
 hap.control is used by hap.em().
+
+HapDesign and HapFreqSE both accept a \code{\link[haplo.stats]{haplo.em}} object to derieve a design/dosage
+matrix and standard error of haplotype frequency estimates. The former is appropriate for haplotype trend 
+regression (HTR), e.g., within the generalized linear model (GLM) framework to be equivllant to a formal 
+approach as implemented in the package haplo.stats and hap.score. However, they are expected to be compatible 
+with objects from gc.em() \code{\link[gap]{gc.em}} and \code{\link[gap]{hap.em}}. The two functions are 
+included as courtesy of Prof Andrea Foulkes from the useR!2008 tutorial.
 
 hap.score.glm, hap.score.podds are used by hap.score().
 
@@ -194,27 +207,37 @@ and pbsize2.
 
 k obtains 1st and 2nd order culumants for correlation coefficient.
 
-log10p is log10(p) for a normal deviate
+log10p is log10(p) for a normal deviate.
 
-logp is log(p) for a normal deviate
+log10pvalue gives log10(p) for any p, e.g., "1.234e-1000".
+
+logp is log(p) for a normal deviate.
 
 m2plem is an experimental function for PLEM format.
 
-mhtplot2d is for 2D Manhattan plot
+makeRLEplot for RLE plot.
+
+mhtplot2d is for 2D Manhattan plot.
+
+mhtplot3d is for 3D Manhattan plot.
 
 miamiplot is for Miami plot.
 
 micombine is used to combine imputation results.
 
+PARn calculates population attributable risk (PAR) for a list of frequencies and relative risks (RRs).
+
 plem2m is also experimental for PLEM format.
+
+pvalue takes a z-statistic for a p value with scientific representation.
 
 ReadGRM is a function to read GCTA grm.gz and grm.id file
 
-ReadGRMPLINK is a function to read PLINK PI_HAT as a genomic relationship matrix
+ReadGRMPLINK is a function to read PLINK PI_HAT as a genomic relationship matrix.
 
-ReadGRMPCA is a function to read .eigenval and .eigenvec files from gcta --pca
+ReadGRMPCA is a function to read .eigenval and .eigenvec files from gcta --pca.
 
-ReadGRMBin is a function to read GCTA grm.bin files, modified from GCTA documentation
+ReadGRMBin is a function to read GCTA grm.bin files, modified from GCTA documentation.
 
 revhap recovers the allele indices for a given haplotype ID in a multiallelic system.
 
@@ -228,13 +251,15 @@ toETDT a function used to experiment with ETDT.
 
 ungcode recovers alleles from genotype(s).
 
-VR is a utility function for calculating variance of a ratio
+VR is a utility function for calculating variance of a ratio.
 
-WriteGRM is a utility function to write GCTA grm.gz and grm.id files
+weighted.median is a function for obtaining weighted median with interpolation.
 
-WriteGRMBin is a utility function to write GCTA grm.bin files
+WriteGRM is a utility function to write GCTA grm.gz and grm.id files.
 
-WriteGRMSAS is a utility function to write a GRM object to SAS PROCs MIXED/GLIMMIX ldata
+WriteGRMBin is a utility function to write GCTA grm.bin files.
+
+WriteGRMSAS is a utility function to write a GRM object to SAS PROCs MIXED/GLIMMIX ldata.
 
 x2 is a simple chi-squared test of two proportions.
 
@@ -283,6 +308,10 @@ snptest_sample(d,C=paste0("PC",1:2),D=paste0("D",1:1),P=paste0("P",1:1))
 s <- chr_pos_a1_a2(1,c(123,321),letters[1:2],letters[2:1])
 inv_chr_pos_a1_a2(s)
 inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
+#
+p <- mhtplot3d(pretty=FALSE)
+#
+pvalue(-1.96)
 }
 }
 \details{These functions are not so frequently called by users}
