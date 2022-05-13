@@ -31,6 +31,7 @@ LDkl                    LD statistics for two multiallelic markers
 lambda1000              A standardized estimate of the genomic inflation scaling to a study of
                         1,000 cases and 1,000 controls
 log10p                  log10(p) for a normal deviate
+log10pvalue             log10(p) for a P value including its scientific format
 logp                    log(p) for a normal deviate
 masize                  Sample size calculation for mediation analysis
 MCMCgrm                 Mixed modeling with genetic relationship matrices
@@ -61,8 +62,9 @@ METAL_forestplot        forest plot as R/meta's forest for METAL outputs
 makeRLEplot		make relative log expression plot
 mhtplot                 Manhattan plot
 mhtplot2                Manhattan plot with annotations
-mhtplot2d               2D Manhattan plot
-mhtplot3d               3D Manhattan plot
+pqtl2dplot              2D pQTL plot
+pqtl2dplotly            2D pQTL plotly
+pqtl3dplotly            3D pQTL plotly
 mhtplot.trunc           truncated Manhattan plot
 miamiplot               Miami plot
 pedtodot                Converting pedigree(s) to dot file(s)
@@ -79,21 +81,28 @@ ab                      Test/Power calculation for mediating effect
 b2r                     Obtain correlation coefficients and their variance-covariances
 chow.test               Chow's test for heterogeneity in two regressions
 chr_pos_a1_a2           Form SNPID from chromosome, posistion and alleles
-cis.vs.trans.classification a cis/trans classifier
+cis.vs.trans.classification A cis/trans classifier
 comp.score              score statistics for testing genetic linkage of quantitative trait
 GRM functions           ReadGRM, ReadGRMBin, ReadGRMPLINK, ReadGRMPCA, WriteGRM, WriteGRMBin, WriteGRMSAS
                         handle genomic relationship matrix involving other software
-h2                      Heritability estimation according to twin correlations
-heritability functions  h2G, VR, h2GC, h2l give point estimates as with their variances
-                        for continuous traits and binary traits under liability threshold model and
-                        case-control sampling
+get_b_se                Get b and se from AF, n, and z
+get_pve_se              Get pve and its standard error from n, z
+get_sdy                 Get sd(y) from AF, n, b, se
+h2G                     A utility function for heritability
+h2GE                    A utility function for heritability involving gene-environment interaction
+h2l                     A utility function for converting observed heritability to its counterpart
+                        under liability threshold model
+h2_mzdz                 Heritability estimation according to twin correlations
 klem                    Haplotype frequency estimation based on a genotype table
                         of two multiallelic markers
 makeped                 A function to prepare pedigrees in post-MAKEPED format
 metap                   Meta-analysis of p values
 metareg                 Fixed and random effects model for meta-analysis
 muvar                   Means and variances under 1- and 2- locus (diallelic) QTL model
+pvalue                  P value for a normal deviate
 read.ms.output          A utility function to read ms output
+revStrand               Allele on the reverse strand
+runshinygap             Start shinygap
 snptest_sample          A utility to generate SNPTEST sample file
 weighted.median         Weighted median with interpolation
 whscore                 Whittemore-Halpern scores for allele-sharing

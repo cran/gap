@@ -1,29 +1,31 @@
-### R code from vignette source 'gap.Rnw'
+## ----setup, include=FALSE-----------------------------------------------------
+set.seed(0)
+options(rmarkdown.html_vignette.check_title = FALSE)
+knitr::opts_chunk$set(
+  out.extra = 'style="display:block; margin: auto"',
+  fig.align = "center",
+  fig.path = "./",
+  collapse = TRUE,
+  comment = "#>",
+  dev = "png")
 
-###################################################
-### code chunk number 1: gap.Rnw:262-270
-###################################################
+## ----lukas, fig.cap="A pedigree diagram", fig.height=8, fig.width=7-----------
 library(gap)
 # pedigree diagram
-data(lukas)
+data(lukas, package="gap.datasets")
 library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
-pdf("figures/lukas.pdf",height=14,width=15)
-plot(ped)
-dev.off()
+plot(ped,cex=0.4)
 
-
-###################################################
-### code chunk number 2: gap.Rnw:280-306
-###################################################
+## -----------------------------------------------------------------------------
 # unordered individuals
 library(gap)
 gk1 <- kin.morgan(lukas)
-write.table(gk1$kin.matrix,"results/gap_1.txt",quote=FALSE)
+write.table(gk1$kin.matrix,"gap_1.txt",quote=FALSE)
 
 library(kinship2)
 kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
-write.table(kk1,"results/kinship_1.txt",quote=FALSE)
+write.table(kk1,"kinship_1.txt",quote=FALSE)
 
 d <- gk1$kin.matrix-kk1
 sum(abs(d))
@@ -35,18 +37,16 @@ olukas <- lukas[order(op),]
 gk2 <- kin.morgan(olukas)
 
 write.table(olukas,"olukas.csv",quote=FALSE)
-write.table(gk2$kin.matrix,"results/gap_2.txt",quote=FALSE)
+write.table(gk2$kin.matrix,"gap_2.txt",quote=FALSE)
 
 kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
-write.table(kk2,"results/kinship_2.txt",quote=FALSE)
+write.table(kk2,"kinship_2.txt",quote=FALSE)
 
 z <- gk2$kin.matrix-kk2
 sum(abs(z))
 
-
-###################################################
-### code chunk number 3: gap.Rnw:314-352
-###################################################
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+options(width=150)
 library(gap)
 models <- matrix(c(
          4.0, 0.01,
@@ -62,14 +62,14 @@ models <- matrix(c(
          1.5, 0.50,
          1.5, 0.80), ncol=2, byrow=TRUE)
 outfile <- "fbsize.txt"
-cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt","L_o","L_s\n",
-    file=outfile,sep="\t")
+cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt",
+    "L_o","L_s\n",file=outfile,sep="\t")
 for(i in 1:12) {
     g <- models[i,1]
     p <- models[i,2]
     z <- fbsize(g,p)
-    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,z$lambdao,z$lambdas,
-        file=outfile,append=TRUE,sep="\t")
+    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,
+        z$lambdao,z$lambdas,file=outfile,append=TRUE,sep="\t")
     cat("\n",file=outfile,append=TRUE)
 }
 table1 <- read.table(outfile,header=TRUE,sep="\t")
@@ -83,13 +83,10 @@ unlink(outfile)
 g <- 4.5
 p <- 0.15
 cat("\nAlzheimer's:\n\n")
-fbsize(g,p)
+data.frame(fbsize(g,p))
 table1
 
-
-###################################################
-### code chunk number 4: gap.Rnw:357-385
-###################################################
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
 models <- matrix(c(
@@ -119,10 +116,7 @@ for(i in 1:dim(models)[1])
 table5 <- read.table(outfile,header=TRUE,sep="\t")
 table5
 
-
-###################################################
-### code chunk number 5: gap.Rnw:390-437
-###################################################
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
 library(gap)
 # ARIC study
 outfile <- "aric.txt"
@@ -131,14 +125,14 @@ pD <- 0.03
 p1 <- 0.25
 alpha <- 0.05
 theta <- c(1.35,1.40,1.45)
-beta1 <- 0.8
+beta <- 0.2
 s_nb <- c(1463,722,468)
 cat("n","pD","p1","hr","q","power","ssize\n",file=outfile,sep="\t")
 for(i in 1:3)
 {
   q <- s_nb[i]/n
-  power <- ccsize(n,q,pD,p1,alpha,log(theta[i]))
-  ssize <- ccsize(n,q,pD,p1,alpha,log(theta[i]),beta1)
+  power <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta,TRUE)
+  ssize <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta)
   cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",
       signif(power,3),"\t",ssize,"\n",
       file=outfile,append=TRUE)
@@ -149,7 +143,7 @@ unlink(outfile)
 outfile <- "epic.txt"
 n <- 25000
 alpha <- 0.00000005
-power <- 0.8
+beta <- 0.2
 s_pD <- c(0.3,0.2,0.1,0.05)
 s_p1 <- seq(0.1,0.5,by=0.1)
 s_hr <- seq(1.1,1.4,by=0.1)
@@ -161,7 +155,7 @@ for(pD in s_pD)
    {
       for(hr in s_hr)
       {
-         ssize <- ccsize(n,q,pD,p1,alpha,log(hr),power)
+         ssize <- ccsize(n,q,pD,p1,log(hr),alpha,beta)
          if (ssize>0) cat(n,"\t",pD,"\t",p1,"\t",hr,"\t",alpha,"\t",
                           ssize,"\n",
                           file=outfile,append=TRUE)
@@ -171,123 +165,190 @@ for(pD in s_pD)
 read.table(outfile,header=TRUE,sep="\t")
 unlink(outfile)
 
-
-###################################################
-### code chunk number 6: gap.Rnw:445-454
-###################################################
+## ----qq, fig.cap="A Q-Q plot", fig.height=7, fig.width=7--------------------------------------------------------------------------------------------
 library(gap)
-pdf("figures/qqunif.pdf",height=10,width=10)
 u_obs <- runif(1000)
 r <- qqunif(u_obs,pch=21,bg="blue",bty="n")
 u_exp <- r$y
 hits <- u_exp >= 2.30103
 points(r$x[hits],u_exp[hits],pch=21,bg="green")
 legend("topleft",sprintf("GC.lambda=%.4f",gc.lambda(u_obs)))
-dev.off()
 
+## ----chicken, fig.cap="A genome-wide association study on chickens", fig.with=7, fig.width=7, results="hide"----------------------------------------
+ord <- with(w4,order(chr,pos))
+w4 <- w4[ord,]
+oldpar <- par()
+par(cex=0.6)
+colors <- c(rep(c("blue","red"),15),"red")
+mhtplot(w4,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
+axis(2,cex.axis=2)
+suggestiveline <- -log10(3.60036E-05)
+genomewideline <- -log10(1.8E-06)
+abline(h=suggestiveline, col="blue")
+abline(h=genomewideline, col="green")
+abline(h=0)
 
-###################################################
-### code chunk number 7: gap.Rnw:462-477 (eval = FALSE)
-###################################################
-## library(gap)
-## ord <- with(w4,order(chr,pos))
-## w4 <- w4[ord,]
-## pdf("figures/w4.pdf",height=9,width=10)
-## oldpar <- par()
-## par(cex=0.6)
-## colors <- c(rep(c("blue","red"),15),"red")
-## mhtplot(w4,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
-## axis(2,cex.axis=2)
-## suggestiveline <- -log10(3.60036E-05)
-## genomewideline <- -log10(1.8E-06)
-## abline(h=suggestiveline, col="blue")
-## abline(h=genomewideline, col="green")
-## abline(h=0)
-## dev.off()
+## ----mhtplot, fig.cap="A Manhattan plot with gene annotation", fig.height=7, fig.width=7, messages=FALSE, results="hide"----------------------------
+data <- with(mhtdata,cbind(chr,pos,p))
+glist <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3",
+           "PPP1R3B","RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
+hdata <- subset(mhtdata,gene%in%glist)[c("chr","pos","p","gene")]
+color <- rep(c("lightgray","gray"),11)
+glen <- length(glist)
+hcolor <- rep("red",glen)  
+par(las=2, xpd=TRUE, cex.axis=1.8, cex=0.4)
+ops <- mht.control(colors=color,yline=1.5,xline=3)
+hops <- hmht.control(data=hdata,colors=hcolor)
+mhtplot(data,ops,hops,pch=19)
+axis(2,pos=2,at=1:16,cex.axis=0.5)
 
+## ----circos, fig.cap="A circos Manhattan plot", fig.height=7, fig.width=8---------------------------------------------------------------------------
+circos.mhtplot(mhtdata, glist)
 
-###################################################
-### code chunk number 8: gap.Rnw:483-499 (eval = FALSE)
-###################################################
-## library(gap)
-## png("figures/mhtplot.png",height=10,width=16,units="cm",res=300)
-## data <- with(mhtdata,cbind(chr,pos,p))
-## glist <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3","PPP1R3B",
-##            "RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
-## hdata <- subset(mhtdata,gene%in%glist)[c("chr","pos","p","gene")]
-## color <- rep(c("lightgray","gray"),11)
-## glen <- length(glist)
-## hcolor <- rep("red",glen)  
-## par(las=2, xpd=TRUE, cex.axis=1.8, cex=0.4)
-## ops <- mht.control(colors=color,yline=1.5,xline=3)
-## hops <- hmht.control(data=hdata,colors=hcolor)
-## mhtplot(data,ops,hops,pch=19)
-## axis(2,pos=2,at=1:16,cex.axis=0.5)
-## title("Manhattan plot with genes highlighted",cex.main=1)
-## dev.off()
+## ----miami, fig.cap="A Miami plot", fig.height=7, fig.width=7---------------------------------------------------------------------------------------
+mhtdata <- within(mhtdata,{pr=p})
+miamiplot(mhtdata,chr="chr",bp="pos",p="p",pr="pr",snp="rsn")
 
+## ----il12b, crop=NULL, echo=FALSE, fig.cap="Association of IL-12B", fig.height=7, fig.width=8-------------------------------------------------------
+knitr::include_graphics("IL12B.png")
 
-###################################################
-### code chunk number 9: gap.Rnw:511-516 (eval = FALSE)
-###################################################
-## library(gap)
-## library(gap.datasets)
-## pdf("figures/circos-mhtplot.pdf")
-## circos.mhtplot()
-## dev.off()
+## ----asplot, fig.cap="A regional association plot", fig.height=7, fig.width=7-----------------------------------------------------------------------
+asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
+title("CDKN2A/CDKN2B Region")
 
+## ----cnv, fig.cap="A CNV plot", fig.height=7, fig.width=7-------------------------------------------------------------------------------------------
+cnvplot(gap.datasets::cnv)
 
-###################################################
-### code chunk number 10: gap.Rnw:522-527 (eval = FALSE)
-###################################################
-## library(gap.datasets)
-## mhtdata <- within(mhtdata,{pr=p})
-## png("figures/miamiplot.png")
-## miamiplot(mhtdata,chr="chr",bp="pos",p="p",pr="pr",snp="rsn")
-## dev.off()
-
-
-###################################################
-### code chunk number 11: gap.Rnw:533-539 (eval = FALSE)
-###################################################
-## library(gap)
-## library(gap.datasets)
-## pdf("figures/asplot.pdf",height=14,width=14)
-## asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
-## title("CDKN2A/CDKN2B Region")
-## dev.off()
-
-
-###################################################
-### code chunk number 12: gap.Rnw:549-559
-###################################################
+## ----esplot, fig.cap="rs12075 and traits", fig.height=7, fig.width=7--------------------------------------------------------------------------------
 library(gap)
-options(stringsAsFactors=FALSE)
-testdata <- data.frame(models=c("Basic model","Adjusted",
-                       "Moderately adjusted",
-                       "Heavily adjusted","Other"),
-OR = c(4.5,3.5,2.5,1.5,1),
-SElogOR = c(0.2,0.1,0.5,0.5,0.2))
-ESplot(testdata,v=1)
-title("This is a fictitious plot")
-dev.off()
+rs12075 <- data.frame(id=c("CCL2","CCL7","CCL8","CCL11","CCL13","CXCL6","Monocytes"),
+                      b=c(0.1694,-0.0899,-0.0973,0.0749,0.189,0.0816,0.0338387),
+                      se=c(0.0113,0.013,0.0116,0.0114,0.0114,0.0115,0.00713386))
+ESplot(rs12075)
 
+## ----forest, fig.cap="Forest plots", fig.height=6, fig.width=12, results="hide"---------------------------------------------------------------------
+data(OPG,package="gap.datasets")
+METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=8.75,height=5)
 
-###################################################
-### code chunk number 13: gap.Rnw:576-580
-###################################################
-library(cowplot)
+## ----normal, echo=FALSE, fig.cap="Normal(0,1) distribution", fig.height=5, fig.width=9--------------------------------------------------------------
+library(lattice)
+z0 <- 1.96
+z <- 5
+a <- seq(-z, z, length = 10000)
+b <- dnorm(a, 0, 1)
+xyplot(b ~ a,
+       type = "l",
+       panel = function(x,y, ...)
+               {
+                   panel.xyplot(x,y, ...)
+                   panel.abline(v = 0, lty = 2)
+                   xx <- c(-z, x[x>=-z & x<=-z0], -z0)
+                   yy <- c(0, y[x>=-z & x<=-z0], 0)
+                   panel.polygon(xx,yy, ..., col='red')
+                   xx <- c(z0, x[x>=z0 & x<=z], z)
+                   yy <- c(0, y[x>=z0 & x<=z], 0)
+                   panel.polygon(xx,yy, ..., col='red')
+               },
+       xlab="z",
+       ylab=expression(1/sqrt(2*pi) * exp(-z^2/2))
+)
+
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+require(gap)
+v <- data.frame()
+for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
+{
+  vi <- c(z,pvalue(z),logp(z),log10p(z))
+  v <- rbind(v,vi)
+}
+names(v) <- c("z","P","log(P)","log10(P)")
+knitr::kable(v,caption="Table 1. z,P,log(P) and log10(P)")
+
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+get_b_se(0.6396966,23991,4.7245)
+
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+get_sdy(0.6396966,23991,0.04490488,0.009504684)
+
+## ----gsmr, fig.cap="Mendelian randomization", fig.height=7, fig.width=7-----------------------------------------------------------------------------
+knitr::kable(mr,caption="Table 1. LIF.R and CAD/FEV1")
+res <- gsmr(mr, "LIF.R", c("CAD","FEV1"),other_plots=TRUE)
+f <- "INF1_CAD-FEV1.csv"
+write.table(with(res,r), file=f, quote=FALSE, col.names=FALSE, row.names=FALSE, sep=",")
+top <- function(r)
+       sapply(c("IVW","EGGER","WM","PWM"), function(x) as.numeric(gap::pvalue(r[[paste0("b",x)]]/r[[paste0("seb",x)]])))
+r <- read.csv(f,as.is=TRUE)
+p <- top(r)
+knitr::kable(data.frame(r,p),caption="Table 2. LIFR variant rs635634 and CAD/FEV1",digits=3)
+unlink(f)
+
+## ----gsmr2, fig.cap="Combined forest plots for LIF.R, FEV1 and CAD", fig.height=7, fig.width=7------------------------------------------------------
+mr_names <- names(mr)
+LIF.R <- cbind(mr[grepl("SNP|LIF.R",mr_names)],trait="LIF.R"); names(LIF.R) <- c("SNP","b","se","trait")
+FEV1 <- cbind(mr[grepl("SNP|FEV1",mr_names)],trait="FEV1"); names(FEV1) <- c("SNP","b","se","trait")
+CAD <- cbind(mr[grepl("SNP|CAD",mr_names)],trait="CAD"); names(CAD) <- c("SNP","b","se","trait")
+mr2 <- within(rbind(LIF.R,FEV1,CAD),{y=b})
 library(ggplot2)
-library(gap)
-r <- gsmr(mr, "LIF.R", c("CAD","FEV1"))
+p <- ggplot(mr2,aes(y = SNP, x = y))+
+theme_bw()+
+geom_point()+
+facet_wrap(~trait,ncol=3,scales="free_x")+
+geom_segment(aes(x = b-1.96*se, xend = b+1.96*se, yend = SNP))+
+geom_vline(lty=2, aes(xintercept=0), colour = 'red')+
+xlab("Effect size")+
+ylab("")
+p
 
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+require(gap)
+s <- chr_pos_a1_a2(1,c(123,321),letters[1:2],letters[2:1])
+inv_chr_pos_a1_a2(s)
+inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
 
-###################################################
-### code chunk number 14: gap.Rnw:604-608
-###################################################
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+gc.lambda <- function(p) {
+  p <- p[!is.na(p)]
+  n <- length(p)
+
+  obs <- qchisq(p,1,lower.tail=FALSE)
+  exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+
+  lambda <- median(obs)/median(exp)
+  return(lambda)
+}
+
+# A simplified version is as follows,
+# obs <- median(chisq)
+# exp <- qchisq(0.5, 1) # 0.4549364
+# lambda <- obs/exp
+# see also estlambda from GenABEL and qq.chisq from snpStats
+
+# A related function
+
+lambda1000 <- function(lambda, ncases, ncontrols)
+  1 + (lambda - 1) * (1 / ncases + 1 / ncontrols)/( 1 / 1000 + 1 / 1000)
+
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+invnormal <- function(x) qnorm((rank(x,na.last="keep")-0.5)/sum(!is.na(x)))
+
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+set.seed(12345)
+Ni <- rpois(50, lambda = 4); table(factor(Ni, 0:max(Ni)))
+y <- invnormal(Ni)
+sd(y)
+mean(y)
+Ni <- 1:50
+y <- invnormal(Ni)
+mean(y)
+sd(y)
+
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+alleles <- c("a","c","G","t")
+revStrand(alleles)
+
+## ---- echo=FALSE------------------------------------------------------------------------------------------------------------------------------------
 library(gap)
 search()
 lsf.str("package:gap")
 data(package="gap")$results
-
 

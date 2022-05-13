@@ -1,5 +1,51 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.2.3-5
+10-05-2022	Switch back to three-character maitainer name.
+
+Version 1.2.3-5
+09-05-2022	Mask circos.mhtplot due to running time > 5s
+		Merge first name
+
+Version 1.2.3-4
+09-05-2022	Drop URL for "Approximations for Mean and Variance of a Ratio" by Howard Seltman
+		due to server certificate verification failure
+		Drop DOI with Cai & Zeng (2004) for its unusual entry
+
+Version 1.2.3-3
+09-05-2022	Change cnvplot(cnv) to cnvplot(gap.datasets::cnv)
+		Revise gap.Rmd to comply with csl.
+
+Version 1.2.3-2
+06-05-2022
+gap.Rmd		Drop fig=TRUE from gap.Rnw since it causes problems
+		Merge plogp.Rmd and functions.Rmd from pQTLtools
+		Apply Sweave2knitr() to gap.Rnw and jss.Rnw and change gap.Rnw to gap.Rmd
+		Add nature-genetics.csl from https://www.zotero.org/styles/nature-genetics with nocite
+		Add the three functions related to linear regression
+shinygap	Add inst/shinygap and therefore runshinygap
+		Create R/global.R containing revised functions so it does not rely on R/gap
+		Add split=FALSE to METAL_forestplot to accommodate individual plot(s).
+		Make the first argument of sn() inside fbsize() as list() so as to handle vector input
+R		R CMD build --compact-vignettes=gs+qpdf with ghostscript 9.56.1 suggested by Kurt Hornik
+		DESCRIPTION/Description + inst/CITATION + bibentry amended with doi
+                courtesy of instructions from Achim Zeileis <Achim.Zeileis@uibk.ac.at> Wed 06/10/2021 01:11.
+		Depend: gap.datasets
+		Imports: dplyr, ggplot2, plotly
+		Suggests: htmlwidgets, rmarkdown, -gap.datasets
+		Rename h2 to h2_mzdz to resolve conflict with shiny/htmltools
+		Document circos.cis.vs.trans.plot(), circos.cnvplot(), miamiplot()
+		Document logp(), log10p(), log10pvalue(), pqtl2dplot(), pvalue(), h2G(), h2GE(), h2l()
+		Rename mhtplot2d/3d as pqtl2dplot/3dplotly, 3d version as run3d() and use .csv
+		Drop strlen() since nchar() is ready to use
+		Add allDuplicated and export grid2d()
+		Add get_b_se(), get_pve_se(), get_sdy(), reverse_strand()
+		Use of qnorm(log_p-log(2),lower.tail=FALSE,log.p=TRUE) for cs() when log_p is non-NULL
+04-05-2021	Documentation through roxygen and suggests knitr
+24-04-2021	Enable fig=TRUE in gap.Rnw to generate figures/reduce size of the package
+23-04-2021	Revise gsmr() adding legend and Egger intercept
+		Add cnvplot() trunc.mhtplot, and METAL_forestplot examples to gap.Rnw
+
 Version 1.2.3-1
 21-04-2021	Remove URL from hwe.cc.Rd and http --> https in CITATION
 
@@ -12,7 +58,7 @@ Version 1.2.3
 11-04-2021	Rework on mhtplot.trunc() to use Z so as to handle extremely small p values
 		Drop qqman from suggests
 10-04-2021	Relocate description on lsf.str() as Appendix and add library(gap) in gap.Rnw
-09-04-2021	Add weighted.median(), mr.boot(), gsmr() which suggests metafor, ggplot2 & cowplot
+09-04-2021	Add weighted.median(), mr.boot(), gsmr() which suggests metafor, cowplot
 31-03-2021	Revise ESplot to use log(OR) as effect size, activate (...) option
 22-03-2021	Add example for miamiplot in gap.Rnw
 12-02-2021	Revise circos.cnvplot() excluding records with start>end

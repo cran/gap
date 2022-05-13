@@ -331,7 +331,7 @@ Figure~\ref{3design}.
 
 \begin{figure}
 \begin{center}
-\includegraphics{figures/figure1.jpg}
+\includegraphics{figure1.jpg}
 \caption{\label{3design} Three common genetic association designs involving
 unrelated individuals (left), nuclear families with affected
 singletons (middle) and affected sib-pairs (right). Males and

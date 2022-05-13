@@ -1,0 +1,1037 @@
+---
+title: "Genetic Analysis Package"
+author:
+  - Jing Hua Zhao, Department of Public Health and Primary Care, University of Cambridge, Cambridge, UK, https://jinghuazhao.github.io/.
+date: '`r Sys.Date()`'
+bibliography: gap.bib
+csl: nature-genetics.csl
+nocite: |
+  @chow60, @devlin99, @elston75, @guo00, @guo92, @gholamic94, @hartung08, @hirotsu01, @miller97, risch96, @risch97, @sham97, @sham98, @skol06, @@spielman96, @wacholder04, @wakefield07, @wcn92, @wang05, @zaykin02, @zhao99, @zhao02, @zhao04
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{gap}
+  %\VignetteEncoding{UTF-8}
+output:
+  knitr:::html_vignette:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+set.seed(0)
+options(rmarkdown.html_vignette.check_title = FALSE)
+knitr::opts_chunk$set(
+  out.extra = 'style="display:block; margin: auto"',
+  fig.align = "center",
+  fig.path = "./",
+  collapse = TRUE,
+  comment = "#>",
+  dev = "png")
+```
+
+# Introduction
+
+This package was initiated to integrate some C/Fortran/SAS programs I have written 
+or used over the years. As such, it would rather be a long-term project, but an
+immediate benefit would be something complementary to other packages currently
+available from CRAN, e.g. **genetics**, **hwde**, etc. I hope eventually this will
+be part of a bigger effort to fulfill most of the requirements foreseen by many @guo00,
+within the portable environment of R for data management, analysis, graphics and
+object-oriented programming. My view has been outlined more formally[@zt06a; @zt06b]
+in relation to other package systems and also on package **kinship** [@zhao05; @zhao06].
+
+The number of functions are quite limited and experimental, but I already feel
+the enormous advantage by shifting to R and would like sooner rather than later
+to share my work with others. I will not claim this work as exclusively done by
+me, but would like to invite others to join me and enlarge the collections and
+improve them.
+
+With my recent work on genomewide association studies (GWASs) especially protein
+GWASs, I have added many functions such as `METAL_forestplot` which handles
+data from software METAL and `sentinels` which extracts sentinels from
+GWAS summary statistics in a way that is very appealing to us compared to some
+other established software. At the meantime, the size of the package surpasses
+the limit as imposed by CRAN, thus the old good feature of `S` as with
+`R` that value both code and data alike has to suffer slightly in that
+**gap.datasets** and **gap.examples** are spun off as two separate
+packages; they do deserve a glimpse however for some general ideas.
+
+Several other updates are worth mentioning: 
+
+1.  use of markdown from the noweb/Sweave format which
+    allows for Citation Style Language (CSL) (https://citationstyles.org/)
+    to format the bibliography.
+
+2.  multiple figures generated from a code section to be embedded.
+
+3.  Experimental implementation of a shiny App (`runshinygap`()).
+
+4.  **roxygen2** style documentation in companion with R code to allow for
+    easier generation of .Rd files through devtools::document().
+
+It is likely these experiences will be shared with/useful for other colleagues
+in converting their work into R.
+
+# Implementation
+
+The following list shows the data and functions currently available.
+
+Name              |      Description
+------------------|------------------------------------------------------------------
+**ANALYSIS** | &nbsp;
+AE3               |      AE model using nuclear family trios
+bt                |      Bradley-Terry model for contingency table
+ccsize            |      Power and sample size for case-cohort design
+cs                |      Credibel set
+fbsize            |      Sample size for family-based linkage and association design
+gc.em             |      Gene counting for haplotype analysis
+gcontrol          |      genomic control
+gcontrol2         |      genomic control based on p values
+gcp               |      Permutation tests using GENECOUNTING
+gc.lambda         |      Estionmation of the genomic control inflation statistic (lambda)
+genecounting      |      Gene counting for haplotype analysis
+gif               |      Kinship coefficient and genetic index of familiality
+grmMCMC           |      Mixed modeling with genetic relationship matrices
+gsmr              |      Mendelian randomization analysis
+hap               |      Haplotype reconstruction
+hap.em            |      Gene counting for haplotype analysis
+hap.score         |      Score statistics for association of traits with haplotypes
+htr               |      Haplotype trend regression
+hwe               |      Hardy-Weinberg equilibrium test for a multiallelic marker
+hwe.cc            |      A likelihood ratio test of population Hardy-Weinberg equilibrium
+hwe.hardy         |      Hardy-Weinberg equilibrium test using MCMC
+invnormal         |      Inverse normal transformation
+kin.morgan        |      kinship matrix for simple pedigree
+LD22              |      LD statistics for two diallelic markers
+LDkl              |      LD statistics for two multiallelic markers
+lambda1000        |      A standardized estimate of the genomic inflation scaling to
+&nbsp;            |      a study of 1,000 cases and 1,000 controls
+log10p            |      log10(p) for a standard normal deviate
+log10pvalue       |      log10(p) for a P value including its scientific format
+logp              |      log(p) for a normal deviate
+masize            |      Sample size calculation for mediation analysis
+mia               |      multiple imputation analysis for hap
+mtdt              |      Transmission/disequilibrium test of a multiallelic marker
+mtdt2             |      Transmission/disequilibrium test of a multiallelic marker
+&nbsp;            |      by Bradley-Terry model
+mvmeta            |      Multivariate meta-analysis based on generalized least squares
+pbsize            |      Power for population-based association design
+pbsize2           |      Power for case-control association design
+pfc               |      Probability of familial clustering of disease
+pfc.sim           |      Probability of familial clustering of disease
+pgc               |      Preparing weight for GENECOUNTING
+print.hap.score   |      Print a hap.score object
+s2k               |      Statistics for 2 by K table
+sentinels         |      Sentinel identification from GWAS summary statistics
+tscc              |      Power calculation for two-stage case-control design
+&nbsp; | &nbsp;
+**GRAPHICS** | &nbsp;
+asplot            |      Regional association plot
+ESplot            |      Effect-size plot
+circos.cnvplot    |      circos plot of CNVs
+circos.cis.vs.trans.plot | circos plot of cis/trans classification
+circos.mhtplot    |      circos Manhattan plot with gene annotation
+cnvplot           |      genomewide plot of CNVs
+METAL\_forestplot |      forest plot as R/meta's forest for METAL outputs
+makeRLEplot       |      make relative log expression plot
+mhtplot           |      Manhattan plot
+mhtplot2          |      Manhattan plot with annotations
+pqtl2dplot        |      2D pQTL plot
+pqtl2dplotly      |      2D pQTL plotly
+pqtl3dplotly      |      3D pQTL plotly
+mhtplot.trunc     |      truncated Manhattan plot
+miamiplot         |      Miami plot
+pedtodot          |      Converting pedigree(s) to dot file(s)
+plot.hap.score    |      Plot haplotype frequencies versus haplotype score statistics
+qqfun             |      Quantile-comparison plots
+qqunif            |      Q-Q plot for uniformly distributed random variable
+&nbsp; | &nbsp;
+**UTILITIES** | &nbsp;
+SNP               |      Functions for single nucleotide polymorphisms (SNPs)
+BFDP              |      Bayesian false-discovery probability
+FPRP              |      False-positive report probability
+ab                |      Test/Power calculation for mediating effect
+b2r               |      Obtain correlation coefficients and their variance-covariances
+chow.test         |      Chow's test for heterogeneity in two regressions
+chr\_pos\_a1\_a2  |      Form SNPID from chromosome, posistion and alleles
+cis.vs.trans.classification | a cis/trans classifier
+comp.score        |      score statistics for testing genetic linkage of quantitative trait
+GRM functions     |      ReadGRM, ReadGRMBin, ReadGRMPLINK,
+&nbsp;            |      ReadGRMPCA, WriteGRM,
+&nbsp;            |      WriteGRMBin, WriteGRMSAS
+&nbsp;            |      handle genomic relationship matrix involving other software
+get_b_se          |      Get b and se from AF, n, and z
+get_pve_se        |      Get pve and its standard error from n, z
+get_sdy           |      Get sd(y) from AF, n, b, se
+h2G               |      A utility function for heritability
+h2GE              |      A utility function for heritability involving gene-environment interaction
+h2l               |      A utility function for converting observed heritability to its counterpart
+&nbsp;            |      under liability threshold model
+h2_mzdz           |      Heritability estimation according to twin correlations
+klem              |      Haplotype frequency estimation based on a genotype table
+&nbsp;            |      of two multiallelic markers
+makeped           |      A function to prepare pedigrees in post-MAKEPED format
+metap             |      Meta-analysis of p values
+metareg           |      Fixed and random effects model for meta-analysis
+muvar             |      Means and variances under 1- and 2- locus (diallelic) QTL model
+pvalue            |      P value for a normal deviate
+read.ms.output    |      A utility function to read ms output
+revStrand         |      Allele on the reverse strand
+runshinygap       |      Start shinygap
+snptest\_sample   |      A utility to generate SNPTEST sample file
+twinan90          |      Classic twin models
+whscore           |      Whittemore-Halpern scores for allele-sharing
+weighted.median   |      Weighted median with interpolation
+
+Assuming proper installation, you will be able to obtain the list by typing
+`library(help=gap)` or view the list within a web browser via 
+`help.start()`. See Appendix on how to obtain a full list of functions.
+
+This file can be viewed with command `vignette("gap", package="gap")`.
+
+You can cut and paste examples at end of each function's documentation.
+
+Both `genecounting` and `hap` are able to handle SNPs and multiallelic
+markers, with the former be flexible enough to include features such as X-linked data
+and the later being able to handle large number of SNPs. But they are unable to
+recode allele labels automatically, so functions `gc.em` and `hap.em`
+are in `haplo.em` format and used by a modified function `hap.score` in
+association testing.
+
+It is notable that multilocus data are handled differently from that in **hwde** and
+elegant definitions of basic genetic data can be found in the **genetics** package.
+
+Incidentally, I found my C mixed-radixed sorting routine @zhao03 is much faster
+than R's internal function.
+
+With exceptions such as function `pfc` which is very computer-intensive, most
+functions in the package can easily be adapted for analysis of large datasets involving
+either SNPs or multiallelic markers. Some are utility functions, e.g. `muvar`
+and `whscore`, which will be part of the other analysis routines in the future.
+
+The benefit with R compared to standalone programs is that for users, all functions have
+unified format. For developers, it is able to incorporate their C/C++ programs more
+easily and avoid repetitive work such as preparing own routines for matrix algebra and
+linear models. Further advantage can be taken from packages in **Bioconductor**, which
+are designed and written to deal with large number of genes.
+
+# Independent programs
+
+To facilitate comparisons and individual preferences, The source codes for 2LD, EHPLUS, 
+GENECOUNTING, HAP, now hosted at GitHub, have enjoyed great popularity ahead of the
+genomewide association studies (GWAS) therefore are likely to be more familiar than their
+R couunterparts in `gap`. However, you need to follow their instructions to compile
+for a particular computer system.
+
+I have included `ms` code (which is required by `read.ms.output` and .xls files
+to accompany `read.ms.output` and `FPRP` and `BFDP` functions as with a 
+classic twin example for ACE model in **OpenMx**. The package is now available from
+CRAN.
+
+For these models it is actually simpler to use facilities as in package **mets**, which
+is now in suggests.
+
+A final category is `twinan90`, which is now dropped from the package function list
+due to difficulty to keep up with the requirements by the `R` environment but 
+nevertheless you will still be able to compile and use otherwise.
+
+# Demos
+
+This has been a template for self-contained examples:
+
+```r
+library(gap)
+demo(gap)
+```
+
+See examples of haplotype analysis there -- additional examples are given below.
+
+# Examples
+
+I would like to highlight `pedtodot`, `pbsize`, `fbsize` and `ccsize` functions
+used for pedigree drawing and power/sample calculations in a genome-wide asssociatoin study as
+reported @zhao07.
+
+## Pedigree drawing
+
+I have included the original file for the *R News* as well as put examples in separate 
+vignettes. They can be accessed via `vignette("rnews",package="gap.examples")` and 
+`vignette("pedtodot", package="gap.examples")`, respectively.
+
+## Kinship calculation
+
+Next, I will provide an example for kinship calculation using `kin.morgan`.
+It is recommended that individuals in a pedigree are ordered so that parents
+always precede their children. In this regard, package **pedigree** can be
+used, and package **kinship2** can be used to produce pedigree diagram as with
+kinship matrix.
+
+### Pedigree diagram
+
+The pedigree diagram is as follows,
+
+```{r lukas, fig.cap="A pedigree diagram", fig.height=8, fig.width=7}
+library(gap)
+# pedigree diagram
+data(lukas, package="gap.datasets")
+library(kinship2)
+ped <- with(lukas,pedigree(id,father,mother,sex))
+plot(ped,cex=0.4)
+```
+
+### Kinship calculation
+
+We then turn to the kinship calculation.
+
+```{r}
+# unordered individuals
+library(gap)
+gk1 <- kin.morgan(lukas)
+write.table(gk1$kin.matrix,"gap_1.txt",quote=FALSE)
+
+library(kinship2)
+kk1 <- kinship(lukas[,1],lukas[,2],lukas[,3])
+write.table(kk1,"kinship_1.txt",quote=FALSE)
+
+d <- gk1$kin.matrix-kk1
+sum(abs(d))
+
+# order individuals so that parents precede their children
+library(pedigree)
+op <- orderPed(lukas)
+olukas <- lukas[order(op),]
+gk2 <- kin.morgan(olukas)
+
+write.table(olukas,"olukas.csv",quote=FALSE)
+write.table(gk2$kin.matrix,"gap_2.txt",quote=FALSE)
+
+kk2 <- kinship(olukas[,1],olukas[,2],olukas[,3])
+write.table(kk2,"kinship_2.txt",quote=FALSE)
+
+z <- gk2$kin.matrix-kk2
+sum(abs(z))
+```
+
+We see that in the second case, the result agrees with **kinship2**.
+
+## Study design
+
+### Family-based design
+
+It now has an experimental work via Shiny from `inst/shinygap`.
+
+The example involving family-based design is as follows,
+
+```{r}
+options(width=150)
+library(gap)
+models <- matrix(c(
+         4.0, 0.01,
+         4.0, 0.10,
+         4.0, 0.50, 
+         4.0, 0.80,
+         2.0, 0.01,
+         2.0, 0.10,
+         2.0, 0.50,
+         2.0, 0.80,
+         1.5, 0.01,    
+         1.5, 0.10,
+         1.5, 0.50,
+         1.5, 0.80), ncol=2, byrow=TRUE)
+outfile <- "fbsize.txt"
+cat("gamma","p","Y","N_asp","P_A","H1","N_tdt","H2","N_asp/tdt",
+    "L_o","L_s\n",file=outfile,sep="\t")
+for(i in 1:12) {
+    g <- models[i,1]
+    p <- models[i,2]
+    z <- fbsize(g,p)
+    cat(z$gamma,z$p,z$y,z$n1,z$pA,z$h1,z$n2,z$h2,z$n3,
+        z$lambdao,z$lambdas,file=outfile,append=TRUE,sep="\t")
+    cat("\n",file=outfile,append=TRUE)
+}
+table1 <- read.table(outfile,header=TRUE,sep="\t")
+nc <- c(4,7,9)
+table1[,nc] <- ceiling(table1[,nc])
+dc <- c(3,5,6,8,10,11)
+table1[,dc] <- round(table1[,dc],2)
+unlink(outfile)
+# APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
+# Genetic analysis of complex diseases 1327
+g <- 4.5
+p <- 0.15
+cat("\nAlzheimer's:\n\n")
+data.frame(fbsize(g,p))
+table1
+```
+
+### Population-based design
+
+The example involving population-based design is as follows,
+
+```{r}
+library(gap)
+kp <- c(0.01,0.05,0.10,0.2)
+models <- matrix(c(
+          4.0, 0.01,
+          4.0, 0.10,
+          4.0, 0.50, 
+          4.0, 0.80,
+          2.0, 0.01,
+          2.0, 0.10,
+          2.0, 0.50,
+          2.0, 0.80,
+          1.5, 0.01,    
+          1.5, 0.10,
+          1.5, 0.50,
+          1.5, 0.80), ncol=2, byrow=TRUE)
+outfile <- "pbsize.txt"
+cat("gamma","p","p1","p5","p10","p20\n",sep="\t",file=outfile)
+for(i in 1:dim(models)[1])
+{
+   g <- models[i,1]
+   p <- models[i,2]
+   n <- vector()
+   for(k in kp) n <- c(n,ceiling(pbsize(k,g,p)))
+   cat(models[i,1:2],n,sep="\t",file=outfile,append=TRUE)
+   cat("\n",file=outfile,append=TRUE)
+} 
+table5 <- read.table(outfile,header=TRUE,sep="\t")
+table5
+```
+
+### Case-cohort design
+
+For case-cohort design, we obtain results for ARIC and EPIC studies.
+
+```{r}
+library(gap)
+# ARIC study
+outfile <- "aric.txt"
+n <- 15792
+pD <- 0.03
+p1 <- 0.25
+alpha <- 0.05
+theta <- c(1.35,1.40,1.45)
+beta <- 0.2
+s_nb <- c(1463,722,468)
+cat("n","pD","p1","hr","q","power","ssize\n",file=outfile,sep="\t")
+for(i in 1:3)
+{
+  q <- s_nb[i]/n
+  power <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta,TRUE)
+  ssize <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta)
+  cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",
+      signif(power,3),"\t",ssize,"\n",
+      file=outfile,append=TRUE)
+}
+read.table(outfile,header=TRUE,sep="\t")
+unlink(outfile)
+# EPIC study
+outfile <- "epic.txt"
+n <- 25000
+alpha <- 0.00000005
+beta <- 0.2
+s_pD <- c(0.3,0.2,0.1,0.05)
+s_p1 <- seq(0.1,0.5,by=0.1)
+s_hr <- seq(1.1,1.4,by=0.1)
+cat("n","pD","p1","hr","alpha","ssize\n",file=outfile,sep="\t")
+# direct calculation
+for(pD in s_pD)
+{
+   for(p1 in s_p1)
+   {
+      for(hr in s_hr)
+      {
+         ssize <- ccsize(n,q,pD,p1,log(hr),alpha,beta)
+         if (ssize>0) cat(n,"\t",pD,"\t",p1,"\t",hr,"\t",alpha,"\t",
+                          ssize,"\n",
+                          file=outfile,append=TRUE)
+      }
+   }
+}
+read.table(outfile,header=TRUE,sep="\t")
+unlink(outfile)
+```
+
+## Graphics
+
+I now include some figures from the documentation that may be of interest.
+
+### Genome-wide association
+
+The following code is used to obtain a Q-Q plot via `qqunif` function,
+
+```{r qq, fig.cap="A Q-Q plot", fig.height=7, fig.width=7}
+library(gap)
+u_obs <- runif(1000)
+r <- qqunif(u_obs,pch=21,bg="blue",bty="n")
+u_exp <- r$y
+hits <- u_exp >= 2.30103
+points(r$x[hits],u_exp[hits],pch=21,bg="green")
+legend("topleft",sprintf("GC.lambda=%.4f",gc.lambda(u_obs)))
+```
+
+Based on a chicken genome scan data, the code below generates a Manhattan plot, demonstrating
+the use of gaps to separate chromosomes.
+
+```{r chicken, fig.cap="A genome-wide association study on chickens", fig.with=7, fig.width=7, results="hide"}
+ord <- with(w4,order(chr,pos))
+w4 <- w4[ord,]
+oldpar <- par()
+par(cex=0.6)
+colors <- c(rep(c("blue","red"),15),"red")
+mhtplot(w4,control=mht.control(colors=colors,gap=1000),pch=19,srt=0)
+axis(2,cex.axis=2)
+suggestiveline <- -log10(3.60036E-05)
+genomewideline <- -log10(1.8E-06)
+abline(h=suggestiveline, col="blue")
+abline(h=genomewideline, col="green")
+abline(h=0)
+```
+
+The code below obtains a Manhattan plot with gene annotation,
+
+```{r mhtplot, fig.cap="A Manhattan plot with gene annotation", fig.height=7, fig.width=7, messages=FALSE, results="hide"}
+data <- with(mhtdata,cbind(chr,pos,p))
+glist <- c("IRS1","SPRY2","FTO","GRIK3","SNED1","HTR1A","MARCH3","WISP3",
+           "PPP1R3B","RP1L1","FDFT1","SLC39A14","GFRA1","MC4R")
+hdata <- subset(mhtdata,gene%in%glist)[c("chr","pos","p","gene")]
+color <- rep(c("lightgray","gray"),11)
+glen <- length(glist)
+hcolor <- rep("red",glen)  
+par(las=2, xpd=TRUE, cex.axis=1.8, cex=0.4)
+ops <- mht.control(colors=color,yline=1.5,xline=3)
+hops <- hmht.control(data=hdata,colors=hcolor)
+mhtplot(data,ops,hops,pch=19)
+axis(2,pos=2,at=1:16,cex.axis=0.5)
+```
+
+All these look familiar, so revised form of the function called `mhtplot2` was
+created for additional features such as centering the chromosome ticks, allowing for 
+more sophisticated coloring schemes, using prespecified fonts, etc. Please refer to
+the function's documentation example.
+
+We could also go further with a circos Manhattan plot,
+
+```{r circos, fig.cap="A circos Manhattan plot", fig.height=7, fig.width=8}
+circos.mhtplot(mhtdata, glist)
+```
+
+We now experiment with Miami plot,
+
+```{r miami, fig.cap="A Miami plot", fig.height=7, fig.width=7}
+mhtdata <- within(mhtdata,{pr=p})
+miamiplot(mhtdata,chr="chr",bp="pos",p="p",pr="pr",snp="rsn")
+```
+
+We now illustrate with a truncated Manhattan plot,
+
+```r
+par(oma=c(0,0,0,0), mar=c(5,6.5,1,1))
+mhtplot.trunc(IL.12B, chr="Chromosome", bp="Position", z="Z",
+   snp="MarkerName",
+   suggestiveline=FALSE, genomewideline=-log10(5e-10),
+   cex.mtext=1.2, cex.text=0.7,
+   annotatelog10P=-log10(5e-10), annotateTop = FALSE,
+   highlight=with(genes,gene),
+   mtext.line=3, y.brk1=115, y.brk2=200, trunc.yaxis=TRUE, delta=0.01,
+   cex.axis=1.2, cex=0.5, font=2, font.axis=1,
+   y.ax.space=20,
+   col = c("blue4", "skyblue")
+)
+```
+
+```{r il12b, crop=NULL, echo=FALSE, fig.cap="Association of IL-12B", fig.height=7, fig.width=8}
+knitr::include_graphics("IL12B.png")
+```
+
+The code below obtains a regional association plot with the `asplot` function,
+
+```{r asplot, fig.cap="A regional association plot", fig.height=7, fig.width=7}
+asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
+title("CDKN2A/CDKN2B Region")
+```
+
+The function predates the currently popular **locuszoom** software but leaves
+the option open for generating such plots on the fly and locally.
+
+Note that all these can serve as templates to customize features of your own.
+
+### Copy number variation
+
+A plot of copy number variation (CNV) is shown here,
+
+```{r cnv, fig.cap="A CNV plot", fig.height=7, fig.width=7}
+cnvplot(gap.datasets::cnv)
+```
+
+### Effect size plot
+
+The code below obtains an effect size plot via the `ESplot` function.
+
+```{r esplot, fig.cap="rs12075 and traits", fig.height=7, fig.width=7}
+library(gap)
+rs12075 <- data.frame(id=c("CCL2","CCL7","CCL8","CCL11","CCL13","CXCL6","Monocytes"),
+                      b=c(0.1694,-0.0899,-0.0973,0.0749,0.189,0.0816,0.0338387),
+                      se=c(0.0113,0.013,0.0116,0.0114,0.0114,0.0115,0.00713386))
+ESplot(rs12075)
+```
+
+### Forest plot
+
+It is possible to draw many forest plots given a list of variants; an example is given (only the first one here) here
+
+```{r forest, fig.cap="Forest plots", fig.height=6, fig.width=12, results="hide"}
+data(OPG,package="gap.datasets")
+METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=8.75,height=5)
+```
+
+# Significance level for z ~ Normal(0,1)
+
+When a Normally distributed association statistic z is very large, its corresponding p value is very small. A genomewide significance is declared at 0.05/1000000=5e-8 with Bonferroni correction assuming 1 million SNPs are tested. This short note describes how to get -log10(p), which can be used in a Q-Q plot and software such as DEPICT. The solution here is generic since z is also the square root of a chi-squared statistic, for instance.
+
+## log(p) and log10(p)
+
+First thing first, we therefore have the R function `z <- function(p) qnorm(p/2,lower.tail=FALSE)`.
+
+First thing first, here are the answers for log(p) and log10(p) given z,
+```r
+# log(p) for a standard normal deviate z based on log()
+logp <- function(z) log(2)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)
+
+# log10(p) for a standard normal deviate z based on log()
+log10p <- function(z) log(2, base=10)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)/log(10)
+```
+Note `logp()` will be used for functions such as `qnorm()` as in R/gap function `cs()` whereas `log10p()` is more appropriate for Manhattan plot and used in R/gap `sentinels()`.
+
+The schematic diagram is shown below.
+
+```{r normal, echo=FALSE, fig.cap="Normal(0,1) distribution", fig.height=5, fig.width=9}
+library(lattice)
+z0 <- 1.96
+z <- 5
+a <- seq(-z, z, length = 10000)
+b <- dnorm(a, 0, 1)
+xyplot(b ~ a,
+       type = "l",
+       panel = function(x,y, ...)
+               {
+                   panel.xyplot(x,y, ...)
+                   panel.abline(v = 0, lty = 2)
+                   xx <- c(-z, x[x>=-z & x<=-z0], -z0)
+                   yy <- c(0, y[x>=-z & x<=-z0], 0)
+                   panel.polygon(xx,yy, ..., col='red')
+                   xx <- c(z0, x[x>=z0 & x<=z], z)
+                   yy <- c(0, y[x>=z0 & x<=z], 0)
+                   panel.polygon(xx,yy, ..., col='red')
+               },
+       xlab="z",
+       ylab=expression(1/sqrt(2*pi) * exp(-z^2/2))
+)
+```
+
+## Rationale
+
+We start with z=1.96 whose corresponding p value is approximately 0.05.
+```r
+2*pnorm(-1.96,lower.tail=TRUE)
+```
+giving an acceptable value 0.04999579, so we proceed to get log10(p)
+```r
+log10(2)+log10(pnorm(-abs(z),lower.tail=TRUE))
+```
+leading to the expression above from the fact that log10(X)=log(X)/log(10) since log(),
+being the natural log function, ln() -- so log(exp(1)) = 1, in R, works far better on
+the numerator of the second term. The use of -abs() just makes sure we are working on
+the lower tail of the standard Normal distribution from which our p value is calculated.
+
+## Benchmark
+
+Now we have a stress test,
+```r
+z <- 20000
+-log10p(z)
+```
+giving -log10(p) = 86858901.
+
+## p, log(p), log10(p) and the multiple precision arithmetic
+
+We would be curious about the p value itself as well, which is furnished with the Rmpfr package
+```r
+require(Rmpfr)
+2*pnorm(mpfr(-abs(z),100),lower.tail=TRUE,log.p=FALSE)
+mpfr(log(2),100) + pnorm(mpfr(-abs(z),100),lower.tail=TRUE,log.p=TRUE)
+```
+giving p = 1.660579603192917090365313727164e-86858901 and -log(p) = -200000010.1292789076808554854177,
+respectively. To carry on we have -log10(p) = -log(p)/log(10)=86858901.
+
+To make -log10(p) usable in R we obtain it directly through
+```r
+as.numeric(-log10(2*pnorm(mpfr(-abs(z),100),lower.tail=TRUE)))
+```
+which actually yields exactly the same 86858901.
+
+If we go very far to have z=50000. then -log10(p)=542868107 but we have less luck with Rmpfr.
+
+One may wonder the P value in this case, which is 6.6666145952e-542868108 or simply 6.67e-542868108.
+
+The magic function for doing this is defined as follows,
+```r
+pvalue <- function (z, decimals = 2)
+{
+    lp <- -log10p(z)
+    exponent <- ceiling(lp)
+    base <- 10^-(lp - exponent)
+    paste0(round(base, decimals), "e", -exponent)
+}
+```
+and it is more appropriate to express p values in scientific format so they can be
+handled as follows,
+```r
+log10pvalue <- function(p=NULL,base=NULL,exponent=NULL)
+{
+  if(!is.null(p))
+  {
+    p <- format(p,scientific=TRUE)
+    p2 <- strsplit(p,"e")
+    base <- as.numeric(lapply(p2,"[",1))
+    exponent <- as.numeric(lapply(p2,"[",2))
+  } else if(is.null(base) | is.null(exponent)) stop("base and exponent should both be specified")
+  log10(base)+exponent
+}
+```
+used as `log10pvalue(p)` when p<=1e-323, or log10pvalue(base=1,exponent=-323) otherwise.
+
+One can also derive logpvalue for natural base (e) similarly.
+
+We end with a quick look-up table
+```{r}
+require(gap)
+v <- data.frame()
+for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
+{
+  vi <- c(z,pvalue(z),logp(z),log10p(z))
+  v <- rbind(v,vi)
+}
+names(v) <- c("z","P","log(P)","log10(P)")
+knitr::kable(v,caption="Table 1. z,P,log(P) and log10(P)")
+```
+
+## Application
+
+The `mhtplot.trunc()` function in R/gap accepts three types of arguments:
+
+1. p. P values of association statistics, which could be very small.
+2. log10p. log10(P).
+3. z. normal statistics that could be very large.
+
+In all three cases, a log10(P) counterpart is obtained internally and to accommodate extreme value,
+the y-axis allows for truncation leaving out a given range to highlight the largest.
+
+A plot for the GIANT data is shown here, [https://jinghuazhao.github.io/Omics-analysis/BMI/](https://jinghuazhao.github.io/Omics-analysis/BMI/).
+
+# Fine-mapping
+
+The function `cs` obtains credible set.
+```r
+# zcat METAL/4E.BP1-1.tbl.gz | \
+# awk 'NR==1 || ($1==4 && $2 >= 187158034 - 1e6 && $2 < 187158034 + 1e6)' >  4E.BP1.z
+tbl <- within(read.delim("4E.BP1.z"),{logp <- logp(Effect/StdErr)})
+z <- cs(tbl)
+l <- cs(tbl,log_p="logp")
+```
+
+# Linear regression
+
+Several functions related to linear regression are detailed here.
+
+## Some preparations
+
+Let $\mbox{x} = SNP\ dosage$. Note that $\mbox{Var}(\mbox{x})=2f(1-f)$, $f=MAF$ or $1-MAF$ by symmetry.
+
+Our linear regression model is $\mbox{y}=a + b\mbox{x} + e$. We have $\mbox{Var}(\mbox{y}) = b^2\mbox{Var}(\mbox{x}) + \mbox{Var}(e)$. Moreover, $\mbox{Var}(b)=\mbox{Var}(e)(\mbox{x}'\mbox{x})^{-1}=\mbox{Var}(e)/S_\mbox{xx}$, we have $\mbox{Var}(e) = \mbox{Var}(b)S_\mbox{xx} = N \mbox{Var}(b) \mbox{Var}(\mbox{x})$. Consequently, let $z = {b}/{SE(b)}$, we have
+
+\begin{eqnarray*}
+\mbox{Var}(\mbox{y}) &=& \mbox{Var}(\mbox{x})(b^2+N\mbox{Var}(b)) \hspace{100cm} \cr
+                     &=& \mbox{Var}(\mbox{x})\mbox{Var}(\mbox{b})(z^2+N) \cr
+                     &=& 2f(1-f)(z^2+N)\mbox{Var}(b)
+\end{eqnarray*} 
+
+Moreover, the mean and the variance of the multiple correlation coefficient or the coefficient of determination ($R^2$) are known @kotz06 to be ${1}/{(N-1)}$ and ${2(N-2)}/{\left[(N-1)^2(N+1)\right]}$, respectively.
+
+We also need some established results of a ratio (R/S)[^1], i.e., the mean
+
+$$
+\begin{align}
+E(R/S) \approx \frac{\mu_R}{\mu_S}-\frac{\mbox{Cov}(R,S)}{\mu_S^2}+\frac{\sigma_S^2\mu_R}{\mu_S^3} \hspace{100cm} 
+\end{align}
+$$
+
+and more importantly the variance
+
+$$
+\begin{align}
+\mbox{Var}(R/S) \approx \frac{\mu_R^2}{\mu_S^2} \left[
+                        \frac{\sigma_R^2}{\mu_R^2} -2\frac{\mbox{Cov}(R,S)}{\mu_R\;\mu_S}
+                       +\frac{\sigma_S^2}{\mu_S^2} \right] \hspace{100cm}
+\end{align}
+$$
+
+where $\mu_R$, $\mu_S$, $\sigma_R^2$, $\sigma_S^2$ are the means and the variances for R and S, respectively.
+
+Finally, we need some facts about $\chi_1^2$, $\chi^2$ distribution of one degree of freedom. For $z \sim N(0,1)$, $z^2\sim \chi_1^2$, whose mean and variance are 1 and 2, respectively.
+
+We now have the following results.
+
+## The proportion of variants explained (PVE)
+
+From above we have
+
+$$
+\begin{align}
+\mbox{PVE}_{\mbox{linear regression}} & = \frac{\mbox{Var}(b\mbox{x})}{\mbox{Var}(\mbox{y})} \hspace{100cm} \\
+           & = \frac{\mbox{Var}(\mbox{x})b^2}{\mbox{Var}(\mbox{x})(b^2+N\mbox{Var}(b))} \\
+           & = \frac{\mbox{z}^2}{\mbox{z}^2+N}
+\end{align}
+$$
+
+On the other hand, for a simple linear regression $R^2\equiv r^2$ where $r$ is the Pearson correlation coefficient, which is readily from the $t$-statistic of the regression slope, i.e., $r={t}/{\sqrt{t^2+N-2}}$. so assuming $t \equiv \ z \sim \chi_1^2$
+
+$$
+\begin{align}
+\mbox{PVE}_{t-\mbox{statistic}} & = \frac{\chi^2}{\chi^2+N-2} \hspace{100cm}
+\end{align}
+$$
+
+To obtain coherent estimates of the asymptotic means and variances of both forms we resort to variance of a ratio (R/S). All the required elements are listed in a table below.
+
+Characteristics   | Linear regression | $t$-statistic
+------------------|-------------------|--------------
+$\mu_R$           |  1    | 1
+$\sigma_R^2$      |  2    | 2
+$\mu_S$           | $N+1$ | $N-1$
+$\sigma_S^2$      |  2    | 2
+$\mbox{Cov}(R,S)$ |  2    | 2
+
+then we have the means and the variances for PVE.
+
+Characteristics          | Linear regression | $t$-statistic
+-------------------------|:-----------------:|:--------------------------------------------------------------:
+mean  | $\frac{1}{N+1}\left[1-\frac{2}{N+1}+\frac{2}{(N+1)^2}\right]$ | $\frac{1}{N-1}\left[1-\frac{2}{N-1}+\frac{2}{(N-1)^2}\right]$
+variance | $\frac{2}{(N+1)^2}\left[1-\frac{1}{N+1}\right]^2$ | $\frac{2}{(N-1)^2}\left[1-\frac{1}{N-1}\right]^2$
+
+Finally, our approximation of PVE for a protein with $T$ independent pQTLs from the meta-analysis
+
+Characteristics          | Linear regression | $t$-statistic
+-------------------------|:-----------------:|:----------------------------------------------------------:
+estimate | $\sum_{i=1}^T{\frac{\chi_i^2}{\chi_i^2+N_i}}$ | $\sum_{i=1}^T{\frac{\chi_i^2}{\chi_i^2+N_i-2}}$
+variance |$\sum_{i=1}^T\frac{2}{(N_i+1)^2}$ | $\sum_{i=1}^T\frac{2}{(N_i-1)^2}$
+
+## The effect size and standard error estimates
+
+When $\mbox{Var}(\mbox{y})=1$, as in cis eQTLGen data, we have $b$ and its standard error (se) as follows,
+
+$$
+\begin{align}
+b & = z/d \hspace{100cm} \\ 
+se & = 1/d
+\end{align}
+$$
+
+where $d = \sqrt{2f(1-f)(z^2+N)}$.
+
+Now three functions are in place.
+
+## get_b_se
+
+A record of the eQTLGen data is shown below
+
+```
+        SNP    Pvalue SNPChr  SNPPos AssessedAllele OtherAllele Zscore
+ rs1003563 2.308e-06     12 6424577              A           G 4.7245
+            Gene GeneSymbol GeneChr GenePos NrCohorts NrSamples         FDR
+ ENSG00000111321       LTBR      12 6492472        34     23991 0.006278872
+ BonferroniP hg19_chr hg19_pos AlleleA AlleleB allA_total allAB_total
+           1       12  6424577       A       G       2574        8483
+ allB_total AlleleB_all
+       7859   0.6396966
+```
+
+from which we obtain the effect size and its standard error as follows,
+
+```{r}
+get_b_se(0.6396966,23991,4.7245)
+```
+
+## get_pve_se
+
+This function obtains proportion of explained variation (PVE) from n, z; its
+standard error is based on variance of the ratio (correction=TRUE) or $r^2$.
+
+## get_sdy
+
+We continue with the eQTLGen example above,
+
+```{r}
+get_sdy(0.6396966,23991,0.04490488,0.009504684)
+```
+
+and indeed the eQTLGen data were standardized.
+
+# Polygenic modeling
+
+In line with the recent surge of interest in the polygenic models, a separate
+vignette is available through `vignette("h2",package="gap.examples")` demonstrating
+aspect of the models on heritability.
+
+Brief documentations are available for functions `h2G`, `h2GE` and `h2l`.
+
+# Mendelian randomization
+
+The function was originally developed to rework on data generated from GSMR, although it could be any harmonised data.
+
+```{r gsmr, fig.cap="Mendelian randomization", fig.height=7, fig.width=7}
+knitr::kable(mr,caption="Table 1. LIF.R and CAD/FEV1")
+res <- gsmr(mr, "LIF.R", c("CAD","FEV1"),other_plots=TRUE)
+f <- "INF1_CAD-FEV1.csv"
+write.table(with(res,r), file=f, quote=FALSE, col.names=FALSE, row.names=FALSE, sep=",")
+top <- function(r)
+       sapply(c("IVW","EGGER","WM","PWM"), function(x) as.numeric(gap::pvalue(r[[paste0("b",x)]]/r[[paste0("seb",x)]])))
+r <- read.csv(f,as.is=TRUE)
+p <- top(r)
+knitr::kable(data.frame(r,p),caption="Table 2. LIFR variant rs635634 and CAD/FEV1",digits=3)
+unlink(f)
+```
+
+The nearest reference for the implemented approaches is Ligthart et al @ligthart18.
+
+We would be of interest to contrast their effect sizes as well,
+
+```{r gsmr2, fig.cap="Combined forest plots for LIF.R, FEV1 and CAD", fig.height=7, fig.width=7}
+mr_names <- names(mr)
+LIF.R <- cbind(mr[grepl("SNP|LIF.R",mr_names)],trait="LIF.R"); names(LIF.R) <- c("SNP","b","se","trait")
+FEV1 <- cbind(mr[grepl("SNP|FEV1",mr_names)],trait="FEV1"); names(FEV1) <- c("SNP","b","se","trait")
+CAD <- cbind(mr[grepl("SNP|CAD",mr_names)],trait="CAD"); names(CAD) <- c("SNP","b","se","trait")
+mr2 <- within(rbind(LIF.R,FEV1,CAD),{y=b})
+library(ggplot2)
+p <- ggplot(mr2,aes(y = SNP, x = y))+
+theme_bw()+
+geom_point()+
+facet_wrap(~trait,ncol=3,scales="free_x")+
+geom_segment(aes(x = b-1.96*se, xend = b+1.96*se, yend = SNP))+
+geom_vline(lty=2, aes(xintercept=0), colour = 'red')+
+xlab("Effect size")+
+ylab("")
+p
+```
+
+# Miscellaneous functions
+
+## chr_pos_a1_a2 and inv_chr_pos_a1_a2
+
+They are functions to handle SNPid.
+```{r}
+require(gap)
+s <- chr_pos_a1_a2(1,c(123,321),letters[1:2],letters[2:1])
+inv_chr_pos_a1_a2(s)
+inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
+```
+
+## gc.lambda
+
+The definition is as follows,
+```{r}
+gc.lambda <- function(p) {
+  p <- p[!is.na(p)]
+  n <- length(p)
+
+  obs <- qchisq(p,1,lower.tail=FALSE)
+  exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+
+  lambda <- median(obs)/median(exp)
+  return(lambda)
+}
+
+# A simplified version is as follows,
+# obs <- median(chisq)
+# exp <- qchisq(0.5, 1) # 0.4549364
+# lambda <- obs/exp
+# see also estlambda from GenABEL and qq.chisq from snpStats
+
+# A related function
+
+lambda1000 <- function(lambda, ncases, ncontrols)
+  1 + (lambda - 1) * (1 / ncases + 1 / ncontrols)/( 1 / 1000 + 1 / 1000)
+```
+
+## invnormal
+
+The function is widely used in various consortium analyses and defined as follows,
+```{r}
+invnormal <- function(x) qnorm((rank(x,na.last="keep")-0.5)/sum(!is.na(x)))
+```
+An example use on data from Poisson distribution is as follows,
+```{r}
+set.seed(12345)
+Ni <- rpois(50, lambda = 4); table(factor(Ni, 0:max(Ni)))
+y <- invnormal(Ni)
+sd(y)
+mean(y)
+Ni <- 1:50
+y <- invnormal(Ni)
+mean(y)
+sd(y)
+```
+
+## revStrand
+
+This functions obtains allele(s) on the opposite strand.
+
+```{r}
+alleles <- c("a","c","G","t")
+revStrand(alleles)
+```
+
+## snptest_sample
+
+This is a function to output sample file for SNPTEST.
+```r
+d <- data.frame(ID_1=1,ID_2=1,missing=0,PC1=1,PC2=2,D1=1,P1=10)
+snptest_sample(d,C=paste0("PC",1:2),D=paste0("D",1:1),P=paste0("P",1:1))
+```
+The commands above generates a file named ``snptest.sample.
+
+# Known bugs
+
+Unaware of any bug. However, better memory management is expected. There are
+apparent issues with the Shiny interfaces for power/sample size calculation
+which produce less outputs for certain configurations than expected.
+
+# Summary
+
+I believe by now the package should have given you a flavour of initiatives
+I have made so far in relation to how the project was envisaged. More importantly,
+it is clear that availability of the package will serve as a platform on which 
+future work can be accumulated and collaboration can be built.
+
+# Bibliography
+
+<div id="refs"></div>
+
+# Appendix
+
+Assuming that you have already loaded the package via
+`library(gap)`, you can use `lsf.str("package:gap")` and 
+`data(package="gap")` to generate a list of functions and a list
+of datasets, respectvely. If this looks odd to you, you might try 
+`search()` within `R` to examine what is available in your
+environment before issuing the `lsf.str` command.
+
+```{r, echo=FALSE}
+library(gap)
+search()
+lsf.str("package:gap")
+data(package="gap")$results
+```
+
+[^1]: Notes by Howard Seltman from Carnegie Mellon University: Pittsburgh, PA, USA.
+

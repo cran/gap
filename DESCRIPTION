@@ -1,32 +1,46 @@
 Package: gap
-Version: 1.2.3-1
-Date: 2021-4-21
+Version: 1.2.3-6
+Date: 2022-5-10
 Title: Genetic Analysis Package
-Author: Jing Hua Zhao and colleagues with inputs from Kurt Hornik and
-        Brian Ripley
-Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
+Authors@R: c(person("Jing Hua", "Zhao", role = c("aut", "cre"),
+                    email = "jinghuazhao@hotmail.com",
+                    comment = c(ORCID = "0000-0002-1463-5870", "0000-0003-4930-3582")),
+    person("Kurt", "Hornik", role = "ctb"),
+    person("Brian", "Ripley", role = "ctb"),
+    person("Uwe", "Liggs", role = "ctb")
+  )
 URL: https://github.com/jinghuazhao/R
 BugReports: https://github.com/jinghuazhao/R/issues
-Depends: R (>= 2.10)
+Depends: R (>= 2.10), gap.datasets
+Imports: dplyr, ggplot2, plotly
 Suggests: BradleyTerry2, MASS, Matrix, MCMCglmm, R2jags, bdsmatrix,
-        calibrate, circlize, coda, cowplot, coxme, dplyr, foreign,
-        forestplot, gap.datasets, genetics, ggplot2, grid, haplo.stats,
-        jsonlite, kinship2, lattice, magic, matrixStats, meta, metafor,
-        mets, nlme, pedigree, pedigreemm, plotly, plotrix, reshape,
-        rmeta, rms, survival
-LazyData: Yes
-LazyLoad: Yes
-Description: It is designed as an integrated package for genetic data
-        analysis of both population and family data. Currently, it
-        contains functions for sample size calculations of both
-        population-based and family-based designs, probability of
-        familial disease aggregation, kinship calculation, statistics
-        in linkage analysis, and association analysis involving genetic
-        markers including haplotype analysis with or without environmental
-        covariates. Over years, the package has been developed in-between
+        calibrate, circlize, coda, cowplot, coxme, foreign, forestplot,
+        genetics, grid, haplo.stats, htmlwidgets, jsonlite, kinship2,
+        knitr, lattice, magic, matrixStats, meta, metafor, mets, nlme,
+        pedigree, pedigreemm, plotrix, reshape, rmarkdown, rmeta, rms,
+        survival
+VignetteBuilder: knitr
+Enhances: shiny
+Description: As first reported [Zhao, J. H. 2007. "gap: Genetic Analysis Package". J Stat Soft 23(8):1-18.
+        <doi:10.18637/jss.v023.i08>], it is designed as an integrated package for genetic data
+        analysis of both population and family data. Currently, it contains functions for
+        sample size calculations of both population-based and family-based designs, probability
+        of familial disease aggregation, kinship calculation, statistics in linkage analysis,
+        and association analysis involving genetic markers including haplotype analysis with or
+        without environmental covariates. Over years, the package has been developed in-between
         many projects hence also in line with the name (gap).
 License: GPL (>= 2)
+LazyData: Yes
+LazyLoad: Yes
 NeedsCompilation: yes
 Repository: CRAN
-Packaged: 2021-04-21 07:07:58 UTC; jhz22
-Date/Publication: 2021-04-21 09:40:09 UTC
+Encoding: UTF-8
+Packaged: 2022-05-10 08:57:58 UTC; jhz22
+Date/Publication: 2022-05-13 22:10:02 UTC
+RoxygenNote: 7.1.2
+Author: Jing Hua Zhao [aut, cre] (<https://orcid.org/0000-0002-1463-5870>,
+    0000-0003-4930-3582),
+  Kurt Hornik [ctb],
+  Brian Ripley [ctb],
+  Uwe Liggs [ctb]
+Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
