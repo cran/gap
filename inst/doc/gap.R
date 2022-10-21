@@ -9,8 +9,41 @@ knitr::opts_chunk$set(
   comment = "#>",
   dev = "png")
 
-## ----lukas, fig.cap="A pedigree diagram", fig.height=8, fig.width=7-----------
+## ---- echo=FALSE--------------------------------------------------------------
+p1 <- "
+ 1  2   3  2  2  7/7  7/10
+ 2  0   0  1  1  -/-  -/-
+ 3  0   0  2  2  7/9  3/10
+ 4  2   3  2  2  7/9  3/7
+ 5  2   3  2  1  7/7  7/10
+ 6  2   3  1  1  7/7  7/10
+ 7  2   3  2  1  7/7  7/10
+ 8  0   0  1  1  -/-  -/-
+ 9  8   4  1  1  7/9  3/10
+10  0   0  2  1  -/-  -/-
+11  2  10  2  1  7/7  7/7
+12  2  10  2  2  6/7  7/7
+13  0   0  1  1  -/-  -/-
+14 13  11  1  1  7/8  7/8
+15  0   0  1  1  -/-  -/-
+16 15  12  2  1  6/6  7/7
+"
+
+p2 <- as.data.frame(scan(file=textConnection(p1),what=list(0,0,0,0,0,"","")))
+names(p2) <-c("id","fid","mid","sex","aff","GABRB1","D4S1645")
+p3 <- data.frame(pid=10081,p2)
+
+## ----pedtodot, fig.cap="", fig.height=8, fig.width=7--------------------------
 library(gap)
+print(p3,row.names=FALSE)
+library(DOT)
+# one can see the diagram in RStudio
+pedtodot_verbatim(p3,run=TRUE,toDOT=TRUE,return="verbatim")
+library(DiagrammeR)
+pedtodot_verbatim(p3)
+grViz(readr::read_file("10081.dot"))
+
+## ----lukas, fig.cap="A pedigree diagram", fig.height=8, fig.width=7-----------
 # pedigree diagram
 data(lukas, package="gap.datasets")
 library(kinship2)
@@ -19,7 +52,6 @@ plot(ped,cex=0.4)
 
 ## -----------------------------------------------------------------------------
 # unordered individuals
-library(gap)
 gk1 <- kin.morgan(lukas)
 write.table(gk1$kin.matrix,"gap_1.txt",quote=FALSE)
 
@@ -174,7 +206,7 @@ hits <- u_exp >= 2.30103
 points(r$x[hits],u_exp[hits],pch=21,bg="green")
 legend("topleft",sprintf("GC.lambda=%.4f",gc.lambda(u_obs)))
 
-## ----chicken, fig.cap="A genome-wide association study on chickens", fig.with=7, fig.width=7, results="hide"----------------------------------------
+## ----chicken, fig.cap="A genome-wide association study on chickens", fig.height=7, fig.width=7, results="hide"--------------------------------------
 ord <- with(w4,order(chr,pos))
 w4 <- w4[ord,]
 oldpar <- par()
@@ -205,11 +237,31 @@ axis(2,pos=2,at=1:16,cex.axis=0.5)
 ## ----circos, fig.cap="A circos Manhattan plot", fig.height=7, fig.width=8---------------------------------------------------------------------------
 circos.mhtplot(mhtdata, glist)
 
-## ----miami, fig.cap="A Miami plot", fig.height=7, fig.width=7---------------------------------------------------------------------------------------
+## ----circos2, fig.cap="Another circos Manhattan plot", fig.height=7, fig.width=8--------------------------------------------------------------------
+require(gap.datasets)
+library(dplyr)
+testdat <- mhtdata[c("chr","pos","p","gene","start","end")] %>%
+           rename(log10p=p) %>%
+           mutate(chr=paste0("chr",chr),log10p=-log10(log10p))
+dat <- mutate(testdat,start=pos,end=pos) %>%
+       select(chr,start,end,log10p)
+labs <- subset(testdat,gene %in% glist) %>%
+        group_by(gene,chr,start,end) %>%
+        summarize() %>%
+        mutate(cols="blue") %>%
+        select(chr,start,end,gene,cols)
+circos.mhtplot2(dat,labs,ticks=0:2*10)
+
+## ----miami, fig.cap="Miami plots", fig.height=7, fig.width=7----------------------------------------------------------------------------------------
 mhtdata <- within(mhtdata,{pr=p})
 miamiplot(mhtdata,chr="chr",bp="pos",p="p",pr="pr",snp="rsn")
+# An alternative implementation
+gwas <- select(mhtdata,chr,pos,p) %>%
+        mutate(z=qnorm(p/2))
+chrmaxpos <- miamiplot2(gwas,gwas,name1="Batch 2",name2="Batch 1",z1="z",z2="z")
+labelManhattan(chr=c(2,16),pos=c(226814165,52373776),name=c("AnonymousGene","FTO"),gwas,gwasZLab="z",chrmaxpos=chrmaxpos)
 
-## ----il12b, crop=NULL, echo=FALSE, fig.cap="Association of IL-12B", fig.height=7, fig.width=8-------------------------------------------------------
+## ----il12b, echo=FALSE, fig.align="left", fig.cap="Association of IL-12B", fig.height=7, fig.width=8------------------------------------------------
 knitr::include_graphics("IL12B.png")
 
 ## ----asplot, fig.cap="A regional association plot", fig.height=7, fig.width=7-----------------------------------------------------------------------
@@ -269,6 +321,47 @@ get_b_se(0.6396966,23991,4.7245)
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 get_sdy(0.6396966,23991,0.04490488,0.009504684)
+
+## ----tnfb, echo=FALSE-------------------------------------------------------------------------------------------------------------------------------
+tnfb <- '
+              "multiple sclerosis"  0.69058600 0.059270400
+    "systemic lupus erythematosus"  0.76687500 0.079000500
+          "sclerosing cholangitis"  0.62671500 0.075954700
+   "juvenile idiopathic arthritis" -1.17577000 0.160293000
+                       "psoriasis"  0.00582586 0.000800016
+            "rheumatoid arthritis" -0.00378072 0.000625160
+      "inflammatory bowel disease" -0.14334200 0.025272500
+          "ankylosing spondylitis" -0.00316852 0.000626225
+                  "hypothyroidism" -0.00432054 0.000987324
+               "allergic rhinitis"  0.00393075 0.000926002
+          "IgA glomerulonephritis" -0.32696600 0.105262000
+                   "atopic eczema" -0.00204018 0.000678061
+'
+
+tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
+        setNames(c("outcome","Effect","StdErr")) %>%
+        mutate(outcome=gsub("\\b(^[a-z])","\\U\\1",outcome,perl=TRUE))
+
+## ----mr_forestplot, fig.cap="Forest plots based on MR results on TNFB", fig.align="left", fig.height=8, fig.width=12, results="hide"----------------
+
+# default output
+mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
+              common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
+              spacing=1.6)
+# no summary level statistics
+mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
+              leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
+              sortvar=tnfb[["Effect"]],
+              common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
+              backtransf=TRUE, spacing=1.6)
+# with P values
+mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
+              leftcols=c("studlab"), leftlabs=c("Outcome"),
+              plotwidth="3inch", sm="OR", sortvar=tnfb[["Effect"]],
+              rightcols=c("effect","ci","pval"), rightlabs=c("OR","95%CI","P"),
+              digits=3, digits.pval=2, scientific.pval=TRUE,
+              common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
+              addrow=TRUE, backtransf=TRUE, spacing=1.6)
 
 ## ----gsmr, fig.cap="Mendelian randomization", fig.height=7, fig.width=7-----------------------------------------------------------------------------
 knitr::kable(mr,caption="Table 1. LIF.R and CAD/FEV1")

@@ -1,5 +1,11 @@
 ---
 title: "Genetic Analysis Package"
+output:
+  rmarkdown::html_vignette:
+    mathjax:  default
+    fig_caption:  true
+    toc: true
+    section_numbering: true
 author:
   - Jing Hua Zhao, Department of Public Health and Primary Care, University of Cambridge, Cambridge, UK, https://jinghuazhao.github.io/.
 date: '`r Sys.Date()`'
@@ -11,9 +17,6 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{gap}
   %\VignetteEncoding{UTF-8}
-output:
-  knitr:::html_vignette:
-    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -53,7 +56,8 @@ other established software. At the meantime, the size of the package surpasses
 the limit as imposed by CRAN, thus the old good feature of `S` as with
 `R` that value both code and data alike has to suffer slightly in that
 **gap.datasets** and **gap.examples** are spun off as two separate
-packages; they do deserve a glimpse however for some general ideas.
+packages; they do deserve a glimpse however for some general ideas. A separate
+initiative has been made in the **pQTLtools** package.
 
 Several other updates are worth mentioning: 
 
@@ -63,13 +67,15 @@ Several other updates are worth mentioning:
 
 2.  multiple figures generated from a code section to be embedded.
 
-3.  Experimental implementation of a shiny App (`runshinygap`()).
+3.  experimental implementation of a shiny App (`runshinygap`()).
 
 4.  **roxygen2** style documentation in companion with R code to allow for
     easier generation of .Rd files through devtools::document().
 
 It is likely these experiences will be shared with/useful for other colleagues
-in converting their work into R.
+in converting their work into R. I found occasionally it is useful to use
+specific functions without loading the whole package (i.e., `library(gap)`),
+e.g.,`invnormal <- gap::invnormal`, `log10p <- gap::log10p`.
 
 # Implementation
 
@@ -90,7 +96,7 @@ gcp               |      Permutation tests using GENECOUNTING
 gc.lambda         |      Estionmation of the genomic control inflation statistic (lambda)
 genecounting      |      Gene counting for haplotype analysis
 gif               |      Kinship coefficient and genetic index of familiality
-grmMCMC           |      Mixed modeling with genetic relationship matrices
+MCMCgrm           |      Mixed modeling with genetic relationship matrices
 gsmr              |      Mendelian randomization analysis
 hap               |      Haplotype reconstruction
 hap.em            |      Gene counting for haplotype analysis
@@ -130,20 +136,25 @@ ESplot            |      Effect-size plot
 circos.cnvplot    |      circos plot of CNVs
 circos.cis.vs.trans.plot | circos plot of cis/trans classification
 circos.mhtplot    |      circos Manhattan plot with gene annotation
+circos.mhtplot2   |      Another circos Manhattan plot
 cnvplot           |      genomewide plot of CNVs
+labelManhattan    |      Annotate Manhattan or Miami Plot
 METAL\_forestplot |      forest plot as R/meta's forest for METAL outputs
 makeRLEplot       |      make relative log expression plot
 mhtplot           |      Manhattan plot
 mhtplot2          |      Manhattan plot with annotations
-pqtl2dplot        |      2D pQTL plot
-pqtl2dplotly      |      2D pQTL plotly
-pqtl3dplotly      |      3D pQTL plotly
 mhtplot.trunc     |      truncated Manhattan plot
 miamiplot         |      Miami plot
+miamiplot2        |      Miami plot
+mr_forestplot     |      Mendelian Randomization forest plot
 pedtodot          |      Converting pedigree(s) to dot file(s)
+pedtodot_verbatim |      Pedigree-drawing with graphviz
 plot.hap.score    |      Plot haplotype frequencies versus haplotype score statistics
 qqfun             |      Quantile-comparison plots
 qqunif            |      Q-Q plot for uniformly distributed random variable
+qtl2dplot         |      2D QTL plot
+qtl2dplotly       |      2D QTL plotly
+qtl3dplotly       |      3D QTL plotly
 &nbsp; | &nbsp;
 **UTILITIES** | &nbsp;
 SNP               |      Functions for single nucleotide polymorphisms (SNPs)
@@ -174,11 +185,11 @@ metap             |      Meta-analysis of p values
 metareg           |      Fixed and random effects model for meta-analysis
 muvar             |      Means and variances under 1- and 2- locus (diallelic) QTL model
 pvalue            |      P value for a normal deviate
+qtlClassifier     |      A QTL cis/trans classifier
 read.ms.output    |      A utility function to read ms output
 revStrand         |      Allele on the reverse strand
 runshinygap       |      Start shinygap
 snptest\_sample   |      A utility to generate SNPTEST sample file
-twinan90          |      Classic twin models
 whscore           |      Whittemore-Halpern scores for allele-sharing
 weighted.median   |      Weighted median with interpolation
 
@@ -222,17 +233,18 @@ genomewide association studies (GWAS) therefore are likely to be more familiar t
 R couunterparts in `gap`. However, you need to follow their instructions to compile
 for a particular computer system.
 
-I have included `ms` code (which is required by `read.ms.output` and .xls files
-to accompany `read.ms.output` and `FPRP` and `BFDP` functions as with a 
-classic twin example for ACE model in **OpenMx**. The package is now available from
-CRAN.
+I have kept the original `pedtodot.sh` by David Duffy which enables contrast with
+`pedtodot_verbatim()` and `pedtodot()` reported as application notes.
 
-For these models it is actually simpler to use facilities as in package **mets**, which
+I have also included `ms` code (which is required by `read.ms.output` and .xls files
+to accompany `read.ms.output` and `FPRP` and `BFDP` functions as with a classic twin
+example for ACE model in **OpenMx**. The package is now available from CRAN. For
+these models it is actually simpler to use facilities as in package **mets**, which
 is now in suggests.
 
 A final category is `twinan90`, which is now dropped from the package function list
 due to difficulty to keep up with the requirements by the `R` environment but 
-nevertheless you will still be able to compile and use otherwise.
+nevertheless you will still be able to compile and use otherwise from **gap.examples**.
 
 # Demos
 
@@ -257,6 +269,44 @@ I have included the original file for the *R News* as well as put examples in se
 vignettes. They can be accessed via `vignette("rnews",package="gap.examples")` and 
 `vignette("pedtodot", package="gap.examples")`, respectively.
 
+We also demonstrate through pedigree 10081 example @zhao06 with `pedtodot_verbatim`.
+
+```{r, echo=FALSE}
+p1 <- "
+ 1  2   3  2  2  7/7  7/10
+ 2  0   0  1  1  -/-  -/-
+ 3  0   0  2  2  7/9  3/10
+ 4  2   3  2  2  7/9  3/7
+ 5  2   3  2  1  7/7  7/10
+ 6  2   3  1  1  7/7  7/10
+ 7  2   3  2  1  7/7  7/10
+ 8  0   0  1  1  -/-  -/-
+ 9  8   4  1  1  7/9  3/10
+10  0   0  2  1  -/-  -/-
+11  2  10  2  1  7/7  7/7
+12  2  10  2  2  6/7  7/7
+13  0   0  1  1  -/-  -/-
+14 13  11  1  1  7/8  7/8
+15  0   0  1  1  -/-  -/-
+16 15  12  2  1  6/6  7/7
+"
+
+p2 <- as.data.frame(scan(file=textConnection(p1),what=list(0,0,0,0,0,"","")))
+names(p2) <-c("id","fid","mid","sex","aff","GABRB1","D4S1645")
+p3 <- data.frame(pid=10081,p2)
+```
+
+```{r pedtodot, fig.cap="", fig.height=8, fig.width=7}
+library(gap)
+print(p3,row.names=FALSE)
+library(DOT)
+# one can see the diagram in RStudio
+pedtodot_verbatim(p3,run=TRUE,toDOT=TRUE,return="verbatim")
+library(DiagrammeR)
+pedtodot_verbatim(p3)
+grViz(readr::read_file("10081.dot"))
+```
+
 ## Kinship calculation
 
 Next, I will provide an example for kinship calculation using `kin.morgan`.
@@ -270,7 +320,6 @@ kinship matrix.
 The pedigree diagram is as follows,
 
 ```{r lukas, fig.cap="A pedigree diagram", fig.height=8, fig.width=7}
-library(gap)
 # pedigree diagram
 data(lukas, package="gap.datasets")
 library(kinship2)
@@ -284,7 +333,6 @@ We then turn to the kinship calculation.
 
 ```{r}
 # unordered individuals
-library(gap)
 gk1 <- kin.morgan(lukas)
 write.table(gk1$kin.matrix,"gap_1.txt",quote=FALSE)
 
@@ -473,7 +521,7 @@ legend("topleft",sprintf("GC.lambda=%.4f",gc.lambda(u_obs)))
 Based on a chicken genome scan data, the code below generates a Manhattan plot, demonstrating
 the use of gaps to separate chromosomes.
 
-```{r chicken, fig.cap="A genome-wide association study on chickens", fig.with=7, fig.width=7, results="hide"}
+```{r chicken, fig.cap="A genome-wide association study on chickens", fig.height=7, fig.width=7, results="hide"}
 ord <- with(w4,order(chr,pos))
 w4 <- w4[ord,]
 oldpar <- par()
@@ -516,11 +564,47 @@ We could also go further with a circos Manhattan plot,
 circos.mhtplot(mhtdata, glist)
 ```
 
+and a version with y-axis,
+
+```{r circos2, fig.cap="Another circos Manhattan plot", fig.height=7, fig.width=8}
+require(gap.datasets)
+library(dplyr)
+testdat <- mhtdata[c("chr","pos","p","gene","start","end")] %>%
+           rename(log10p=p) %>%
+           mutate(chr=paste0("chr",chr),log10p=-log10(log10p))
+dat <- mutate(testdat,start=pos,end=pos) %>%
+       select(chr,start,end,log10p)
+labs <- subset(testdat,gene %in% glist) %>%
+        group_by(gene,chr,start,end) %>%
+        summarize() %>%
+        mutate(cols="blue") %>%
+        select(chr,start,end,gene,cols)
+circos.mhtplot2(dat,labs,ticks=0:2*10)
+```
+
+As a side note, the data is used by `manhattanly`.
+
+```r
+#too slowly to show here.
+#{r mhttest, fig.cap="Manhattanly plot", fig.height=8, fig.width=8, plotly=TRUE}
+library(manhattanly)
+mhttest <- manhattanly(mhtdata, chr = "chr", bp = "pos",
+                       snp = "rsn", annotation1 = "gene", suggestiveline = TRUE,
+                       annotation2 = "rsn", p = "p")
+mhttest
+htmlwidgets::saveWidget(mhttest,"mhttest.html")
+```
+
 We now experiment with Miami plot,
 
-```{r miami, fig.cap="A Miami plot", fig.height=7, fig.width=7}
+```{r miami, fig.cap="Miami plots", fig.height=7, fig.width=7}
 mhtdata <- within(mhtdata,{pr=p})
 miamiplot(mhtdata,chr="chr",bp="pos",p="p",pr="pr",snp="rsn")
+# An alternative implementation
+gwas <- select(mhtdata,chr,pos,p) %>%
+        mutate(z=qnorm(p/2))
+chrmaxpos <- miamiplot2(gwas,gwas,name1="Batch 2",name2="Batch 1",z1="z",z2="z")
+labelManhattan(chr=c(2,16),pos=c(226814165,52373776),name=c("AnonymousGene","FTO"),gwas,gwasZLab="z",chrmaxpos=chrmaxpos)
 ```
 
 We now illustrate with a truncated Manhattan plot,
@@ -540,7 +624,7 @@ mhtplot.trunc(IL.12B, chr="Chromosome", bp="Position", z="Z",
 )
 ```
 
-```{r il12b, crop=NULL, echo=FALSE, fig.cap="Association of IL-12B", fig.height=7, fig.width=8}
+```{r il12b, echo=FALSE, fig.align="left", fig.cap="Association of IL-12B", fig.height=7, fig.width=8}
 knitr::include_graphics("IL12B.png")
 ```
 
@@ -887,7 +971,52 @@ Brief documentations are available for functions `h2G`, `h2GE` and `h2l`.
 
 # Mendelian randomization
 
-The function was originally developed to rework on data generated from GSMR, although it could be any harmonised data.
+First, we illustrate with `mr_forestplot()`.
+
+```{r tnfb, echo=FALSE}
+tnfb <- '
+              "multiple sclerosis"  0.69058600 0.059270400
+    "systemic lupus erythematosus"  0.76687500 0.079000500
+          "sclerosing cholangitis"  0.62671500 0.075954700
+   "juvenile idiopathic arthritis" -1.17577000 0.160293000
+                       "psoriasis"  0.00582586 0.000800016
+            "rheumatoid arthritis" -0.00378072 0.000625160
+      "inflammatory bowel disease" -0.14334200 0.025272500
+          "ankylosing spondylitis" -0.00316852 0.000626225
+                  "hypothyroidism" -0.00432054 0.000987324
+               "allergic rhinitis"  0.00393075 0.000926002
+          "IgA glomerulonephritis" -0.32696600 0.105262000
+                   "atopic eczema" -0.00204018 0.000678061
+'
+
+tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
+        setNames(c("outcome","Effect","StdErr")) %>%
+        mutate(outcome=gsub("\\b(^[a-z])","\\U\\1",outcome,perl=TRUE))
+```
+
+```{r mr_forestplot, fig.cap="Forest plots based on MR results on TNFB", fig.align="left", fig.height=8, fig.width=12, results="hide"}
+
+# default output
+mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
+              common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
+              spacing=1.6)
+# no summary level statistics
+mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
+              leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
+              sortvar=tnfb[["Effect"]],
+              common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
+              backtransf=TRUE, spacing=1.6)
+# with P values
+mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
+              leftcols=c("studlab"), leftlabs=c("Outcome"),
+              plotwidth="3inch", sm="OR", sortvar=tnfb[["Effect"]],
+              rightcols=c("effect","ci","pval"), rightlabs=c("OR","95%CI","P"),
+              digits=3, digits.pval=2, scientific.pval=TRUE,
+              common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
+              addrow=TRUE, backtransf=TRUE, spacing=1.6)
+```
+
+The function `gsmr` was originally developed to rework on data generated from GSMR, although it could be any harmonised data.
 
 ```{r gsmr, fig.cap="Mendelian randomization", fig.height=7, fig.width=7}
 knitr::kable(mr,caption="Table 1. LIF.R and CAD/FEV1")
@@ -1034,4 +1163,3 @@ data(package="gap")$results
 ```
 
 [^1]: Notes by Howard Seltman from Carnegie Mellon University: Pittsburgh, PA, USA.
-
