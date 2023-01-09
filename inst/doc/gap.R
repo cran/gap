@@ -33,9 +33,9 @@ p2 <- as.data.frame(scan(file=textConnection(p1),what=list(0,0,0,0,0,"","")))
 names(p2) <-c("id","fid","mid","sex","aff","GABRB1","D4S1645")
 p3 <- data.frame(pid=10081,p2)
 
-## ----pedtodot, fig.cap="", fig.height=8, fig.width=7--------------------------
+## ----pedtodot, fig.cap="An example pedigree", fig.height=8, fig.width=7-------
 library(gap)
-print(p3,row.names=FALSE)
+knitr::kable(p3,caption="An example pedigree")
 library(DOT)
 # one can see the diagram in RStudio
 pedtodot_verbatim(p3,run=TRUE,toDOT=TRUE,return="verbatim")
@@ -77,7 +77,7 @@ write.table(kk2,"kinship_2.txt",quote=FALSE)
 z <- gk2$kin.matrix-kk2
 sum(abs(z))
 
-## ---------------------------------------------------------------------------------------------------------------------------------------------------
+## ----fb---------------------------------------------------------------------------------------------------------------------------------------------
 options(width=150)
 library(gap)
 models <- matrix(c(
@@ -110,15 +110,15 @@ table1[,nc] <- ceiling(table1[,nc])
 dc <- c(3,5,6,8,10,11)
 table1[,dc] <- round(table1[,dc],2)
 unlink(outfile)
-# APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
-# Genetic analysis of complex diseases 1327
+knitr::kable(table1,caption="Power/Sample size of family-based designs")
+
+## ----alz--------------------------------------------------------------------------------------------------------------------------------------------
 g <- 4.5
 p <- 0.15
-cat("\nAlzheimer's:\n\n")
-data.frame(fbsize(g,p))
-table1
+alz <- data.frame(fbsize(g,p))
+knitr::kable(alz,caption="Power/Sample size of study on Alzheimer's disease")
 
-## ---------------------------------------------------------------------------------------------------------------------------------------------------
+## ----pb---------------------------------------------------------------------------------------------------------------------------------------------
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
 models <- matrix(c(
@@ -146,7 +146,7 @@ for(i in 1:dim(models)[1])
    cat("\n",file=outfile,append=TRUE)
 } 
 table5 <- read.table(outfile,header=TRUE,sep="\t")
-table5
+knitr::kable(table5,caption="Sample size of population-based design")
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 library(gap)
@@ -194,7 +194,7 @@ for(pD in s_pD)
       }
    }
 }
-read.table(outfile,header=TRUE,sep="\t")
+knitr::kable(read.table(outfile,header=TRUE,sep="\t"),caption="Sample size of case-cohort designs")
 unlink(outfile)
 
 ## ----qq, fig.cap="A Q-Q plot", fig.height=7, fig.width=7--------------------------------------------------------------------------------------------
@@ -261,8 +261,8 @@ gwas <- select(mhtdata,chr,pos,p) %>%
 chrmaxpos <- miamiplot2(gwas,gwas,name1="Batch 2",name2="Batch 1",z1="z",z2="z")
 labelManhattan(chr=c(2,16),pos=c(226814165,52373776),name=c("AnonymousGene","FTO"),gwas,gwasZLab="z",chrmaxpos=chrmaxpos)
 
-## ----il12b, echo=FALSE, fig.align="left", fig.cap="Association of IL-12B", fig.height=7, fig.width=8------------------------------------------------
-knitr::include_graphics("IL12B.png")
+## ----il12b, echo=FALSE, fig.align="left", fig.cap="Association of IL-12B", fig.height=6, fig.width=6------------------------------------------------
+knitr::include_graphics("IL-12B.png")
 
 ## ----asplot, fig.cap="A regional association plot", fig.height=7, fig.width=7-----------------------------------------------------------------------
 asplot(CDKNlocus, CDKNmap, CDKNgenes, best.pval=5.4e-8, sf=c(3,6))
@@ -278,9 +278,9 @@ rs12075 <- data.frame(id=c("CCL2","CCL7","CCL8","CCL11","CCL13","CXCL6","Monocyt
                       se=c(0.0113,0.013,0.0116,0.0114,0.0114,0.0115,0.00713386))
 ESplot(rs12075)
 
-## ----forest, fig.cap="Forest plots", fig.height=6, fig.width=12, results="hide"---------------------------------------------------------------------
+## ----forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide"----------------------------------------------------------------------
 data(OPG,package="gap.datasets")
-METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=8.75,height=5)
+METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
 
 ## ----normal, echo=FALSE, fig.cap="Normal(0,1) distribution", fig.height=5, fig.width=9--------------------------------------------------------------
 library(lattice)
@@ -314,13 +314,56 @@ for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
   v <- rbind(v,vi)
 }
 names(v) <- c("z","P","log(P)","log10(P)")
-knitr::kable(v,caption="Table 1. z,P,log(P) and log10(P)")
+knitr::kable(v,caption="z,P,log(P) and log10(P)")
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 get_b_se(0.6396966,23991,4.7245)
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 get_sdy(0.6396966,23991,0.04490488,0.009504684)
+
+## ----mrdat, echo=FALSE------------------------------------------------------------------------------------------------------------------------------
+mrdat <- '
+ rs188743906  0.6804   0.1104  0.00177 0.01660        NA        NA
+   rs2289779 -0.0788   0.0134  0.00104 0.00261 -0.007543 0.0092258
+ rs117804300 -0.2281   0.0390 -0.00392 0.00855  0.109372 0.0362219
+   rs7033492 -0.0968   0.0147 -0.00585 0.00269  0.022793 0.0119903
+  rs10793962  0.2098   0.0212  0.00378 0.00536 -0.014567 0.0138196
+    rs635634 -0.2885   0.0153 -0.02040 0.00334  0.077157 0.0117123
+    rs176690 -0.0973   0.0142  0.00293 0.00306 -0.000007 0.0107781
+ rs147278971 -0.2336   0.0378 -0.01240 0.00792  0.079873 0.0397491
+  rs11562629  0.1155   0.0181  0.00960 0.00378 -0.010040 0.0151460
+'
+mrdat <- setNames(as.data.frame(scan(file=textConnection(mrdat), what=list("",0,0,0,0,0,0))), 
+         c("SNP", "b.LIF.R", "SE.LIF.R", "b.FEV1", "SE.FEV1", "b.CAD", "SE.CAD"))
+knitr::kable(mrdat,caption="LIF-R and CAD/FEV1")
+
+## ----mr, echo=FALSE, fig.cap="Mendelian randomization", fig.height=7, fig.width=7-------------------------------------------------------------------
+res <- mr(mrdat, "LIF.R", c("CAD","FEV1"), other_plots=TRUE)
+s <- res$r[-1,]
+colnames(s) <- res$r[1,]
+r <- matrix(as.numeric(s[,-1]),nrow(s),dimnames=list(res$r[-1,1],res$r[1,-1]))
+p <- sapply(c("IVW","EGGER","WM","PWM"), function(x)
+     format(2*pnorm(-abs(r[,paste0("b",x)]/r[,paste0("seb",x)])),digits=3,scientific=TRUE))
+rp <- t(data.frame(round(r,3),p))
+knitr::kable(rp, align="r", caption="LIFR variant rs635634 and CAD/FEV1")
+
+## ----mr2, fig.cap="Combined forest plots for LIF.R, FEV1 and CAD", fig.height=7, fig.width=7--------------------------------------------------------
+mr_names <- names(mrdat)
+LIF.R <- cbind(mrdat[grepl("SNP|LIF.R",mr_names)],trait="LIF.R"); names(LIF.R) <- c("SNP","b","se","trait")
+FEV1 <- cbind(mrdat[grepl("SNP|FEV1",mr_names)],trait="FEV1"); names(FEV1) <- c("SNP","b","se","trait")
+CAD <- cbind(mrdat[grepl("SNP|CAD",mr_names)],trait="CAD"); names(CAD) <- c("SNP","b","se","trait")
+mrdat2 <- within(rbind(LIF.R,FEV1,CAD),{y=b})
+library(ggplot2)
+p <- ggplot2::ggplot(mrdat2,aes(y = SNP, x = y))+
+     ggplot2::theme_bw()+
+     ggplot2::geom_point()+
+     ggplot2::facet_wrap(~ trait, ncol=3, scales="free_x")+
+     ggplot2::geom_segment(aes(x = b-1.96*se, xend = b+1.96*se, yend = SNP))+
+     ggplot2::geom_vline(lty=2, ggplot2::aes(xintercept=0), colour = 'red')+
+     ggplot2::xlab("Effect size")+
+     ggplot2::ylab("")
+p
 
 ## ----tnfb, echo=FALSE-------------------------------------------------------------------------------------------------------------------------------
 tnfb <- '
@@ -342,19 +385,19 @@ tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
         setNames(c("outcome","Effect","StdErr")) %>%
         mutate(outcome=gsub("\\b(^[a-z])","\\U\\1",outcome,perl=TRUE))
 
-## ----mr_forestplot, fig.cap="Forest plots based on MR results on TNFB", fig.align="left", fig.height=8, fig.width=12, results="hide"----------------
-
-# default output
+## ---- fig.cap="Forest plots for MR results on TNFB", fig.align="left", fig.height=6, fig.width=9, results="hide"------------------------------------
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              spacing=1.6)
-# no summary level statistics
+              spacing=1.6,digits.TE=2,digits.se=2)
+
+## ---- fig.cap="Forest plots for MR results on TNFB (no summary statistics)", fig.align="left", fig.height=6, fig.width=9, results="hide"------------
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
               leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
               sortvar=tnfb[["Effect"]],
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
               backtransf=TRUE, spacing=1.6)
-# with P values
+
+## ---- fig.cap="Forest plots for MR results on TNFB (with P values)", fig.align="left", fig.height=6, fig.width=9, results="hide"--------------------
 mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               leftcols=c("studlab"), leftlabs=c("Outcome"),
               plotwidth="3inch", sm="OR", sortvar=tnfb[["Effect"]],
@@ -362,35 +405,6 @@ mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               digits=3, digits.pval=2, scientific.pval=TRUE,
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
               addrow=TRUE, backtransf=TRUE, spacing=1.6)
-
-## ----gsmr, fig.cap="Mendelian randomization", fig.height=7, fig.width=7-----------------------------------------------------------------------------
-knitr::kable(mr,caption="Table 1. LIF.R and CAD/FEV1")
-res <- gsmr(mr, "LIF.R", c("CAD","FEV1"),other_plots=TRUE)
-f <- "INF1_CAD-FEV1.csv"
-write.table(with(res,r), file=f, quote=FALSE, col.names=FALSE, row.names=FALSE, sep=",")
-top <- function(r)
-       sapply(c("IVW","EGGER","WM","PWM"), function(x) as.numeric(gap::pvalue(r[[paste0("b",x)]]/r[[paste0("seb",x)]])))
-r <- read.csv(f,as.is=TRUE)
-p <- top(r)
-knitr::kable(data.frame(r,p),caption="Table 2. LIFR variant rs635634 and CAD/FEV1",digits=3)
-unlink(f)
-
-## ----gsmr2, fig.cap="Combined forest plots for LIF.R, FEV1 and CAD", fig.height=7, fig.width=7------------------------------------------------------
-mr_names <- names(mr)
-LIF.R <- cbind(mr[grepl("SNP|LIF.R",mr_names)],trait="LIF.R"); names(LIF.R) <- c("SNP","b","se","trait")
-FEV1 <- cbind(mr[grepl("SNP|FEV1",mr_names)],trait="FEV1"); names(FEV1) <- c("SNP","b","se","trait")
-CAD <- cbind(mr[grepl("SNP|CAD",mr_names)],trait="CAD"); names(CAD) <- c("SNP","b","se","trait")
-mr2 <- within(rbind(LIF.R,FEV1,CAD),{y=b})
-library(ggplot2)
-p <- ggplot(mr2,aes(y = SNP, x = y))+
-theme_bw()+
-geom_point()+
-facet_wrap(~trait,ncol=3,scales="free_x")+
-geom_segment(aes(x = b-1.96*se, xend = b+1.96*se, yend = SNP))+
-geom_vline(lty=2, aes(xintercept=0), colour = 'red')+
-xlab("Effect size")+
-ylab("")
-p
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 require(gap)

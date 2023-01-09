@@ -4,7 +4,6 @@
 \alias{hg19}
 \alias{hg38}
 \alias{lambda1000}
-\alias{mr}
 \alias{sun3d}
 \alias{HapDesign}
 \alias{HapFreqSE}
@@ -21,13 +20,11 @@
 \alias{getb1star}
 \alias{getPTE}
 \alias{grec2g}
-\alias{hap.control}
 \alias{hap.score.glm}
 \alias{hap.score.podds}
 \alias{hw}
 \alias{invlogit}
 \alias{is.miss}
-\alias{KCC}
 \alias{k}
 \alias{logit}
 \alias{m2plem}
@@ -61,7 +58,6 @@ chr_pos_a1_a2(chr,pos,a1,a2,prefix="chr",seps=c(":","_","_"),uppercase=TRUE)
 g2a(g)
 g2a.c(g)
 inv_chr_pos_a1_a2(chr_pos_a1_a2,prefix="chr",seps=c(":","_","_"))
-KCC(model,GRR,p1,K)
 sun3d(xyz="INF1.merge.cis.vs.trans",
       cols=c("id","chr1","pos1","chr2","pos2","gene","target","log10p","x","y","col"),
       xy.scale=c(1.3e8,1.3e8),marker.size=4,log10p.max=400,
@@ -103,8 +99,6 @@ gc.control is used by gc.em().
 gcode is as a2g.
 
 grec2g is undocumented.
-
-hap.control is used by hap.em().
 
 HapDesign and HapFreqSE both accept a \code{\link[haplo.stats]{haplo.em}} object to derieve a design/dosage
 matrix and standard error of haplotype frequency estimates. The former is appropriate for haplotype trend 

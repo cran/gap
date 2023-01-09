@@ -1,5 +1,31 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.4-2
+09-01-2023	Only use %s as in makeped_c.c/fscanf("%s",&response)
+		Add "and" in gap.Rmd Summary
+
+Version 1.4-1
+08-01-2023	Increase all 1s, 2s to 3s as in makeped_c.c/fscanf("%1s",&response)
+		Fix typo `constrast` in gap.Rmd
+
+Version 1.4
+07-01-2023	Suggest bookdown
+
+Version 1.3-2
+07-01-2023	gap.Rmd now uses bookdown with `convert -resize 60% IL.12B-mhtplot.trunc.png IL-12B.png`
+			and appropriate citations
+		Rename `gsmr` to `mr` with the test data reading from the console
+		Replace path.package() with find.package()
+		Move `...` from pdf() to meta() in METAL_forestplot()
+		sprintf --> snprintf following https://developer.r-project.org/blosxom.cgi/R-devel/2022/12/04
+		Simplify miamiplot2 code
+		Export makeped()
+		Document/export  hap.control(), KCC() due to query from Cecil Asa-Atiemo <asaatiemo@gmail.com>
+		Fix LLVM clang >= 15 is used in C23 mode (https://www.stats.ox.ac.uk/pub/bdr/C23/):
+			gcontrol_c.c r variables not used,
+			makeped_c.c fscanf() may overflow,
+			pgc.h enum expects identifier
+
 Version 1.3-1
 20-10-2022	Remove README.md and mask miamiplot2 example
 

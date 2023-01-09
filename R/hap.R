@@ -1,12 +1,3 @@
-hap.control <- function(mb=0,pr=0,po=0.001,to=0.001,th=1,maxit=100,n=0,
-      ss=0,rs=0,rp=0,ro=0,rv=0,sd=0,mm=0,mi=0,mc=50,ds=0.1,de=0,q=0,
-      hapfile="hap.out",assignfile="assign.out")
-{
-   list(mb=mb,pr=pr,po=po,to=to,th=th,maxit=maxit,n=n,ss=ss,rs=rs,
-       rp=rp,ro=ro,rv=rv,sd=sd,mm=mm,mi=mi,mc=mc,ds=ds,de=de,q=q,
-       hapfile=hapfile,assignfile=assignfile)
-}
-
 #' Haplotype reconstruction
 #'
 #' Haplotype reconstruction using sorting and trimming algorithms.
@@ -16,30 +7,7 @@ hap.control <- function(mb=0,pr=0,po=0.001,to=0.001,th=1,maxit=100,n=0,
 #' @param nloci number of loci.
 #' @param loci number of alleles at all loci.
 #' @param names locus names.
-#' @param control is a function with the following arguments,
-#'     \enumerate{
-#'     \item mb Maximum dynamic storage to be allocated, in Mb
-#'     \item pr Prior (ie population) probability threshold
-#'     \item po Posterior probability threshold
-#'     \item to Log-likelihood convergence tolerance
-#'     \item th Posterior probability threshold for output
-#'     \item maxit Maximum EM iteration
-#'     \item n Force numeric allele coding (1/2) on output (off)
-#'     \item ss Tab-delimited speadsheet file output (off)
-#'     \item rs Random starting points for each EM iteration (off)
-#'     \item rp Restart from random prior probabilities
-#'     \item ro Loci added in random order (off)
-#'     \item rv Loci added in reverse order (off)
-#'     \item sd Set seed for random number generator (use date+time)
-#'     \item mm Repeat final maximization multiple times
-#'     \item mi Create multiple imputed datasets. If set >0
-#'     \item mc  Number of MCMC steps between samples
-#'     \item ds  Starting value of Dirichlet prior parameter
-#'     \item de  Finishing value of Dirichlet prior parameter
-#'     \item q Quiet operation (off)
-#'     \item hapfile a file for haplotype frequencies
-#'     \item assignfile a file for haplotype assignment
-#'     }
+#' @param control is a call to hap.control().
 #'
 #' @details
 #' The package can hanlde much larger number of multiallelic loci. 
@@ -83,8 +51,8 @@ hap.control <- function(mb=0,pr=0,po=0.001,to=0.001,th=1,maxit=100,n=0,
 #' @note adapted from hap.
 #' @keywords models
 
-hap<-function(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep=""),
-              control=hap.control())
+hap <- function(id,data,nloci,loci=rep(2,nloci),names=paste("loci",1:nloci,sep=""),
+                control=hap.control())
 {
   if (control$rv & control$ro) stop("rv and ro flags cannot both be set in hap.control\n");
 # if (mi==0 & (mc | ds | de)) stop("mc, ds, de parameters are only legal if mi is set\n");

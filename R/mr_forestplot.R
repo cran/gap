@@ -34,7 +34,7 @@
 #'  # default output
 #'  mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
 #'                common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-#'                spacing=1.6)
+#'                spacing=1.6,digits.TE=2,digits.se=2)
 #'  # no summary level statistics
 #'  mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
 #'                leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci", 
@@ -57,7 +57,7 @@ mr_forestplot <- function(dat,sm="",title="",...)
    outcome <- dat[,1]
    Effect <- dat[,2]
    StdErr <- dat[,3]
-   mg <- meta::metagen(Effect,StdErr,sprintf("%s",outcome),sm=sm,title=title)
+   mg <- meta::metagen(Effect,StdErr,sprintf("%s",outcome),sm=sm,title=title,method.tau.ci="")
    meta::forest(mg,...)
    with(mg,cat("Q =", Q, "df =", df.Q, "p =", pval.Q, "I2 =", I2, "lower.I2 =", lower.I2, "upper.I2 =", upper.I2, "\n"))
 }

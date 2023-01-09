@@ -1,18 +1,23 @@
 ---
 title: "Genetic Analysis Package"
+subtitle: "Jing Hua Zhao"
 output:
-  rmarkdown::html_vignette:
-    mathjax:  default
-    fig_caption:  true
+  bookdown::html_document2:
     toc: true
-    section_numbering: true
+    toc_float: true
+fontsize: 11pt
+lot: true
+lof: true
 author:
-  - Jing Hua Zhao, Department of Public Health and Primary Care, University of Cambridge, Cambridge, UK, https://jinghuazhao.github.io/.
+  - Department of Public Health and Primary Care
+  - University of Cambridge
+  - Cambridge, UK
+  - https://jinghuazhao.github.io/
 date: '`r Sys.Date()`'
 bibliography: gap.bib
 csl: nature-genetics.csl
 nocite: |
-  @chow60, @devlin99, @elston75, @guo00, @guo92, @gholamic94, @hartung08, @hirotsu01, @miller97, risch96, @risch97, @sham97, @sham98, @skol06, @@spielman96, @wacholder04, @wakefield07, @wcn92, @wang05, @zaykin02, @zhao99, @zhao02, @zhao04
+  @wcn92
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{gap}
@@ -61,7 +66,7 @@ initiative has been made in the **pQTLtools** package.
 
 Several other updates are worth mentioning: 
 
-1.  use of markdown from the noweb/Sweave format which
+1.  use of markdown and then bookdown from the noweb/Sweave format which
     allows for Citation Style Language (CSL) (https://citationstyles.org/)
     to format the bibliography.
 
@@ -70,16 +75,16 @@ Several other updates are worth mentioning:
 3.  experimental implementation of a shiny App (`runshinygap`()).
 
 4.  **roxygen2** style documentation in companion with R code to allow for
-    easier generation of .Rd files through devtools::document().
+    easier generation of .Rd files and NAMESPACE through devtools::document().
 
-It is likely these experiences will be shared with/useful for other colleagues
+It is hoped that these experiences will be shared with/useful for other colleagues
 in converting their work into R. I found occasionally it is useful to use
 specific functions without loading the whole package (i.e., `library(gap)`),
 e.g.,`invnormal <- gap::invnormal`, `log10p <- gap::log10p`.
 
 # Implementation
 
-The following list shows the data and functions currently available.
+The following list shows the functions currently available.
 
 Name              |      Description
 ------------------|------------------------------------------------------------------
@@ -97,7 +102,6 @@ gc.lambda         |      Estionmation of the genomic control inflation statistic
 genecounting      |      Gene counting for haplotype analysis
 gif               |      Kinship coefficient and genetic index of familiality
 MCMCgrm           |      Mixed modeling with genetic relationship matrices
-gsmr              |      Mendelian randomization analysis
 hap               |      Haplotype reconstruction
 hap.em            |      Gene counting for haplotype analysis
 hap.score         |      Score statistics for association of traits with haplotypes
@@ -116,6 +120,7 @@ log10pvalue       |      log10(p) for a P value including its scientific format
 logp              |      log(p) for a normal deviate
 masize            |      Sample size calculation for mediation analysis
 mia               |      multiple imputation analysis for hap
+mr                |      Mendelian randomization analysis
 mtdt              |      Transmission/disequilibrium test of a multiallelic marker
 mtdt2             |      Transmission/disequilibrium test of a multiallelic marker
 &nbsp;            |      by Bradley-Terry model
@@ -248,7 +253,7 @@ nevertheless you will still be able to compile and use otherwise from **gap.exam
 
 # Demos
 
-This has been a template for self-contained examples:
+This has been a template for adding self-contained examples:
 
 ```r
 library(gap)
@@ -257,11 +262,7 @@ demo(gap)
 
 See examples of haplotype analysis there -- additional examples are given below.
 
-# Examples
-
-I would like to highlight `pedtodot`, `pbsize`, `fbsize` and `ccsize` functions
-used for pedigree drawing and power/sample calculations in a genome-wide asssociatoin study as
-reported @zhao07.
+# Pedigrees and kinship
 
 ## Pedigree drawing
 
@@ -296,9 +297,9 @@ names(p2) <-c("id","fid","mid","sex","aff","GABRB1","D4S1645")
 p3 <- data.frame(pid=10081,p2)
 ```
 
-```{r pedtodot, fig.cap="", fig.height=8, fig.width=7}
+```{r pedtodot, fig.cap="An example pedigree", fig.height=8, fig.width=7}
 library(gap)
-print(p3,row.names=FALSE)
+knitr::kable(p3,caption="An example pedigree")
 library(DOT)
 # one can see the diagram in RStudio
 pedtodot_verbatim(p3,run=TRUE,toDOT=TRUE,return="verbatim")
@@ -315,8 +316,6 @@ always precede their children. In this regard, package **pedigree** can be
 used, and package **kinship2** can be used to produce pedigree diagram as with
 kinship matrix.
 
-### Pedigree diagram
-
 The pedigree diagram is as follows,
 
 ```{r lukas, fig.cap="A pedigree diagram", fig.height=8, fig.width=7}
@@ -326,8 +325,6 @@ library(kinship2)
 ped <- with(lukas,pedigree(id,father,mother,sex))
 plot(ped,cex=0.4)
 ```
-
-### Kinship calculation
 
 We then turn to the kinship calculation.
 
@@ -361,15 +358,19 @@ sum(abs(z))
 
 We see that in the second case, the result agrees with **kinship2**.
 
-## Study design
+# Study designs
 
-### Family-based design
+I would like to highlight `fbsize`, `pbsize` and `ccsize` functions used
+for power/sample calculations in a genome-wide asssociatoin study as
+reported @risch96, @risch97, @zhao07.
 
 It now has an experimental work via Shiny from `inst/shinygap`.
 
-The example involving family-based design is as follows,
+## Family-based design
 
-```{r}
+The example is as follows,
+
+```{r fb}
 options(width=150)
 library(gap)
 models <- matrix(c(
@@ -402,20 +403,23 @@ table1[,nc] <- ceiling(table1[,nc])
 dc <- c(3,5,6,8,10,11)
 table1[,dc] <- round(table1[,dc],2)
 unlink(outfile)
-# APOE-4, Scott WK, Pericak-Vance, MA & Haines JL
-# Genetic analysis of complex diseases 1327
-g <- 4.5
-p <- 0.15
-cat("\nAlzheimer's:\n\n")
-data.frame(fbsize(g,p))
-table1
+knitr::kable(table1,caption="Power/Sample size of family-based designs")
 ```
 
-### Population-based design
+As for APOE4 and Alzheimer's @sph97
 
-The example involving population-based design is as follows,
+```{r alz}
+g <- 4.5
+p <- 0.15
+alz <- data.frame(fbsize(g,p))
+knitr::kable(alz,caption="Power/Sample size of study on Alzheimer's disease")
+```
 
-```{r}
+## Population-based design
+
+The example is as follows,
+
+```{r pb}
 library(gap)
 kp <- c(0.01,0.05,0.10,0.2)
 models <- matrix(c(
@@ -443,12 +447,12 @@ for(i in 1:dim(models)[1])
    cat("\n",file=outfile,append=TRUE)
 } 
 table5 <- read.table(outfile,header=TRUE,sep="\t")
-table5
+knitr::kable(table5,caption="Sample size of population-based design")
 ```
 
-### Case-cohort design
+## Case-cohort design
 
-For case-cohort design, we obtain results for ARIC and EPIC studies.
+We obtain results for ARIC and EPIC studies.
 
 ```{r}
 library(gap)
@@ -496,15 +500,15 @@ for(pD in s_pD)
       }
    }
 }
-read.table(outfile,header=TRUE,sep="\t")
+knitr::kable(read.table(outfile,header=TRUE,sep="\t"),caption="Sample size of case-cohort designs")
 unlink(outfile)
 ```
 
-## Graphics
+# Graphics
 
-I now include some figures from the documentation that may be of interest.
+Some figures from the documentation may be of interest.
 
-### Genome-wide association
+## Genome-wide association
 
 The following code is used to obtain a Q-Q plot via `qqunif` function,
 
@@ -607,7 +611,7 @@ chrmaxpos <- miamiplot2(gwas,gwas,name1="Batch 2",name2="Batch 1",z1="z",z2="z")
 labelManhattan(chr=c(2,16),pos=c(226814165,52373776),name=c("AnonymousGene","FTO"),gwas,gwasZLab="z",chrmaxpos=chrmaxpos)
 ```
 
-We now illustrate with a truncated Manhattan plot,
+and a truncated Manhattan plot,
 
 ```r
 par(oma=c(0,0,0,0), mar=c(5,6.5,1,1))
@@ -624,8 +628,8 @@ mhtplot.trunc(IL.12B, chr="Chromosome", bp="Position", z="Z",
 )
 ```
 
-```{r il12b, echo=FALSE, fig.align="left", fig.cap="Association of IL-12B", fig.height=7, fig.width=8}
-knitr::include_graphics("IL12B.png")
+```{r il12b, echo=FALSE, fig.align="left", fig.cap="Association of IL-12B", fig.height=6, fig.width=6}
+knitr::include_graphics("IL-12B.png")
 ```
 
 The code below obtains a regional association plot with the `asplot` function,
@@ -640,7 +644,7 @@ the option open for generating such plots on the fly and locally.
 
 Note that all these can serve as templates to customize features of your own.
 
-### Copy number variation
+## Copy number variation
 
 A plot of copy number variation (CNV) is shown here,
 
@@ -648,7 +652,7 @@ A plot of copy number variation (CNV) is shown here,
 cnvplot(gap.datasets::cnv)
 ```
 
-### Effect size plot
+## Effect size plot
 
 The code below obtains an effect size plot via the `ESplot` function.
 
@@ -660,34 +664,18 @@ rs12075 <- data.frame(id=c("CCL2","CCL7","CCL8","CCL11","CCL13","CXCL6","Monocyt
 ESplot(rs12075)
 ```
 
-### Forest plot
+## Forest plot
 
 It is possible to draw many forest plots given a list of variants; an example is given (only the first one here) here
 
-```{r forest, fig.cap="Forest plots", fig.height=6, fig.width=12, results="hide"}
+```{r forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide"}
 data(OPG,package="gap.datasets")
-METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=8.75,height=5)
+METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
 ```
 
-# Significance level for z ~ Normal(0,1)
+# Significance
 
-When a Normally distributed association statistic z is very large, its corresponding p value is very small. A genomewide significance is declared at 0.05/1000000=5e-8 with Bonferroni correction assuming 1 million SNPs are tested. This short note describes how to get -log10(p), which can be used in a Q-Q plot and software such as DEPICT. The solution here is generic since z is also the square root of a chi-squared statistic, for instance.
-
-## log(p) and log10(p)
-
-First thing first, we therefore have the R function `z <- function(p) qnorm(p/2,lower.tail=FALSE)`.
-
-First thing first, here are the answers for log(p) and log10(p) given z,
-```r
-# log(p) for a standard normal deviate z based on log()
-logp <- function(z) log(2)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)
-
-# log10(p) for a standard normal deviate z based on log()
-log10p <- function(z) log(2, base=10)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)/log(10)
-```
-Note `logp()` will be used for functions such as `qnorm()` as in R/gap function `cs()` whereas `log10p()` is more appropriate for Manhattan plot and used in R/gap `sentinels()`.
-
-The schematic diagram is shown below.
+Our focus is on z ~ Normal(0,1), whose schematic diagram is shown below.
 
 ```{r normal, echo=FALSE, fig.cap="Normal(0,1) distribution", fig.height=5, fig.width=9}
 library(lattice)
@@ -713,6 +701,22 @@ xyplot(b ~ a,
 )
 ```
 
+The associate R function is `z <- function(p) qnorm(p/2,lower.tail=FALSE)`.
+
+When z is very large, its corresponding p value is very small. A genomewide significance is declared at 0.05/1000000=5e-8 with Bonferroni correction assuming 1 million SNPs are tested. This short note describes how to get -log10(p), which can be used in a Q-Q plot and software such as DEPICT @pers15. The solution here is generic since z is also the square root of a chi-squared statistic, for instance.
+
+## log(p) and log10(p)
+
+First thing first, here are the answers for log(p) and log10(p) given z,
+```r
+# log(p) for a standard normal deviate z based on log()
+logp <- function(z) log(2)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)
+
+# log10(p) for a standard normal deviate z based on log()
+log10p <- function(z) log(2, base=10)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)/log(10)
+```
+Note `logp()` will be used for functions such as `qnorm()` as in R/gap function `cs()` whereas `log10p()` is more appropriate for Manhattan plot and used in R/gap `sentinels()`.
+
 ## Rationale
 
 We start with z=1.96 whose corresponding p value is approximately 0.05.
@@ -737,7 +741,7 @@ z <- 20000
 ```
 giving -log10(p) = 86858901.
 
-## p, log(p), log10(p) and the multiple precision arithmetic
+## Multiple precision arithmetic
 
 We would be curious about the p value itself as well, which is furnished with the Rmpfr package
 ```r
@@ -754,7 +758,7 @@ as.numeric(-log10(2*pnorm(mpfr(-abs(z),100),lower.tail=TRUE)))
 ```
 which actually yields exactly the same 86858901.
 
-If we go very far to have z=50000. then -log10(p)=542868107 but we have less luck with Rmpfr.
+If we go very far to have z=50,000. then -log10(p)=542868107 but we have less luck with Rmpfr.
 
 One may wonder the P value in this case, which is 6.6666145952e-542868108 or simply 6.67e-542868108.
 
@@ -797,7 +801,7 @@ for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
   v <- rbind(v,vi)
 }
 names(v) <- c("z","P","log(P)","log10(P)")
-knitr::kable(v,caption="Table 1. z,P,log(P) and log10(P)")
+knitr::kable(v,caption="z,P,log(P) and log10(P)")
 ```
 
 ## Application
@@ -812,17 +816,6 @@ In all three cases, a log10(P) counterpart is obtained internally and to accommo
 the y-axis allows for truncation leaving out a given range to highlight the largest.
 
 A plot for the GIANT data is shown here, [https://jinghuazhao.github.io/Omics-analysis/BMI/](https://jinghuazhao.github.io/Omics-analysis/BMI/).
-
-# Fine-mapping
-
-The function `cs` obtains credible set.
-```r
-# zcat METAL/4E.BP1-1.tbl.gz | \
-# awk 'NR==1 || ($1==4 && $2 >= 187158034 - 1e6 && $2 < 187158034 + 1e6)' >  4E.BP1.z
-tbl <- within(read.delim("4E.BP1.z"),{logp <- logp(Effect/StdErr)})
-z <- cs(tbl)
-l <- cs(tbl,log_p="logp")
-```
 
 # Linear regression
 
@@ -847,6 +840,7 @@ We also need some established results of a ratio (R/S)[^1], i.e., the mean
 $$
 \begin{align}
 E(R/S) \approx \frac{\mu_R}{\mu_S}-\frac{\mbox{Cov}(R,S)}{\mu_S^2}+\frac{\sigma_S^2\mu_R}{\mu_S^3} \hspace{100cm} 
+(\#eq:mean_ratio)
 \end{align}
 $$
 
@@ -857,6 +851,7 @@ $$
 \mbox{Var}(R/S) \approx \frac{\mu_R^2}{\mu_S^2} \left[
                         \frac{\sigma_R^2}{\mu_R^2} -2\frac{\mbox{Cov}(R,S)}{\mu_R\;\mu_S}
                        +\frac{\sigma_S^2}{\mu_S^2} \right] \hspace{100cm}
+(\#eq:var_ratio)
 \end{align}
 $$
 
@@ -866,15 +861,16 @@ Finally, we need some facts about $\chi_1^2$, $\chi^2$ distribution of one degre
 
 We now have the following results.
 
-## The proportion of variants explained (PVE)
+## Proportion of variance explained
 
-From above we have
+We have
 
 $$
 \begin{align}
 \mbox{PVE}_{\mbox{linear regression}} & = \frac{\mbox{Var}(b\mbox{x})}{\mbox{Var}(\mbox{y})} \hspace{100cm} \\
            & = \frac{\mbox{Var}(\mbox{x})b^2}{\mbox{Var}(\mbox{x})(b^2+N\mbox{Var}(b))} \\
            & = \frac{\mbox{z}^2}{\mbox{z}^2+N}
+(\#eq:pve_lr)
 \end{align}
 $$
 
@@ -883,6 +879,7 @@ On the other hand, for a simple linear regression $R^2\equiv r^2$ where $r$ is t
 $$
 \begin{align}
 \mbox{PVE}_{t-\mbox{statistic}} & = \frac{\chi^2}{\chi^2+N-2} \hspace{100cm}
+(\#eq:pve_t)
 \end{align}
 $$
 
@@ -910,7 +907,7 @@ Characteristics          | Linear regression | $t$-statistic
 estimate | $\sum_{i=1}^T{\frac{\chi_i^2}{\chi_i^2+N_i}}$ | $\sum_{i=1}^T{\frac{\chi_i^2}{\chi_i^2+N_i-2}}$
 variance |$\sum_{i=1}^T\frac{2}{(N_i+1)^2}$ | $\sum_{i=1}^T\frac{2}{(N_i-1)^2}$
 
-## The effect size and standard error estimates
+## Effect size and standard error
 
 When $\mbox{Var}(\mbox{y})=1$, as in cis eQTLGen data, we have $b$ and its standard error (se) as follows,
 
@@ -918,6 +915,7 @@ $$
 \begin{align}
 b & = z/d \hspace{100cm} \\ 
 se & = 1/d
+(\#eq:b_se)
 \end{align}
 $$
 
@@ -961,6 +959,17 @@ get_sdy(0.6396966,23991,0.04490488,0.009504684)
 
 and indeed the eQTLGen data were standardized.
 
+# Fine-mapping
+
+The function `cs` obtains credible set.
+```r
+# zcat METAL/4E.BP1-1.tbl.gz | \
+# awk 'NR==1 || ($1==4 && $2 >= 187158034 - 1e6 && $2 < 187158034 + 1e6)' >  4E.BP1.z
+tbl <- within(read.delim("4E.BP1.z"),{logp <- logp(Effect/StdErr)})
+z <- cs(tbl)
+l <- cs(tbl,log_p="logp")
+```
+
 # Polygenic modeling
 
 In line with the recent surge of interest in the polygenic models, a separate
@@ -971,7 +980,67 @@ Brief documentations are available for functions `h2G`, `h2GE` and `h2l`.
 
 # Mendelian randomization
 
-First, we illustrate with `mr_forestplot()`.
+## The `mr` function
+
+The function `mr` was originally developed to rework on data generated from GSMR @zhu18, although it could be any harmonised data. The following example is from analysis of a real data on LIF-R protein and CVD/FEV1.
+
+```{r mrdat, echo=FALSE}
+mrdat <- '
+ rs188743906  0.6804   0.1104  0.00177 0.01660        NA        NA
+   rs2289779 -0.0788   0.0134  0.00104 0.00261 -0.007543 0.0092258
+ rs117804300 -0.2281   0.0390 -0.00392 0.00855  0.109372 0.0362219
+   rs7033492 -0.0968   0.0147 -0.00585 0.00269  0.022793 0.0119903
+  rs10793962  0.2098   0.0212  0.00378 0.00536 -0.014567 0.0138196
+    rs635634 -0.2885   0.0153 -0.02040 0.00334  0.077157 0.0117123
+    rs176690 -0.0973   0.0142  0.00293 0.00306 -0.000007 0.0107781
+ rs147278971 -0.2336   0.0378 -0.01240 0.00792  0.079873 0.0397491
+  rs11562629  0.1155   0.0181  0.00960 0.00378 -0.010040 0.0151460
+'
+mrdat <- setNames(as.data.frame(scan(file=textConnection(mrdat), what=list("",0,0,0,0,0,0))), 
+         c("SNP", "b.LIF.R", "SE.LIF.R", "b.FEV1", "SE.FEV1", "b.CAD", "SE.CAD"))
+knitr::kable(mrdat,caption="LIF-R and CAD/FEV1")
+```
+
+The MR analysis is as follows,
+
+```{r mr, echo=FALSE, fig.cap="Mendelian randomization", fig.height=7, fig.width=7}
+res <- mr(mrdat, "LIF.R", c("CAD","FEV1"), other_plots=TRUE)
+s <- res$r[-1,]
+colnames(s) <- res$r[1,]
+r <- matrix(as.numeric(s[,-1]),nrow(s),dimnames=list(res$r[-1,1],res$r[1,-1]))
+p <- sapply(c("IVW","EGGER","WM","PWM"), function(x)
+     format(2*pnorm(-abs(r[,paste0("b",x)]/r[,paste0("seb",x)])),digits=3,scientific=TRUE))
+rp <- t(data.frame(round(r,3),p))
+knitr::kable(rp, align="r", caption="LIFR variant rs635634 and CAD/FEV1")
+```
+
+This is close to Ligthart et al. @ligthart18 as used one time at workplace which turns to overlap with TwoSampleMR @hemani18.
+
+## Contrast of effect sizes
+
+Analysis has been done upon cis, trans, cis+trans (pan) pQTLs @folkersen20, which would be of interest to contrast their effect sizes as well,
+
+```{r mr2, fig.cap="Combined forest plots for LIF.R, FEV1 and CAD", fig.height=7, fig.width=7}
+mr_names <- names(mrdat)
+LIF.R <- cbind(mrdat[grepl("SNP|LIF.R",mr_names)],trait="LIF.R"); names(LIF.R) <- c("SNP","b","se","trait")
+FEV1 <- cbind(mrdat[grepl("SNP|FEV1",mr_names)],trait="FEV1"); names(FEV1) <- c("SNP","b","se","trait")
+CAD <- cbind(mrdat[grepl("SNP|CAD",mr_names)],trait="CAD"); names(CAD) <- c("SNP","b","se","trait")
+mrdat2 <- within(rbind(LIF.R,FEV1,CAD),{y=b})
+library(ggplot2)
+p <- ggplot2::ggplot(mrdat2,aes(y = SNP, x = y))+
+     ggplot2::theme_bw()+
+     ggplot2::geom_point()+
+     ggplot2::facet_wrap(~ trait, ncol=3, scales="free_x")+
+     ggplot2::geom_segment(aes(x = b-1.96*se, xend = b+1.96*se, yend = SNP))+
+     ggplot2::geom_vline(lty=2, ggplot2::aes(xintercept=0), colour = 'red')+
+     ggplot2::xlab("Effect size")+
+     ggplot2::ylab("")
+p
+```
+
+## Forest plots
+
+We illustrate with `mr_forestplot()`,
 
 ```{r tnfb, echo=FALSE}
 tnfb <- '
@@ -994,19 +1063,21 @@ tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
         mutate(outcome=gsub("\\b(^[a-z])","\\U\\1",outcome,perl=TRUE))
 ```
 
-```{r mr_forestplot, fig.cap="Forest plots based on MR results on TNFB", fig.align="left", fig.height=8, fig.width=12, results="hide"}
-
-# default output
+```{r, fig.cap="Forest plots for MR results on TNFB", fig.align="left", fig.height=6, fig.width=9, results="hide"}
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              spacing=1.6)
-# no summary level statistics
+              spacing=1.6,digits.TE=2,digits.se=2)
+```
+
+```{r, fig.cap="Forest plots for MR results on TNFB (no summary statistics)", fig.align="left", fig.height=6, fig.width=9, results="hide"}
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
               leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
               sortvar=tnfb[["Effect"]],
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
               backtransf=TRUE, spacing=1.6)
-# with P values
+```
+
+```{r, fig.cap="Forest plots for MR results on TNFB (with P values)", fig.align="left", fig.height=6, fig.width=9, results="hide"}
 mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               leftcols=c("studlab"), leftlabs=c("Outcome"),
               plotwidth="3inch", sm="OR", sortvar=tnfb[["Effect"]],
@@ -1014,43 +1085,6 @@ mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               digits=3, digits.pval=2, scientific.pval=TRUE,
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
               addrow=TRUE, backtransf=TRUE, spacing=1.6)
-```
-
-The function `gsmr` was originally developed to rework on data generated from GSMR, although it could be any harmonised data.
-
-```{r gsmr, fig.cap="Mendelian randomization", fig.height=7, fig.width=7}
-knitr::kable(mr,caption="Table 1. LIF.R and CAD/FEV1")
-res <- gsmr(mr, "LIF.R", c("CAD","FEV1"),other_plots=TRUE)
-f <- "INF1_CAD-FEV1.csv"
-write.table(with(res,r), file=f, quote=FALSE, col.names=FALSE, row.names=FALSE, sep=",")
-top <- function(r)
-       sapply(c("IVW","EGGER","WM","PWM"), function(x) as.numeric(gap::pvalue(r[[paste0("b",x)]]/r[[paste0("seb",x)]])))
-r <- read.csv(f,as.is=TRUE)
-p <- top(r)
-knitr::kable(data.frame(r,p),caption="Table 2. LIFR variant rs635634 and CAD/FEV1",digits=3)
-unlink(f)
-```
-
-The nearest reference for the implemented approaches is Ligthart et al @ligthart18.
-
-We would be of interest to contrast their effect sizes as well,
-
-```{r gsmr2, fig.cap="Combined forest plots for LIF.R, FEV1 and CAD", fig.height=7, fig.width=7}
-mr_names <- names(mr)
-LIF.R <- cbind(mr[grepl("SNP|LIF.R",mr_names)],trait="LIF.R"); names(LIF.R) <- c("SNP","b","se","trait")
-FEV1 <- cbind(mr[grepl("SNP|FEV1",mr_names)],trait="FEV1"); names(FEV1) <- c("SNP","b","se","trait")
-CAD <- cbind(mr[grepl("SNP|CAD",mr_names)],trait="CAD"); names(CAD) <- c("SNP","b","se","trait")
-mr2 <- within(rbind(LIF.R,FEV1,CAD),{y=b})
-library(ggplot2)
-p <- ggplot(mr2,aes(y = SNP, x = y))+
-theme_bw()+
-geom_point()+
-facet_wrap(~trait,ncol=3,scales="free_x")+
-geom_segment(aes(x = b-1.96*se, xend = b+1.96*se, yend = SNP))+
-geom_vline(lty=2, aes(xintercept=0), colour = 'red')+
-xlab("Effect size")+
-ylab("")
-p
 ```
 
 # Miscellaneous functions
@@ -1127,29 +1161,28 @@ This is a function to output sample file for SNPTEST.
 d <- data.frame(ID_1=1,ID_2=1,missing=0,PC1=1,PC2=2,D1=1,P1=10)
 snptest_sample(d,C=paste0("PC",1:2),D=paste0("D",1:1),P=paste0("P",1:1))
 ```
-The commands above generates a file named ``snptest.sample.
+The commands above generates a file named `snptest.sample`.
 
-# Known bugs
+# Known issues
 
-Unaware of any bug. However, better memory management is expected. There are
-apparent issues with the Shiny interfaces for power/sample size calculation
-which produce less outputs for certain configurations than expected.
+A lot of code optimization as wtih better memory management is desirable.
+There are apparent issues with the Shiny interfaces for power/sample size
+calculation which produce less outputs for certain configurations than expected.
 
 # Summary
 
-I believe by now the package should have given you a flavour of initiatives
-I have made so far in relation to how the project was envisaged. More importantly,
-it is clear that availability of the package will serve as a platform on which 
-future work can be accumulated and collaboration can be built.
+By now the package should have given you a flavor of the project. It sets to
+build a infrastructure to keep up with the development of R system itself and
+collect elements from oning work. Over years it also serves to inspire others
+to join force and develop better alternatives.
 
-# Bibliography
+# Bibliography {-}
 
 <div id="refs"></div>
 
-# Appendix
+# Appendix {-}
 
-Assuming that you have already loaded the package via
-`library(gap)`, you can use `lsf.str("package:gap")` and 
+After package loading via `library(gap)`, you can use `lsf.str("package:gap")` and
 `data(package="gap")` to generate a list of functions and a list
 of datasets, respectvely. If this looks odd to you, you might try 
 `search()` within `R` to examine what is available in your
