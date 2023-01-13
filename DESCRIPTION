@@ -1,6 +1,6 @@
 Package: gap
-Version: 1.4-2
-Date: 2023-1-9
+Version: 1.5
+Date: 2023-1-12
 Title: Genetic Analysis Package
 Authors@R: c(person("Jing Hua", "Zhao", role = c("aut", "cre"),
                     email = "jinghuazhao@hotmail.com",
@@ -18,9 +18,9 @@ Suggests: BradleyTerry2, DiagrammeR, DOT, MASS, Matrix, MCMCglmm,
         R2jags, bdsmatrix, bookdown, calibrate, circlize, coda,
         cowplot, coxme, foreign, forestplot, genetics, grid,
         haplo.stats, htmlwidgets, jsonlite, kinship2, knitr, lattice,
-        magic, manhattanly, matrixStats, meta, metafor, mets, nlme,
-        pedigree, pedigreemm, plotrix, readr, reshape, rmarkdown,
-        rmeta, rms, survival
+        magic, manhattanly, matrixStats, meta, metafor, nlme, pedigree,
+        pedigreemm, plotrix, readr, reshape, rmarkdown, rmeta, rms,
+        survival
 VignetteBuilder: knitr
 Enhances: shiny
 Description: As first reported [Zhao, J. H. 2007. "gap: Genetic Analysis Package". J Stat Soft 23(8):1-18.
@@ -37,8 +37,8 @@ LazyLoad: Yes
 NeedsCompilation: yes
 Repository: CRAN
 Encoding: UTF-8
-Packaged: 2023-01-09 12:01:03 UTC; jhz22
-Date/Publication: 2023-01-09 18:00:02 UTC
+Packaged: 2023-01-12 11:48:01 UTC; jhz22
+Date/Publication: 2023-01-13 09:20:02 UTC
 RoxygenNote: 7.2.3
 Author: Jing Hua Zhao [aut, cre] (<https://orcid.org/0000-0002-1463-5870>,
     0000-0003-4930-3582),
