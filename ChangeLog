@@ -1,5 +1,13 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.5-1
+22-01-2023	Add rationale, @graham21 and @vosa21 for cs() together with minor changes in gap.Rmd
+		gcx.c: 49, 1209, short * to short int []
+		hap.h:37, hap_c.c: 1001, char *
+		Modify mhtplot.trunc()
+		Export several internal functions
+		Fix logp.Rd
+
 Version 1.5
 12-01-2023	Apply bookdown to shinygap.Rmd
 		Suggests mets in gap.examples instead

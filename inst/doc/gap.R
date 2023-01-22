@@ -280,7 +280,7 @@ ESplot(rs12075)
 
 ## ----forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide"----------------------------------------------------------------------
 data(OPG,package="gap.datasets")
-METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
+METAL_forestplot(OPGtbl[5:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
 
 ## ----normal, echo=FALSE, fig.cap="Normal(0,1) distribution", fig.height=5, fig.width=9--------------------------------------------------------------
 library(lattice)
@@ -315,6 +315,27 @@ for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
 }
 names(v) <- c("z","P","log(P)","log10(P)")
 knitr::kable(v,caption="z,P,log(P) and log10(P)")
+
+## ----pve, echo=FALSE, fig.cap="Comparisons of Var($R^2$) estimates", fig.height=6, fig.width=14, messages=FALSE, warning=FALSE----------------------
+oldpar <- par()
+par(mfrow=c(1,2))
+N <- 2:500
+R2 <- 2*(N-2)/(N-1)^2/(N+1)
+R2LR <- 2/(N+1)^2
+R2t <- 2/(N-1)^2
+plot(N,R2,cex=0.6,xaxt="n",xlab="Sample size",ylab=expression(Var(R^2)),col="black",pch=20)
+points(N,R2LR,cex=0.6,pch=15,col="red")
+points(N,R2t,cex=0.6,pch=17,col="blue")
+axis(1,at=c(2,(1:5)*100))
+legend(400,0.03,c("Asymptotic","LR","t-statistic"),col=c("black","red","blue"),pch=c(20,15,17))
+sLR <- (N-2)*(N+1)/(N-1)^2
+st <- (N-2)/(N+1)
+plot(N,sLR,cex=0.6,xaxt="n",xlab="Sample size",ylab="Asymptotic/approximation estimator ratio",col="red",pch=20)
+points(N,st,cex=0.6,pch=15,col="blue")
+abline(h=1,col="black")
+axis(1,at=c(2,(1:5)*100))
+legend(400,0.2,c("Asymptotic","LR","t-statistic"),col=c("black","red","blue"),pch=c(20,15,17))
+par(oldpar)
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 get_b_se(0.6396966,23991,4.7245)
@@ -409,6 +430,7 @@ mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 require(gap)
 s <- chr_pos_a1_a2(1,c(123,321),letters[1:2],letters[2:1])
+s
 inv_chr_pos_a1_a2(s)
 inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
 

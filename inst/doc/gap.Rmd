@@ -661,11 +661,11 @@ ESplot(rs12075)
 
 ## Forest plot
 
-It is possible to draw many forest plots given a list of variants; an example is given (only the first one here) here
+It draws many forest plots given a list of variants, e.g.,
 
 ```{r forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide"}
 data(OPG,package="gap.datasets")
-METAL_forestplot(OPGtbl[2:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
+METAL_forestplot(OPGtbl[5:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
 ```
 
 # Significance
@@ -835,7 +835,7 @@ We also need some established results of a ratio (R/S)[^1], i.e., the mean
 $$
 \begin{align}
 E(R/S) \approx \frac{\mu_R}{\mu_S}-\frac{\mbox{Cov}(R,S)}{\mu_S^2}+\frac{\sigma_S^2\mu_R}{\mu_S^3} \hspace{100cm} 
-(\#eq:mean_ratio)
+(\#eq:meanRatio)
 \end{align}
 $$
 
@@ -846,7 +846,7 @@ $$
 \mbox{Var}(R/S) \approx \frac{\mu_R^2}{\mu_S^2} \left[
                         \frac{\sigma_R^2}{\mu_R^2} -2\frac{\mbox{Cov}(R,S)}{\mu_R\;\mu_S}
                        +\frac{\sigma_S^2}{\mu_S^2} \right] \hspace{100cm}
-(\#eq:var_ratio)
+(\#eq:varRatio)
 \end{align}
 $$
 
@@ -865,7 +865,7 @@ $$
 \mbox{PVE}_{\mbox{linear regression}} & = \frac{\mbox{Var}(b\mbox{x})}{\mbox{Var}(\mbox{y})} \hspace{100cm} \\
            & = \frac{\mbox{Var}(\mbox{x})b^2}{\mbox{Var}(\mbox{x})(b^2+N\mbox{Var}(b))} \\
            & = \frac{\mbox{z}^2}{\mbox{z}^2+N}
-(\#eq:pve_lr)
+(\#eq:pveLR)
 \end{align}
 $$
 
@@ -874,7 +874,7 @@ On the other hand, for a simple linear regression $R^2\equiv r^2$ where $r$ is t
 $$
 \begin{align}
 \mbox{PVE}_{t-\mbox{statistic}} & = \frac{\chi^2}{\chi^2+N-2} \hspace{100cm}
-(\#eq:pve_t)
+(\#eq:pvet)
 \end{align}
 $$
 
@@ -902,15 +902,42 @@ Characteristics          | Linear regression | $t$-statistic
 estimate | $\sum_{i=1}^T{\frac{\chi_i^2}{\chi_i^2+N_i}}$ | $\sum_{i=1}^T{\frac{\chi_i^2}{\chi_i^2+N_i-2}}$
 variance |$\sum_{i=1}^T\frac{2}{(N_i+1)^2}$ | $\sum_{i=1}^T\frac{2}{(N_i-1)^2}$
 
+Therefore they differ from the asymptotic results @kotz06 by ratios of $(N-2)(N+1)/(N-1)^2$ and $(N-2)/(N+1)$ for
+linear regression and $t$-statistic, respectively.
+
+```{r pve, echo=FALSE, fig.cap="Comparisons of Var($R^2$) estimates", fig.height=6, fig.width=14, messages=FALSE, warning=FALSE}
+oldpar <- par()
+par(mfrow=c(1,2))
+N <- 2:500
+R2 <- 2*(N-2)/(N-1)^2/(N+1)
+R2LR <- 2/(N+1)^2
+R2t <- 2/(N-1)^2
+plot(N,R2,cex=0.6,xaxt="n",xlab="Sample size",ylab=expression(Var(R^2)),col="black",pch=20)
+points(N,R2LR,cex=0.6,pch=15,col="red")
+points(N,R2t,cex=0.6,pch=17,col="blue")
+axis(1,at=c(2,(1:5)*100))
+legend(400,0.03,c("Asymptotic","LR","t-statistic"),col=c("black","red","blue"),pch=c(20,15,17))
+sLR <- (N-2)*(N+1)/(N-1)^2
+st <- (N-2)/(N+1)
+plot(N,sLR,cex=0.6,xaxt="n",xlab="Sample size",ylab="Asymptotic/approximation estimator ratio",col="red",pch=20)
+points(N,st,cex=0.6,pch=15,col="blue")
+abline(h=1,col="black")
+axis(1,at=c(2,(1:5)*100))
+legend(400,0.2,c("Asymptotic","LR","t-statistic"),col=c("black","red","blue"),pch=c(20,15,17))
+par(oldpar)
+```
+
+As the sample size increases, the estimates are quite close nevertheless quite small while the ratios approach 1 quickly from opposite sides after $N\approx 300$.
+
 ## Effect size and standard error
 
-When $\mbox{Var}(\mbox{y})=1$, as in cis eQTLGen data, we have $b$ and its standard error (se) as follows,
+When $\mbox{Var}(\mbox{y})=1$, as in cis eQTLGen @vosa21 data, we have $b$ and its standard error (se) as follows,
 
 $$
 \begin{align}
 b & = z/d \hspace{100cm} \\ 
 se & = 1/d
-(\#eq:b_se)
+(\#eq:bSE)
 \end{align}
 $$
 
@@ -955,6 +982,17 @@ get_sdy(0.6396966,23991,0.04490488,0.009504684)
 and indeed the eQTLGen data were standardized.
 
 # Fine-mapping
+
+We considered a region of interest (which could be approximately independent variants,
+e.g., $r^2 \le 0.5$) using expressions that rely on effect sizes and their standard
+errors @graham21. More specifically, let Bayes factor (BF) for each variant in the
+meta-analysis be defined as $ln(BF) \propto 0.5 \beta^2/SE^2$, where $\beta$ and $SE$
+are the effect size and standard error from the meta-analysis, respectively. The
+posterior probability (PP) for being causal for a particular variant is obtained as
+$BF_i/\sum_{i=1}^TBF_i$, where $i=1,\ldots,T$ indexes all variants considered in the
+region. We generated credible sets within a given region by ranking all variants by
+PPs in descending order and calculating the number of variants required to reach a
+cumulative probability of such as 99\%.
 
 The function `cs` obtains credible set.
 ```r
@@ -1090,6 +1128,7 @@ They are functions to handle SNPid.
 ```{r}
 require(gap)
 s <- chr_pos_a1_a2(1,c(123,321),letters[1:2],letters[2:1])
+s
 inv_chr_pos_a1_a2(s)
 inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
 ```
