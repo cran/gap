@@ -37,6 +37,9 @@ The returned value are z-test and significance level for significant testing or 
 given fold change of the default sample size.
 }
 \description{
+Test/Power calculation for mediating effect
+}
+\details{
 This function tests for or obtains power of mediating effect based on estimates of
 two regression coefficients and their standard errors. Note that for binary outcome
 or mediator, one should use log-odds ratio and its standard error.
@@ -57,10 +60,7 @@ title("SNP-BMI-T2D association in EPIC-Norfolk study")
 
 }
 \references{
-Freathy RM, Timpson NJ, Lawlor DA, Pouta A, Ben-Shlomo Y, Ruokonen A, Ebrahim S, Shields B, Zeggini E, Weedon MN, 
-Lindgren CM, Lango H, Melzer D, Ferrucci L, Paolisso G, Neville MJ, Karpe F, Palmer CN, Morris AD, Elliott P, Jarvelin 
-MR, Smith GD, McCarthy MI, Hattersley AT, Frayling TM. Common variation in the FTO Gene alters diabetes-related 
-metabolic traits to the extent expected given its effect on BMI. Diabetes 57:1419-1426, 2008.
+\insertRef{freathy08}{gap}
 
 Kline RB. Principles and practice of structural equation modeling, Second Edition. The Guilford Press 2005.
 
@@ -70,7 +70,7 @@ Preacher KJ, Leonardelli GJ. Calculation for the Sobel Test-An interactive calcu
 https://quantpsy.org/sobel/sobel.htm
 }
 \seealso{
-\code{\link[gap]{ccsize}}
+\code{\link{ccsize}}
 }
 \author{
 Jing Hua Zhao

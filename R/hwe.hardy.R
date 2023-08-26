@@ -1,12 +1,13 @@
 #' Hardy-Weinberg equilibrium test using MCMC
 #'
-#' Hardy-Weinberg equilibrium test by MCMC
-#'
 #' @param a an array containing the genotype counts, as integer.
 #' @param alleles number of allele at the locus, greater than or equal to 3, as integer.
 #' @param seed pseudo-random number seed, as integer.
 #' @param sample optional, parameters for MCMC containing number of chunks,
 #'               size of a chunk and burn-in steps, as integer.
+#'
+#' @details
+#' Hardy-Weinberg equilibrium test by MCMC
 #'
 #' @note Codes are commented for taking x a genotype object, as genotype to prepare
 #' \code{a} and \code{alleles} on the fly.
@@ -14,22 +15,20 @@
 #' @export
 #' @return
 #' The returned value is a list containing:
-#' \describe{
-#'  \item{method}{Hardy-Weinberg equilibrium test using MCMC}
-#'  \item{data.name}{name of used data if \code{x} is given}
-#'  \item{p.value}{Monte Carlo p value}
-#'  \item{p.value.se}{standard error of Monte Carlo p value}
-#'  \item{switches}{percentage of switches (partial, full and altogether)}
-#' }
+#' - method Hardy-Weinberg equilibrium test using MCMC.
+#' - data.name name of used data if \code{x} is given.
+#' - p.value Monte Carlo p value.
+#' - p.value.se standard error of Monte Carlo p value.
+#' - switches percentage of switches (partial, full and altogether).
+#'
 #' @author Sun-Wei Guo, Jing Hua Zhao, Gregor Gorjanc
 #'
 #' @source https://sites.stat.washington.edu/thompson/Genepi/pangaea.shtml
 #'
 #' @references
-#' Guo, S.-W. and E. A. Thompson (1992) Performing the exact test of
-#' Hardy-Weinberg proportion for multiple alleles. Biometrics. 48:361--372.
+#' \insertRef{guo92}{gap}
 #'
-#' @seealso \code{\link[gap]{hwe}}, \code{\link[genetics]{HWE.test}}, \code{\link[genetics]{genotype}}
+#' @seealso [`hwe`], [`genetics::HWE.test`], [`genetics::genotype`]
 #'
 #' @examples
 #' \dontrun{
@@ -88,7 +87,7 @@
 #'
 #' keywords htest
 
-hwe.hardy<-function(a, alleles=3, seed=3000, sample=c(1000, 1000, 5000)) {
+hwe.hardy <- function(a, alleles=3, seed=3000, sample=c(1000, 1000, 5000)) {
 #   require(genetics)
 #    if (!missing(x)) {
 #        if (!is.genotype(x)) {

@@ -13,12 +13,15 @@ kin.morgan(ped, verbose = FALSE)
 }
 \value{
 The returned value is a list containing:
-\describe{
-\item{kin}{the kinship matrix in vector form}
-\item{kin.matrix}{the kinship matrix}
+\itemize{
+\item kin the kinship matrix in vector form.
+\item kin.matrix the kinship matrix.
 }
 }
 \description{
+kinship matrix for simple pedigree
+}
+\details{
 kinship matrix according to Morgan v2.1.
 }
 \note{
@@ -52,7 +55,7 @@ kin.morgan(werner[,1:3])
 Morgan V2.1 \url{https://sites.stat.washington.edu/thompson/Genepi/MORGAN/Morgan.shtml}
 }
 \seealso{
-\code{\link[gap]{gif}}
+\code{\link{gif}}
 }
 \author{
 Morgan development team, Jing Hua Zhao

@@ -1,10 +1,11 @@
 #' circos Manhattan plot with gene annotation
 #'
-#' The function generates circos Manhattan plot with gene annotation.
-#'
-#' @md
 #' @param data Data to be used.
 #' @param glist A gene list.
+#'
+#' @details
+#' The function generates circos Manhattan plot with gene annotation.
+#'
 #' @export
 #' @return
 #' None.
@@ -49,6 +50,6 @@ circos.mhtplot <- function(data, glist)
            color <- as.numeric(gsub("chr", "", circlize::get.current.chromosome()))
            with(cbind(region, value), circlize::circos.genomicPoints(region, -log10(value), cex=0.3, col = color))
   })
-  circlize::circos.genomicLabels(ann, labels.column = 4, side = "inside")
+  circlize::circos.genomicLabels(ann, labels.column = 4, font = 3, side = "inside")
   circlize::circos.clear()
 }

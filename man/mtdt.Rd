@@ -13,25 +13,24 @@ mtdt(x, n.sim = 0)
 }
 \value{
 It returned list contains the following components:
-\describe{
-  \item{SE}{Spielman-Ewens Chi-square from the observed data}
-  \item{ST}{Stuart or score Statistic from the observed data}
-  \item{pSE}{the simulated p value}
-  \item{sSE}{standard error of the simulated p value}
-  \item{pST}{the simulated p value}
-  \item{sST}{standard error of the simulated p value}
+\itemize{
+\item SE Spielman-Ewens Chi-square from the observed data.
+\item ST Stuart or score Statistic from the observed data.
+\item pSE the simulated p value.
+\item sSE standard error of the simulated p value.
+\item pST the simulated p value.
+\item sST standard error of the simulated p value.
 }
 }
 \description{
-This function calculates transmission-disequilibrium statistics involving multiallelic marker.
+Transmission/disequilibrium test of a multiallelic marker
 }
 \details{
+This function calculates transmission-disequilibrium statistics involving multiallelic marker.
 Inside the function are tril and triu used to obtain lower and upper triangular matrices.
 }
 \examples{
 \dontrun{
-# Copeman et al (1995) Nat Genet 9: 80-5
-
 x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
               0,0, 1, 3, 0,0, 0, 2, 3, 0, 0, 0,
               2,3,26,35, 7,0, 2,10,11, 3, 4, 1,
@@ -52,21 +51,16 @@ mtdt(x)
 
 }
 \references{
-Miller MB (1997) Genomic scanning and the transmission/disequilibrium test: 
-analysis of error rates. Genet. Epidemiol. 14:851-856
+\insertRef{miller97}{gap}
 
-Sham PC (1997) Transmission/disequilibrium tests for multiallelic loci. 
-Am. J. Hum. Genet. 61:774-778
+\insertRef{sham95}{gap}
 
-Spielman RS, Ewens WJ (1996) The TDT and other family-based tests for
-linkage disequilibrium and association. Am. J. Hum. Genet. 59:983-989
+\insertRef{spielman96}{gap}
 
-Zhao JH, Sham PC, Curtis D (1999) A program for the Monte Carlo evaluation 
-of significance of the extended transmission/disequilibrium test. 
-Am. J. Hum. Genet. 64:1484-1485
+\insertRef{zhao99}{gap}
 }
 \seealso{
-{\code{\link[gap]{bt}}}
+\code{\link{bt}}
 }
 \author{
 Mike Miller, Jing Hua Zhao

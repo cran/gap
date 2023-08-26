@@ -17,15 +17,18 @@ b2r(b, s, rho, n)
 }
 \value{
 The returned value is a list containing:
-\describe{
-\item{r}{the vector of correlation coefficients}
-\item{V}{the variance-covariance matrix of correlations}
+\itemize{
+\item r the vector of correlation coefficients.
+\item V the variance-covariance matrix of correlations.
 }
 }
 \description{
+Obtain correlation coefficients and their variance-covariances
+}
+\details{
 This function converts linear regression coefficients of phenotype on
 single nucleotide polymorphisms (SNPs) into Pearson correlation coefficients
-with their variance-covariance matrix. It is useful as a preliminary step 
+with their variance-covariance matrix. It is useful as a preliminary step
 for meta-analyze SNP-trait associations at a given region. Between-SNP
 correlations (e.g., from HapMap) are required as auxiliary information.
 }
@@ -40,16 +43,14 @@ bs <- b2r(b,s,r,n)
 
 }
 \references{
-Becker BJ (2004). Multivariate meta-analysis. in Tinsley HEA,
-Brown SD (Ed.) Handbook of Applied Multivariate Statistics and
-Mathematical Modeling (Chapter 17, pp499-525). Academic Press.
+\insertRef{elston75}{gap}
 
-Casella G, Berger RL (2002). Statistical Inference, 2nd Edition, Duxbury.
+\insertRef{becker00}{gap}
 
-Elston RC (1975). On the correlation between correlations. Biometrika 62:133-40
+\insertRef{casella02}{gap}
 }
 \seealso{
-\code{\link[gap]{mvmeta}}, \code{\link[gap]{LD22}}
+\code{\link{mvmeta}}, \code{\link{LD22}}
 }
 \author{
 Jing Hua Zhao

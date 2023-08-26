@@ -250,6 +250,7 @@ labs <- subset(testdat,gene %in% glist) %>%
         summarize() %>%
         mutate(cols="blue") %>%
         select(chr,start,end,gene,cols)
+labs[2,"cols"] <- "red"
 circos.mhtplot2(dat,labs,ticks=0:2*10)
 
 ## ----miami, fig.cap="Miami plots", fig.height=7, fig.width=7----------------------------------------------------------------------------------------
@@ -278,9 +279,13 @@ rs12075 <- data.frame(id=c("CCL2","CCL7","CCL8","CCL11","CCL13","CXCL6","Monocyt
                       se=c(0.0113,0.013,0.0116,0.0114,0.0114,0.0115,0.00713386))
 ESplot(rs12075)
 
-## ----forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide"----------------------------------------------------------------------
+## ----forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide", warning=FALSE-------------------------------------------------------
 data(OPG,package="gap.datasets")
-METAL_forestplot(OPGtbl[5:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
+meta::settings.meta(method.tau="DL")
+METAL_forestplot(OPGtbl,OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2,
+                 col.diamond="black",col.inside="black",col.square="black")
+METAL_forestplot(OPGtbl,OPGall,OPGrsid,package="metafor",method="FE",xlab="Effect",
+                 showweights=TRUE)
 
 ## ----normal, echo=FALSE, fig.cap="Normal(0,1) distribution", fig.height=5, fig.width=9--------------------------------------------------------------
 library(lattice)
@@ -409,14 +414,14 @@ tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
 ## ---- fig.cap="Forest plots for MR results on TNFB", fig.align="left", fig.height=6, fig.width=9, results="hide"------------------------------------
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              spacing=1.6,digits.TE=2,digits.se=2)
+              spacing=1.6,digits.TE=2,digits.se=2,xlab="Effect size",type.study="square",col.inside="black",col.square="black")
 
 ## ---- fig.cap="Forest plots for MR results on TNFB (no summary statistics)", fig.align="left", fig.height=6, fig.width=9, results="hide"------------
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
               leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
               sortvar=tnfb[["Effect"]],
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              backtransf=TRUE, spacing=1.6)
+              backtransf=TRUE, spacing=1.6,type.study="square",col.inside="black",col.square="black")
 
 ## ---- fig.cap="Forest plots for MR results on TNFB (with P values)", fig.align="left", fig.height=6, fig.width=9, results="hide"--------------------
 mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
@@ -425,7 +430,7 @@ mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               rightcols=c("effect","ci","pval"), rightlabs=c("OR","95%CI","P"),
               digits=3, digits.pval=2, scientific.pval=TRUE,
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              addrow=TRUE, backtransf=TRUE, spacing=1.6)
+              addrow=TRUE, backtransf=TRUE, spacing=1.6,type.study="square",col.inside="black",col.square="black")
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 require(gap)
@@ -435,12 +440,25 @@ inv_chr_pos_a1_a2(s)
 inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
-gc.lambda <- function(p) {
-  p <- p[!is.na(p)]
-  n <- length(p)
+example(ci2ms)
 
-  obs <- qchisq(p,1,lower.tail=FALSE)
-  exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+## ---------------------------------------------------------------------------------------------------------------------------------------------------
+gc.lambda <- function(x, logscale=FALSE, z=FALSE) {
+  v <- x[!is.na(x)]
+  n <- length(v)
+  if (z) {
+     obs <- v^2
+     exp <- qchisq(log(1:n/n),1,lower.tail=FALSE,log.p=TRUE)
+  } else {
+    if (!logscale)
+    {
+      obs <- qchisq(v,1,lower.tail=FALSE)
+      exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+    } else {
+      obs <- qchisq(-log(10)*v,1,lower.tail=FALSE,log.p=TRUE)
+      exp <- qchisq(log(1:n/n),1,lower.tail=FALSE,log.p=TRUE)
+    }
+  }
 
   lambda <- median(obs)/median(exp)
   return(lambda)

@@ -13,15 +13,18 @@ s2k(y1, y2)
 }
 \value{
 The returned value is a list containing:
-\describe{
-\item{x2a}{the one-to-other chisquare.}
-\item{x2b}{the maximum accumulated chisquare.}
-\item{col1}{the column index for x2a.}
-\item{col2}{the column index for x2b.}
-\item{p}{the corresponding p value.}
+\itemize{
+\item x2a the one-to-other chisquare.
+\item x2b the maximum accumulated chisquare.
+\item col1 the column index for x2a.
+\item col2 the column index for x2b.
+\item p the corresponding p value.
 }
 }
 \description{
+Statistics for 2 by K table
+}
+\details{
 This function calculates one-to-others and maximum accumulated chi-squared
 statistics for a 2 by K contingency table.
 }
@@ -39,9 +42,7 @@ result <- s2k(y1,y2)
 }
 }
 \references{
-Hirotsu C, Aoki S, Inada T, Kitao Y (2001) An exact test for the association 
-between the disease and alleles at highly polymorphic loci with particular interest 
-in the haplotype analysis. Biometrics 57:769-778
+\insertRef{hirotsu01}{gap}
 }
 \author{
 Chihiro Hirotsu, Jing Hua Zhao

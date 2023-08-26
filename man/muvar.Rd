@@ -28,7 +28,10 @@ Currently it does not return any value except screen output; the results can be 
 command or via modifying the C/R codes.
 }
 \description{
-Function muvar() gives means and variances under 1-locus and 2-locus QTL model (simple); 
+Means and variances under 1- and 2- locus (biallelic) QTL model
+}
+\details{
+Function muvar() gives means and variances under 1-locus and 2-locus QTL model (simple);
 in the latter case it gives results from different avenues. This function is included for
 experimental purpose and yet to be generalized.
 }
@@ -46,7 +49,7 @@ muvar(n.loci=2,y12=c(1,1,1,1,1,0,0,0,0),p1=0.99,p2=0.9)
 
 }
 \references{
-Sham P (1998). Statistics in Human Genetics. Arnold
+\insertRef{sham97}{gap}
 }
 \author{
 Jing Hua Zhao

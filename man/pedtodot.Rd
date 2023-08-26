@@ -17,7 +17,7 @@ pedtodot(
 )
 }
 \arguments{
-\item{pedfile}{a pedigree file in GAS or LINKAGE format, note if 
+\item{pedfile}{a pedigree file in GAS or LINKAGE format, note if
 individual's ID is character then it is necessary to specify as.is=T
 in the read.table command.}
 
@@ -25,7 +25,7 @@ in the read.table command.}
 
 \item{sink}{a logical variable indicating if .dot file(s) are created.}
 
-\item{page}{a string indicating the page size, e.g, A4, A5, B5, Legal, Letter, 
+\item{page}{a string indicating the page size, e.g, A4, A5, B5, Legal, Letter,
 Executive, "x,y", where x, y is the customized page size.}
 
 \item{url}{Unified Resource Locator (URL) associated with the diagram(s).}
@@ -44,23 +44,28 @@ For each pedigree, the function generates a .dot file to be used by dot. The
 collection of all pedigrees (*.dot) can also be put together.
 }
 \description{
+Converting pedigree(s) to dot file(s)
+}
+\details{
 This function converts GAS or LINKAGE formatted pedigree(s) into .dot file
 for each pedigree to be used by dot in graphviz, which is a flexible package
 for graphics freely available.
-}
-\details{
-Note that a single PostScript (PDF) file can be obtainaed by dot, fdp, 
-or neato.
 
-dot -Tps <dot file> -o <ps file>  
+Note that a single PostScript (PDF) file can be obtainaed by \code{dot}, \code{fdp},
+or \code{neato}.
 
-or
-
-fdp -Tps <dot file> -o <ps file>  
+\if{html}{\out{<div class="sourceCode">}}\preformatted{dot -Tps <dot file> -o <ps file>
+}\if{html}{\out{</div>}}
 
 or
 
-neato -Tps <dot file> -o <ps file>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fdp -Tps <dot file> -o <ps file>
+}\if{html}{\out{</div>}}
+
+or
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{neato -Tps <dot file> -o <ps file>
+}\if{html}{\out{</div>}}
 
 See relevant documentations for other formats.
 
@@ -70,20 +75,22 @@ examples at the end of this document.
 Under Cygwin/Linux/Unix, the PostScript file can be converted to Portable
 Document Format (PDF) default to Acrobat.
 
-ps2pdf <ps file>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ps2pdf <ps file>
+}\if{html}{\out{</div>}}
 
-Use ps2pdf12, ps2pdf13, or ps2pdf14 for appropriate versions of Acrobat
-according to information given on the headline of <ps file>.
+Use \code{ps2pdf12}, \code{ps2pdf13}, or \code{ps2pdf14} for appropriate versions of Acrobat
+according to information given on the headline of \verb{<ps file>}.
 
 Under Linux, you can also visualize the .dot file directly via command,
 
-dotty <dot file> &
+\if{html}{\out{<div class="sourceCode">}}\preformatted{dotty <dot file> &
+}\if{html}{\out{</div>}}
 
+We can extract the code below (or within \code{pedtodot.Rd}) to pedtodot and then
+use command:
 
-We can extract the code below (or within pedtodot.Rd) to pedtodot and then
-use command: 
-
-sh pedtodot <pedigree file>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{sh pedtodot <pedigree file>
+}\if{html}{\out{</div>}}
 }
 \note{
 This is based on the gawk script program pedtodot by David Duffy with minor changes.

@@ -4,7 +4,15 @@
 \alias{METAL_forestplot}
 \title{forest plot as R/meta's forest for METAL outputs}
 \usage{
-METAL_forestplot(tbl, all, rsid, package = "meta", split = FALSE, ...)
+METAL_forestplot(
+  tbl,
+  all,
+  rsid,
+  package = "meta",
+  method = "REML",
+  split = FALSE,
+  ...
+)
 }
 \arguments{
 \item{tbl}{Meta-anslysis summary statistics.}
@@ -13,26 +21,31 @@ METAL_forestplot(tbl, all, rsid, package = "meta", split = FALSE, ...)
 
 \item{rsid}{SNPID-rsid mapping file.}
 
-\item{package}{style of plot as in meta, rmeta or forestplot.}
+\item{package}{"meta" or "metafor" package.}
+
+\item{method}{an explcit flag for fixed/random effects model.}
 
 \item{split}{when TRUE, individual prot-MarkerName.pdf will be generated.}
 
-\item{...}{Additional arguments to meta::forest.}
+\item{...}{Additional arguments to \code{meta::forest} or \code{metafor::forest}.}
 }
 \value{
 It will generate a forest plot specified by pdf for direction-adjusted effect sizes.
 }
 \description{
+forest plot as R/meta's forest for METAL outputs
+}
+\details{
 This functions takes a meta-data from METAL (tbl) and data from contributing studies (all)
 for forest plot. It also takes a SNPID-rsid mapping (rsid) as contributing studies often
 involve discrepancies in rsid so it is appropriate to use SNPID, i.e., chr:pos_A1_A2 (A1<=A2).
-}
-\details{
-The study-specific and total sample sizes (N) can be customised from METAL commands. By default, the input triplets each contain
-a `MarkerName` variable which is the unique SNP identifier (e.g., chr:pos:a1:a2) and the `tbl` argument has variables
-`A1` and `A2` as produced by METAL while the `all` argument has `EFFECT_ALLELE` and `REFERENCE_ALLELE` as with a `study` variable
-indicating study name. Another variable common the `tbl` and `all` is `prot` variable as the function was developed in a protein
-based meta-analysis. From these all information is in place for generation of a list of Forest plots through a batch run.
+
+The study-specific and total sample sizes (\code{N}) can be customised from METAL commands. By default, the input triplets each contain
+a \code{MarkerName} variable which is the unique SNP identifier (e.g., chr:pos:a1:a2) and the \code{tbl} argument has variables
+\code{A1} and \code{A2} as produced by METAL while the \code{all} argument has \code{EFFECT_ALLELE} and \code{REFERENCE_ALLELE} as with a \code{study} variable
+indicating study name. Another variable common the \code{tbl} and \code{all} is \code{prot} variable as the function was developed in a protein
+based meta-analysis. As noted above, the documentation example also has variable \code{N}.
+From these all information is in place for generation of a list of forest plots through a batch run.
 
 CUSTOMVARIABLE N\cr
 LABEL N as N\cr
@@ -40,21 +53,19 @@ WEIGHTLABEL N
 }
 \examples{
 \dontrun{
- require(gap.datasets)
- data(OPG)
- METAL_forestplot(OPGtbl,OPGall,OPGrsid,width=8.75,height=5,digits.TE=2,digits.se=2)
+ data(OPG, package="gap.datasets")
+ meta::settings.meta(method.tau="DL")
+ METAL_forestplot(OPGtbl,OPGall,OPGrsid,width=8.75,height=5,digits.TE=2,digits.se=2,
+                  col.diamond="black",col.inside="black",col.square="black")
+ METAL_forestplot(OPGtbl,OPGall,OPGrsid,package="metafor",method="FE",xlab="Effect",
+                  showweights=TRUE)
 }
 
 }
 \references{
-Scharzer G. (2007). meta: An R package for meta-analysis. R News, 7:40-5, https://cran.r-project.org/doc/Rnews/Rnews_2007-3.pdf, 
-https://CRAN.R-project.org/package=meta.
+\insertRef{schwarzer07}{gap}
 
-Willer CJ, Li Y, Abecasis GR. (2010). METAL: fast and efficient meta-analysis of genomewideassociation scans. Bioinformations. 26:2190-1,
-https://github.com/statgen/METAL, https://genome.sph.umich.edu/wiki/METAL.
-}
-\seealso{
-\code{\link[gap]{METAL_forestplot}}
+\insertRef{willer10}{gap}
 }
 \author{
 Jing Hua Zhao

@@ -1,44 +1,34 @@
 #' Transmission/disequilibrium test of a multiallelic marker by Bradley-Terry model
 #'
-#' This function calculates transmission-disequilibrium statistics involving
-#' multiallelic marker according to Bradley-Terry model.
-#'
 #' @param x the data table.
 #' @param verbose To print out test statistics if TRUE.
 #' @param n.sim Number of simulations.
 #' @param ... other options compatible with the BTm function.
 #'
+#' @details
+#' This function calculates transmission-disequilibrium statistics involving
+#' multiallelic marker according to Bradley-Terry model.
+#'
 #' @export
 #' @return
 #' It returned list contains the following components:
-#' \describe{
-#'  \item{c2b}{A data frame in four-column format showing transmitted vs nontransmitted counts.}
-#'  \item{BTm}{A fitted Bradley-Terry model object.}
-#'  \item{X2}{Allele-wise, genotype-wise and goodness-of-fit Chi-squared statistics.}
-#'  \item{df}{Degrees of freedom.}
-#'  \item{p}{P value.}
-#'  \item{pn}{Monte Carlo p values when n.sim is specified.}
-#' }
+#' - c2b A data frame in four-column format showing transmitted vs nontransmitted counts.
+#' - BTm A fitted Bradley-Terry model object.
+#' - X2 Allele-wise, genotype-wise and goodness-of-fit Chi-squared statistics.
+#' - df Degrees of freedom.
+#' - p P value.
+#' - pn Monte Carlo p values when n.sim is specified.
 #'
 #' @references
-#' Firth, D. (2005). Bradley-terry models in R. Journal of Statistical Software 12(1):1-12
-#'
-#' Sham PC, Curtis D (1995) An extended transmission/disequilibrium
-#' test (TDT) for multi-allelic marker loci. Ann. Hum. Genet. 59:323-336
+#' \insertRef{firth05}{gap}
 #'
 #' Turner H, Firth D (2010) Bradley-Terry models in R: The BradleyTerry2 package.
 #' https://cran.r-project.org/web/packages/BradleyTerry2/vignettes/BradleyTerry.pdf.
 #'
-#' Zhao JH, Sham PC, Curtis D (1999) A program for the Monte Carlo evaluation
-#' of significance of the extended transmission/disequilibrium test.
-#' Am. J. Hum. Genet. 64:1484-1485
-#'
-#' @seealso \code{\link[gap]{mtdt}}
+#' @seealso [`mtdt`]
 #'
 #' @examples
 #' \dontrun{
-#' # Copeman et al (1995) Nat Genet 9: 80-5
-#'
 #' x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
 #'               0,0, 1, 3, 0,0, 0, 2, 3, 0, 0, 0,
 #'               2,3,26,35, 7,0, 2,10,11, 3, 4, 1,

@@ -1,4 +1,5 @@
-# 1-3-2008, MRC-Epid, JHZ
+#' A normal z-test of two proportions
+#' @noRd
 
 z <- function(p1,p2,n1,n2,r)
 {
@@ -6,6 +7,9 @@ z <- function(p1,p2,n1,n2,r)
    z.var <- p1*(1-p1)/n1+p2*(1-p2)/n2
    invisible(z.mean/sqrt(z.var/(2*r)))
 }
+
+#' A function used by tscc
+#' @noRd
 
 solve_skol <- function(rootfun,target,lo,hi,e)
 {
@@ -33,6 +37,18 @@ solve_skol <- function(rootfun,target,lo,hi,e)
 
 #' Power calculation for two-stage case-control design
 #'
+#' @param model any in c("multiplicative","additive","dominant","recessive").
+#' @param GRR genotype relative risk.
+#' @param p1 the estimated risk allele frequency in cases.
+#' @param n1 total number of cases.
+#' @param n2 total number of controls.
+#' @param M total number of markers.
+#' @param alpha.genome false positive rate at genome level.
+#' @param pi.samples sample% to be genotyped at stage 1.
+#' @param pi.markers markers% to be selected (also used as the false positive rate at stage 1).
+#' @param K the population prevalence.
+#'
+#' @details
 #' This function gives power estimates for two-stage case-control design for genetic association.
 #'
 #' The false positive rates are calculated as follows,
@@ -45,41 +61,26 @@ solve_skol <- function(rootfun,target,lo,hi,e)
 #' \deqn{z2 = z(p1,p2,n1,n2,1-pi.samples)}
 #' \deqn{zj = sqrt(pi.samples)*z1+sqrt(1-pi.samples)*z2}
 #'
-#' @param model any in c("multiplicative","additive","dominant","recessive").
-#' @param GRR genotype relative risk.
-#' @param p1 the estimated risk allele frequency in cases.
-#' @param n1 total number of cases.
-#' @param n2 total number of controls.
-#' @param M total number of markers.
-#' @param alpha.genome false positive rate at genome level.
-#' @param pi.samples sample\% to be genotyped at stage 1.
-#' @param pi.markers markers\% to be selected (also used as the false positive rate at stage 1).
-#' @param K the population prevalence.
-#'
 #' @export
 #' @return
 #' The returned value is a list containing a copy of the input plus output as follows,
-#' \describe{
-#'  \item{model}{any in c("multiplicative","additive","dominant","recessive").}
-#'  \item{GRR}{genotype relative risk.}
-#'  \item{p1}{the estimated risk allele frequency in cases.}
-#'  \item{pprime}{expected risk allele frequency in cases.}
-#'  \item{p}{expected risk allele frequency in controls.}
-#'  \item{n1}{total number of cases.}
-#'  \item{n2}{total number of controls.}
-#'  \item{M}{total number of markers.}
-#'  \item{alpha.genome}{false positive rate at genome level.}
-#'  \item{pi.samples}{sample\% to be genotyped at stage 1.}
-#'  \item{pi.markers}{markers\% to be selected (also used as the false positive rate at stage 1).}
-#'  \item{K}{the population prevalence.}
-#'  \item{C}{threshoulds for no stage, stage 1, stage 2, joint analysis.}
-#'  \item{power}{power corresponding to C.}
-#' }
+#' - model any in c("multiplicative","additive","dominant","recessive").
+#' - GRR genotype relative risk.
+#' - p1 the estimated risk allele frequency in cases.
+#' - pprime expected risk allele frequency in cases.
+#' - p expected risk allele frequency in controls.
+#' - n1 total number of cases.
+#' - n2 total number of controls.
+#' - M total number of markers.
+#' - alpha.genome false positive rate at genome level.
+#' - pi.samples sample% to be genotyped at stage 1.
+#' - pi.markers markers% to be selected (also used as the false positive rate at stage 1).
+#' - K the population prevalence.
+#' - C threshoulds for no stage, stage 1, stage 2, joint analysis.
+#' - power power corresponding to C.
 #'
 #' @references
-#' Skol AD, Scott LJ, Abecasis GR, Boehkne M (2006).
-#' Joint analysis in more efficient than replication-based aalysis for two-stage
-#' genome-wide association studies. Nature Genetics 38:209-213
+#' \insertRef{skol06}{gap}
 #'
 #' @examples
 #' \dontrun{
@@ -95,7 +96,7 @@ solve_skol <- function(rootfun,target,lo,hi,e)
 #' pi.markers <- 0.1
 #'
 #' options(echo=FALSE)
-#' cat("sample\%,marker\%,GRR,(thresholds x 4)(power estimates x 4)","\n")
+#' cat("sample%,marker%,GRR,(thresholds x 4)(power estimates x 4)","\n")
 #' for(GRR in c(1.3,1.35,1.40))
 #' {
 #'    cat("\n")
@@ -108,7 +109,7 @@ solve_skol <- function(rootfun,target,lo,hi,e)
 #'         x <- tscc("multiplicative",GRR,p1,n1,n2,M,alpha.genome,
 #'                   pi.samples,pi.markers,K)
 #'         l <- c(pi.samples,pi.markers,GRR,x$C,x$power)
-#'         l <- sprintf("\%.2f \%.2f \%.2f, \%.2f \%.2f \%.2f \%.2f, \%.2f \%.2f \%.2f \%.2f",
+#'         l <- sprintf("%.2f %.2f %.2f, %.2f %.2f %.2f %.2f, %.2f %.2f %.2f %.2f",
 #'                      l[1],l[2],l[3],l[4],l[5],l[6],l[7],l[8],l[9],l[10],l[11])
 #'         cat(l,"\n")
 #'       }
@@ -118,7 +119,7 @@ solve_skol <- function(rootfun,target,lo,hi,e)
 #' options(echo=TRUE)
 #' }
 #' @author Jing Hua Zhao
-#' @note solve.skol is adapted from CaTS.
+#' @note `solve.skol` is adapted from CaTS.
 #' @keywords misc
 
 tscc <- function(model,GRR,p1,n1,n2,M,alpha.genome,pi.samples,pi.markers,K)

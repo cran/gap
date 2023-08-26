@@ -28,17 +28,19 @@ hap(
 }
 \value{
 The returned value is a list containing:
-\describe{
-\item{l1}{log-likelihood assuming linkage disequilibrium}
-\item{converge}{convergence status, 0=failed, 1=succeeded}
-\item{niter}{number of iterations}
+\itemize{
+\item l1 log-likelihood assuming linkage disequilibrium.
+\item converge convergence status, 0=failed, 1=succeeded.
+\item niter number of iterations.
 }
 }
 \description{
-Haplotype reconstruction using sorting and trimming algorithms.
+Haplotype reconstruction
 }
 \details{
-The package can hanlde much larger number of multiallelic loci. 
+Haplotype reconstruction using sorting and trimming algorithms.
+
+The package can hanlde much larger number of multiallelic loci.
 For large sample size with relatively small number of multiallelic
 loci, genecounting should be used.
 }
@@ -66,10 +68,9 @@ Clayton DG (2001) SNPHAP. https://github.com/chr1swallace/snphap.
 Zhao JH and W Qian (2003) Association analysis of unrelated individuals
 using polymorphic genetic markers. RSS 2003, Hassalt, Belgium
 
-Zhao JH (2004). 2LD, GENECOUNTING and HAP: Computer programs for linkage
-disequilibrium analysis. Bioinformatics 20: 1325-1326
+\insertRef{zhao04}{gap}
 }
 \seealso{
-\code{\link[gap]{genecounting}}
+\code{\link{genecounting}}
 }
 \keyword{models}

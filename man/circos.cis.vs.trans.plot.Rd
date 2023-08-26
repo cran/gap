@@ -19,10 +19,13 @@ circos.cis.vs.trans.plot(hits, panel, id, radius = 1e+06)
 None.
 }
 \description{
+circos plot of cis/trans classification
+}
+\details{
 The function implements a circos plot at the early stage of SCALLOP-INF meta-analysis.
 }
 \examples{
 \dontrun{
-  circos.cis.vs.trans.plot(hits="INF1.clumped", panel=inf1, id="uniprot")
+  circos.cis.vs.trans.plot(hits="INF1.merge", panel=inf1, id="uniprot")
 }
 }

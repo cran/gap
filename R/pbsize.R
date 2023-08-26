@@ -1,28 +1,30 @@
 #' Power for population-based association design
 #'
-#' This function implements Long et al. (1997) statistics for population-based association
-#' design. This is based on a contingency table test and accurate level of significance can be
-#' obtained by Fisher's exact test.
-#'
 #' @param kp population disease prevalence.
 #' @param gamma genotype relative risk assuming multiplicative model.
 #' @param p frequency of disease allele.
 #' @param alpha type I error rate.
 #' @param beta type II error rate.
 #'
+#' @details
+#' This function implements \insertCite{sph97;textual}{gap} statistics for population-based
+#' association design. This is based on a contingency table test and accurate level of
+#' significance can be obtained by Fisher's exact test.
+#'
 #' @export
-#' @return The returned value is scaler containing the required sample size.
+#' @return
+#' The returned value is scaler containing the required sample size.
 #'
 #' @references
-#' Scott WK, Pericak-Vance MA, et al. (1997). Genetic analysis of complex diseases. Science 275: 1327.
+#' \insertAllCited{}
 #'		
 #' Long AD, Grote MN, Langley CH (1997). Genetic analysis of complex traits. Science 275: 1328.
 #'
-#' Rosner B (2000). Fundamentals of Biostatistics, 5th Edition, Duxbury.
+#' \insertRef{rosner00}{gap}
 #'
-#' Armitage P, Colton T (2005). Encyclopedia of Biostatistics, 2nd Edition, Wiley.
+#' \insertRef{armitage05}{gap}
 #'
-#' @seealso \code{\link[gap]{fbsize}}
+#' @seealso [`fbsize`]
 #'
 #' @examples
 #' kp <- c(0.01,0.05,0.10,0.2)

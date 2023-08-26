@@ -13,16 +13,19 @@ pfc(famdata, enum = 0)
 }
 \value{
 The returned value is a list containing (tailp,sump,nenum are only available if enum=1:
-\describe{
-  \item{p}{the probabitly of familial clustering}
-  \item{stat}{the deviances, chi-squares based on binomial and hypergeometric distributions, 
- the degrees of freedom should take into account the number of marginals used}
-  \item{tailp}{the exact statistical significance}
-  \item{sump}{sum of the probabilities used for error checking}
-  \item{nenum}{the total number of tables enumerated}
+\itemize{
+\item p the probabitly of familial clustering.
+\item stat the deviances, chi-squares based on binomial and hypergeometric distributions,
+the degrees of freedom should take into account the number of marginals used.
+\item tailp the exact statistical significance.
+\item sump sum of the probabilities used for error checking.
+\item nenum the total number of tables enumerated.
 }
 }
 \description{
+Probability of familial clustering of disease
+}
+\details{
 To calculate exact probability of familial clustering of disease
 }
 \note{
@@ -59,14 +62,12 @@ famp<-pfc(test)
 
 }
 \references{
-Yu C, Zelterman D (2001) Exact inference for family disease clusters. Commun Stat -- Theory
-Meth 30:2293-2305
+\insertRef{yu01}{gap}
 
-Yu C, Zelterman D (2002) Statistical inference for familial disease clusters. Biometrics
-58:481-491
+\insertRef{yu02}{gap}
 }
 \seealso{
-\code{\link[gap]{kin.morgan}}
+\code{\link{kin.morgan}}
 }
 \author{
 Dani Zelterman, Jing Hua Zhao

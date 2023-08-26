@@ -1,7 +1,6 @@
 #' Genetic analysis package
 #'
-#' As first reported [Zhao, J. H. 2007. "gap: Genetic Analysis Package". JSS 23(8):1-18.
-#' \doi{10.18637/jss.v023.i08}], it is designed as an integrated package for genetic data
+#' As is first reported, it is designed as an integrated package for genetic data
 #' analysis of both population and family data. Currently, it contains functions for
 #' sample size calculations of both population-based and family-based designs, probability
 #' of familial disease aggregation, kinship calculation, statistics in linkage analysis,
@@ -10,21 +9,8 @@
 #' many projects hence also in line with the name (gap).
 #'
 #' @details
-#' \tabular{ll}{
-#' Package: \tab gap\cr
-#' Version: \tab 1.5-1\cr
-#' Depends: \tab R(>= 2.1.0)\cr
-#' Imports: \tab dplyr, ggplot2, plotly \cr
-#' Suggests: \tab BradleyTerry2, MASS, Matrix, MCMCglmm, R2jags, bdsmatrix, bookdown, \cr
-#'           \tab calibrate, circlize, coda, cowplot, coxme, dplyr, foreign, forestplot, \cr
-#'           \tab gap.datasets, ggplot2, grid, haplo.stats, htmlwidgets, kinship2, lattice, \cr
-#'           \tab magic, matrixStats, meta, metafor, nlme, pedigree, pedigreemm,\cr
-#'           \tab plotrix, qqman, regress, reshape, rmarkdown, rmeta, rms, survival \cr
-#' License: \tab GPL (>=2)\cr
-#' URL: \tab https://jinghuazhao.github.io/R\cr
-#' }
+#' We have incorporated functions for a wide range of problems as shown below.
 #'
-#' Index:
 #' \tabular{ll}{
 #' \cr
 #' \strong{ANALYSIS}\cr
@@ -113,6 +99,7 @@
 #' b2r               \tab      Obtain correlation coefficients and their variance-covariances\cr
 #' chow.test         \tab      Chow's test for heterogeneity in two regressions\cr
 #' chr_pos_a1_a2     \tab      Form SNPID from chromosome, posistion and alleles\cr
+#' ci2ms             \tab      Effect size and standard error from confidence interval\cr
 #' cis.vs.trans.classification \tab a cis/trans classifier\cr
 #' comp.score        \tab      score statistics for testing genetic linkage of quantitative trait\cr
 #' GRM functions     \tab      ReadGRM, ReadGRMBin, ReadGRMPLINK, ReadGRMPCA, WriteGRM,\cr
@@ -142,32 +129,39 @@
 #' \cr
 #' }
 #'
-#' @details
-#' We have incorporated functions for a wide range of problems. Nevertheless,
-#' this largely remains as a preliminary work to be consolidated in the
-#' near future.
+#' @section Usage:
+#' Vignettes on package usage:
+#' - Genetic Analysis Package. `vignette("gap")`.
+#' - Shiny for Genetic Analysis Package (gap) Designs. `vignette("shinygap")`.
+#' - JSS paper: Genetic Analysis Package. `vignette("jss")`.
 #'
-#' @useDynLib gap
-#' @author Jing Hua Zhao in collaboration with other colleagues, and with
-#'         help from Kurt Hornik and Brian Ripley of the R core development team
-#' 
-#' maitained by Jing Hua Zhao <jinghuazhao@hotmail.com>
+#' @docType package
+#' @name gap
+#' @aliases gap-package
 #'
 #' @import dplyr gap.datasets
-#' @importFrom grDevices palette xy.coords
+#' @importFrom grDevices dev.off palette pdf xy.coords
 #' @importFrom graphics abline arrows axis box boxplot
 #'             identify legend lines mtext par points
 #'             segments text title
 #' @importFrom stats as.formula coef coefficients cor
-#'             dnorm glm integrate lm median nlm
-#'             pchisq pf pnorm ppoints pt qchisq qnorm
+#'             complete.cases dnorm glm integrate lm median
+#'             nlm pchisq pf pnorm ppoints pt qchisq qnorm
 #'             qqplot qt quantile rbinom rexp rnorm
-#'             runif sd var
+#'             runif sd setNames var
 #' @importFrom utils data head packageDescription read.csv
 #'             read.delim read.table tail write.table
+#'             globalVariables
+#' @importFrom Rdpack reprompt
+#' @useDynLib gap
+#'
+#' @author Jing Hua Zhao in collaboration with other colleagues and with
+#'         help from Kurt Hornik, Brian Ripley, Uwe Ligges and Achim Zeileis
+#'
+#' maitained by Jing Hua Zhao <jinghuazhao@hotmail.com>
 #'
 #' @references
-#' Zhao JH, gap: genetic analysis package. Journal of Statistical Software 2007, 23(8):1-18, \doi{10.18637/jss.v023.i08}.
+#' \insertRef{zhao07}{gap}
 #'
 #' @keywords internal
 

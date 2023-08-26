@@ -14,7 +14,7 @@ author:
   - Cambridge, UK
   - https://jinghuazhao.github.io/
 date: '`r Sys.Date()`'
-bibliography: gap.bib
+bibliography: '`r system.file("REFERENCES.bib", package="gap")`'
 csl: nature-genetics.csl
 nocite: |
   @wcn92
@@ -40,51 +40,45 @@ knitr::opts_chunk$set(
 
 This package was initiated to integrate some C/Fortran/SAS programs I have written 
 or used over the years. As such, it would rather be a long-term project, but an
-immediate benefit would be something complementary to other packages currently
-available from CRAN, e.g. **genetics**, **hwde**, etc. I hope eventually this will
-be part of a bigger effort to fulfill most of the requirements foreseen by many @guo00,
+immediate benefit is something complementary to other packages currently available
+from CRAN, e.g. **genetics**, **hwde**, etc. I hope eventually this will be part
+of a bigger effort to fulfil most of the requirements foreseen by many @guo00,
 within the portable environment of R for data management, analysis, graphics and
-object-oriented programming. My view has been outlined more formally[@zt06a; @zt06b]
-in relation to other package systems and also on package **kinship** [@zhao05; @zhao06].
+object-oriented programming. My view has been outlined more formally [@zhao06a; @zhao06b]
+in relation to other package systems and also on package **kinship** [@zhao05; @zhao06c].
+I feel the enormous advantage by shifting to R and would like to my work with others
+as it is available, which I will not claim this work as exclusively done by myself,
+but would like to invite others to join me and enlarge the collections and improve them.
 
-The number of functions are quite limited and experimental, but I already feel
-the enormous advantage by shifting to R and would like sooner rather than later
-to share my work with others. I will not claim this work as exclusively done by
-me, but would like to invite others to join me and enlarge the collections and
-improve them.
-
-With my recent work on genomewide association studies (GWASs) especially protein
-GWASs, I have added many functions such as `METAL_forestplot` which handles
-data from software METAL @willer10 and `sentinels` which extracts sentinels from
-GWAS summary statistics in a way that is very appealing to us compared to some
-other established software. At the meantime, the size of the package surpasses
-the limit as imposed by CRAN, thus the old good feature of `S` as with
-`R` that value both code and data alike has to suffer slightly in that
-**gap.datasets** and **gap.examples** are spun off as two separate
+With recent work on genomewide association studies (GWASs) especially protein GWASs, I
+have added many functions such as `METAL_forestplot` which handles data from software
+METAL @willer10 and `sentinels` which extracts sentinels from GWAS summary statistics
+in a way that is very appealing to us compared to some other established software.
+Meanwhile, the size of the package surpasses the limit as imposed by CRAN, thus the
+old good feature of `S` as with `R` that value both code and data alike has to suffer
+slightly in that **gap.datasets** and **gap.examples** are spun off as two separate
 packages; they do deserve a glimpse however for some general ideas. A separate
 initiative has been made in the **pQTLtools** package.
 
-Several other updates are worth mentioning: 
+Notable recent technical updates include:
 
-1.  use of markdown and then bookdown from the noweb/Sweave format which
-    allows for Citation Style Language (CSL) (https://citationstyles.org/)
-    to format the bibliography.
+1. documentaion from R code via **roxygen2** and **devtools** to allow for easier
+   generation of the .Rd files and NAMESPACE.
 
-2.  multiple figures generated from a code section to be embedded.
+2. vignettes with noweb/Sweave as well as **rmarkdown** and **bookdown** that allows
+   for numbered sectioning, multiple figures generated from a code chunk, and
+   Citation Style Language (CSL) (https://citationstyles.org/). **Rdpack** is now
+   employed for BibTeX citations in the .Rd files.
 
-3.  experimental implementation of a shiny App (`runshinygap`()).
+3. an experimental shiny App (`runshinygap`()).
 
-4.  **roxygen2** style documentation in companion with R code to allow for
-    easier generation of .Rd files and NAMESPACE through devtools::document().
-
-It is hoped that these experiences will be shared with/useful for other colleagues
-in converting their work into R. I found occasionally it is useful to use
-specific functions without loading the whole package (i.e., `library(gap)`),
+These experiences can be useful for others in their package development. I found it
+useful to use specific functions without loading the whole package, i.e., `library(gap)`,
 e.g.,`invnormal <- gap::invnormal`, `log10p <- gap::log10p`.
 
 # Implementation
 
-The following list shows the functions currently available.
+The currently available functions are shown below,
 
 Name              |      Description
 ------------------|------------------------------------------------------------------
@@ -144,7 +138,7 @@ circos.mhtplot    |      circos Manhattan plot with gene annotation
 circos.mhtplot2   |      Another circos Manhattan plot
 cnvplot           |      genomewide plot of CNVs
 labelManhattan    |      Annotate Manhattan or Miami Plot
-METAL\_forestplot |      forest plot as R/meta's forest for METAL outputs
+METAL_forestplot  |      forest plot as R/meta's forest for METAL outputs
 makeRLEplot       |      make relative log expression plot
 mhtplot           |      Manhattan plot
 mhtplot2          |      Manhattan plot with annotations
@@ -170,6 +164,7 @@ b2r               |      Obtain correlation coefficients and their variance-cova
 chow.test         |      Chow's test for heterogeneity in two regressions
 chr\_pos\_a1\_a2  |      Form SNPID from chromosome, posistion and alleles
 cis.vs.trans.classification | a cis/trans classifier
+ci2ms             |      Effect size and standard error from confidence interval
 comp.score        |      score statistics for testing genetic linkage of quantitative trait
 GRM functions     |      ReadGRM, ReadGRMBin, ReadGRMPLINK,
 &nbsp;            |      ReadGRMPCA, WriteGRM,
@@ -198,31 +193,27 @@ snptest\_sample   |      A utility to generate SNPTEST sample file
 whscore           |      Whittemore-Halpern scores for allele-sharing
 weighted.median   |      Weighted median with interpolation
 
-Assuming proper installation, you will be able to obtain the list by typing
-`library(help=gap)` or view the list within a web browser via 
-`help.start()`. See Appendix on how to obtain a full list of functions.
-
-This file can be viewed with command `vignette("gap", package="gap")`.
-
-You can cut and paste examples at end of each function's documentation.
+After installation, you will be able to obtain the list by typing `library(help=gap)`
+in alphabetical order, or `?gap::gap` ordered by category, or view it within a web
+browser via `help.start()`. A full list of functions is provided in the Appendix.
+This file can be viewed with command `vignette("gap", package="gap")`. You can cut
+and paste examples at end of each function's documentation.
 
 Both `genecounting` and `hap` are able to handle SNPs and multiallelic
 markers, with the former be flexible enough to include features such as X-linked data
 and the later being able to handle large number of SNPs. But they are unable to
-recode allele labels automatically, so functions `gc.em` and `hap.em`
-are in `haplo.em` format and used by a modified function `hap.score` in
-association testing.
+recode allele labels automatically, so functions `gc.em` and `hap.em` are in
+`haplo.em` format and used by a modified function `hap.score` in association testing.
 
 It is notable that multilocus data are handled differently from that in **hwde** and
 elegant definitions of basic genetic data can be found in the **genetics** package.
+Incidentally, I found my C mixed-radixed sorting routine @zhao03 is much faster than
+R's internal function.
 
-Incidentally, I found my C mixed-radixed sorting routine @zhao03 is much faster
-than R's internal function.
-
-With exceptions such as function `pfc` which is very computer-intensive, most
-functions in the package can easily be adapted for analysis of large datasets involving
-either SNPs or multiallelic markers. Some are utility functions, e.g. `muvar`
-and `whscore`, which will be part of the other analysis routines in the future.
+With exceptions such as function `pfc` which is very computer-intensive, most functions
+in the package can easily be adapted for analysis of large datasets involving either
+SNPs or multiallelic markers. Some are utility functions, e.g. `muvar` and `whscore`,
+which will be part of the other analysis routines in the future.
 
 The benefit with R compared to standalone programs is that for users, all functions have
 unified format. For developers, it is able to incorporate their C/C++ programs more
@@ -232,19 +223,18 @@ are designed and written to deal with large number of genes.
 
 # Independent programs
 
-To facilitate comparisons and individual preferences, The source codes for EHPLUS @zhao00,
+To facilitate comparisons and individual preferences, the source codes for EHPLUS @zhao00,
 2LD, GENECOUNTING, HAP @zhao04, now hosted at GitHub, have enjoyed great popularity ahead
-of the genomewide association studies (GWAS) therefore are likely to be more familiar than
-their R couunterparts in `gap`. However, you need to follow their instructions to compile
-for a particular computer system.
+of GWASs therefore are likely to be more familiar than their R counterparts in `gap` but
+you need to follow their instructions to compile for a particular computer system.
 
 I have kept the original `pedtodot.sh` by David Duffy which enables contrast with
 `pedtodot_verbatim()` and `pedtodot()` reported as application notes. I have also included
-`ms` code @hudson02, which is required by `read.ms.output`.
+`ms` code @hudson02 to couple with `read.ms.output`.
 
 A final note is concerned about `twinan90`, which is now dropped from the package function
-list due to difficulty to keep up with the requirements by the `R` environment but
-nevertheless you will still be able to compile and use otherwise from **gap.examples**.
+list due to difficulty to keep up with the requirements by the `R` environment nevertheless
+you will still be able to compile and use otherwise from **gap.examples**.
 
 # Demos
 
@@ -255,7 +245,7 @@ library(gap)
 demo(gap)
 ```
 
-See examples of haplotype analysis there -- additional examples are given below.
+See examples of haplotype analysis there.
 
 # Pedigrees and kinship
 
@@ -578,6 +568,7 @@ labs <- subset(testdat,gene %in% glist) %>%
         summarize() %>%
         mutate(cols="blue") %>%
         select(chr,start,end,gene,cols)
+labs[2,"cols"] <- "red"
 circos.mhtplot2(dat,labs,ticks=0:2*10)
 ```
 
@@ -606,18 +597,18 @@ chrmaxpos <- miamiplot2(gwas,gwas,name1="Batch 2",name2="Batch 1",z1="z",z2="z")
 labelManhattan(chr=c(2,16),pos=c(226814165,52373776),name=c("AnonymousGene","FTO"),gwas,gwasZLab="z",chrmaxpos=chrmaxpos)
 ```
 
-and a truncated Manhattan plot,
+and a truncated Manhattan plot, noting that only data points with -log10(P)>=2 are shown,
 
 ```r
 par(oma=c(0,0,0,0), mar=c(5,6.5,1,1))
-mhtplot.trunc(IL.12B, chr="Chromosome", bp="Position", z="Z",
+mhtplot.trunc(filter(IL.12B,log10P>=2), chr="Chromosome", bp="Position", z="Z",
    snp="MarkerName",
    suggestiveline=FALSE, genomewideline=-log10(5e-10),
-   cex.mtext=1.2, cex.text=0.7,
+   cex.mtext=1.2, cex.text=1.2,
    annotatelog10P=-log10(5e-10), annotateTop = FALSE,
    highlight=with(genes,gene),
-   mtext.line=3, y.brk1=115, y.brk2=200, trunc.yaxis=TRUE, delta=0.01,
-   cex.axis=1.2, cex=0.5, font=2, font.axis=1,
+   mtext.line=3, y.brk1=115, y.brk2=300, trunc.yaxis=TRUE, delta=0.01,
+   cex.axis=1.5, cex=0.8, font=3, font.axis=1.5,
    y.ax.space=20,
    col = c("blue4", "skyblue")
 )
@@ -663,9 +654,13 @@ ESplot(rs12075)
 
 It draws many forest plots given a list of variants, e.g.,
 
-```{r forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide"}
+```{r forest, fig.cap="Forest plots", fig.height=6, fig.width=9, results="hide", warning=FALSE}
 data(OPG,package="gap.datasets")
-METAL_forestplot(OPGtbl[5:6,],OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2)
+meta::settings.meta(method.tau="DL")
+METAL_forestplot(OPGtbl,OPGall,OPGrsid,width=6.75,height=5,digits.TE=2,digits.se=2,
+                 col.diamond="black",col.inside="black",col.square="black")
+METAL_forestplot(OPGtbl,OPGall,OPGrsid,package="metafor",method="FE",xlab="Effect",
+                 showweights=TRUE)
 ```
 
 # Significance
@@ -710,7 +705,7 @@ logp <- function(z) log(2)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)
 # log10(p) for a standard normal deviate z based on log()
 log10p <- function(z) log(2, base=10)+pnorm(-abs(z), lower.tail=TRUE, log.p=TRUE)/log(10)
 ```
-Note `logp()` will be used for functions such as `qnorm()` as in R/gap function `cs()` whereas `log10p()` is more appropriate for Manhattan plot and used in R/gap `sentinels()`.
+Note `logp()` will be used for functions such as `qnorm()` as in function `cs()` whereas `log10p()` is more appropriate for Manhattan plot and used in `sentinels()`.
 
 ## Rationale
 
@@ -801,16 +796,16 @@ knitr::kable(v,caption="z,P,log(P) and log10(P)")
 
 ## Application
 
-The `mhtplot.trunc()` function in R/gap accepts three types of arguments:
+The `mhtplot.trunc()` function accepts three types of arguments:
 
-1. p. P values of association statistics, which could be very small.
-2. log10p. log10(P).
-3. z. normal statistics that could be very large.
+: p. P values of association statistics, which could be very small.
+: log10p. log10(P).
+: z. normal statistics that could be very large.
 
 In all three cases, a log10(P) counterpart is obtained internally and to accommodate extreme value,
 the y-axis allows for truncation leaving out a given range to highlight the largest.
 
-A plot for the GIANT data is shown here, [https://jinghuazhao.github.io/Omics-analysis/BMI/](https://jinghuazhao.github.io/Omics-analysis/BMI/).
+See the IL-12B example above.
 
 # Linear regression
 
@@ -1003,13 +998,18 @@ z <- cs(tbl)
 l <- cs(tbl,log_p="logp")
 ```
 
+Note in particular that the implementation intends to avoid the naive summation in
+scenarios such as proteogenomic analysis containing exceptionally large BFs.
+
 # Polygenic modeling
 
-In line with the recent surge of interest in the polygenic models, a separate
-vignette is available through `vignette("h2",package="gap.examples")` demonstrating
-aspect of the models on heritability.
-
-Brief documentations are available for functions `h2G`, `h2GE` and `h2l`.
+In line with the recent surge of interest in the polygenic models, a separate vignette
+is available through `vignette("h2",package="gap.examples")` demonstrating aspect of
+the models on heritability. Utility Functions `h2G`, `h2GE` and `h2l` are briefly
+documented. Functions `h2.jags` and `hwe.jags` are also available. The function
+`h2_mzdz` can be used for heritability estimation based on monozygotic (MZ) and
+dizygotic (DZ) twin correlations under the additive genetics, common and specific
+environment (ACE) model, e.g., [10.1038/s41562-023-01530-y](https://doi.org/10.1038/s41562-023-01530-y).
 
 # Mendelian randomization
 
@@ -1099,7 +1099,7 @@ tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
 ```{r, fig.cap="Forest plots for MR results on TNFB", fig.align="left", fig.height=6, fig.width=9, results="hide"}
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              spacing=1.6,digits.TE=2,digits.se=2)
+              spacing=1.6,digits.TE=2,digits.se=2,xlab="Effect size",type.study="square",col.inside="black",col.square="black")
 ```
 
 ```{r, fig.cap="Forest plots for MR results on TNFB (no summary statistics)", fig.align="left", fig.height=6, fig.width=9, results="hide"}
@@ -1107,7 +1107,7 @@ mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
               leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
               sortvar=tnfb[["Effect"]],
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              backtransf=TRUE, spacing=1.6)
+              backtransf=TRUE, spacing=1.6,type.study="square",col.inside="black",col.square="black")
 ```
 
 ```{r, fig.cap="Forest plots for MR results on TNFB (with P values)", fig.align="left", fig.height=6, fig.width=9, results="hide"}
@@ -1117,7 +1117,7 @@ mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               rightcols=c("effect","ci","pval"), rightlabs=c("OR","95%CI","P"),
               digits=3, digits.pval=2, scientific.pval=TRUE,
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
-              addrow=TRUE, backtransf=TRUE, spacing=1.6)
+              addrow=TRUE, backtransf=TRUE, spacing=1.6,type.study="square",col.inside="black",col.square="black")
 ```
 
 # Miscellaneous functions
@@ -1133,16 +1133,34 @@ inv_chr_pos_a1_a2(s)
 inv_chr_pos_a1_a2("chr1:123-A_B",seps=c(":","-","_"))
 ```
 
+## ci2ms
+
+Here is the documentation example on rs3784099 and breast cancer @shu12.
+
+```{r}
+example(ci2ms)
+```
+
 ## gc.lambda
 
 The definition is as follows,
 ```{r}
-gc.lambda <- function(p) {
-  p <- p[!is.na(p)]
-  n <- length(p)
-
-  obs <- qchisq(p,1,lower.tail=FALSE)
-  exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+gc.lambda <- function(x, logscale=FALSE, z=FALSE) {
+  v <- x[!is.na(x)]
+  n <- length(v)
+  if (z) {
+     obs <- v^2
+     exp <- qchisq(log(1:n/n),1,lower.tail=FALSE,log.p=TRUE)
+  } else {
+    if (!logscale)
+    {
+      obs <- qchisq(v,1,lower.tail=FALSE)
+      exp <- qchisq(1:n/n,1,lower.tail=FALSE)
+    } else {
+      obs <- qchisq(-log(10)*v,1,lower.tail=FALSE,log.p=TRUE)
+      exp <- qchisq(log(1:n/n),1,lower.tail=FALSE,log.p=TRUE)
+    }
+  }
 
   lambda <- median(obs)/median(exp)
   return(lambda)

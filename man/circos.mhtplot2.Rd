@@ -21,6 +21,9 @@ circos.mhtplot2(dat, labs, species = "hg18", ticks = 0:3 * 10, y = 20)
 There is no return value but a plot.
 }
 \description{
+Another circos Manhattan plot
+}
+\details{
 This is adapted from work for a recent publication. It enables a y-axis to the -log10(P) for association statistics
 }
 \examples{
@@ -39,6 +42,7 @@ labs <- subset(testdat,gene \%in\% glist) \%>\%
         summarize() \%>\%
         mutate(cols="blue") \%>\%
         select(chr,start,end,gene,cols)
+labs[2,"cols"] <- "red"
 circos.mhtplot2(dat,labs,ticks=0:2*10)
 # https://www.rapidtables.com/web/color/RGB_Color.html
 }

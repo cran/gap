@@ -1,5 +1,22 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.5-3
+25-08-2023	Depends: R (>= 2.10), gap.datasets (>= 0.0.6) as suggested by Uwe Ligges
+
+Version 1.5-2
+21-08-2023	circos.mhtplot(2)/labelManhattan/mhtplot: to italicise gene labels
+		On METAL_forestplot():
+		1. Revise examples, 2. Accommodate `metafor` for EE/FE models, 3. \insertRef{}
+		Extend gc.lambda() for -log10(P) and drop -log10(P)<2 for IL-12B plot in gap.Rmd
+		Amend circos.mhtplot2() with an addtional track
+		Add ci2ms() for PhenoScanner/GWAS Catalog lookup and refine h2_mzdz()
+		Drop genetics/GeneticsDesign reference in pbsize2() and backslash (\%) in tscc()
+		Rename SNP functions and document hg18/19/38
+		Reorganize DESCRIPTION, adding Roxygen: list(markdown = TRUE), and document in Markdown
+		Import/amend in line with Rdpack/Remove INDEX to suppress error message/ and \insertRef
+		Refine gap.Rmd and shinygap.Rmd
+		Revise CITATION for the new style
+
 Version 1.5-1
 22-01-2023	Add rationale, @graham21 and @vosa21 for cs() together with minor changes in gap.Rmd
 		gcx.c: 49, 1209, short * to short int []
@@ -10,7 +27,7 @@ Version 1.5-1
 
 Version 1.5
 12-01-2023	Apply bookdown to shinygap.Rmd
-		Suggests mets in gap.examples instead
+		Suggest mets in gap.examples instead
 		Initialize r=0 at lines 252, 695 of gcontrol_c.c
 		Remove "typedef enum{false=0,true=1} boolean" in pgc.h and use false/true=0/1 in pgc_c.c
 		Modify gap.Rmd

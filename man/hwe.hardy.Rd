@@ -21,15 +21,18 @@ size of a chunk and burn-in steps, as integer.}
 }
 \value{
 The returned value is a list containing:
-\describe{
- \item{method}{Hardy-Weinberg equilibrium test using MCMC}
- \item{data.name}{name of used data if \code{x} is given}
- \item{p.value}{Monte Carlo p value}
- \item{p.value.se}{standard error of Monte Carlo p value}
- \item{switches}{percentage of switches (partial, full and altogether)}
+\itemize{
+\item method Hardy-Weinberg equilibrium test using MCMC.
+\item data.name name of used data if \code{x} is given.
+\item p.value Monte Carlo p value.
+\item p.value.se standard error of Monte Carlo p value.
+\item switches percentage of switches (partial, full and altogether).
 }
 }
 \description{
+Hardy-Weinberg equilibrium test using MCMC
+}
+\details{
 Hardy-Weinberg equilibrium test by MCMC
 }
 \note{
@@ -95,11 +98,10 @@ keywords htest
 
 }
 \references{
-Guo, S.-W. and E. A. Thompson (1992) Performing the exact test of
-Hardy-Weinberg proportion for multiple alleles. Biometrics. 48:361--372.
+\insertRef{guo92}{gap}
 }
 \seealso{
-\code{\link[gap]{hwe}}, \code{\link[genetics]{HWE.test}}, \code{\link[genetics]{genotype}}
+\code{\link{hwe}}, \code{\link[genetics:HWE.test]{genetics::HWE.test}}, \code{\link[genetics:genotype]{genetics::genotype}}
 }
 \author{
 Sun-Wei Guo, Jing Hua Zhao, Gregor Gorjanc

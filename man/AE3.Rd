@@ -21,13 +21,16 @@ AE3(model, random, data, seed = 1234, n.sim = 50000, verbose = TRUE)
 }
 \value{
 The returned value is a list containing:
-\describe{
-  \item{lme.result}{the linear mixed model result.}
-  \item{h2}{the heritability estimate.}
-  \item{CL}{confidence intervals.}
+\itemize{
+\item lme.result the linear mixed model result.
+\item h2 the heritability estimate.
+\item CL confidence intervals.
 }
 }
 \description{
+AE model using nuclear family trios
+}
+\details{
 This function is adapted from example 7.1 of Rabe-Hesketh et al. (2008). It
 also procides heritability estimate and confidence intervals.
 }
@@ -43,8 +46,7 @@ AE3(bwt ~ male + first + midage + highage + birthyr,
 
 }
 \references{
-Rabe-Hesketh S, Skrondal A, Gjessing HK. Biometrical modeling of twin and family data using standard mixed model 
-software. Biometrics 2008, 64:280-288
+\insertRef{rh08}{gap}
 }
 \author{
 Jing Hua Zhao

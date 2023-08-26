@@ -13,22 +13,24 @@ mvmeta(b, V)
 }
 \value{
 The returned value is a list containing:
-\describe{
- \item{d}{the compact parameter estimates}
- \item{Psi}{the compact covariance-covariance matrix}
- \item{X}{the design matrix}
- \item{beta}{the pooled parameter estimates}
- \item{cov.beta}{the pooled variance-covariance matrix}
- \item{X2}{the Chi-squared statistic for heterogeneity}
- \item{df}{the degrees(s) of freedom}
- \item{p}{the p value}
+\itemize{
+\item d the compact parameter estimates.
+\item Psi the compact covariance-covariance matrix.
+\item X the design matrix.
+\item beta the pooled parameter estimates.
+\item cov.beta the pooled variance-covariance matrix.
+\item X2 the Chi-squared statistic for heterogeneity.
+\item df the degrees(s) of freedom.
+\item p the p value.
 }
 }
 \description{
-This function accepts a data matrix of parameter estimates and their variance-covariance matrix
-from individual studies and obtain a generalized least squares (GLS) estimate and heterogeneity statistic.
+Multivariate meta-analysis based on generalized least squares
 }
 \details{
+This function accepts a data matrix of parameter estimates and their variance-covariance matrix
+from individual studies and obtain a generalized least squares (GLS) estimate and heterogeneity statistic.
+
 For instance, this would be appropriate for combining linear correlation coefficients of single
 nucleotide polymorphisms (SNPs) for a given region.
 }
@@ -89,10 +91,10 @@ mvmeta(b,V)
 }
 }
 \references{
-Hartung J, Knapp G, Sinha BK. Statistical Meta-analysis with Applications, Wiley 2008.
+\insertRef{hartung08}{gap}
 }
 \seealso{
-\code{\link[gap]{metareg}}
+\code{\link{metareg}}
 }
 \author{
 Jing Hua Zhao

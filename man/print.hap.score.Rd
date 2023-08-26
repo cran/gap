@@ -16,7 +16,7 @@ Nothing is returned.
 
 This is a print method function used to print information from
 hap.score class, with haplotype-specific information given in a
-table. Because hap.score is a class, the generic print function 
+table. Because hap.score is a class, the generic print function
 can be used, which in turn calls this print.hap.score function.
 }
 \description{
@@ -40,6 +40,6 @@ Score tests for association of traits with haplotypes when
 linkage phase is ambiguous. Amer J Hum Genet 70:425-34
 }
 \seealso{
-{\code{\link[gap]{hap.score}}}
+\code{\link{hap.score}}
 }
 \keyword{print}

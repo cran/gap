@@ -1,39 +1,5 @@
 #' Converting pedigree(s) to dot file(s)
 #'
-#' This function converts GAS or LINKAGE formatted pedigree(s) into .dot file
-#' for each pedigree to be used by dot in graphviz, which is a flexible package
-#' for graphics freely available.
-#'
-#' Note that a single PostScript (PDF) file can be obtainaed by dot, fdp, 
-#' or neato.
-#'
-#' dot -Tps <dot file> -o <ps file>  
-#'
-#' or
-#'
-#' fdp -Tps <dot file> -o <ps file>  
-#'
-#' or
-#'
-#' neato -Tps <dot file> -o <ps file>
-#'
-#' See relevant documentations for other formats.
-#'
-#' To preserve the original order of pedigree(s) in the data, you can examine the
-#' examples at the end of this document.
-#'
-#' Under Cygwin/Linux/Unix, the PostScript file can be converted to Portable
-#' Document Format (PDF) default to Acrobat.
-#'
-#' ps2pdf <ps file>
-#'
-#' Use ps2pdf12, ps2pdf13, or ps2pdf14 for appropriate versions of Acrobat
-#' according to information given on the headline of <ps file>.
-#'
-#' Under Linux, you can also visualize the .dot file directly via command,
-#'
-#' dotty <dot file> &
-#'
 #' @param pedfile a pedigree file in GAS or LINKAGE format, note if 
 #' individual's ID is character then it is necessary to specify as.is=T
 #' in the read.table command.
@@ -49,13 +15,48 @@
 #' if the diagram is viewed by lneato.
 #'
 #' @details
-#' We can extract the code below (or within pedtodot.Rd) to pedtodot and then
+#' This function converts GAS or LINKAGE formatted pedigree(s) into .dot file
+#' for each pedigree to be used by dot in graphviz, which is a flexible package
+#' for graphics freely available.
+#'
+#' Note that a single PostScript (PDF) file can be obtainaed by `dot`, `fdp`,
+#' or `neato`.
+#' ```
+#' dot -Tps <dot file> -o <ps file>
+#' ```
+#' or
+#' ```
+#' fdp -Tps <dot file> -o <ps file>
+#' ```
+#' or
+#' ```
+#' neato -Tps <dot file> -o <ps file>
+#' ```
+#' See relevant documentations for other formats.
+#'
+#' To preserve the original order of pedigree(s) in the data, you can examine the
+#' examples at the end of this document.
+#'
+#' Under Cygwin/Linux/Unix, the PostScript file can be converted to Portable
+#' Document Format (PDF) default to Acrobat.
+#' ```
+#' ps2pdf <ps file>
+#' ```
+#' Use `ps2pdf12`, `ps2pdf13`, or `ps2pdf14` for appropriate versions of Acrobat
+#' according to information given on the headline of `<ps file>`.
+#'
+#' Under Linux, you can also visualize the .dot file directly via command,
+#' ```
+#' dotty <dot file> &
+#' ```
+#' We can extract the code below (or within `pedtodot.Rd`) to pedtodot and then
 #' use command: 
-#'
+#' ```
 #' sh pedtodot <pedigree file>
-#'
+#' ```
 #' @export
-#' @return For each pedigree, the function generates a .dot file to be used by dot. The
+#' @return
+#' For each pedigree, the function generates a .dot file to be used by dot. The
 #' collection of all pedigrees (*.dot) can also be put together.
 #' 
 #' @seealso package sem in CRAN and Rgraphviz in BioConductor \url{https://www.bioconductor.org/}.

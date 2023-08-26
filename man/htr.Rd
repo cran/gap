@@ -15,15 +15,17 @@ htr(y, x, n.sim = 0)
 }
 \value{
 The returned value is a list containing:
-
 \itemize{
-\item{f}{the F statistic for overall association}
-\item{p}{the p value for overall association}
-\item{fv}{the F statistics for individual haplotypes}
-\item{pi}{the p values for individual haplotypes}
+\item f the F statistic for overall association.
+\item p the p value for overall association.
+\item fv the F statistics for individual haplotypes.
+\item pi the p values for individual haplotypes.
 }
 }
 \description{
+Haplotype trend regression
+}
+\details{
 Haplotype trend regression (with permutation)
 }
 \note{
@@ -63,14 +65,12 @@ anova(m2,m1)
 
 }
 \references{
-Zaykin DV, Westfall PH, Young SS, Karnoub MA, Wagner MJ, Ehm MG (2002) Testing association of statistically inferred haplotypes with
-discrete and continuous traits in samples of unrelated individuals. Hum. Hered. 53:79-91
+\insertRef{zaykin02}{gap}
 
-Xie R, Stram DO (2005). Asymptotic equivalence between two score tests for haplotype-specific risk in general linear models.
-Genet. Epidemiol. 29:186-170
+\insertRef{xie05}{gap}
 }
 \seealso{
-\code{\link[gap]{hap.score}}
+\code{\link{hap.score}}
 }
 \author{
 Dimitri Zaykin, Jing Hua Zhao

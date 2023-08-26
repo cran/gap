@@ -19,14 +19,17 @@ chow.test(y1, x1, y2, x2, x = NULL)
 }
 \value{
 The returned value is a vector containing (please use subscript to access them):
-\describe{
-\item{F}{the F statistic}
-\item{df1}{the numerator degree(s) of freedom}
-\item{df2}{the denominator degree(s) of freedom}
-\item{p}{the p value for the F test}
+\itemize{
+\item F the F statistic.
+\item df1 the numerator degree(s) of freedom.
+\item df2 the denominator degree(s) of freedom.
+\item p the p value for the F test.
 }
 }
 \description{
+Chow's test for heterogeneity in two regressions
+}
+\details{
 Chow's test is for differences between two or more regressions.  Assuming that
 errors in regressions 1 and 2 are normally distributed with zero mean and
 homoscedastic variance, and they are independent of each other, the test of
@@ -41,8 +44,7 @@ freedom.  3.  Conduct an \eqn{F_{(k,n_1+n_2-2k)}} test defined by \deqn{F =
 \frac{[S_1-(S_2+S_3)]/k}{[(S_2+S_3)/(n_1+n_2-2k)]}} If the \eqn{F} statistic
 exceeds the critical \eqn{F}, we reject the null hypothesis that the two
 regressions are equal.
-}
-\details{
+
 In the case of haplotype trend regression, haplotype frequencies from combined
 data are known, so can be directly used.
 }
@@ -85,10 +87,10 @@ chow.test.r<-chow.test(y1,x1,y2,x2)
 
 }
 \references{
-Chow GC (1960). Tests of equality between sets of coefficients in two linear regression. Econometrica 28:591-605
+\insertRef{chow60}{gap}
 }
 \seealso{
-\code{\link[gap]{htr}}
+\code{\link{htr}}
 }
 \author{
 Shigenobu Aoki, Jing Hua Zhao

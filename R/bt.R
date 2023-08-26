@@ -1,4 +1,9 @@
-# This function fits a Bradley-Terry Model to a squared contingency table
+#' A function used to experiment with ETDT
+#'
+#' @details
+#' It fits a Bradley-Terry Model to a squared contingency table
+#' @noRd
+
 # JH Zhao 5/1/2004, 12/3/2005
 
 # This generates format as required by ETDT
@@ -30,37 +35,30 @@ toETDT <- function(a)
 
 #' Bradley-Terry model for contingency table
 #'
-#' This function calculates statistics under Bradley-Terry model. 
-#'
 #' @param x the data table.
 #'
+#' @details
+#' This function calculates statistics under Bradley-Terry model. 
+#'
 #' @export
-#' @return The returned value is a list containing:
-#' \describe{
-#' \item{y}{A column of 1}
-#' \item{count}{the frequency count/weight}
-#' \item{allele}{the design matrix}
-#' \item{bt.glm}{a glm.fit object}
-#' \item{etdt.dat}{a data table that can be used by ETDT}
-#' }
+#' @return
+#' The returned value is a list containing:
+#' - y A column of 1.
+#' - count the frequency count/weight.
+#' - allele the design matrix.
+#' - bt.glm a glm.fit object.
+#' - etdt.dat a data table that can be used by ETDT.
 #'
 #' @references
-#' Bradley RA, Terry ME (1952) Rank analysis of incomplete block designs I. 
-#' the method of paired comparisons. Biometrika 39:324--345
+#' \insertRef{bradley52}{gap}
 #'
-#' Sham PC, Curtis D (1995) An extended transmission/disequilibrium 
-#' test (TDT) for multi-allelic marker loci. Ann. Hum. Genet. 59:323-336
+#' \insertRef{sham95}{gap}
 #'
-#' @seealso \code{\link[gap]{mtdt}}
+#' \insertRef{copeman95}{gap}
+#' @seealso [`mtdt`]
 #'
 #' @examples
 #' \dontrun{
-#' # Copeman JB, Cucca F, Hearne CM, Cornall RJ, Reed PW, 
-#' # Ronningen KS, Undlien DE, Nistico L, Buzzetti R, Tosi R, et al.
-#' # (1995) Linkage disequilibrium mapping of a type 1 
-#' # diabetes susceptibility gene (IDDM7) to chromosome 2q31-q33. 
-#' # Nat Genet 9: 80-5
-#'
 #' x <- matrix(c(0,0, 0, 2, 0,0, 0, 0, 0, 0, 0, 0,
 #'               0,0, 1, 3, 0,0, 0, 2, 3, 0, 0, 0,
 #'               2,3,26,35, 7,0, 2,10,11, 3, 4, 1,

@@ -13,27 +13,27 @@ LD22(h, n)
 }
 \value{
 The returned value is a list containing:
-\describe{
-\item{h}{the original haplotype frequency vector}
-\item{n}{the number of haplotypes}
-\item{D}{the linkage disequilibrium parameter}
-\item{VarD}{the variance of D}
-\item{Dmax}{the maximum of D}
-\item{VarDmax}{the variance of Dmax}
-\item{Dprime}{the scaled disequilibrium parameter}
-\item{VarDprime}{the variance of Dprime}
-\item{x2}{the Chi-squared statistic}
-\item{lor}{the log(OR) statistic}
-\item{vlor}{the var[log(OR)] statistic}
+\itemize{
+\item h the original haplotype frequency vector.
+\item n the number of haplotypes.
+\item D the linkage disequilibrium parameter.
+\item VarD the variance of D.
+\item Dmax the maximum of D.
+\item VarDmax the variance of Dmax.
+\item Dprime the scaled disequilibrium parameter.
+\item VarDprime the variance of Dprime.
+\item x2 the Chi-squared statistic.
+\item lor the log(OR) statistic.
+\item vlor the var(log(OR)) statistic.
 }
 }
 \description{
-LD statistics for two SNPs.
+LD statistics for two diallelic markers
 }
 \details{
 It is possible to perform permutation test of \eqn{r^2} by re-ordering the genotype through
-R's sample function, obtaining the haplotype frequencies by \code{\link[gap]{gc.em}}
-or \code{\link[gap]{genecounting}}, supplying the estimated haplotype frequencies to
+R's sample function, obtaining the haplotype frequencies by \code{\link{gc.em}}
+or \code{\link{genecounting}}, supplying the estimated haplotype frequencies to
 the current function and record x2, and comparing the observed x2 and that from the
 replicates.
 }
@@ -49,16 +49,12 @@ t <- LD22(h,n)
 
 }
 \references{
-Zabetian CP, Buxbaum SG, Elston RC, Kohnke MD, Anderson GM, Gelernter J, Cubells JF.
-The structure of linkage disequilibrium at the DBH locus strongly influences the 
-magnitude of association between diallelic markers and plasma dopamine beta-hydroxylase activity
-Am J Hum Genet 72: 1389-1400 
+\insertRef{zabetian03}{gap}
 
-Zapata C, Alvarez G, Carollo C (1997) Approximate variance of the standardized
- measure of gametic disequilibrium D'. Am. J. Hum. Genet. 61:771-774
+\insertRef{zapata97}{gap}
 }
 \seealso{
-\code{\link[gap]{LDkl}}
+\code{\link{LDkl}}
 }
 \author{
 Jing Hua Zhao

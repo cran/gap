@@ -1,5 +1,8 @@
-# Adapted from code by Felix Day 16/9/2015
-# with reference from Bowden J, et al. (2015). 44(2):512-525.
+#' A function for obtaining weighted median with interpolation
+#' @author Adapted code by Felix Day 16/9/2015
+#' @references
+#' \insertRef{bowden15}{gap}
+#' @noRd
 
 weighted.median <- function(x, w)
 {
@@ -33,16 +36,18 @@ mr.boot = function(bXG, sebXG, bYG, sebYG, w, n.boot=1000, method="median")
 
 #' Mendelian randomization analysis
 #' 
-#' The function initially intends to rework on GSMR outputs, but it would be appropriate for general use.
-#' 
-#' @md
 #' @param data Data to be used.
 #' @param X Exposure.
 #' @param Y Outcome.
 #' @param alpha type I error rate for confidence intervals.
 #' @param other_plots To add funnel and forest plots.
+#'
+#' @details
+#' The function initially intends to rework on GSMR outputs, but it would be appropriate for general use.
+#' 
 #' @export
-#' @return The result and plots.
+#' @return
+#' The result and plots.
 #' @examples
 #' library(ggplot2)
 #' library(gap)

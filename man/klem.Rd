@@ -19,10 +19,10 @@ Modified from 2ld.c.}
 }
 \value{
 The returned value is a list containing:
-\describe{
- \item{h}{haplotype Frequencies.}
- \item{l0}{log-likelihood under linkage equilibrium.}
- \item{l1}{log-likelihood under linkage disequilibrium.}
+\itemize{
+\item h haplotype Frequencies.
+\item l0 log-likelihood under linkage equilibrium.
+\item l1 log-likelihood under linkage disequilibrium.
 }
 }
 \description{
@@ -38,7 +38,7 @@ source(file.path(find.package("gap"),"scripts","SH2B1.R"),echo=TRUE)
 
 }
 \seealso{
-{\code{\link[gap]{genecounting}}}
+\code{\link{genecounting}}
 }
 \author{
 Jing Hua Zhao

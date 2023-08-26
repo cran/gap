@@ -29,39 +29,41 @@ tscc(model, GRR, p1, n1, n2, M, alpha.genome, pi.samples, pi.markers, K)
 }
 \value{
 The returned value is a list containing a copy of the input plus output as follows,
-\describe{
- \item{model}{any in c("multiplicative","additive","dominant","recessive").}
- \item{GRR}{genotype relative risk.}
- \item{p1}{the estimated risk allele frequency in cases.}
- \item{pprime}{expected risk allele frequency in cases.}
- \item{p}{expected risk allele frequency in controls.}
- \item{n1}{total number of cases.}
- \item{n2}{total number of controls.}
- \item{M}{total number of markers.}
- \item{alpha.genome}{false positive rate at genome level.}
- \item{pi.samples}{sample\% to be genotyped at stage 1.}
- \item{pi.markers}{markers\% to be selected (also used as the false positive rate at stage 1).}
- \item{K}{the population prevalence.}
- \item{C}{threshoulds for no stage, stage 1, stage 2, joint analysis.}
- \item{power}{power corresponding to C.}
+\itemize{
+\item model any in c("multiplicative","additive","dominant","recessive").
+\item GRR genotype relative risk.
+\item p1 the estimated risk allele frequency in cases.
+\item pprime expected risk allele frequency in cases.
+\item p expected risk allele frequency in controls.
+\item n1 total number of cases.
+\item n2 total number of controls.
+\item M total number of markers.
+\item alpha.genome false positive rate at genome level.
+\item pi.samples sample\% to be genotyped at stage 1.
+\item pi.markers markers\% to be selected (also used as the false positive rate at stage 1).
+\item K the population prevalence.
+\item C threshoulds for no stage, stage 1, stage 2, joint analysis.
+\item power power corresponding to C.
 }
 }
 \description{
-This function gives power estimates for two-stage case-control design for genetic association.
+Power calculation for two-stage case-control design
 }
 \details{
+This function gives power estimates for two-stage case-control design for genetic association.
+
 The false positive rates are calculated as follows,
 
 \deqn{P(|z1|>C1)P(|z2|>C2,sign(z1)=sign(z2))} and \deqn{P(|z1|>C1)P(|zj|>Cj||z1|>C1)}
 for replication-based and joint analyses, respectively; where C1, C2, and Cj
-are threshoulds at stages 1, 2 replication and joint analysis, 
+are threshoulds at stages 1, 2 replication and joint analysis,
 
 \deqn{z1 = z(p1,p2,n1,n2,pi.samples)}
 \deqn{z2 = z(p1,p2,n1,n2,1-pi.samples)}
 \deqn{zj = sqrt(pi.samples)*z1+sqrt(1-pi.samples)*z2}
 }
 \note{
-solve.skol is adapted from CaTS.
+\code{solve.skol} is adapted from CaTS.
 }
 \examples{
 \dontrun{
@@ -77,7 +79,7 @@ pi.samples <- 0.2
 pi.markers <- 0.1
 
 options(echo=FALSE)
-cat("sample\\%,marker\\%,GRR,(thresholds x 4)(power estimates x 4)","\n")
+cat("sample\%,marker\%,GRR,(thresholds x 4)(power estimates x 4)","\n")
 for(GRR in c(1.3,1.35,1.40))
 {
    cat("\n")
@@ -90,7 +92,7 @@ for(GRR in c(1.3,1.35,1.40))
         x <- tscc("multiplicative",GRR,p1,n1,n2,M,alpha.genome,
                   pi.samples,pi.markers,K)
         l <- c(pi.samples,pi.markers,GRR,x$C,x$power)
-        l <- sprintf("\\%.2f \\%.2f \\%.2f, \\%.2f \\%.2f \\%.2f \\%.2f, \\%.2f \\%.2f \\%.2f \\%.2f",
+        l <- sprintf("\%.2f \%.2f \%.2f, \%.2f \%.2f \%.2f \%.2f, \%.2f \%.2f \%.2f \%.2f",
                      l[1],l[2],l[3],l[4],l[5],l[6],l[7],l[8],l[9],l[10],l[11])
         cat(l,"\n")
       }
@@ -101,9 +103,7 @@ options(echo=TRUE)
 }
 }
 \references{
-Skol AD, Scott LJ, Abecasis GR, Boehkne M (2006).
-Joint analysis in more efficient than replication-based aalysis for two-stage
-genome-wide association studies. Nature Genetics 38:209-213
+\insertRef{skol06}{gap}
 }
 \author{
 Jing Hua Zhao

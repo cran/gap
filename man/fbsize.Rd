@@ -28,27 +28,28 @@ fbsize(
 }
 \value{
 The returned value is a list containing:
-
-\describe{
-  \item{gamma}{input gamma.}
-  \item{p}{input p.}
-  \item{n1}{sample size for ASP.}
-  \item{n2}{sample size for TDT.}
-  \item{n3}{sample size for ASP-TDT.}
-  \item{lambdao}{lambda o.}
-  \item{lambdas}{lambda s.}
+\itemize{
+\item gamma input gamma.
+\item p input p.
+\item n1 sample size for ASP.
+\item n2 sample size for TDT.
+\item n3 sample size for ASP-TDT.
+\item lambdao lambda o.
+\item lambdas lambda s.
 }
 }
 \description{
-This function implements Risch and Merikangas (1996) statistics 
+Sample size for family-based linkage and association design
+}
+\details{
+This function implements Risch and Merikangas (1996) statistics
 evaluating power for family-based linkage (affected sib pairs, ASP) and
 association design. They are potentially useful in the prospect of
 genome-wide association studies.
-}
-\details{
-The function calls auxiliary functions sn() and strlen; sn() 
+
+The function calls auxiliary functions sn() and strlen; \code{sn()}
 contains the necessary thresholds for power calculation while
-strlen() evaluates length of a string (generic).
+\code{strlen()} evaluates length of a string (generic).
 }
 \note{
 extracted from rm.c.
@@ -101,11 +102,11 @@ complex human diseases. Science 273(September): 1516-1517.
 Risch, N. and K. Merikangas (1997). Reply to Scott el al. Science
 275(February): 1329-1330.
 
-Scott, W. K., M. A. Pericak-Vance, et al. (1997). Genetic analysis of 
+Scott, W. K., M. A. Pericak-Vance, et al. (1997). Genetic analysis of
 complex diseases. Science 275: 1327.
 }
 \seealso{
-\code{\link[gap]{pbsize}}
+\code{\link{pbsize}}
 }
 \author{
 Jing Hua Zhao

@@ -37,12 +37,15 @@ qqunif(
 }
 \value{
 The returned value is a list with components of a qqplot:
-\describe{
-\item{x}{expected value for uniform order statistics or its -log(,base) counterpart}
-\item{y}{observed value or its -log(,base) counterpart}
+\itemize{
+\item x expected value for uniform order statistics or its -log(,base) counterpart.
+\item y observed value or its -log(,base) counterpart.
 }
 }
 \description{
+Q-Q plot for uniformly distributed random variable
+}
+\details{
 This function produces Q-Q plot for a random variable following uniform distribution with or
 without using log-scale. Note that the log-scale is by default for type "exp", which is a plot based on
 exponential order statistics. This appears to be more appropriate than the commonly used procedure whereby
@@ -61,14 +64,14 @@ legend("topleft",sprintf("GC.lambda=\\%.4f",gc.lambda(u_obs)))
 
 }
 \references{
-Balakrishnan N, Nevzorov VB. A Primer on Statistical Distributions. Wiley 2003.
+\insertRef{balakrishnan03}{gap}
 
-Casella G, Berger RL. Statistical Inference, Second Edition. Duxbury 2002.
+\insertRef{casella02}{gap}
 
-Davison AC. Statistical Models. Cambridge University Press 2003.
+\insertRef{davison03}{gap}
 }
 \seealso{
-\code{\link[gap]{qqfun}}
+\code{\link{qqfun}}
 }
 \author{
 Jing Hua Zhao

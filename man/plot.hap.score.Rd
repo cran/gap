@@ -16,7 +16,7 @@ Nothing is returned.
 
 This is a plot method function used to plot haplotype frequencies on
 the x-axis and haplotype-specific scores on the y-axis. Because
-hap.score is a class, the generic plot function 
+hap.score is a class, the generic plot function
 can be used, which in turn calls this plot.hap.score function.
 }
 \description{
@@ -40,6 +40,6 @@ Score tests for association of traits with haplotypes when
 linkage phase is ambiguous. Amer J Hum Genet 70:425-34
 }
 \seealso{
-{\code{\link[gap]{hap.score}}}
+\code{\link{hap.score}}
 }
 \keyword{hplot}

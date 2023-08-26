@@ -15,6 +15,9 @@ whscore(allele, type)
 The returned value is the value of score statistic.
 }
 \description{
+Whittemore-Halpern scores for allele-sharing
+}
+\details{
 Allele sharing score statistics.
 }
 \note{
@@ -29,14 +32,11 @@ whscore(c,type=2)
 
 }
 \references{
-Kruglyak L, Daly MJ, Reeve-Daly MP, Lander ES (1996) Parametric and Nonparametric
-linkage analysis: a unified multipoint approach. Am. J. Hum. Genet. 58:1347-1363
+\insertRef{kruglyak96}{gap}
 
-Whittemore AS, Halpern J (1994) A class of tests for linkage using affected 
-pedigree members. Biometrics 50:118-127
+\insertRef{wh94a}{gap}
 
-Whittemore AS, Halpern J (1994) Probability of gene identity by descent: 
-computation and applications. Biometrics 50:109-117
+\insertRef{wh94b}{gap}
 }
 \author{
 Leonid Kruglyak, Jing Hua Zhao

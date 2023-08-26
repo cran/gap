@@ -36,10 +36,12 @@ hwe.jags(
 The returned value is a fitted model from jags().
 }
 \description{
-Hardy-Weinberg equilibrium test.
+Hardy-Weinberg equlibrium test for a multiallelic marker using JAGS
 }
 \details{
-This function performs Bayesian Hardy-Weinberg equilibrium test, which mirrors \code{\link[gap]{hwe.hardy}},
+Hardy-Weinberg equilibrium test.
+
+This function performs Bayesian Hardy-Weinberg equilibrium test, which mirrors \link{hwe.hardy},
 another implementation for highly polymorphic markers when asymptotic results do not hold.
 }
 \examples{
@@ -111,10 +113,10 @@ hwe.jags.ABO.results
 
 }
 \references{
-Wakefield J (2010). Bayesian methods for examining Hardy-Weinberg equilibrium. Biometrics 66:257-265
+\insertRef{wakefield10}{gap}
 }
 \seealso{
-\code{\link[gap]{hwe.hardy}}
+\code{\link{hwe.hardy}}
 }
 \author{
 Jing Hua Zhao, Jon Wakefield
