@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   dev = "png")
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 p1 <- "
  1  2   3  2  2  7/7  7/10
  2  0   0  1  1  -/-  -/-
@@ -164,7 +164,7 @@ for(i in 1:3)
 {
   q <- s_nb[i]/n
   power <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta,TRUE)
-  ssize <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta)
+  ssize <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta,FALSE)
   cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",
       signif(power,3),"\t",ssize,"\n",
       file=outfile,append=TRUE)
@@ -187,7 +187,7 @@ for(pD in s_pD)
    {
       for(hr in s_hr)
       {
-         ssize <- ccsize(n,q,pD,p1,log(hr),alpha,beta)
+         ssize <- ccsize(n,q,pD,p1,log(hr),alpha,beta,FALSE)
          if (ssize>0) cat(n,"\t",pD,"\t",p1,"\t",hr,"\t",alpha,"\t",
                           ssize,"\n",
                           file=outfile,append=TRUE)
@@ -251,7 +251,8 @@ labs <- subset(testdat,gene %in% glist) %>%
         mutate(cols="blue") %>%
         select(chr,start,end,gene,cols)
 labs[2,"cols"] <- "red"
-circos.mhtplot2(dat,labs,ticks=0:2*10)
+ticks <- 0:2*5
+circos.mhtplot2(dat,labs,ticks=ticks,ymax=max(ticks))
 
 ## ----miami, fig.cap="Miami plots", fig.height=7, fig.width=7----------------------------------------------------------------------------------------
 mhtdata <- within(mhtdata,{pr=p})
@@ -312,14 +313,10 @@ xyplot(b ~ a,
 
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------
 require(gap)
-v <- data.frame()
-for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
-{
-  vi <- c(z,pvalue(z),logp(z),log10p(z))
-  v <- rbind(v,vi)
-}
-names(v) <- c("z","P","log(P)","log10(P)")
-knitr::kable(v,caption="z,P,log(P) and log10(P)")
+zlist <- c(5,10,30,40,50,100,500,1000,2000,3000,5000)
+zp <- sapply(zlist,function(z) {c(z,pvalue(z),logp(z),log10p(z))})
+rownames(zp) <- c("z","P","log(P)","log10(P)")
+knitr::kable(t(zp),caption="z, P, log(P) and log10(P)")
 
 ## ----pve, echo=FALSE, fig.cap="Comparisons of Var($R^2$) estimates", fig.height=6, fig.width=14, messages=FALSE, warning=FALSE----------------------
 oldpar <- par()
@@ -411,19 +408,19 @@ tnfb <- as.data.frame(scan(file=textConnection(tnfb),what=list("",0,0))) %>%
         setNames(c("outcome","Effect","StdErr")) %>%
         mutate(outcome=gsub("\\b(^[a-z])","\\U\\1",outcome,perl=TRUE))
 
-## ---- fig.cap="Forest plots for MR results on TNFB", fig.align="left", fig.height=6, fig.width=9, results="hide"------------------------------------
+## ----fig.cap="Forest plots for MR results on TNFB", fig.align="left", fig.height=6, fig.width=9, results="hide"-------------------------------------
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14, leftlabs=c("Outcome","b","SE"),
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
               spacing=1.6,digits.TE=2,digits.se=2,xlab="Effect size",type.study="square",col.inside="black",col.square="black")
 
-## ---- fig.cap="Forest plots for MR results on TNFB (no summary statistics)", fig.align="left", fig.height=6, fig.width=9, results="hide"------------
+## ----fig.cap="Forest plots for MR results on TNFB (no summary statistics)", fig.align="left", fig.height=6, fig.width=9, results="hide"-------------
 mr_forestplot(tnfb, colgap.forest.left="0.05cm", fontsize=14,
               leftcols="studlab", leftlabs="Outcome", plotwidth="3inch", sm="OR", rightlabs="ci",
               sortvar=tnfb[["Effect"]],
               common=FALSE, random=FALSE, print.I2=FALSE, print.pval.Q=FALSE, print.tau2=FALSE,
               backtransf=TRUE, spacing=1.6,type.study="square",col.inside="black",col.square="black")
 
-## ---- fig.cap="Forest plots for MR results on TNFB (with P values)", fig.align="left", fig.height=6, fig.width=9, results="hide"--------------------
+## ----fig.cap="Forest plots for MR results on TNFB (with P values)", fig.align="left", fig.height=6, fig.width=9, results="hide"---------------------
 mr_forestplot(tnfb,colgap.forest.left="0.05cm", fontsize=14,
               leftcols=c("studlab"), leftlabs=c("Outcome"),
               plotwidth="3inch", sm="OR", sortvar=tnfb[["Effect"]],
@@ -493,7 +490,7 @@ sd(y)
 alleles <- c("a","c","G","t")
 revStrand(alleles)
 
-## ---- echo=FALSE------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE-------------------------------------------------------------------------------------------------------------------------------------
 library(gap)
 search()
 lsf.str("package:gap")

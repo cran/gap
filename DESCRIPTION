@@ -1,8 +1,8 @@
 Type: Package
 Package: gap
 Title: Genetic Analysis Package
-Version: 1.5-3
-Date: 2023-8-25
+Version: 1.6
+Date: 2024-8-26
 Authors@R: c(
     person("Jing Hua", "Zhao", role = c("aut", "cre"),
            email = "jinghuazhao@hotmail.com",
@@ -30,14 +30,15 @@ Suggests: BradleyTerry2, DiagrammeR, DOT, MASS, Matrix, MCMCglmm,
         cowplot, coxme, foreign, genetics, grid, haplo.stats,
         htmlwidgets, jsonlite, kinship2, knitr, lattice, magic,
         manhattanly, matrixStats, meta, metafor, nlme, pedigree,
-        pedigreemm, plotrix, readr, reshape, rmarkdown, rms, survival
+        pedigreemm, plotrix, readr, reshape, rmarkdown, rms, survival,
+        valr
 Enhances: shiny
 LazyData: Yes
 LazyLoad: Yes
 NeedsCompilation: yes
 Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 RdMacros: Rdpack
 Author: Jing Hua Zhao [aut, cre] (<https://orcid.org/0000-0002-1463-5870>,
     0000-0003-4930-3582),
@@ -47,5 +48,5 @@ Author: Jing Hua Zhao [aut, cre] (<https://orcid.org/0000-0002-1463-5870>,
   Achim Zeileis [ctb]
 Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
 Repository: CRAN
-Date/Publication: 2023-08-26 14:10:07 UTC
-Packaged: 2023-08-25 16:30:43 UTC; jhz22
+Date/Publication: 2024-08-27 04:40:06 UTC
+Packaged: 2024-08-26 21:28:22 UTC; jhz22

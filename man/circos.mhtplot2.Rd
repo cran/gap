@@ -4,7 +4,7 @@
 \alias{circos.mhtplot2}
 \title{Another circos Manhattan plot}
 \usage{
-circos.mhtplot2(dat, labs, species = "hg18", ticks = 0:3 * 10, y = 20)
+circos.mhtplot2(dat, labs, species = "hg18", ticks = 0:3 * 10, ymax = 30)
 }
 \arguments{
 \item{dat}{Data to be plotted with variables chr, pos, log10p.}
@@ -15,7 +15,7 @@ circos.mhtplot2(dat, labs, species = "hg18", ticks = 0:3 * 10, y = 20)
 
 \item{ticks}{Tick positions.}
 
-\item{y}{Starting position of y-axis label.}
+\item{ymax}{maximum value for y-axis.}
 }
 \value{
 There is no return value but a plot.
@@ -43,7 +43,8 @@ labs <- subset(testdat,gene \%in\% glist) \%>\%
         mutate(cols="blue") \%>\%
         select(chr,start,end,gene,cols)
 labs[2,"cols"] <- "red"
-circos.mhtplot2(dat,labs,ticks=0:2*10)
+ticks <- 0:3*5
+circos.mhtplot2(dat,labs,ticks=ticks,ymax=max(ticks))
 # https://www.rapidtables.com/web/color/RGB_Color.html
 }
 }

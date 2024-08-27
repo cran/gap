@@ -52,7 +52,7 @@ but would like to invite others to join me and enlarge the collections and impro
 
 With recent work on genomewide association studies (GWASs) especially protein GWASs, I
 have added many functions such as `METAL_forestplot` which handles data from software
-METAL @willer10 and `sentinels` which extracts sentinels from GWAS summary statistics
+METAL @willer10 and `qtlFinder` which extracts sentinels from GWAS summary statistics
 in a way that is very appealing to us compared to some other established software.
 Meanwhile, the size of the package surpasses the limit as imposed by CRAN, thus the
 old good feature of `S` as with `R` that value both code and data alike has to suffer
@@ -186,6 +186,7 @@ metareg           |      Fixed and random effects model for meta-analysis
 muvar             |      Means and variances under 1- and 2- locus (diallelic) QTL model
 pvalue            |      P value for a normal deviate
 qtlClassifier     |      A QTL cis/trans classifier
+qtlFinder         |      Distance-based signal identification
 read.ms.output    |      A utility function to read ms output
 revStrand         |      Allele on the reverse strand
 runshinygap       |      Start shinygap
@@ -255,7 +256,7 @@ I have included the original file for the *R News* as well as put examples in se
 vignettes. They can be accessed via `vignette("rnews",package="gap.examples")` and 
 `vignette("pedtodot", package="gap.examples")`, respectively.
 
-We also demonstrate through pedigree 10081 example @zhao06 with `pedtodot_verbatim`.
+We also demonstrate through pedigree 10081 example @zhao06c with `pedtodot_verbatim`.
 
 ```{r, echo=FALSE}
 p1 <- "
@@ -455,7 +456,7 @@ for(i in 1:3)
 {
   q <- s_nb[i]/n
   power <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta,TRUE)
-  ssize <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta)
+  ssize <- ccsize(n,q,pD,p1,log(theta[i]),alpha,beta,FALSE)
   cat(n,"\t",pD,"\t",p1,"\t",theta[i],"\t",q,"\t",
       signif(power,3),"\t",ssize,"\n",
       file=outfile,append=TRUE)
@@ -478,7 +479,7 @@ for(pD in s_pD)
    {
       for(hr in s_hr)
       {
-         ssize <- ccsize(n,q,pD,p1,log(hr),alpha,beta)
+         ssize <- ccsize(n,q,pD,p1,log(hr),alpha,beta,FALSE)
          if (ssize>0) cat(n,"\t",pD,"\t",p1,"\t",hr,"\t",alpha,"\t",
                           ssize,"\n",
                           file=outfile,append=TRUE)
@@ -569,13 +570,13 @@ labs <- subset(testdat,gene %in% glist) %>%
         mutate(cols="blue") %>%
         select(chr,start,end,gene,cols)
 labs[2,"cols"] <- "red"
-circos.mhtplot2(dat,labs,ticks=0:2*10)
+ticks <- 0:2*5
+circos.mhtplot2(dat,labs,ticks=ticks,ymax=max(ticks))
 ```
 
 As a side note, the data is used by `manhattanly`.
 
 ```r
-#too slowly to show here.
 #{r mhttest, fig.cap="Manhattanly plot", fig.height=8, fig.width=8, plotly=TRUE}
 library(manhattanly)
 mhttest <- manhattanly(mhtdata, chr = "chr", bp = "pos",
@@ -784,14 +785,10 @@ One can also derive logpvalue for natural base (e) similarly.
 We end with a quick look-up table
 ```{r}
 require(gap)
-v <- data.frame()
-for (z in c(5,10,30,40,50,100,500,1000,2000,3000,5000))
-{
-  vi <- c(z,pvalue(z),logp(z),log10p(z))
-  v <- rbind(v,vi)
-}
-names(v) <- c("z","P","log(P)","log10(P)")
-knitr::kable(v,caption="z,P,log(P) and log10(P)")
+zlist <- c(5,10,30,40,50,100,500,1000,2000,3000,5000)
+zp <- sapply(zlist,function(z) {c(z,pvalue(z),logp(z),log10p(z))})
+rownames(zp) <- c("z","P","log(P)","log10(P)")
+knitr::kable(t(zp),caption="z, P, log(P) and log10(P)")
 ```
 
 ## Application
@@ -976,7 +973,16 @@ get_sdy(0.6396966,23991,0.04490488,0.009504684)
 
 and indeed the eQTLGen data were standardized.
 
-# Fine-mapping
+# Sentinels of association
+
+## Identification
+
+Following an earlier implementation called `sentinels`, a distance-based signal
+identification based on GWAS summary statistics is avaialable from `qtlFinder`
+function; to avoid the overhead of data-loading it works on a preselected list
+of variants from a GWAS and in this case a METAL output file.
+
+## Fine-mapping
 
 We considered a region of interest (which could be approximately independent variants,
 e.g., $r^2 \le 0.5$) using expressions that rely on effect sizes and their standard

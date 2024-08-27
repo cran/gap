@@ -1,5 +1,15 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.6
+26-08-2024	Replace PI with M_PI in gcontrol_c.c
+		Add qtlClassifer/qtl2dplot coupling example
+		sed -i '/ISSN/d' inst/REFERENCE.bib
+		Replace looping with sapply() for the z-p lookup table / citation in gap.Rmd
+		Set font=2/4 for yaxis/genes and amendment in circos.mhtplot2()
+		Add find_qtls --> qtlFinder, suggesting valr
+		Reset ccsize(power=TRUE) due to D. Hill + revise vignette / shinygap/global.R
+		Add Type= to METAL_forestplot()
+
 Version 1.5-3
 25-08-2023	Depends: R (>= 2.10), gap.datasets (>= 0.0.6) as suggested by Uwe Ligges
 
