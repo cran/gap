@@ -7,7 +7,7 @@ knitr::opts_chunk$set(
   fig.path = "./",
   collapse = TRUE,
   comment = "#>",
-  dev = "png")
+  dev = "ragg_png")
 
 ## ----echo=FALSE---------------------------------------------------------------
 p1 <- "

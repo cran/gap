@@ -1,8 +1,8 @@
 Type: Package
 Package: gap
 Title: Genetic Analysis Package
-Version: 1.6
-Date: 2024-8-26
+Version: 1.9
+Date: 2026-2-5
 Authors@R: c(
     person("Jing Hua", "Zhao", role = c("aut", "cre"),
            email = "jinghuazhao@hotmail.com",
@@ -29,24 +29,23 @@ Suggests: BradleyTerry2, DiagrammeR, DOT, MASS, Matrix, MCMCglmm,
         R2jags, bdsmatrix, bookdown, calibrate, circlize, coda,
         cowplot, coxme, foreign, genetics, grid, haplo.stats,
         htmlwidgets, jsonlite, kinship2, knitr, lattice, magic,
-        manhattanly, matrixStats, meta, metafor, nlme, pedigree,
-        pedigreemm, plotrix, readr, reshape, rmarkdown, rms, survival,
-        valr
+        matrixStats, meta, metafor, nlme, pedigree, pedigreemm,
+        plotrix, ragg, readr, reshape, rmarkdown, rms, survival, valr
 Enhances: shiny
 LazyData: Yes
 LazyLoad: Yes
 NeedsCompilation: yes
 Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 RdMacros: Rdpack
-Author: Jing Hua Zhao [aut, cre] (<https://orcid.org/0000-0002-1463-5870>,
-    0000-0003-4930-3582),
+Author: Jing Hua Zhao [aut, cre] (ORCID:
+    <https://orcid.org/0000-0002-1463-5870>, 0000-0003-4930-3582),
   Kurt Hornik [ctb],
   Brian Ripley [ctb],
   Uwe Ligges [ctb],
   Achim Zeileis [ctb]
 Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
 Repository: CRAN
-Date/Publication: 2024-08-27 04:40:06 UTC
-Packaged: 2024-08-26 21:28:22 UTC; jhz22
+Date/Publication: 2026-02-06 06:40:37 UTC
+Packaged: 2026-02-05 22:28:35 UTC; jhz22
