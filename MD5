@@ -1,5 +1,5 @@
-bfd0bacec43040c87000153ee016abf3 *ChangeLog
-3ed1f0838642c5f2ce6db421f609b73e *DESCRIPTION
+9f8e3011c80caff3580f91fd771b6dd0 *ChangeLog
+28497309d962af000350710c9bacb082 *DESCRIPTION
 586211cc1e0119e64c32e70aa0b1f017 *NAMESPACE
 ef4a82ee4094d4b00524511a2facc1a9 *R/2ld.R
 8a6f463a2e124fe6b5a6c0695d44b9e6 *R/AE3.R
@@ -54,7 +54,7 @@ e47a10bee8c3070147a48dfe654bf620 *R/hwe.R
 84613092cf17f3501ad8896b6f56d764 *R/hwe.hardy.R
 5c693453ec06e6ed0963b9aca13b171a *R/hwe.jags.R
 ff9c7aa41201e541906ebc7eaefcfedf *R/invnormal.R
-530686e6c344fc7841c4c772169e5522 *R/kin.morgan.R
+0351778d578e23ee1023e9318e63f242 *R/kin.morgan.R
 e2fbdd4fc2e55c648493f826befa164b *R/labelManhattan.R
 89e345ba0656ef8a72e416ea3c313ca5 *R/log10p.R
 30786343d55f2412e868249935ad8b82 *R/log10pvalue.R
@@ -102,8 +102,8 @@ efe50903792c312706e6f5f7902d395d *R/snptest_sample.R
 6d182792a8e0ac2b5027b2f59dcb454a *R/tscc.R
 5e64cccf0e049c367bf892c00fa11ca5 *R/utils.R
 1105a57e3ebd5b8264925ed5aa551c65 *R/whscore.R
-cae26f5444b053c356cca4c47866c370 *build/partial.rdb
-2ee43ca9b71d51c2817fb493a84784a6 *build/vignette.rds
+d463908ce742ccfe5e03612fd2564b00 *build/partial.rdb
+b2a7a78e6b7c74005fdf779d9c44e1ad *build/vignette.rds
 2d62a49c590367ac4cc50c3bc8135599 *data/datalist
 63b4c0bbe8d3695d309291a49ba01fda *data/hg18.rda
 ddc6b565b89f453841a035bd10e8581e *data/hg19.rda
@@ -115,11 +115,8 @@ c2ce2a70a86c1528bf6e8177ac82047f *demo/gap.R
 51f663a162ce7a07c070c7b919736c91 *inst/JAGS/hwe.jags
 e4d6c4707625bba1f0723ce5b6a3d914 *inst/README.md
 d0697e7c70230fadbd3b60ed6af1b318 *inst/REFERENCES.bib
-ece11af6f5873ff52a9f9a8cf4d43758 *inst/doc/gap.R
-b259528c4d06042412b30cde645888a1 *inst/doc/gap.Rmd
-a713658322f5e0466167ba0f76334575 *inst/doc/gap.html
 e9e313532690de461393e4920e8ee024 *inst/doc/shinygap.Rmd
-a0389b85b812de7a1410605592b4d42c *inst/doc/shinygap.html
+35ed2d3e96e8d218fb2fccaa19c8162b *inst/doc/shinygap.html
 84f48cc3976e173c7ff29b76f0c673dc *inst/ms/clms
 5ae1af1445c95f5e9718070f277a7259 *inst/ms/ms.c
 eafafa8fa89edef1f0bcaffa3acf26b0 *inst/ms/ms.h
@@ -204,7 +201,7 @@ c1092891303534f4ec9a2bb17f4f5ee0 *man/htr.Rd
 39b48faa5088265c07389681425f6082 *man/inv_chr_pos_a1_a2.Rd
 e339d1710450603507d47bf227d99c21 *man/invnormal.Rd
 c809809f6cce4f230e748901846defd5 *man/ixy.Rd
-1efeaf8944cfa713309a3afe6d70656f *man/kin.morgan.Rd
+a71c50b41877fa991644931e478791dc *man/kin.morgan.Rd
 d5c7e3dd0641766139c6b6143f0b9011 *man/klem.Rd
 1356f6457e1eb99747ce3103bcf49549 *man/labelManhattan.Rd
 6a31fb9903adca7408e3a43bd14f6d5e *man/log10p.Rd
@@ -254,7 +251,7 @@ ffc715fa45f520fe9b4bdcf4e176a2c0 *man/tscc.Rd
 c107a39e740952be4ec7c2c0c8cccc0f *man/whscore.Rd
 08aa1435ac2863a8a4266b7e9687b9f3 *man/xy.Rd
 6a3db0aa3ec9141f9d06dc88ce14b82b *src/2k.c
-fcfc5b6fad38f7b28bc981a121c58c9c *src/2ld.c
+4baa5060a6c3a8aa29032cf7a0d459e8 *src/2ld.c
 05937c1a3c35fb75d582fd6cd4178c39 *src/cline.c
 dd47033074934e7488c53a721e9a3e9d *src/cline.h
 e47416ab52a7aed06797e84d41e9b959 *src/gcontrol_c.c
@@ -270,13 +267,11 @@ b86806249406f1a6ad3642d6b70679d6 *src/makeped_c.c
 15f87bd40169dd3d4c7208a873025c77 *src/mia.c
 90e1185baab2434a855abdce1dd65861 *src/muvar.c
 f65818e0b5ee4be5c83fa8e7048a99f6 *src/nghds.h
-bb371511e331f32f627790a1570d55c1 *src/package_native_routine_registration_skeleton.c
+f6035fa6806288a5c68f29d69f4f8ca2 *src/package_native_routine_registration_skeleton.c
 538f8e185dec6c2211039bafacec5846 *src/pfc.f
 0f8b631690bdd7f7c28279fb3269458b *src/pfc.sim.f
 168d2990f78f643e5d39cfbe15011551 *src/pgc.h
 bd7b163f55c84a709ec468f94e31242f *src/pgc_c.c
 d56a95e439a688ddfc520deeeb12ed6a *src/whscore.c
-98f95fc0b77c71c2546a88b74745d927 *vignettes/IL-12B.png
-b259528c4d06042412b30cde645888a1 *vignettes/gap.Rmd
 d8d6ff07b786683ff3b7876604b33014 *vignettes/nature-genetics.csl
 e9e313532690de461393e4920e8ee024 *vignettes/shinygap.Rmd

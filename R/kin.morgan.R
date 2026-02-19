@@ -1,6 +1,6 @@
 #' kinship matrix for simple pedigree
 #'
-#' @param ped individual's id, father's id and mother's id.
+#' @param ped A matrix with columns on individual's id, father's id and mother's id.
 #' @param verbose an option to print out the original pedigree.
 #'
 #' @details
@@ -78,7 +78,7 @@ kin.morgan<-function(ped,verbose=FALSE)
       print(t(rbind(peddata,pedindex)))
    }
    z<-.C("kin_morgan",data=as.integer(peddata),pedsize=as.integer(pedsize),
-         pedinex=as.integer(pedindex),kin=as.double(array(kin)),PACKAGE="gap")
+         pedindex=as.integer(pedindex),kin=double(length(kin)),PACKAGE="gap")
    kin.matrix=v2k(z$kin)
    colnames(kin.matrix) <- rownames(kin.matrix) <- id
    list(kin=z$kin,kin.matrix=kin.matrix)

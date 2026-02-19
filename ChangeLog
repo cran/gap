@@ -1,5 +1,26 @@
 Version history of the R genetic analysis package (R/gap)
 
+Version 1.14
+19-02-2026	Adopt --use-valgrind / .valgrindrc
+		Revise gap.Rmd and relocate to gap.examples
+		- Fix the sticky kin.morgan() call from gap.Rmd
+		- Restore bookdown::html_document2 as it renders well on CRAN.
+
+Version 1.13
+10-02-2026	Drop bookdown::html_document2 entirely from gap.Rmd
+
+Version 1.12
+10-02-2026	Disable bookdown::html_document2 on CRAN (beyond its limit) in gap.Rmd
+		Drop ragg from Suggests
+
+Version 1.11
+09-02-2026	Amend gap.Rmd
+		Rework on C codes including package_native_routine_registration_skeleton.c
+
+Version 1.10
+09-02-2026	Fix kin.morgan() via Fedora 43 ASAN, https://github.com/jinghuazhao/R/blob/master/docs/R-devel.sh
+		Switch back from buggy ragg_png to png with option(bitmapType = "cairo")
+
 Version 1.9
 05-02-2026	Rename two URL-am's with DOIs and drop the rest
 
