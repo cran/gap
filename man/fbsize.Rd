@@ -42,7 +42,7 @@ The returned value is a list containing:
 Sample size for family-based linkage and association design
 }
 \details{
-This function implements Risch and Merikangas (1996) statistics
+This function implements \insertCite{risch96;textual}{gap} statistics
 evaluating power for family-based linkage (affected sib pairs, ASP) and
 association design. They are potentially useful in the prospect of
 genome-wide association studies.
@@ -96,14 +96,8 @@ fbsize(g,p)
 
 }
 \references{
-Risch, N. and K. Merikangas (1996). The future of genetic studies of
-complex human diseases. Science 273(September): 1516-1517.
-
-Risch, N. and K. Merikangas (1997). Reply to Scott el al. Science
-275(February): 1329-1330.
-
-Scott, W. K., M. A. Pericak-Vance, et al. (1997). Genetic analysis of
-complex diseases. Science 275: 1327.
+\insertAllCited{}
+\insertRef{risch96}{gap}\insertRef{risch97}{gap}\insertRef{scott97}{gap}
 }
 \seealso{
 \code{\link{pbsize}}

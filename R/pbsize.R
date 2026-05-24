@@ -7,7 +7,7 @@
 #' @param beta type II error rate.
 #'
 #' @details
-#' This function implements \insertCite{sph97;textual}{gap} statistics for population-based
+#' This function implements \insertCite{scott97;textual}{gap} statistics for population-based
 #' association design. This is based on a contingency table test and accurate level of
 #' significance can be obtained by Fisher's exact test.
 #'
@@ -16,13 +16,7 @@
 #' The returned value is scaler containing the required sample size.
 #'
 #' @references
-#' \insertAllCited{}
-#'		
-#' Long AD, Grote MN, Langley CH (1997). Genetic analysis of complex traits. Science 275: 1328.
-#'
-#' \insertRef{rosner00}{gap}
-#'
-#' \insertRef{armitage05}{gap}
+#' \insertRef{scott97}{gap}\insertRef{rosner00}{gap}\insertRef{armitage05}{gap}
 #'
 #' @seealso [`fbsize`]
 #'

@@ -56,7 +56,7 @@ qqfun(
 
 \item{bg}{background color of points.}
 
-\item{cex}{factor for expanding the size of plotted symbols; the default is `.4.}
+\item{cex}{factor for expanding the size of plotted symbols; the default is \code{.4}.}
 
 \item{line}{\code{"quartiles"} to pass a line through the quartile-pairs, or \code{"robust"} for a robust-regression line; the latter uses the \code{rlm} function in the \code{MASS} package. Specifying \code{line = "none"} suppresses the line.}
 
@@ -75,26 +75,27 @@ Draws theoretical quantile-comparison plots for variables and for studentized re
 
 Any distribution for which quantile and density functions exist in R (with prefixes \code{q} and \code{d}, respectively) may be used. Studentized residuals are plotted against the appropriate t-distribution.
 
-This is adapted from \code{\link[car:car-defunct]{car::qq.plot}} with different values for points and lines, more options, more transparent code and examples in the current setting. Another similar but sophisticated function is \code{\link[lattice:qqmath]{lattice::qqmath}}.
+This is adapted from \code{\link[car:qq.plot]{car::qq.plot}} with different values for points and lines, more options, more transparent code and examples in the current setting. Another similar but sophisticated function is \code{\link[lattice:qqmath]{lattice::qqmath}}.
 }
 \examples{
 \dontrun{
 p <- runif(100)
 alpha <- 1/log(10)
-qqfun(p,dist="unif")
-qqfun(-log10(p),dist="exp",rate=alpha,pch=21)
+
+qqfun(p,distribution="unif")
+qqfun(-log10(p),distribution="exp",rate=alpha,pch=21)
+
 library(car)
 qq.plot(p,dist="unif")
 qq.plot(-log10(p),dist="exp",rate=alpha)
 
 library(lattice)
-qqmath(~ -log10(p), distribution = function(p) qexp(p,rate=alpha))
+qqmath(~ -log10(p), distribution=function(p) qexp(p,rate=alpha))
 }
 
 }
 \references{
 \insertRef{davison03}{gap}
-
 \insertRef{leemis08}{gap}
 }
 \seealso{

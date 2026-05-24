@@ -8,7 +8,7 @@
 #' @param error 0=use the correct formula,1=the original paper.
 #'
 #' @details
-#' This function implements Risch and Merikangas (1996) statistics 
+#' This function implements \insertCite{risch96;textual}{gap} statistics
 #' evaluating power for family-based linkage (affected sib pairs, ASP) and
 #' association design. They are potentially useful in the prospect of
 #' genome-wide association studies.
@@ -29,15 +29,8 @@
 #' - lambdas lambda s.
 #'
 #' @references
-#'
-#' Risch, N. and K. Merikangas (1996). The future of genetic studies of
-#' complex human diseases. Science 273(September): 1516-1517.
-#'
-#' Risch, N. and K. Merikangas (1997). Reply to Scott el al. Science
-#' 275(February): 1329-1330.
-#'
-#' Scott, W. K., M. A. Pericak-Vance, et al. (1997). Genetic analysis of 
-#' complex diseases. Science 275: 1327.
+#' \insertAllCited{}
+#' \insertRef{risch96}{gap}\insertRef{risch97}{gap}\insertRef{scott97}{gap}
 #'
 #' @seealso [`pbsize`]
 #'
@@ -88,9 +81,6 @@
 fbsize <- function (gamma,p,alpha=c(1e-4,1e-8,1e-8),beta=0.2,debug=0,error=0)
 # Family-based sample sizes
 # Jing Hua Zhao 30-12-98, 19-8-2009
-# Risch & Merikangas 1996
-# Science 273: 1516-17 13SEP1996
-# Science 275: 1327-30 28FEB1997
 {
   sn <- function (all,alpha,beta,op)
   # m=0,v=1 under the null hypotheses

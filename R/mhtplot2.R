@@ -1,26 +1,11 @@
 #' Manhattan plot with annotations
 #'
 #' @param data a data frame with three columns representing chromosome, position and p values.
-#' @param control A control function named mht.control() with the following arguments:
-#' - type a flag with value "p" or "l" indicating if points or lines are to be drawn.
-#' - usepos a flag to use real chromosomal positions as composed to ordinal positions with default value FALSE.
-#' - logscale a flag to indicate if p value is to be log-transformed with default value TRUE.
-#' - base the base of the logarithm with default value 10.
-#' - cutoffs the cut-offs where horizontal line(s) are drawn with default value NULL.
-#' - colors the color for different chromosome(s), and random if unspecified with default values NULL.
-#' - labels labels for the ticks on x-axis with default value NULL.
-#' - srt degree to which labels are rotated with default value of 45.
-#' - gap gap between chromosomes with default value NULL.
-#' - cex cex for the data points.
-#' - yline Margin line position.
-#' - xline Margin line position.
-#' @param hcontrol A control function named hmht.control() with the following arguments:
-#' - data chunk of data to be highlighted with default value NULL.
-#' - colors colors for annotated genes.
-#' - yoffset offset above the data point showing most significant p value with default value 0.5.
-#' - cex shrinkage factor for data points with default value 1.5.
-#' - boxed if the label for the highlited region with default value FALSE.
-#' @param ... other options in compatible with the R plot function.
+#' @param control A list produced by [mht.control()] controlling plot behaviour.
+#' @param hcontrol A list produced by [hmht.control()] defining highlighted markers or regions and labels.
+#' @param ... Additional graphical arguments passed to [graphics::plot()]
+#'   (e.g. `pch`, `bg`, `xlab`, `ylab`, `ylim`).
+#'   If `mar` is supplied, the default margins are not modified.
 #'
 #' @details
 #' To generate Manhattan plot with annotations. The function is generic and for instance could be used for genomewide
@@ -28,18 +13,12 @@
 #' Note that with real chromosomal positions, it is also appropriate to plot and some but not all chromosomes.
 #'
 #' It is possible to specify options such as xlab, ylim and font family when the plot is requested for data in other
-#' context.
-#'
-#' To maintain back compatibility options as in [`mhtplot`] are used. The positions of the horizontal
-#' labels are now in the middle rather than at the beginning of their bands in the plot.
+#' context. The example uses only chromosomes 14 and 20 of \insertCite{denhoed13}{gap}.
 #'
 #' @export
-#' @return
-#' The plot is shown on or saved to the appropriate device.
+#' @return shown on or saved to the appropriate device.
 #' @examples
 #' \dontrun{
-#' The following example uses only chromosomes 14 and 20 of the Nat Genet paper.
-#'
 #' mdata <- within(hr1420,{
 #'   c1<-colour==1
 #'   c2<-colour==2
@@ -49,8 +28,8 @@
 #'   colour[c3] <- 552
 #' })
 #' mdata <- mdata[,c("CHR","POS","P","gene","colour")]
-#' ops <- mht.control(colors=rep(c("lightgray","gray"),11),yline=1.5,xline=2,srt=0)
-#' hops <- hmht.control(data=subset(mdata,!is.na(gene)))
+#' ops <- mht.control(colors=rep(c("lightgray","gray"),11),yline=1.5,xline=2)
+#' hops <- hmht.control(data=subset(mdata,!is.na(gene)),boxed=TRUE)
 #' v <- "Verdana"
 #' ifelse(Sys.info()['sysname']=="Windows", windowsFonts(ffamily=windowsFont(v)),
 #'        ffamily <- v)
@@ -67,17 +46,17 @@
 #' # in response to query from Vallejo, Roger <Roger.Vallejo@ARS.USDA.GOV>
 #' opar <- par()
 #' par(cex=0.4)
-#' ops <- mht.control(colors=rep(c("lightgray","lightblue"),11),srt=0,yline=2.5,xline=2)
-#' mhtplot2(data.frame(mhtdata[,c("chr","pos","p")],gene=NA,color=NA),ops,xlab="",ylab="",srt=0)
+#' ops <- mht.control(colors=rep(c("lightgray","lightblue"),11),yline=2.5,xline=2)
+#' mhtplot2(data.frame(mhtdata[,c("chr","pos","p")],gene=NA,color=NA),ops,xlab="",ylab="")
 #' axis(2,at=1:16)
 #' title("data in mhtplot used by mhtplot2")
 #' par(opar)
 #' }
 #' @references
 #' \insertRef{denhoed13}{gap}
+#'
 #' @author Jing Hua Zhao
-#' @keywords hplot
-
+#'
 mhtplot2 <- function (data, control = mht.control(), hcontrol = hmht.control(), ...)
 {
     for(p in c("grid")) {
@@ -179,7 +158,6 @@ mhtplot2 <- function (data, control = mht.control(), hcontrol = hmht.control(), 
         text(ifelse(i == 1, CM[1]+(CM[u]-CM[l])/2, CM[l]+(CM[u]-CM[l])/2), y1, pos = 1, offset = 1.5, 
              labels[i], srt = srt, ...)
     }
-    j <- 1
     for (i in 1:n.chr) {
         u <- CMindex[i]
         l <- CMindex[i] - allchr[i] + 1
@@ -207,11 +185,23 @@ mhtplot2 <- function (data, control = mht.control(), hcontrol = hmht.control(), 
                   l2 <- hu - l + 1
                   col.index <- as.integer(colnames(namecol)[gmat[rownames(gmat)==hchrs[k]]])
                   col.label <- colors()[col.index]
-                  if (hboxed) textbox(hchrs[k], name="tbt", vp=grid::viewport(x = CM[chr][l1]/max(CM), y = (max(y[l1:l2]) +  hyoffs)/max(y)))
-                  else text(CM[chr][l1], max(y[l1:l2] + hyoffs), hchrs[k],
-                       col=col.label, cex = hcex, font=3, ...)
- #                 points(CM[l + (l1:l2)], y[l1:l2], col = col.label, cex = pcex, ...)
-                  j <- j + 1
+                  idx <- chr
+                  hx <- CM[idx][l1]
+                  hy <- max(y[l1:l2]) + hyoffs
+                  lab <- hchrs[k]
+                  if (hboxed) {
+                     usr <- par("usr")
+                     pin <- par("pin")
+                     xinch <- diff(usr[1:2]) / pin[1]
+                     yinch <- diff(usr[3:4]) / pin[2]
+                     w <- strwidth(lab, units="inches") * xinch * 1.3
+                     h <- strheight(lab, units="inches") * yinch * 1.6
+                     rect(hx - w/2, hy - h/2, hx + w/2, hy + h/2,
+                          col="white", border="black")
+                     text(hx, hy, lab, cex=hcex, font=3)
+                  } else {
+                     text(hx, hy, lab, cex=hcex, font=3)
+                  }
                 }
             }
         }
