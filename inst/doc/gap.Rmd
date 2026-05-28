@@ -1,5 +1,5 @@
 ---
-title: ""
+title: " "
 output:
   bookdown::html_document2:
     toc: true
@@ -11,7 +11,7 @@ pkgdown:
   as_is: true
 
 vignette: >
-  %\VignetteIndexEntry{An Overview of pQTLtools}
+  %\VignetteIndexEntry{Genetic Analysis Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,12 +27,12 @@ knitr::opts_chunk$set(
   out.extra = 'style="display:block; margin:auto"',
   dev = "CairoPNG"
 )
+```
 
-```{r gap_incl, echo=FALSE}
+```{r gap_incl, echo=FALSE, warning=FALSE}
 htmltools::tags$iframe(
-  src = "gap_incl.html",
+  src = "https://jinghuazhao.github.io/R/vignettes/gap.html",
   width = "100%",
   height = "600px",
   style = "border:none;"
 )
-```

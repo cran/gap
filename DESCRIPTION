@@ -1,8 +1,8 @@
 Type: Package
 Package: gap
 Title: Genetic Analysis Package
-Version: 1.15.1
-Date: 2026-05-24
+Version: 1.15.2
+Date: 2026-05-26
 Authors@R: c(
     person("Jing Hua", "Zhao", role = c("aut", "cre"),
            email = "jinghuazhao@hotmail.com",
@@ -40,7 +40,7 @@ VignetteBuilder: knitr
 RdMacros: Rdpack
 Config/roxygen2/version: 8.0.0
 RoxygenNote: 7.3.3
-Packaged: 2026-05-24 16:25:00 UTC; jhz22
+Packaged: 2026-05-26 13:30:10 UTC; jhz22
 Author: Jing Hua Zhao [aut, cre] (ORCID:
     <https://orcid.org/0000-0002-1463-5870>, 0000-0003-4930-3582),
   Kurt Hornik [ctb],
@@ -49,4 +49,4 @@ Author: Jing Hua Zhao [aut, cre] (ORCID:
   Achim Zeileis [ctb]
 Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
 Repository: CRAN
-Date/Publication: 2026-05-24 17:00:02 UTC
+Date/Publication: 2026-05-28 05:11:05 UTC

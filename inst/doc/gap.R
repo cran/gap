@@ -10,10 +10,9 @@ knitr::opts_chunk$set(
   dev = "CairoPNG"
 )
 
-
-## ----gap_incl, echo=FALSE-----------------------------------------------------
+## ----gap_incl, echo=FALSE, warning=FALSE--------------------------------------
 htmltools::tags$iframe(
-  src = "gap_incl.html",
+  src = "https://jinghuazhao.github.io/R/vignettes/gap.html",
   width = "100%",
   height = "600px",
   style = "border:none;"
