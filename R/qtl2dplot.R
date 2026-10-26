@@ -26,19 +26,18 @@
 #' @return positional information.
 #' @examples
 #' \dontrun{
-#' INF <- Sys.getenv("INF")
-#' d <- read.csv(file.path(INF,"work","INF1.merge.cis.vs.trans"),as.is=TRUE)
-#' r <- qtl2dplot(d)
+#' # SCALLOP/INF
+#' d <- read.csv("~/INF/work/INF1.merge.cis.vs.trans",as.is=TRUE)
+#' inf <- qtl2dplot(d,cex.points=-d[["log10p"]]/50)
 #' # A qtlClaaifier/qtl2dplot coupling example:
-#' ucsc_modified <- bind_rows(ucsc,APOC,AMY,C4B,HIST,HBA)
-#' pqtls <- select(merged,prot,SNP,log.P.) %>%
-#'          mutate(log10p=-log.P.) %>%
-#'          left_join(caprion_modified) %>%
-#'          select(Gene,SNP,prot,log10p)
-#' posSNP <- select(merged,SNP,Chr,bp)
-#' cis.vs.trans <- qtlClassifier(pqtls,posSNP,ucsc_modified,1e6) %>%
-#'                 mutate(geneChrom=as.integer(geneChrom),
-#'                        cis=if_else(Type=="cis",TRUE,FALSE))
+#' cis.vs.trans <- read.csv("~/Caprion/analysis/work/caprion_dr.cis.vs.trans",as.is=TRUE)
+#' caprion <- qtl2dplot(cis.vs.trans,chrlen=gap::hg19,
+#'            snp_name="SNP",snp_chr="SNPChrom",snp_pos="SNPPos",
+#'            gene_chr="geneChrom",gene_start="geneStart",gene_end="geneEnd",
+#'            trait="prot",gene="Gene",
+#'            TSS=TRUE,cis="cis",plot=TRUE,
+#'            cex.labels=0.6,cex.points=cis.vs.trans[["log10p"]]/40,
+#'            xlab="pQTL position",ylab="Gene position")
 #' head(cis.vs.trans)
 #'     Gene             SNP  prot log10p geneChrom geneStart  geneEnd SNPChrom    SNPPos  cis
 #'    YWHAB 8:111907280_A_T 1433B   7.38        20  43530174 43535076        8 111907280 FALSE
@@ -47,14 +46,8 @@
 #'      PGD 2:121896327_A_G  6PGD   7.79         1  10459174 10479803        2 121896327 FALSE
 #' SERPINF2  17:1618262_C_T  A2AP  12.59        17   1648289  1657825       17   1618262  TRUE
 #'     PGLS 19:54327869_G_T  6PGL   9.87        19  17622481 17631887       19  54327869 FALSE
-#' qtl2dplot(cis.vs.trans,chrlen=gap::hg19,
-#'           snp_name="SNP",snp_chr="SNPChrom",snp_pos="SNPPos",
-#'           gene_chr="geneChrom",gene_start="geneStart",gene_end="geneEnd",
-#'           trait="prot",gene="Gene",
-#'           TSS=TRUE,cis="cis",plot=TRUE,cex.labels=0.6,cex.points=0.6,
-#'           xlab="pQTL position",ylab="Gene position")
 #' }
-
+#'
 qtl2dplot <- function(d, chrlen=gap::hg19, snp_name="SNP", snp_chr="Chr", snp_pos="bp",
                       gene_chr="p.chr", gene_start="p.start", gene_end="p.end",
                       trait="p.target.short", gene="p.gene", TSS=FALSE,
@@ -68,16 +61,16 @@ qtl2dplot <- function(d, chrlen=gap::hg19, snp_name="SNP", snp_chr="Chr", snp_po
   chr1 <- d[[snp_chr]]
   chr1[chr1=="X"] <- 23
   chr1[chr1=="Y"] <- 24
-  pos1 <- CM[chr1] + d[[snp_pos]]
+  pos1 <- CM[as.integer(chr1)] + d[[snp_pos]]
   chr2 <- d[[gene_chr]]
   chr2[chr2=="X"] <- 23
   chr2[chr2=="Y"] <- 24
   pos <- (d[[gene_start]] + d[[gene_end]])/2
   if (TSS) pos <- d[[gene_start]]
-  pos2 <- CM[chr2] + pos
+  pos2 <- CM[as.integer(chr2)] + pos
   if (plot) {
      points(pos1, pos2, cex=cex.points, col=ifelse(d[[cis]],"red","blue"), pch=19)
-     legend("top", legend=c("cis","trans"), box.lty=0, cex=cex.points, col=c("red","blue"),
+     legend("top", legend=c("cis","trans"), box.lty=0, cex=cex.labels, col=c("red","blue"),
             horiz=TRUE, inset=c(0,1), xpd=TRUE, pch=19)
   }
   return(list(n=n, CM=CM, data=data.frame(id=d[[snp_name]],

@@ -1,8 +1,8 @@
 Type: Package
 Package: gap
 Title: Genetic Analysis Package
-Version: 1.15.2
-Date: 2026-05-26
+Version: 1.15.3
+Date: 2026-10-26
 Authors@R: c(
     person("Jing Hua", "Zhao", role = c("aut", "cre"),
            email = "jinghuazhao@hotmail.com",
@@ -24,13 +24,13 @@ License: GPL (>= 2)
 URL: https://github.com/jinghuazhao/R
 BugReports: https://github.com/jinghuazhao/R/issues
 Depends: R (>= 2.10), gap.datasets (>= 0.0.6)
-Imports: dplyr, ggplot2, plotly, Rdpack
+Imports: dplyr, ggplot2, grDevices, plotly, Rdpack
 Suggests: BradleyTerry2, DiagrammeR, MASS, Matrix, MCMCglmm, R2jags,
         bdsmatrix, bookdown, calibrate, circlize, coda, cowplot, coxme,
-        foreign, genetics, grDevices, haplo.stats, htmltools,
-        htmlwidgets, jsonlite, kinship2, knitr, lattice, magic,
-        matrixStats, meta, metafor, nlme, pedigree, pedigreemm,
-        plotrix, readr, reshape, rmarkdown, rms, scales, survival, valr
+        foreign, genetics, haplo.stats, htmltools, htmlwidgets,
+        jsonlite, kinship2, knitr, lattice, magic, matrixStats, meta,
+        metafor, nlme, pedigree, pedigreemm, plotrix, readr, remotes,
+        reshape, rmarkdown, rms, scales, survival, testthat, valr
 Enhances: shiny
 LazyData: Yes
 LazyLoad: Yes
@@ -38,9 +38,10 @@ NeedsCompilation: yes
 Encoding: UTF-8
 VignetteBuilder: knitr
 RdMacros: Rdpack
+Config/testthat/edition: 3
 Config/roxygen2/version: 8.0.0
 RoxygenNote: 7.3.3
-Packaged: 2026-05-26 13:30:10 UTC; jhz22
+Packaged: 2026-10-26 10:54:24 UTC; jhz22
 Author: Jing Hua Zhao [aut, cre] (ORCID:
     <https://orcid.org/0000-0002-1463-5870>, 0000-0003-4930-3582),
   Kurt Hornik [ctb],
@@ -49,4 +50,4 @@ Author: Jing Hua Zhao [aut, cre] (ORCID:
   Achim Zeileis [ctb]
 Maintainer: Jing Hua Zhao <jinghuazhao@hotmail.com>
 Repository: CRAN
-Date/Publication: 2026-05-28 05:11:05 UTC
+Date/Publication: 2026-10-26 20:10:02 UTC

@@ -2,77 +2,108 @@
 % Please edit documentation in R/ab.R
 \name{ab}
 \alias{ab}
-\title{Test/Power calculation for mediating effect}
+\title{Test and Power Calculation for Mediating Effect}
 \usage{
 ab(
-  type = "power",
+  type = c("power", "test"),
   n = 25000,
   a = 0.15,
   sa = 0.01,
   b = log(1.19),
   sb = 0.01,
   alpha = 0.05,
-  fold = 1
+  fold = 1,
+  method = c("sobel", "aroian", "goodman")
 )
 }
 \arguments{
-\item{type}{string option: "test", "power".}
+\item{type}{Character; \code{"test"} to perform a significance test, \code{"power"} to estimate power.}
 
-\item{n}{default sample size to be used for power calculation.}
+\item{n}{Numeric; baseline sample size for power calculation (default 25000).}
 
-\item{a}{regression coefficient from indepdendent variable to mediator.}
+\item{a}{Numeric; regression coefficient from independent variable to mediator.}
 
-\item{sa}{SE(a).}
+\item{sa}{Numeric; standard error of \code{a}.}
 
-\item{b}{regression coefficient from mediator variable to outcome.}
+\item{b}{Numeric; regression coefficient from mediator to outcome.}
 
-\item{sb}{SE(b).}
+\item{sb}{Numeric; standard error of \code{b}.}
 
-\item{alpha}{size of siginficance test for power calculation.}
+\item{alpha}{Numeric; significance level (default 0.05) for power calculation.}
 
-\item{fold}{fold change for power calculation, as appropriate for a range of sample sizes.}
+\item{fold}{Numeric; multiplicative factor for sample size in power calculation.}
+
+\item{method}{Character; one of \code{"sobel"}, \code{"aroian"}, \code{"goodman"} specifying the variance formula.}
 }
 \value{
-The returned value are z-test and significance level for significant testing or sample size/power for a
-given fold change of the default sample size.
+If \code{type = "test"}, a named numeric vector with:
+\itemize{
+\item \code{effect}: indirect effect estimate (\eqn{ab})
+\item \code{se}: standard error
+\item \code{z}: z-statistic
+\item \code{p}: two-sided p-value
+\item \code{lcl}: lower 95\% confidence limit
+\item \code{ucl}: upper 95\% confidence limit
+}
+
+If \code{type = "power"}, a named numeric vector with:
+\itemize{
+\item \code{sample_size}: effective sample size (\code{fold * n})
+\item \code{power}: estimated statistical power
+}
 }
 \description{
-Test/Power calculation for mediating effect
+This function computes the indirect (mediated) effect in a mediation model
+and either tests its significance or calculates statistical power.
+It uses regression coefficients from an independent variable to a mediator (\code{a})
+and from the mediator to an outcome (\code{b}) with their standard errors.
+Variance can be estimated using Sobel, Aroian, or Goodman formulas.
 }
 \details{
-This function tests for or obtains power of mediating effect based on estimates of
-two regression coefficients and their standard errors. Note that for binary outcome
-or mediator, one should use log-odds ratio and its standard error.
+The indirect effect is \eqn{ab}, representing the portion of the effect of \eqn{X} on \eqn{Y}
+transmitted through mediator \eqn{M}.
+
+Standard errors of the indirect effect are approximated using the delta method:
+\itemize{
+\item Sobel: \eqn{SE = \sqrt{b^2 s_a^2 + a^2 s_b^2}}
+\item Aroian: \eqn{SE = \sqrt{b^2 s_a^2 + a^2 s_b^2 + s_a^2 s_b^2}}
+\item Goodman: \eqn{SE = \sqrt{b^2 s_a^2 + a^2 s_b^2 - s_a^2 s_b^2}}
+}
+
+The z-statistic is \eqn{z = ab / SE(ab)}, assumed to follow a standard normal
+distribution under \eqn{H_0: ab = 0}.
+
+Two-sided p-value: \eqn{p = 2 \Phi(-|z|)}
+95\% confidence interval: \eqn{ab \pm 1.96 \cdot SE(ab)}
+
+Power is based on a non-central chi-square approximation:
+\eqn{\lambda = z^2 \cdot \text{fold}}
+\eqn{Power = P(\chi^2_1(\lambda) > \chi^2_{1,1-\alpha})},
+where \eqn{\chi^2_{1,1-\alpha}} is the critical value at significance level \eqn{\alpha}.
+
+These tests assume large samples. For small samples, bootstrap confidence intervals are recommended.
 }
 \examples{
 \dontrun{
-ab()
-n <- power <- vector()
-for (j in 1:10)
-{
-   z <- ab(fold=j*0.01)
-   n[j] <- z[1]
-   power[j] <- z[2]
-}
-plot(n,power,xlab="Sample size",ylab="Power")
-title("SNP-BMI-T2D association in EPIC-Norfolk study")
+# Test mediation effect
+ab(a = 0.15, sa = 0.01,
+   b = log(1.19), sb = 0.01,
+   method = "aroian")
+
+# Power calculation for 10\% increase in sample size
+ab(type = "power", n = 25000,
+   a = 0.15, sa = 0.01,
+   b = log(1.19), sb = 0.01,
+   fold = 1.1)
 }
 
 }
 \references{
 \insertRef{freathy08}{gap}
 
-Kline RB. Principles and practice of structural equation modeling, Second Edition. The Guilford Press 2005.
+\insertRef{kline05}{gap}
 
-MacKinnon DP. Introduction to Statistical Mediation Analysis. Taylor & Francis Group 2008.
+\insertRef{mackinnon08}{gap}
 
-Preacher KJ, Leonardelli GJ. Calculation for the Sobel Test-An interactive calculation tool for mediation tests
-https://quantpsy.org/sobel/sobel.htm
+\insertRef{preacher01}{gap}
 }
-\seealso{
-\code{\link{ccsize}}
-}
-\author{
-Jing Hua Zhao
-}
-\keyword{htest}

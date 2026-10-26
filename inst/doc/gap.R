@@ -11,10 +11,24 @@ knitr::opts_chunk$set(
 )
 
 ## ----gap_incl, echo=FALSE, warning=FALSE--------------------------------------
-htmltools::tags$iframe(
-  src = "https://jinghuazhao.github.io/R/vignettes/gap.html",
-  width = "100%",
-  height = "600px",
-  style = "border:none;"
+htmltools::tagList(
+  htmltools::tags$iframe(
+    id = "gapframe",
+    src = "https://jinghuazhao.github.io/R/vignettes/gap.html",
+    style = "
+      width: 100%;
+      border: none;
+      display: block;
+      min-height: 200px;
+    "
+  ),
+  htmltools::tags$script(htmltools::HTML("
+window.addEventListener('message', function(event) {
+  if (!event.data || event.data.type !== 'setHeight') return;
+  var iframe = document.getElementById('gapframe');
+  if (!iframe) return;
+  iframe.style.height = Math.max(event.data.height, 200) + 'px';
+});
+  "))
 )
 

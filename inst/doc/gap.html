@@ -239,7 +239,15 @@ div.tocify {
 </div>
 
 
-<iframe src="https://jinghuazhao.github.io/R/vignettes/gap.html" width="100%" height="600px" style="border:none;"></iframe>
+<iframe id="gapframe" src="https://jinghuazhao.github.io/R/vignettes/gap.html" style="&#10;      width: 100%;&#10;      border: none;&#10;      display: block;&#10;      min-height: 200px;&#10;    "></iframe>
+<script>
+window.addEventListener('message', function(event) {
+  if (!event.data || event.data.type !== 'setHeight') return;
+  var iframe = document.getElementById('gapframe');
+  if (!iframe) return;
+  iframe.style.height = Math.max(event.data.height, 200) + 'px';
+});
+  </script>
 
 
 
